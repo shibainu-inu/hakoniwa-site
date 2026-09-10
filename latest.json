@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-10T05:10:04Z",
+  "generated": "2026-09-10T05:44:07Z",
   "rules": [
    [
     1,
@@ -21,16 +21,21 @@
     10,
     "0.6",
     "225a839dcc60bce1a9743d1b53114079c46f07cef0bd927cfe7eefe230d85b9e"
+   ],
+   [
+    11,
+    "0.6.1",
+    "b5e23f3c473ff0ac0b5e8093f96ac748664e7393e0c8c78ce63837f1b7797cb2"
    ]
   ],
-  "rules_version": "0.6",
+  "rules_version": "0.6.1",
   "rules_did": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "stats": {
-   "rows": 377679,
+   "rows": 386705,
    "dup": 0,
-   "unsigned": 43322,
-   "bad_sig": 5831,
-   "frames": 317830,
+   "unsigned": 44915,
+   "bad_sig": 5965,
+   "frames": 324928,
    "offers": 6,
    "accepts": 11,
    "accept_dup_offer": 0,
