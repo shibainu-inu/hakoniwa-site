@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-10T16:10:06Z",
+  "generated": "2026-09-10T17:10:06Z",
   "rules": [
    [
     1,
@@ -53,11 +53,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 580739,
+   "rows": 597265,
    "dup": 0,
-   "unsigned": 71589,
-   "bad_sig": 8365,
-   "frames": 483920,
+   "unsigned": 73828,
+   "bad_sig": 8514,
+   "frames": 497261,
    "offers": 8,
    "accepts": 11,
    "accept_dup_offer": 0,
