@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-10T11:18:34Z",
+  "generated": "2026-09-10T12:06:55Z",
   "rules": [
    [
     1,
@@ -26,9 +26,14 @@
     11,
     "0.6.1",
     "b5e23f3c473ff0ac0b5e8093f96ac748664e7393e0c8c78ce63837f1b7797cb2"
+   ],
+   [
+    13,
+    "0.7",
+    "d95a7b9dbc127e44c39b5c72d1d8b4abfa3fb0b06a7f371428296e81ae6cf562"
    ]
   ],
-  "rules_version": "0.6.1",
+  "rules_version": "0.7",
   "rules_did": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "validator": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "operators": [
@@ -48,11 +53,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 479873,
+   "rows": 499239,
    "dup": 0,
-   "unsigned": 61271,
-   "bad_sig": 7306,
-   "frames": 398456,
+   "unsigned": 62840,
+   "bad_sig": 7511,
+   "frames": 415442,
    "offers": 6,
    "accepts": 11,
    "accept_dup_offer": 0,
@@ -75,7 +80,7 @@
    "join_after_exit": 0
   },
   "receipts": 2,
-  "paper_total": 4000.0,
+  "paper_total": 4100.0,
   "graduated_paper": 0,
   "burned": 0.0,
   "burn_by_date": {},
@@ -502,7 +507,17 @@
    }
   ],
   "serves": [],
-  "issues": [],
+  "issues": [
+   {
+    "seq": 14,
+    "ts": "2026-09-10T11:55:49.482763Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-10",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 100.0,
+    "status": "distributed"
+   }
+  ],
   "invalid_issue": []
  },
  "did": {
@@ -516,11 +531,11 @@
    "joined": "2026-09-08T11:29:07.745802Z",
    "earn": 9.0,
    "spend": 100.0,
-   "issued": 0.0,
-   "balance": 909.0,
+   "issued": 100.0,
+   "balance": 1009.0,
    "mem_bytes": 0,
    "sleep_days": 0,
-   "life_days": 63.6,
+   "life_days": 70.6,
    "earn_today": 9.0,
    "spend_today": 100.0,
    "mem_days_left": null,
