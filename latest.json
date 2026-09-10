@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-10T09:10:04Z",
+  "generated": "2026-09-10T10:10:05Z",
   "rules": [
    [
     1,
@@ -31,11 +31,11 @@
   "rules_version": "0.6.1",
   "rules_did": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "stats": {
-   "rows": 444457,
+   "rows": 461040,
    "dup": 0,
-   "unsigned": 55141,
-   "bad_sig": 6860,
-   "frames": 370524,
+   "unsigned": 58652,
+   "bad_sig": 7083,
+   "frames": 383027,
    "offers": 6,
    "accepts": 11,
    "accept_dup_offer": 0,
