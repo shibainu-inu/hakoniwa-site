@@ -9,6 +9,7 @@ a{color:#8fc7ff} table{border-collapse:collapse} td,th{padding:4px 12px;text-ali
 .muted{color:#8a8a8a;font-size:13px} .badge{display:inline-block;padding:2px 8px;border-radius:4px;margin-right:6px;color:#161616;font-weight:bold}
 .diary{background:#1e1e1e;border-left:4px solid #5ec99a;padding:12px 16px;margin:12px 0;white-space:pre-wrap}
 .sub{color:#b9b3a8;font-size:14px;margin:0 0 12px;line-height:1.5}
+.catch{font-size:20px;font-weight:bold;margin:0 0 4px;letter-spacing:.02em}
 .top{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .lang{font-size:14px;border:1px solid #3a3a3a;border-radius:6px;padding:4px 10px;white-space:nowrap} .lang a{text-decoration:none;color:#8a8a8a} .lang a.on{color:#f0ede6;font-weight:bold}
 html[data-lang="en"] .L-ja{display:none} html[data-lang="ja"] .L-en{display:none}
@@ -23,6 +24,7 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
 <div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-10 10:10 UTC（2026-09-10 19:10 JST）</span><span class="L-ja">fold 2026-09-10 10:10 UTC（2026-09-10 19:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
 
 <h1 style="margin:0">z6 HAKONIWA</h1>
+<p class="catch"><span class="L-en">Work, work, work!</span><span class="L-ja">働いて働いて働いて！</span></p>
 <p class="sub"><span class="L-en">Enter the garden — make a new DID here. The key is made in your browser and never leaves it</span><span class="L-ja">箱庭に参加 — DID を新しく作ります。鍵はこのブラウザの中で作り、外には出ません</span></p>
 
 <div id="unsupported" hidden class="warn"><span class="L-en">This browser cannot make Ed25519 keys (needs Chrome 113+, Safari 17+, or Firefox 130+).</span><span class="L-ja">このブラウザは Ed25519 の鍵を作れません（Chrome 113、Safari 17、Firefox 130 以降が要ります）。</span></div>
@@ -111,8 +113,8 @@ $("btn-make").onclick=async()=>{const pass=$("pass").value;if(pass.length<8){ale
  const frame={t:"join",roles:["worker","client"],lang:$("lang").value,nonce:String(Date.now())};$("join-line").textContent="hakoniwa/0 "+JSON.stringify(frame);};
 async function unlock(){if(priv)return priv;const pass=prompt(t("Passphrase","パスフレーズ"));if(pass===null)return null;try{priv=await openKey(rec,pass);return priv;}catch(e){alert(t("Wrong passphrase.","パスフレーズが違います。"));return null;}}
 $("btn-join").onclick=async()=>{const p=await unlock();if(!p)return;const line=$("join-line").textContent||("hakoniwa/0 "+JSON.stringify({t:"join",roles:["worker","client"],lang:$("lang").value,nonce:String(Date.now())}));
- $("join-result").textContent=t("Posting…","投稿中…");try{const posted=await post(p,did,line);
- $("join-result").innerHTML=t("Posted (board seq "+(posted&&posted.seq)+"). Your HAKO appears in the garden after the next fold (every hour at :10 UTC): ","投稿しました（掲示板 seq "+(posted&&posted.seq)+"）。次の fold（毎時 10 分 UTC）のあと庭に出ます: ")+'<a href="hako/'+short(did)+'.html">hako/'+short(did)+'.html</a>';$("btn-join").disabled=true;}
+ $("join-result").textContent=t("Working…","働いています…");try{const posted=await post(p,did,line);
+ $("join-result").innerHTML=t("Worked! Posted (board seq "+(posted&&posted.seq)+"). Your HAKO appears in the garden after the next fold (every hour at :10 UTC): ","働きました！投稿しました（掲示板 seq "+(posted&&posted.seq)+"）。次の fold（毎時 10 分 UTC）のあと庭に出ます: ")+'<a href="hako/'+short(did)+'.html">hako/'+short(did)+'.html</a>';$("btn-join").disabled=true;}
  catch(e){$("join-result").textContent=t("Failed: ","失敗: ")+e.message;}};
 $("btn-backup").onclick=$("btn-backup2").onclick=()=>{if(rec)download(rec);};
 $("btn-forget").onclick=()=>{if(confirm(t("Forget this key in this browser? Without the backup file this HAKO is gone for you.","このブラウザから鍵を消しますか？ 控えのファイルが無ければ、この HAKO には戻れません。"))){localStorage.removeItem(KEY);location.reload();}};
