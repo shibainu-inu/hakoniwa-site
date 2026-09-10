@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-10T12:06:55Z",
+  "generated": "2026-09-10T12:10:05Z",
   "rules": [
    [
     1,
@@ -207,18 +207,18 @@
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the worker",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": true,
+       "4": null,
        "5": true
       },
-      "context_copy": "20260910T010531Z",
-      "context_note": "",
-      "context_path_ok": true
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260910",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -383,18 +383,18 @@
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the worker",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
        "4": true,
        "5": true
       },
-      "context_copy": "20260909T210510Z",
-      "context_note": "",
-      "context_path_ok": false
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260909",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
