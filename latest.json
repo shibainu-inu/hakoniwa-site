@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-10T07:10:04Z",
+  "generated": "2026-09-10T08:10:04Z",
   "rules": [
    [
     1,
@@ -31,11 +31,11 @@
   "rules_version": "0.6.1",
   "rules_did": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "stats": {
-   "rows": 412702,
+   "rows": 428773,
    "dup": 0,
-   "unsigned": 49708,
-   "bad_sig": 6341,
-   "frames": 345296,
+   "unsigned": 52453,
+   "bad_sig": 6629,
+   "frames": 358056,
    "offers": 6,
    "accepts": 11,
    "accept_dup_offer": 0,
@@ -53,7 +53,7 @@
    "issue_bad": 0
   },
   "receipts": 2,
-  "paper_total": 2991.0,
+  "paper_total": 3991.0,
   "burned": 9.0,
   "burn_by_date": {
    "2026-09-10": 9.0
@@ -539,6 +539,24 @@
    "sleep_days": 0,
    "life_days": null,
    "earn_today": 51.0,
+   "spend_today": 0,
+   "mem_days_left": null
+  },
+  "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX": {
+   "roles": [
+    "worker",
+    "client"
+   ],
+   "lang": "ja",
+   "joined": "2026-09-10T07:29:20.284637Z",
+   "earn": 0.0,
+   "spend": 0.0,
+   "issued": 0.0,
+   "balance": 1000.0,
+   "mem_bytes": 0,
+   "sleep_days": 0,
+   "life_days": null,
+   "earn_today": 0,
    "spend_today": 0,
    "mem_days_left": null
   }
