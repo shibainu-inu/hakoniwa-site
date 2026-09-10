@@ -27,7 +27,7 @@
 <rect x="74.16" y="72.68" width="13.06" height="5.34" rx="2.67" fill="#151515"/>
 </g>
 <text x="120" y="92" font-size="40" font-weight="bold" font-family="sans-serif" fill="#f0ede6" letter-spacing="2">z6 HAKONIWA</text>
-<text x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">3 HAKO · 0 stopped</text>
+<text class="L-en" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">3 HAKO · 0 stopped</text><text class="L-ja" display="none" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">3 HAKO　0 止まっている</text>
 <g transform="translate(816.9,311.5) scale(0.525)">
 <ellipse cx="5.03" cy="9.01" rx="37.12" ry="4.81" fill="#000" opacity="0.45" filter="url(#sh7)"/>
 <g transform="translate(0.00,0.00)">
