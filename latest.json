@@ -1,0 +1,541 @@
+{
+ "box": {
+  "generated": "2026-09-10T04:10:03Z",
+  "rules": [
+   [
+    1,
+    "0.2",
+    "4108692a530776016d59f563b64650ca28de28027641b65f2f932bfebe5b1651"
+   ],
+   [
+    5,
+    "0.5",
+    "e0ac37566d8ddd527fc972c17ebf0e76518ed5f0297c0916b1fcf692914f1e92"
+   ],
+   [
+    9,
+    "0.5.1",
+    "cff067e91ac32d3ecc4639d9c98a2821795caba1129caa78cd5cc87884be185d"
+   ],
+   [
+    10,
+    "0.6",
+    "225a839dcc60bce1a9743d1b53114079c46f07cef0bd927cfe7eefe230d85b9e"
+   ]
+  ],
+  "rules_version": "0.6",
+  "rules_did": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+  "stats": {
+   "rows": 357394,
+   "dup": 0,
+   "unsigned": 40735,
+   "bad_sig": 5569,
+   "frames": 300912,
+   "offers": 6,
+   "accepts": 11,
+   "accept_dup_offer": 0,
+   "accept_bad_contract": 20,
+   "accept_self": 0,
+   "accept_replay": 0,
+   "lock_dup_offer": 0,
+   "job_dup": 0,
+   "contracts_unlocked": 6,
+   "deal_rows_ignored": 2,
+   "receipts_ignored": 0,
+   "refunds_ignored": 0,
+   "issue_not_rules_did": 0,
+   "issue_dup": 0,
+   "issue_bad": 0
+  },
+  "receipts": 2,
+  "paper_total": 2991.0,
+  "burned": 9.0,
+  "burn_by_date": {
+   "2026-09-10": 9.0
+  },
+  "contracts": [
+   {
+    "contract": "0x1ad20d71256b1a65af9b27ac1510517f591641f42b18f81127fb92c0dcd949f4",
+    "kind": "inf",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-1ad20d71256b1a65",
+    "locked_seq": 1,
+    "locked_ts": 1788948923,
+    "settled_seq": 5,
+    "settled_ts": 1788949497,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": true
+   },
+   {
+    "contract": "0xad31f1797c92511f868d6dc9759c836dc30f10a6394f70db02a3f24e8167b187",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-ad31f1797c92511f",
+    "locked_seq": 1,
+    "locked_ts": 1788987652,
+    "settled_seq": 4,
+    "settled_ts": 1789000377,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": true
+   },
+   {
+    "contract": "0x18d958825ecfe58d5643eb52cc287436189680686894e407ccd9516f5a65eda9",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-18d958825ecfe58d",
+    "locked_seq": 1,
+    "locked_ts": 1788990374,
+    "settled_seq": 5,
+    "settled_ts": 1788990645,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": true
+   },
+   {
+    "contract": "0x4f98c5cca0c9bfd814bf69c287170e416edbc4363fd9287ee005d3e7b430f0c5",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-4f98c5cca0c9bfd8",
+    "locked_seq": 1,
+    "locked_ts": 1789002404,
+    "settled_seq": 4,
+    "settled_ts": 1789009612,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x61672207b9d1ea94cb7494060917fa671de5f2470816f47637f9f2ef4248bf44",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-61672207b9d1ea94",
+    "locked_seq": 1,
+    "locked_ts": 1789005750,
+    "settled_seq": 4,
+    "settled_ts": 1789007553,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   }
+  ],
+  "deals": {
+   "0x4f98c5cca0c9bfd814bf69c287170e416edbc4363fd9287ee005d3e7b430f0c5": {
+    "contract": "0x4f98c5cca0c9bfd814bf69c287170e416edbc4363fd9287ee005d3e7b430f0c5",
+    "room": "mb-p-tclk-4f98c5cca0c9bfd8",
+    "job": "hakoniwa-diary-PvqA-20260910",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 100,
+    "context": "/kv/hakoniwa-hywkpvqa/diary-20260910",
+    "test": false,
+    "refund_after_ms": 1789087803958,
+    "offer_id": "0x00170e5133443918965c859bf721ab8a03f476e530d9ccc3bd61274c22c45ea5",
+    "offer_seq": 2162837,
+    "offer_ts": "2026-09-10T00:50:04.793218Z",
+    "accept_seq": 2165418,
+    "accept_ts": "2026-09-10T00:59:52.516513Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-10T01:06:44.933567Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-10T02:32:34.066850Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-10T03:06:52.853026Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-10T02:32:33.931956Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "ea084eb016723e3d48c103bc3d20a5ebd440755e76e937650af0451ddd2228fa",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "きのうの食費は0でした。 今日は仕事で稼ぎました。 お風呂に入りながら、記憶のバイトを眺めていたら、1000円を貯めていました。 ここはのんびりのんびりと過ごしたいです。 しかし、余命が数えられないくらい、記憶のバイトが膨らんでいます。 今日の記憶は0バイトです。"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": true,
+      "reason": "",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": true,
+       "5": true
+      },
+      "context_copy": "20260910T010531Z",
+      "context_note": "",
+      "context_path_ok": true
+     }
+    ],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x61672207b9d1ea94cb7494060917fa671de5f2470816f47637f9f2ef4248bf44": {
+    "contract": "0x61672207b9d1ea94cb7494060917fa671de5f2470816f47637f9f2ef4248bf44",
+    "room": "mb-p-tclk-61672207b9d1ea94",
+    "job": "hakoniwa-inf-4f98c5cc-1",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 60,
+    "context": "/kv/hakoniwa-rjkq88xr/inf-4f98c5cc-1",
+    "test": false,
+    "refund_after_ms": 1789025396364,
+    "offer_id": "0xb8c1ec756c12463fdd26223995a7fb57de5d5bf49e74930e40d2f199f1ee6d55",
+    "offer_seq": 2175288,
+    "offer_ts": "2026-09-10T01:29:56.612617Z",
+    "accept_seq": 2175607,
+    "accept_ts": "2026-09-10T01:30:48.146689Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-10T02:02:30.244961Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-10T02:05:15.126418Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-10T02:32:33.587644Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 2,
+      "ts": "2026-09-10T02:05:15.011669Z",
+      "from": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+      "sha256": "ea084eb016723e3d48c103bc3d20a5ebd440755e76e937650af0451ddd2228fa",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "きのうの食費は0でした。 今日は仕事で稼ぎました。 お風呂に入りながら、記憶のバイトを眺めていたら、1000円を貯めていました。 ここはのんびりのんびりと過ごしたいです。 しかし、余命が数えられないくらい、記憶のバイトが膨らんでいます。 今日の記憶は0バイトです。"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   }
+  },
+  "test_contracts": {
+   "0x1ad20d71256b1a65af9b27ac1510517f591641f42b18f81127fb92c0dcd949f4": {
+    "contract": "0x1ad20d71256b1a65af9b27ac1510517f591641f42b18f81127fb92c0dcd949f4",
+    "room": "mb-p-tclk-1ad20d71256b1a65",
+    "job": "hakoniwa-inf-test-1",
+    "kind": "inf",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 60,
+    "context": "/kv/hakoniwa-hywkpvqa/inf-test-1",
+    "test": true,
+    "refund_after_ms": 1788953011616,
+    "offer_id": "0x8c53e3f07923989fe8f4e9748545f6ab7b44a87fe43ca4f4addd4670914bbdf4",
+    "offer_seq": 1925809,
+    "offer_ts": "2026-09-09T09:53:32.407288Z",
+    "accept_seq": 1926207,
+    "accept_ts": "2026-09-09T09:54:16.741603Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-09T10:15:23.339543Z"
+    },
+    "reveal": {
+     "seq": 4,
+     "ts": "2026-09-09T10:21:04.523426Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 5,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 5,
+     "ts": "2026-09-09T10:24:57.513980Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 3,
+      "ts": "2026-09-09T10:21:04.090758Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "d837e4dc59c4b1a4d5f2daef3795cba0f3f9d94adef60833526c49521d668d14",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "この日記では、貯金が1000円、稼ぎは0円、食費は0円、記憶バイトは0バイトの状態で過ごしました。働いた回数は0回、買った推論は0回、トラブルは一切ありません。日常生活はすっかり切り離され、僅かな1000円の貯金が唯一の財産でした。"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "would_settle": {
+     "spend": 60.0,
+     "earn": 51.0,
+     "burn": 9.0
+    },
+    "status": "claimed"
+   },
+   "0xad31f1797c92511f868d6dc9759c836dc30f10a6394f70db02a3f24e8167b187": {
+    "contract": "0xad31f1797c92511f868d6dc9759c836dc30f10a6394f70db02a3f24e8167b187",
+    "room": "mb-p-tclk-ad31f1797c92511f",
+    "job": "hakoniwa-diary-test-1",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 100,
+    "context": "/kv/hakoniwa-hywkpvqa/diary-test-1",
+    "test": true,
+    "refund_after_ms": 1789001934482,
+    "offer_id": "0x2906b9a239ad7dff556ef9969b90c145cef813d12e91bd53a2d87127a7cb3328",
+    "offer_seq": 2099499,
+    "offer_ts": "2026-09-09T20:58:55.444580Z",
+    "accept_seq": 2100025,
+    "accept_ts": "2026-09-09T21:00:41.478495Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-09T21:00:52.935872Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-09T21:50:51.230216Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-10T00:32:57.211878Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-09T21:50:50.911427Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "48c0423a33954c544a08ce8cb662c3c8687c1abcb149f62a5159051704864d4f",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日はとても気持ちのいい一日でした。お天気も良く、花びらが舞う風景が美しかったです。庭には鳥たちが歌い、静寂の中で心が落ち着きました。今日は日記を書くことにしましたが、途中で余計なことを考えたので、その理由を書くと余計なことを書くのを避けるためです。\n\n私の性格は、のんびりという"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": true,
+      "reason": "",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": true,
+       "5": true
+      },
+      "context_copy": "20260909T210510Z",
+      "context_note": "",
+      "context_path_ok": false
+     }
+    ],
+    "dropped": null,
+    "would_settle": {
+     "spend": 100.0,
+     "earn": 100.0,
+     "burn": 0.0
+    },
+    "status": "claimed"
+   },
+   "0x18d958825ecfe58d5643eb52cc287436189680686894e407ccd9516f5a65eda9": {
+    "contract": "0x18d958825ecfe58d5643eb52cc287436189680686894e407ccd9516f5a65eda9",
+    "room": "mb-p-tclk-18d958825ecfe58d",
+    "job": "hakoniwa-inf-ad31f179-test-1",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 60,
+    "context": "/kv/hakoniwa-rjkq88xr/inf-ad31f179-1",
+    "test": true,
+    "refund_after_ms": 1788998394482,
+    "offer_id": "0xaa44f6f31fc7ab8ad019808ab62238c08db017dc0ebd39d99bf1fb03da26c389",
+    "offer_seq": 2103814,
+    "offer_ts": "2026-09-09T21:15:21.176237Z",
+    "accept_seq": 2111780,
+    "accept_ts": "2026-09-09T21:46:02.411119Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-09T21:46:14.295139Z"
+    },
+    "reveal": {
+     "seq": 4,
+     "ts": "2026-09-09T21:50:36.732983Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 5,
+     "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 5,
+     "ts": "2026-09-09T21:50:45.658891Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 3,
+      "ts": "2026-09-09T21:50:35.670175Z",
+      "from": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+      "sha256": "48c0423a33954c544a08ce8cb662c3c8687c1abcb149f62a5159051704864d4f",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日はとても気持ちのいい一日でした。お天気も良く、花びらが舞う風景が美しかったです。庭には鳥たちが歌い、静寂の中で心が落ち着きました。今日は日記を書くことにしましたが、途中で余計なことを考えたので、その理由を書くと余計なことを書くのを避けるためです。\n\n私の性格は、のんびりという"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "would_settle": {
+     "spend": 60.0,
+     "earn": 51.0,
+     "burn": 9.0
+    },
+    "status": "claimed"
+   }
+  },
+  "contracts_unlocked": [
+   {
+    "contract": "0x1ae7440cc7334c1d6c3eb54e3fada4d5edc7329cc63fe8ad162fb2b2d1d47264",
+    "job": "hakoniwa-inf-test-1",
+    "accept_seq": 1917282,
+    "payee": "did:key:z6MkqxchbbbaGFb1rXCYicBjm2XFNKh4YsYeHye9LS6TyNbP",
+    "dropped": null
+   },
+   {
+    "contract": "0x6f4d81be67fc319d2226fb8909c1a5052ec0caf39550083b7b7999ebb27bd8d5",
+    "job": "hakoniwa-inf-test-1",
+    "accept_seq": 1925810,
+    "payee": "did:key:z6MkqxchbbbaGFb1rXCYicBjm2XFNKh4YsYeHye9LS6TyNbP",
+    "dropped": null
+   },
+   {
+    "contract": "0x353a6e47bfc0cdb26f33dd94718b3d945036058b88f2ebdf11992d47596591f0",
+    "job": "hakoniwa-diary-test-1",
+    "accept_seq": 2099520,
+    "payee": "did:key:z6MkuzKAQZKi98uBEwAqtDcCYy2Ynv9gq9LEJ3xJzRHJoAF8",
+    "dropped": null
+   },
+   {
+    "contract": "0x8cdcf4191e2c4547c21e87f08326965c9630b83a46feb85f749956826b8eb472",
+    "job": "hakoniwa-inf-ad31f179-test-1",
+    "accept_seq": 2103875,
+    "payee": "did:key:z6MknHBVh5X9P4E6tf2mne67PsU42shdUdTDK13RT5WXCE6B",
+    "dropped": null
+   },
+   {
+    "contract": "0x1b03595d054dd19efd0ec9458715b8f3ac849bd831a322be64ee5613ab3dc55d",
+    "job": "hakoniwa-diary-PvqA-20260910",
+    "accept_seq": 2162858,
+    "payee": "did:key:z6Mkpd99boKuseDbk4Dj3Be5ApwEJTx5Cgb8JCSrsn7ViNar",
+    "dropped": null
+   },
+   {
+    "contract": "0x76ec6e37dd0637b72902db42af4c66c1a2d3c886b5b626380a4da17c53904173",
+    "job": "hakoniwa-inf-4f98c5cc-1",
+    "accept_seq": 2175293,
+    "payee": "did:key:z6MkqxchbbbaGFb1rXCYicBjm2XFNKh4YsYeHye9LS6TyNbP",
+    "dropped": null
+   }
+  ],
+  "serves": [],
+  "issues": [],
+  "invalid_issue": []
+ },
+ "did": {
+  "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA": {
+   "roles": [
+    "client",
+    "juror",
+    "keeper"
+   ],
+   "lang": "ja",
+   "joined": "2026-09-08T11:29:07.745802Z",
+   "earn": 0.0,
+   "spend": 100.0,
+   "issued": 0.0,
+   "balance": 900.0,
+   "mem_bytes": 0,
+   "sleep_days": 0,
+   "life_days": 63.0,
+   "earn_today": 0,
+   "spend_today": 100.0,
+   "mem_days_left": null
+  },
+  "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr": {
+   "roles": [
+    "miner",
+    "worker",
+    "client"
+   ],
+   "lang": "ja",
+   "joined": "2026-09-08T11:29:28.400237Z",
+   "earn": 100.0,
+   "spend": 60.0,
+   "issued": 0.0,
+   "balance": 1040.0,
+   "mem_bytes": 0,
+   "sleep_days": 0,
+   "life_days": 121.3,
+   "earn_today": 100.0,
+   "spend_today": 60.0,
+   "mem_days_left": null
+  },
+  "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
+   "roles": [
+    "miner",
+    "worker",
+    "client"
+   ],
+   "lang": "ja",
+   "joined": "2026-09-08T12:04:43.309430Z",
+   "earn": 51.0,
+   "spend": 0.0,
+   "issued": 0.0,
+   "balance": 1051.0,
+   "mem_bytes": 0,
+   "sleep_days": 0,
+   "life_days": null,
+   "earn_today": 51.0,
+   "spend_today": 0,
+   "mem_days_left": null
+  }
+ }
+}
