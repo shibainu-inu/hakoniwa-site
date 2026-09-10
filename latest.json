@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-10T12:10:05Z",
+  "generated": "2026-09-10T13:10:05Z",
   "rules": [
    [
     1,
@@ -53,15 +53,15 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 499239,
+   "rows": 519027,
    "dup": 0,
-   "unsigned": 62840,
-   "bad_sig": 7511,
-   "frames": 415442,
-   "offers": 6,
+   "unsigned": 65039,
+   "bad_sig": 7731,
+   "frames": 432069,
+   "offers": 8,
    "accepts": 11,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 20,
+   "accept_bad_contract": 32,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
