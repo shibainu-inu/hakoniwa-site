@@ -80,6 +80,9 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
      <button id="btn-work-stop" hidden><span class="L-en">Stop</span><span class="L-ja">止める</span></button>
      <button id="btn-work-reset" class="danger"><span class="L-en">Forget today's progress</span><span class="L-ja">今日の途中経過を消す</span></button>
      <span id="work-stage" class="muted"></span></p>
+  <div id="work-view" hidden><img id="work-img" alt="" width="320" height="300" style="max-width:100%;height:auto;display:block">
+    <p id="work-img-note" class="muted" hidden><span class="L-en">Your HAKO's picture appears after the next fold (every hour at :10 UTC).</span><span class="L-ja">姿は次の fold（毎時 10 分 UTC）のあとに出ます。</span></p>
+    <p class="muted"><a href="#" id="work-log-toggle"><span class="L-en">Show log</span><span class="L-ja">log を見る</span></a></p></div>
   <pre id="work-log" class="muted" style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre>
 </section>
 
@@ -163,10 +166,15 @@ const STAGE={idle:["waiting for a job","仕事待ち"],accepting:["accepting","�
 let w=null;
 function show(stage,st){const s=STAGE[stage]||[stage,stage];$("work-stage").textContent=t(s[0],s[1]);}
 function showLog(st){$("work-log").textContent=(st&&st.log||[]).slice(-30).join("\n");}
-{const st=loadState();if(st){show(st.stage,st);showLog(st);}}
+// 動き出したら既定は自分の HAKO が働いている姿（サイトの hako/<末尾 8>-work.svg。fold 前なら無い）。log は「log を見る」で切り替え
+function showFigure(){const s=String(window.hako.did||"").slice(-8).toLowerCase();const img=$("work-img");img.hidden=false;$("work-img-note").hidden=true;
+ img.onerror=()=>{img.hidden=true;$("work-img-note").hidden=false;};img.src="hako/"+s+"-work.svg?"+Date.now();$("work-view").hidden=false;$("work-log").hidden=true;setToggle();}
+function setToggle(){const hid=$("work-log").hidden;$("work-log-toggle").innerHTML=hid?'<span class="L-en">Show log</span><span class="L-ja">log を見る</span>':'<span class="L-en">Hide log</span><span class="L-ja">log を隠す</span>';}
+$("work-log-toggle").onclick=e=>{e.preventDefault();$("work-log").hidden=!$("work-log").hidden;setToggle();};
+{const st=loadState();if(st){show(st.stage,st);showLog(st);if(st.stage!=="idle")showFigure();}}
 $("btn-work").onclick=async()=>{const priv=await window.hako.unlock($("btn-work").parentElement);if(!priv)return;
  w=new Worker(makeSigner(window.hako.did,priv),{statsUrl:"latest.json",onLog:()=>showLog(loadState()),onStage:show});
- $("btn-work").disabled=true;$("btn-work-stop").hidden=false;show("idle");
+ $("btn-work").disabled=true;$("btn-work-stop").hidden=false;show("idle");showFigure();
  try{await w.run();}finally{$("btn-work").disabled=false;$("btn-work-stop").hidden=true;const st=loadState();if(st)show(st.stage,st);}};
 $("btn-work-stop").onclick=()=>{if(w)w.stop();};
 $("btn-work-reset").onclick=()=>{if(confirm(t("Forget today's progress? A contract in flight will be left to expire (the client refunds it).","今日の途中経過を消しますか？ 進行中の契約は期限切れになります（client が refund します）。"))){if(w)w.stop();clearState();$("work-log").textContent="";$("work-stage").textContent="";}};

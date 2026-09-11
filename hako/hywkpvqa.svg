@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh32" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="2.94"/></filter><clipPath id="clip33"><path d="M-21.39,24.48 Q-27.42,24.48 -27.42,18.45 L-27.42,-18.45 Q-27.42,-24.48 -22.06,-27.25 L-11.94,-32.48 Q-6.58,-35.25 -0.55,-35.25 L36.74,-35.25 Q42.77,-35.25 42.77,-29.22 L42.77,9.29 Q42.77,15.33 37.59,18.41 L32.60,21.39 Q27.42,24.48 21.39,24.48 Z"/></clipPath><linearGradient id="gt34" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffe83"/><stop offset="1" stop-color="#fff07c"/></linearGradient><linearGradient id="gs35" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c1a555"/><stop offset="1" stop-color="#a48c48"/></linearGradient><linearGradient id="gf36" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbd76f"/><stop offset="1" stop-color="#e3c264"/></linearGradient></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="4.61" cy="28.40" rx="34.00" ry="4.41" fill="#000" opacity="0.45" filter="url(#sh32)"/>
+<g transform="translate(0.00,0.00)">
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -2.17;0 0" dur="0.7s" begin="-0.35s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<g clip-path="url(#clip33)">
+<rect x="-28.4190929321499" y="-36.25311948419273" width="72.19287790630375" height="61.73445245932657" fill="url(#gf36)"/>
+<polygon points="-27.42,-24.48 27.42,-24.48 42.77,-35.25 -6.58,-35.25" fill="url(#gt34)"/>
+<polygon points="27.42,-24.48 42.77,-35.25 42.77,15.33 27.42,24.48" fill="url(#gs35)"/>
+</g>
+<rect x="-17.00" y="-4.92" width="12.06" height="4.94" rx="2.47" fill="#151515"/>
+<rect x="4.94" y="-4.92" width="12.06" height="4.94" rx="2.47" fill="#151515"/>
+</g>
+<path d="M-15.60,20.56 q2.06,13.71 17.14,13.71 q15.08,0 17.14,-13.71 Z" fill="#e6e2d8"/>
+<path d="M-15.60,20.56 q17.14,5.48 34.27,0" stroke="#c9c4b8" stroke-width="1.03" fill="none"/>
+<ellipse cx="1.54" cy="20.56" rx="17.14" ry="3.43" fill="#f2cf6b"/>
+<ellipse cx="1.54" cy="19.19" rx="12.34" ry="2.40" fill="#f5a06e"/>
+<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="0.00s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -17.14" dur="1.6s" begin="0.00s" additive="sum" repeatCount="indefinite"/>
+<path d="M-4.63,16.65 q2.06,-4.11 0,-8.23" stroke="#ddd" stroke-width="1.20" fill="none" stroke-linecap="round"/></g>
+<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-0.53s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -17.14" dur="1.6s" begin="-0.53s" additive="sum" repeatCount="indefinite"/>
+<path d="M2.22,16.65 q2.06,-4.11 0,-8.23" stroke="#ddd" stroke-width="1.20" fill="none" stroke-linecap="round"/></g>
+<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-1.06s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -17.14" dur="1.6s" begin="-1.06s" additive="sum" repeatCount="indefinite"/>
+<path d="M9.08,16.65 q2.06,-4.11 0,-8.23" stroke="#ddd" stroke-width="1.20" fill="none" stroke-linecap="round"/></g></g>
+</svg>
