@@ -81,6 +81,7 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
      <button id="btn-work-reset" class="danger"><span class="L-en">Forget today's progress</span><span class="L-ja">今日の途中経過を消す</span></button>
      <span id="work-stage" class="muted"></span></p>
   <div id="work-view" hidden><img id="work-img" alt="" width="320" height="300" style="max-width:100%;height:auto;display:block">
+    <p id="work-stage-view" style="font-size:18px;font-weight:bold;margin:8px 0"></p>
     <p id="work-img-note" class="muted" hidden><span class="L-en">Your HAKO's picture appears after the next fold (every hour at :10 UTC).</span><span class="L-ja">姿は次の fold（毎時 10 分 UTC）のあとに出ます。</span></p>
     <p class="muted"><a href="#" id="work-log-toggle"><span class="L-en">Show log</span><span class="L-ja">log を見る</span></a></p></div>
   <pre id="work-log" class="muted" style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre>
@@ -164,7 +165,8 @@ const STAGE={idle:["waiting for a job","仕事待ち"],accepting:["accepting","�
  locked:["locked; asking a miner","lock 済み。miner に依頼"],inf_offering:["posting the inference offer","推論 offer を投稿中"],inf_offered:["waiting for a miner","miner 待ち"],inf_locking:["locking the miner","miner を lock 中"],
  inf_locked:["waiting for the inference","推論待ち"],inf_done:["checking the text","本文を確かめている"],delivering:["delivering","納品中"],delivered:["revealing","reveal 中"],done:["Worked! Done for today","働いた！今日はおしまい"],gave_up:["gave up for today","今日はあきらめた"]};
 let w=null;
-function show(stage,st){const s=STAGE[stage]||[stage,stage];$("work-stage").textContent=t(s[0],s[1]);}
+// いまの段（仕事待ち / 推論待ち / …）はボタンの横と、姿の下に大きく
+function show(stage,st){const s=STAGE[stage]||[stage,stage];const w=t(s[0],s[1]);$("work-stage").textContent=w;$("work-stage-view").textContent=w;}
 function showLog(st){$("work-log").textContent=(st&&st.log||[]).slice(-30).join("\n");}
 // 動き出したら既定は自分の HAKO が働いている姿（サイトの hako/<末尾 8>-work.svg。fold 前なら無い）。log は「log を見る」で切り替え
 function showFigure(){const s=String(window.hako.did||"").slice(-8).toLowerCase();const img=$("work-img");img.hidden=false;$("work-img-note").hidden=true;
