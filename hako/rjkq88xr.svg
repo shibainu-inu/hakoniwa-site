@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh47" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.28"/></filter><clipPath id="clip48"><path d="M-23.88,27.34 Q-30.62,27.34 -30.62,20.60 L-30.62,-20.60 Q-30.62,-27.34 -24.64,-30.43 L-13.33,-36.28 Q-7.35,-39.37 -0.61,-39.37 L41.03,-39.37 Q47.77,-39.37 47.77,-32.63 L47.77,10.38 Q47.77,17.11 41.98,20.56 L36.41,23.89 Q30.62,27.34 23.88,27.34 Z"/></clipPath><linearGradient id="gt49" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff"/></linearGradient><linearGradient id="gs50" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfbdb7"/><stop offset="1" stop-color="#a2a19c"/></linearGradient><linearGradient id="gf51" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9f6ef"/><stop offset="1" stop-color="#e1ded8"/></linearGradient></defs>
 <g transform="translate(160,190) scale(1.6)"><ellipse cx="5.14" cy="31.71" rx="37.97" ry="4.92" fill="#000" opacity="0.45" filter="url(#sh47)"/>
 <g transform="translate(0.00,0.00)">
-<animateTransform attributeName="transform" type="translate" values="0 0;0 -2.42;0 0" dur="0.7s" begin="-0.36s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -2.90;0 0" dur="1.1s" begin="-0.57s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip48)">
 <rect x="-31.620039753077407" y="-40.368622539670945" width="80.38730176787817" height="68.70794374777577" fill="url(#gf51)"/>
 <polygon points="-30.62,-27.34 30.62,-27.34 47.77,-39.37 -7.35,-39.37" fill="url(#gt49)"/>
@@ -9,15 +9,5 @@
 </g>
 <rect x="-18.98" y="-5.49" width="13.47" height="5.51" rx="2.76" fill="#151515"/>
 <rect x="5.51" y="-5.49" width="13.47" height="5.51" rx="2.76" fill="#151515"/>
-</g>
-<path d="M-17.42,22.97 q2.30,15.31 19.14,15.31 q16.84,0 19.14,-15.31 Z" fill="#e6e2d8"/>
-<path d="M-17.42,22.97 q19.14,6.12 38.28,0" stroke="#c9c4b8" stroke-width="1.15" fill="none"/>
-<ellipse cx="1.71" cy="22.97" rx="19.14" ry="3.83" fill="#f2cf6b"/>
-<ellipse cx="1.71" cy="21.43" rx="13.78" ry="2.68" fill="#f5a06e"/>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="0.00s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.14" dur="1.6s" begin="0.00s" additive="sum" repeatCount="indefinite"/>
-<path d="M-5.17,18.59 q2.30,-4.59 0,-9.19" stroke="#ddd" stroke-width="1.34" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-0.53s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.14" dur="1.6s" begin="-0.53s" additive="sum" repeatCount="indefinite"/>
-<path d="M2.48,18.59 q2.30,-4.59 0,-9.19" stroke="#ddd" stroke-width="1.34" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-1.06s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.14" dur="1.6s" begin="-1.06s" additive="sum" repeatCount="indefinite"/>
-<path d="M10.14,18.59 q2.30,-4.59 0,-9.19" stroke="#ddd" stroke-width="1.34" fill="none" stroke-linecap="round"/></g></g>
+</g></g>
 </svg>

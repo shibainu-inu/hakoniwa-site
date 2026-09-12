@@ -31,7 +31,7 @@
 <g transform="translate(816.9,311.5) scale(0.525)">
 <ellipse cx="5.31" cy="10.76" rx="39.22" ry="5.08" fill="#000" opacity="0.45" filter="url(#sh7)"/>
 <g transform="translate(0.00,0.00)">
-<animateTransform attributeName="transform" type="translate" values="0 0;0 -10.66;0 0" dur="0.8s" begin="-0.77s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -9.13;0 0" dur="1.1s" begin="-1.06s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip8)">
 <rect x="-32.627664425359065" y="-63.66413997546165" width="82.9668209289192" height="70.90312606953223" fill="url(#gf11)"/>
 <polygon points="-31.63,-50.24 31.63,-50.24 49.34,-62.66 -7.59,-62.66" fill="url(#gt9)"/>
@@ -40,26 +40,11 @@
 <rect x="-18.34" y="-27.67" width="13.92" height="5.69" rx="2.85" fill="#151515"/>
 <rect x="4.43" y="-27.67" width="13.92" height="5.69" rx="2.85" fill="#151515"/>
 </g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.77" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
-<circle cx="60.63" cy="-5.06" r="5.65" fill="#f6c343" stroke="#e9b02c" stroke-width="1.13"/>
-<rect x="59.62" y="-7.60" width="2.03" height="5.08" rx="0.56" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-0.6s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.77" dur="1.8s" begin="-0.6s" additive="sum" repeatCount="indefinite"/>
-<circle cx="66.28" cy="-5.06" r="5.65" fill="#f6c343" stroke="#e9b02c" stroke-width="1.13"/>
-<rect x="65.27" y="-7.60" width="2.03" height="5.08" rx="0.56" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-1.2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.77" dur="1.8s" begin="-1.2s" additive="sum" repeatCount="indefinite"/>
-<circle cx="71.93" cy="-5.06" r="5.65" fill="#f6c343" stroke="#e9b02c" stroke-width="1.13"/>
-<rect x="70.91" y="-7.60" width="2.03" height="5.08" rx="0.56" fill="#e9b02c"/>
-</g>
-<g><animate attributeName="opacity" values="0;1;0" dur="1.2s" begin="0s" repeatCount="indefinite"/>
-<polygon points="59.20,-87.51 60.99,-83.20 65.64,-82.83 62.10,-79.79 63.18,-75.25 59.20,-77.69 55.21,-75.25 56.30,-79.79 52.75,-82.83 57.41,-83.20" fill="#f6c343"/>
-</g>
 </g>
 <g transform="translate(819.7,421.8) scale(0.566)">
 <ellipse cx="5.11" cy="9.53" rx="37.75" ry="4.89" fill="#000" opacity="0.45" filter="url(#sh12)"/>
 <g transform="translate(0.00,0.00)">
-<animateTransform attributeName="transform" type="translate" values="0 0;0 -6.80;0 0" dur="0.7s" begin="-0.08s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -8.16;0 0" dur="1.1s" begin="-0.13s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip13)">
 <rect x="-31.44524524810198" y="-62.143886747559684" width="79.93982783514107" height="68.32714143336503" fill="url(#gf16)"/>
 <polygon points="-30.45,-49.18 30.45,-49.18 47.49,-61.14 -7.31,-61.14" fill="url(#gt14)"/>
@@ -68,16 +53,6 @@
 <rect x="-16.44" y="-27.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
 <rect x="3.04" y="-27.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
 </g>
-<path d="M-17.32,0.83 q2.28,15.22 19.03,15.22 q16.74,0 19.03,-15.22 Z" fill="#e6e2d8"/>
-<path d="M-17.32,0.83 q19.03,6.09 38.06,0" stroke="#c9c4b8" stroke-width="1.14" fill="none"/>
-<ellipse cx="1.70" cy="0.83" rx="19.03" ry="3.81" fill="#f2cf6b"/>
-<ellipse cx="1.70" cy="-0.69" rx="13.70" ry="2.66" fill="#f5a06e"/>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="0.00s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.03" dur="1.6s" begin="0.00s" additive="sum" repeatCount="indefinite"/>
-<path d="M-5.15,-3.52 q2.28,-4.57 0,-9.13" stroke="#ddd" stroke-width="1.33" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-0.53s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.03" dur="1.6s" begin="-0.53s" additive="sum" repeatCount="indefinite"/>
-<path d="M2.47,-3.52 q2.28,-4.57 0,-9.13" stroke="#ddd" stroke-width="1.33" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-1.06s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.03" dur="1.6s" begin="-1.06s" additive="sum" repeatCount="indefinite"/>
-<path d="M10.08,-3.52 q2.28,-4.57 0,-9.13" stroke="#ddd" stroke-width="1.33" fill="none" stroke-linecap="round"/></g>
 </g>
 <g transform="translate(456.1,435.2) scale(0.571)">
 <ellipse cx="3.89" cy="1.96" rx="28.69" ry="3.72" fill="#000" opacity="0.45" filter="url(#sh17)"/>
@@ -99,7 +74,7 @@
 <g transform="translate(215.8,705.2) scale(0.671)">
 <ellipse cx="5.14" cy="9.71" rx="37.97" ry="4.92" fill="#000" opacity="0.45" filter="url(#sh22)"/>
 <g transform="translate(0.00,0.00)">
-<animateTransform attributeName="transform" type="translate" values="0 0;0 -5.77;0 0" dur="0.7s" begin="-0.36s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -6.92;0 0" dur="1.1s" begin="-0.57s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip23)">
 <rect x="-31.620039753077407" y="-62.368622539670945" width="80.38730176787817" height="68.70794374777577" fill="url(#gf26)"/>
 <polygon points="-30.62,-49.34 30.62,-49.34 47.77,-61.37 -7.35,-61.37" fill="url(#gt24)"/>
@@ -108,15 +83,5 @@
 <rect x="-18.98" y="-27.49" width="13.47" height="5.51" rx="2.76" fill="#151515"/>
 <rect x="5.51" y="-27.49" width="13.47" height="5.51" rx="2.76" fill="#151515"/>
 </g>
-<path d="M-17.42,0.97 q2.30,15.31 19.14,15.31 q16.84,0 19.14,-15.31 Z" fill="#e6e2d8"/>
-<path d="M-17.42,0.97 q19.14,6.12 38.28,0" stroke="#c9c4b8" stroke-width="1.15" fill="none"/>
-<ellipse cx="1.71" cy="0.97" rx="19.14" ry="3.83" fill="#f2cf6b"/>
-<ellipse cx="1.71" cy="-0.57" rx="13.78" ry="2.68" fill="#f5a06e"/>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="0.00s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.14" dur="1.6s" begin="0.00s" additive="sum" repeatCount="indefinite"/>
-<path d="M-5.17,-3.41 q2.30,-4.59 0,-9.19" stroke="#ddd" stroke-width="1.34" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-0.53s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.14" dur="1.6s" begin="-0.53s" additive="sum" repeatCount="indefinite"/>
-<path d="M2.48,-3.41 q2.30,-4.59 0,-9.19" stroke="#ddd" stroke-width="1.34" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-1.06s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.14" dur="1.6s" begin="-1.06s" additive="sum" repeatCount="indefinite"/>
-<path d="M10.14,-3.41 q2.30,-4.59 0,-9.19" stroke="#ddd" stroke-width="1.34" fill="none" stroke-linecap="round"/></g>
 </g>
 </svg>
