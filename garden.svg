@@ -28,16 +28,6 @@
 </g>
 <text x="120" y="92" font-size="40" font-weight="bold" font-family="sans-serif" fill="#f0ede6" letter-spacing="2">z6 HAKONIWA</text>
 <text class="L-en" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">4 HAKO · 0 graduated</text><text class="L-ja" display="none" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">4 HAKO　卒業 0</text>
-<g>
-<path d="M456.1,430.7 Q336.0,528.6 215.8,698.5" fill="none" stroke="#5ec99a" stroke-width="2" stroke-dasharray="6 6" opacity="0.75" stroke-linecap="round"><animate attributeName="stroke-dashoffset" values="24;0" dur="1.2s" repeatCount="indefinite"/></path>
-<circle cx="456.1" cy="430.7" r="3" fill="#5ec99a"/><circle cx="215.8" cy="698.5" r="3" fill="#5ec99a"/>
-<circle r="5" fill="#f6c343" stroke="#e9b02c" stroke-width="1.5"><animateMotion dur="1.5s" repeatCount="indefinite" path="M456.1,430.7 Q336.0,528.6 215.8,698.5"/></circle>
-</g>
-<g>
-<path d="M215.8,698.5 Q516.3,431.1 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="2" stroke-dasharray="6 6" opacity="0.75" stroke-linecap="round"><animate attributeName="stroke-dashoffset" values="24;0" dur="1.2s" repeatCount="indefinite"/></path>
-<circle cx="215.8" cy="698.5" r="3" fill="#3fbfd9"/><circle cx="816.9" cy="307.9" r="3" fill="#3fbfd9"/>
-<circle r="5" fill="#f6c343" stroke="#e9b02c" stroke-width="1.5"><animateMotion dur="1.5s" repeatCount="indefinite" path="M215.8,698.5 Q516.3,431.1 816.9,307.9"/></circle>
-</g>
 <g transform="translate(816.9,311.5) scale(0.525)">
 <ellipse cx="5.43" cy="11.46" rx="40.06" ry="5.19" fill="#000" opacity="0.45" filter="url(#sh7)"/>
 <g transform="translate(0.00,0.00)">
