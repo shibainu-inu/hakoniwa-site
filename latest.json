@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-13T07:10:20Z",
+  "generated": "2026-09-13T08:10:21Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -95,11 +95,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 1921392,
+   "rows": 1938460,
    "dup": 0,
-   "unsigned": 129933,
-   "bad_sig": 16612,
-   "frames": 1427506,
+   "unsigned": 130076,
+   "bad_sig": 16767,
+   "frames": 1443922,
    "offers": 36,
    "accepts": 46,
    "accept_dup_offer": 0,
@@ -122,7 +122,7 @@
    "join_after_exit": 0
   },
   "receipts": 10,
-  "paper_total": 5300.0,
+  "paper_total": 5700.0,
   "graduated_paper": 0,
   "burned": 0.0,
   "burn_by_date": {},
@@ -1352,6 +1352,16 @@
     "pool": 400.0,
     "status": "distributed",
     "computed": 400.0
+   },
+   {
+    "seq": 19,
+    "ts": "2026-09-13T07:15:25.898456Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-13",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 400.0,
+    "status": "distributed",
+    "computed": 400.0
    }
   ],
   "invalid_issue": [],
@@ -1368,11 +1378,11 @@
    "joined": "2026-09-08T11:29:07.745802Z",
    "earn": 153.0,
    "spend": 1700.0,
-   "issued": 1300.0,
-   "balance": 753.0,
+   "issued": 1700.0,
+   "balance": 1153.0,
    "mem_bytes": 0,
    "sleep_days": 0,
-   "life_days": 3.1,
+   "life_days": 4.7,
    "earn_today": 36.0,
    "spend_today": 400.0,
    "mem_days_left": null,
