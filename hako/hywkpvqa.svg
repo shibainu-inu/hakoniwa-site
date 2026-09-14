@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh27" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.26"/></filter><clipPath id="clip28"><path d="M-23.72,27.16 Q-30.41,27.16 -30.41,20.46 L-30.41,-20.46 Q-30.41,-27.16 -24.47,-30.23 L-13.24,-36.03 Q-7.30,-39.10 -0.61,-39.10 L40.75,-39.10 Q47.45,-39.10 47.45,-32.41 L47.45,10.31 Q47.45,17.00 41.70,20.43 L36.16,23.73 Q30.41,27.16 23.72,27.16 Z"/></clipPath><linearGradient id="gt29" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fffe83"/><stop offset="1" stop-color="#fff07c"/></linearGradient><linearGradient id="gs30" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c1a555"/><stop offset="1" stop-color="#a48c48"/></linearGradient><linearGradient id="gf31" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbd76f"/><stop offset="1" stop-color="#e3c264"/></linearGradient></defs>
 <g transform="translate(160,190) scale(1.6)"><ellipse cx="5.11" cy="31.50" rx="37.71" ry="4.89" fill="#000" opacity="0.45" filter="url(#sh27)"/>
 <g transform="translate(0.00,0.00)">
-<animateTransform attributeName="transform" type="translate" values="0 0;0 -2.40;0 0" dur="0.7s" begin="-0.35s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -2.88;0 0" dur="1.1s" begin="-0.55s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip28)">
 <rect x="-31.41403753620267" y="-40.103762546546285" width="79.85993609267884" height="68.2591532038701" fill="url(#gf31)"/>
 <polygon points="-30.41,-27.16 30.41,-27.16 47.45,-39.10 -7.30,-39.10" fill="url(#gt29)"/>
@@ -10,14 +10,8 @@
 <rect x="-18.86" y="-5.45" width="13.38" height="5.47" rx="2.74" fill="#151515"/>
 <rect x="5.47" y="-5.45" width="13.38" height="5.47" rx="2.74" fill="#151515"/>
 </g>
-<path d="M-17.31,22.81 q2.28,15.21 19.01,15.21 q16.73,0 19.01,-15.21 Z" fill="#e6e2d8"/>
-<path d="M-17.31,22.81 q19.01,6.08 38.02,0" stroke="#c9c4b8" stroke-width="1.14" fill="none"/>
-<ellipse cx="1.70" cy="22.81" rx="19.01" ry="3.80" fill="#f2cf6b"/>
-<ellipse cx="1.70" cy="21.29" rx="13.69" ry="2.66" fill="#f5a06e"/>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="0.00s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.01" dur="1.6s" begin="0.00s" additive="sum" repeatCount="indefinite"/>
-<path d="M-5.14,18.47 q2.28,-4.56 0,-9.12" stroke="#ddd" stroke-width="1.33" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-0.53s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.01" dur="1.6s" begin="-0.53s" additive="sum" repeatCount="indefinite"/>
-<path d="M2.46,18.47 q2.28,-4.56 0,-9.12" stroke="#ddd" stroke-width="1.33" fill="none" stroke-linecap="round"/></g>
-<g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-1.06s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.01" dur="1.6s" begin="-1.06s" additive="sum" repeatCount="indefinite"/>
-<path d="M10.07,18.47 q2.28,-4.56 0,-9.12" stroke="#ddd" stroke-width="1.33" fill="none" stroke-linecap="round"/></g></g>
+<g transform="translate(53.45,-45.10) scale(0.625) translate(-53.45,45.10)">
+<rect x="53.45" y="-54.10" width="54" height="16" rx="8" fill="#f6c343"/>
+<text x="80.45" y="-42.10" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">client</text>
+</g></g>
 </svg>
