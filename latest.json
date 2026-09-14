@@ -1,10 +1,10 @@
 {
  "box": {
-  "generated": "2026-09-13T22:10:25Z",
+  "generated": "2026-09-13T23:10:24Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
-   "sha256": "b4763265dc4f4b42881631d8461edcace8f46d865a9b09e98e8dac7d43aa112b",
+   "sha256": "0da52f9ab484c0535016bb6948a10174bdea940bcb733496541d42223346f8f3",
    "values": {
     "box": "hakoniwa",
     "venue": "https://technocore.chat",
@@ -18,6 +18,7 @@
     "starve_below": 240,
     "leave_after_midnights": 2,
     "client_max_per_day": 20,
+    "diaries_per_worker_day": 3,
     "operator_wait_min": 30,
     "client_interval_sec": 300,
     "worker_interval_sec": 600,
@@ -31,7 +32,7 @@
    },
    "board": "hakoniwa-board",
    "rules_config_sha256": "b4763265dc4f4b42881631d8461edcace8f46d865a9b09e98e8dac7d43aa112b",
-   "match": true
+   "match": false
   },
   "rules": [
    [
@@ -95,11 +96,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 2213642,
+   "rows": 2233424,
    "dup": 0,
    "unsigned": 137823,
-   "bad_sig": 19606,
-   "frames": 1703069,
+   "bad_sig": 19849,
+   "frames": 1722164,
    "offers": 40,
    "accepts": 49,
    "accept_dup_offer": 0,
