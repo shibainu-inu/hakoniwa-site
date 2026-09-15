@@ -13,5 +13,9 @@
 </g>
 <path d="M-17.46,23.02 q2.30,15.35 19.18,15.35 q16.88,0 19.18,-15.35 Z" fill="#e6e2d8"/>
 <path d="M-17.46,23.02 q19.18,6.14 38.37,0" stroke="#c9c4b8" stroke-width="1.15" fill="none"/>
-<ellipse cx="1.72" cy="23.02" rx="19.18" ry="3.84" fill="#c9c4b8"/></g>
+<ellipse cx="1.72" cy="23.02" rx="19.18" ry="3.84" fill="#c9c4b8"/>
+<g transform="translate(53.88,-45.46) scale(0.625) translate(-53.88,45.46)">
+<rect x="53.88" y="-54.46" width="54" height="16" rx="8" fill="#f6c343"/>
+<text x="80.88" y="-42.46" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">client</text>
+</g></g>
 </svg>
