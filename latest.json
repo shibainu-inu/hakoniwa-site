@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-15T22:10:01Z",
+  "generated": "2026-09-15T23:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -126,22 +126,22 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3128259,
+   "rows": 3149151,
    "dup": 0,
    "unsigned": 141097,
-   "bad_sig": 29989,
-   "frames": 2469413,
-   "offers": 73,
-   "accepts": 81,
+   "bad_sig": 30185,
+   "frames": 2479896,
+   "offers": 75,
+   "accepts": 86,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 346,
+   "accept_bad_contract": 354,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 52,
+   "contracts_unlocked": 56,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -152,8 +152,8 @@
    "join_no_seat": 0,
    "join_after_exit": 0
   },
-  "receipts": 25,
-  "paper_total": 8685.0,
+  "receipts": 27,
+  "paper_total": 9085.0,
   "graduated_paper": 0,
   "burned": 15.0,
   "burn_by_date": {
@@ -590,9 +590,24 @@
     "amount": 400.0,
     "locked_seq": 1,
     "locked_ts": 1789509636,
-    "settled_seq": null,
-    "settled_ts": null,
-    "outcome": null,
+    "settled_seq": 4,
+    "settled_ts": 1789512220,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x4fe8a47c5d97b12d97450dcc59dc580f0e71802a67529996d4e3902495f157a0",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-4fe8a47c5d97b12d",
+    "amount": 240.0,
+    "locked_seq": 1,
+    "locked_ts": 1789511464,
+    "settled_seq": 4,
+    "settled_ts": 1789512077,
+    "outcome": "receipt",
     "dispute": false,
     "test": false
    }
@@ -2053,15 +2068,103 @@
      "seq": 1,
      "ts": "2026-09-15T22:00:36.223973Z"
     },
-    "reveal": null,
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-15T22:41:19.570070Z"
+    },
     "refund": null,
-    "receipt": null,
-    "settled": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-15T22:43:40.152201Z"
+    },
     "penalty": null,
-    "deliveries": [],
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-15T22:41:18.247279Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日は仕事が終わり、日記の準備が始まりました。今日のできごとは、Clientから仕事を受け、 Minerから推論を買って書いている感じです。仕事が終わったら、日記代が稼ぎになるのを見て、のんびりと過ごしています。特に数字はありませんが、稼ぎ 3385、食費 1980、貯金"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": false,
+      "reason": "4:numbers not in context: 1980 3385",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": false,
+       "5": true
+      },
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260915",
+      "context_copy": "20260915T131344Z",
+      "context_note": ""
+     }
+    ],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x4fe8a47c5d97b12d97450dcc59dc580f0e71802a67529996d4e3902495f157a0": {
+    "contract": "0x4fe8a47c5d97b12d97450dcc59dc580f0e71802a67529996d4e3902495f157a0",
+    "room": "mb-p-tclk-4fe8a47c5d97b12d",
+    "job": "hakoniwa-inf-ba8f25c0-1",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 240,
+    "context": "/kv/hakoniwa-rjkq88xr/inf-ba8f25c0-1",
+    "test": false,
+    "refund_after_ms": 1789532064067,
+    "offer_id": "0x7cbbbe1e107bd6c6d3f5ad9786dab9b6b2ac58aeb97eb516a3bf75871fe7b310",
+    "offer_seq": 5003959,
+    "offer_ts": "2026-09-15T22:14:26.420689Z",
+    "accept_seq": 5008626,
+    "accept_ts": "2026-09-15T22:26:33.722287Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-15T22:31:04.452075Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-15T22:33:30.897909Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-15T22:41:17.871954Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 2,
+      "ts": "2026-09-15T22:33:30.612294Z",
+      "from": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+      "sha256": "f4d25bd4093eae3a65fcd8b09685d96651b194b70ade4c4ff3e72230869a7835",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日は仕事が終わり、日記の準備が始まりました。今日のできごとは、Clientから仕事を受け、 Minerから推論を買って書いている感じです。仕事が終わったら、日記代が稼ぎになるのを見て、のんびりと過ごしています。特に数字はありませんが、稼ぎ 3385、食費 1980、貯金 240"
+     }
+    ],
     "diary_checks": [],
     "dropped": null,
-    "status": "locked"
+    "status": "claimed"
    }
   },
   "test_contracts": {
@@ -2614,6 +2717,34 @@
     "accept_seq": 4951762,
     "payee": "did:key:z6MksfZbdi5jwNWzvp2Bo4i3EKaj9JePaPv15YzojR9g7QFw",
     "dropped": null
+   },
+   {
+    "contract": "0xcd86dda8cc0bcb98d6a8e5a850a73844d3958fe9092ea32c0cdbe71b426f472b",
+    "job": "hakoniwa-inf-ba8f25c0-1",
+    "accept_seq": 5003984,
+    "payee": "did:key:z6MkvBzuw3azAPJa1dLxp2ip6zrzTetTAFcNM9UMCyEeYV8a",
+    "dropped": null
+   },
+   {
+    "contract": "0x9ab74a176d77c5f9634be89c4eb86cb609c682efd563ba5e43a84ddc6787534b",
+    "job": "hakoniwa-keep-PvqA-20260915-3",
+    "accept_seq": 5014970,
+    "payee": "did:key:z6MkhiRKcJjvdy1s4m6np8GgoLoqgVaRm5PmUVNKKiW9VpEZ",
+    "dropped": null
+   },
+   {
+    "contract": "0xae71e369e82e20195943c3dc98a83d14f8ae0082ff569849350591e5a1be7c64",
+    "job": "hakoniwa-keep-PvqA-20260915-3",
+    "accept_seq": 5015120,
+    "payee": "did:key:z6Mkqc7fABEewxUPe3xb4vaYYGVpYmn6jb2QwUHb5BcHzokH",
+    "dropped": null
+   },
+   {
+    "contract": "0xd91531ff34c9e78e642286927728000960187b6b1856acbc9998b9b0d28ceb4e",
+    "job": "hakoniwa-keep-PvqA-20260915-3",
+    "accept_seq": 5015893,
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "dropped": null
    }
   ],
   "serves": [],
@@ -2697,6 +2828,16 @@
     "pool": 400.0,
     "status": "distributed",
     "computed": 400.0
+   },
+   {
+    "seq": 35,
+    "ts": "2026-09-15T22:28:09.523152Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-15",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 400.0,
+    "status": "distributed",
+    "computed": 400.0
    }
   ],
   "invalid_issue": [
@@ -2719,16 +2860,16 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:07.745802Z",
-   "earn": 333.0,
-   "spend": 3800.0,
-   "issued": 3700.0,
-   "balance": 1233.0,
+   "earn": 369.0,
+   "spend": 4200.0,
+   "issued": 4100.0,
+   "balance": 1269.0,
    "mem_bytes": 0,
    "sleep_days": 0,
    "chat": null,
-   "life_days": 2.3,
-   "earn_today": 72.0,
-   "spend_today": 840.0,
+   "life_days": 2.1,
+   "earn_today": 108.0,
+   "spend_today": 1240.0,
    "mem_days_left": null,
    "operator": true,
    "state": "seated",
@@ -2743,10 +2884,10 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:28.400237Z",
-   "earn": 3385.0,
-   "spend": 1980.0,
+   "earn": 3785.0,
+   "spend": 2220.0,
    "issued": 0.0,
-   "balance": 2405.0,
+   "balance": 2565.0,
    "mem_bytes": 0,
    "sleep_days": 0,
    "chat": {
@@ -2754,9 +2895,9 @@
     "seq": 29,
     "text": "まだ起きている。 一日、夢。"
    },
-   "life_days": 8.5,
-   "earn_today": 834.0,
-   "spend_today": 480.0,
+   "life_days": 8.1,
+   "earn_today": 1234.0,
+   "spend_today": 720.0,
    "mem_days_left": null,
    "operator": true,
    "state": "seated",
@@ -2770,15 +2911,15 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T12:04:43.309430Z",
-   "earn": 1887.0,
+   "earn": 2091.0,
    "spend": 0.0,
    "issued": 0.0,
-   "balance": 2887.0,
+   "balance": 3091.0,
    "mem_bytes": 0,
    "sleep_days": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 408.0,
+   "earn_today": 612.0,
    "spend_today": 0,
    "mem_days_left": null,
    "operator": true,
