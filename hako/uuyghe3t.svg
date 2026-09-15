@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh57" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.68"/></filter><clipPath id="clip58"><path d="M-26.80,30.68 Q-34.36,30.68 -34.36,23.12 L-34.36,-23.12 Q-34.36,-30.68 -27.65,-34.15 L-14.96,-40.71 Q-8.25,-44.18 -0.69,-44.18 L46.04,-44.18 Q53.60,-44.18 53.60,-36.62 L53.60,11.65 Q53.60,19.21 47.11,23.08 L40.85,26.81 Q34.36,30.68 26.80,30.68 Z"/></clipPath><linearGradient id="gt59" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#48abff"/><stop offset="1" stop-color="#44a2ff"/></linearGradient><linearGradient id="gs60" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e6fcb"/><stop offset="1" stop-color="#275eac"/></linearGradient><linearGradient id="gf61" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d91ff"/><stop offset="1" stop-color="#3783ef"/></linearGradient></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.77" cy="35.59" rx="42.61" ry="5.52" fill="#000" opacity="0.45" filter="url(#sh57)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh62" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.68"/></filter><clipPath id="clip63"><path d="M-26.80,30.68 Q-34.36,30.68 -34.36,23.12 L-34.36,-23.12 Q-34.36,-30.68 -27.65,-34.15 L-14.96,-40.71 Q-8.25,-44.18 -0.69,-44.18 L46.04,-44.18 Q53.60,-44.18 53.60,-36.62 L53.60,11.65 Q53.60,19.21 47.11,23.08 L40.85,26.81 Q34.36,30.68 26.80,30.68 Z"/></clipPath><linearGradient id="gt64" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#48abff"/><stop offset="1" stop-color="#44a2ff"/></linearGradient><linearGradient id="gs65" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e6fcb"/><stop offset="1" stop-color="#275eac"/></linearGradient><linearGradient id="gf66" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d91ff"/><stop offset="1" stop-color="#3783ef"/></linearGradient></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.77" cy="35.59" rx="42.61" ry="5.52" fill="#000" opacity="0.45" filter="url(#sh62)"/>
 <g transform="translate(0.00,0.00)">
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.26;0 0" dur="1.078s" begin="-1.04s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
-<g clip-path="url(#clip58)">
-<rect x="-35.36085092578758" y="-45.17823690458403" width="89.9637783700162" height="76.85756808832294" fill="url(#gf61)"/>
-<polygon points="-34.36,-30.68 34.36,-30.68 53.60,-44.18 -8.25,-44.18" fill="url(#gt59)"/>
-<polygon points="34.36,-30.68 53.60,-44.18 53.60,19.21 34.36,30.68" fill="url(#gs60)"/>
+<g clip-path="url(#clip63)">
+<rect x="-35.36085092578758" y="-45.17823690458403" width="89.9637783700162" height="76.85756808832294" fill="url(#gf66)"/>
+<polygon points="-34.36,-30.68 34.36,-30.68 53.60,-44.18 -8.25,-44.18" fill="url(#gt64)"/>
+<polygon points="34.36,-30.68 53.60,-44.18 53.60,19.21 34.36,30.68" fill="url(#gs65)"/>
 </g>
 <rect x="-19.93" y="-6.16" width="15.12" height="6.18" rx="3.09" fill="#151515"/>
 <rect x="4.81" y="-6.16" width="15.12" height="6.18" rx="3.09" fill="#151515"/>
