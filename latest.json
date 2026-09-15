@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-15T21:10:01Z",
+  "generated": "2026-09-15T22:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -126,15 +126,15 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3111185,
+   "rows": 3128259,
    "dup": 0,
    "unsigned": 141097,
-   "bad_sig": 29749,
-   "frames": 2459115,
-   "offers": 72,
-   "accepts": 80,
+   "bad_sig": 29989,
+   "frames": 2469413,
+   "offers": 73,
+   "accepts": 81,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 344,
+   "accept_bad_contract": 346,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
@@ -578,6 +578,21 @@
     "settled_seq": 4,
     "settled_ts": 1789501827,
     "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xba8f25c0e2c822dd771eb5a58484b34d39feb4c68425f09ea91ac1fcba6930cf",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-ba8f25c0e2c822dd",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1789509636,
+    "settled_seq": null,
+    "settled_ts": null,
+    "outcome": null,
     "dispute": false,
     "test": false
    }
@@ -2017,6 +2032,36 @@
     "diary_checks": [],
     "dropped": null,
     "status": "claimed"
+   },
+   "0xba8f25c0e2c822dd771eb5a58484b34d39feb4c68425f09ea91ac1fcba6930cf": {
+    "contract": "0xba8f25c0e2c822dd771eb5a58484b34d39feb4c68425f09ea91ac1fcba6930cf",
+    "room": "mb-p-tclk-ba8f25c0e2c822dd",
+    "job": "hakoniwa-diary-PvqA-20260915-4",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1789594003820,
+    "offer_id": "0xc18acb1001319ff75bb5a8c73bdbaa0bcf7d2c88d4e18b7b81db70aa5d68f829",
+    "offer_seq": 4992451,
+    "offer_ts": "2026-09-15T21:26:44.067352Z",
+    "accept_seq": 4993736,
+    "accept_ts": "2026-09-15T21:29:48.699822Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-15T22:00:36.223973Z"
+    },
+    "reveal": null,
+    "refund": null,
+    "receipt": null,
+    "settled": null,
+    "penalty": null,
+    "deliveries": [],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "locked"
    }
   },
   "test_contracts": {

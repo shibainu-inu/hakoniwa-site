@@ -19,5 +19,9 @@
 <g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-0.53s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -21.38" dur="1.6s" begin="-0.53s" additive="sum" repeatCount="indefinite"/>
 <path d="M2.77,20.77 q2.57,-5.13 0,-10.26" stroke="#ddd" stroke-width="1.50" fill="none" stroke-linecap="round"/></g>
 <g opacity="0"><animate attributeName="opacity" values="0;0.9;0" dur="1.6s" begin="-1.06s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -21.38" dur="1.6s" begin="-1.06s" additive="sum" repeatCount="indefinite"/>
-<path d="M11.32,20.77 q2.57,-5.13 0,-10.26" stroke="#ddd" stroke-width="1.50" fill="none" stroke-linecap="round"/></g></g>
+<path d="M11.32,20.77 q2.57,-5.13 0,-10.26" stroke="#ddd" stroke-width="1.50" fill="none" stroke-linecap="round"/></g>
+<g transform="translate(59.36,-49.98) scale(0.625) translate(-59.36,49.98)">
+<rect x="59.36" y="-58.98" width="54" height="16" rx="8" fill="#5ec99a"/>
+<text x="86.36" y="-46.98" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
+</g></g>
 </svg>
