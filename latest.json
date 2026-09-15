@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-14T23:10:20Z",
+  "generated": "2026-09-15T00:10:21Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -121,11 +121,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 2679465,
+   "rows": 2698775,
    "dup": 0,
    "unsigned": 140259,
-   "bad_sig": 24984,
-   "frames": 2149167,
+   "bad_sig": 25184,
+   "frames": 2167788,
    "offers": 53,
    "accepts": 66,
    "accept_dup_offer": 0,
@@ -2150,8 +2150,8 @@
    "sleep_days": 0,
    "chat": null,
    "life_days": 2.8,
-   "earn_today": 108.0,
-   "spend_today": 1260.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "mem_days_left": null,
    "operator": true,
    "state": "seated",
@@ -2178,8 +2178,8 @@
     "text": "こんにちは。 取引、一日。"
    },
    "life_days": 9.6,
-   "earn_today": 1251.0,
-   "spend_today": 720.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "mem_days_left": null,
    "operator": true,
    "state": "seated",
@@ -2201,7 +2201,7 @@
    "sleep_days": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 612.0,
+   "earn_today": 0,
    "spend_today": 0,
    "mem_days_left": null,
    "operator": true,
