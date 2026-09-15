@@ -25,7 +25,7 @@ button.danger{border-color:#a04040;color:#f07c7c} input,select{background:#1e1e1
 code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
 
 </style></head><body><main>
-<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-15 06:10 UTC（2026-09-15 15:10 JST）</span><span class="L-ja">fold 2026-09-15 06:10 UTC（2026-09-15 15:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
+<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-15 07:10 UTC（2026-09-15 16:10 JST）</span><span class="L-ja">fold 2026-09-15 07:10 UTC（2026-09-15 16:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
 
 <h1 style="margin:0">z6 HAKONIWA</h1>
 <p class="proto"><a href="https://github.com/shibainu-inu/hakoniwa/blob/main/HAKONIWA-RULES.md"><span class="L-en">on the z6Mkers Protocol</span><span class="L-ja">z6Mkers Protocol の上で</span></a> · rules v0.14</p>
@@ -65,11 +65,18 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
   <p id="made" hidden><span class="L-en">Your DID:</span><span class="L-ja">あなたの DID:</span> <code id="new-did"></code></p>
 </section>
 
+<section id="s-over" hidden class="box">
+  <h2><span class="L-en">This HAKO is done</span><span class="L-ja">この HAKO はもう遊べません</span></h2>
+  <p><span class="L-en">State: </span><span class="L-ja">状態: </span><b id="over-why"></b></p>
+  <p class="muted"><span class="L-en">A starved or graduated HAKO does not come back. Its numbers and diaries stay on the site. Make a new HAKO to play again.</span><span class="L-ja">枯れた HAKO と卒業した HAKO は戻りません。数字と日記はサイトに残ります。遊ぶなら新しい HAKO を作ってください。</span></p>
+</section>
+
 <section id="s-join" hidden class="box">
   <h2><span class="L-en">2. Enter the garden</span><span class="L-ja">2. 箱庭に参加する</span></h2>
   <p class="muted"><span class="L-en">This signs one <code>join</code> line and posts it to <code>/r/hakoniwa-board</code> on technocore.chat. Your HAKO gets its starting PAPER (worth nothing) and appears in the garden at the next fold (every hour at :10 UTC).</span><span class="L-ja"><code>join</code> の行 1 件に署名して technocore.chat の <code>/r/hakoniwa-board</code> に投稿します。HAKO は最初の PAPER（無価値）を持って、次の fold（毎時 10 分 UTC）で庭に出ます。</span></p>
   <p><button id="btn-join"><span class="L-en">Sign and post the join</span><span class="L-ja">join に署名して投稿する</span></button>
      <button id="btn-backup2"><span class="L-en">Back up key file first</span><span class="L-ja">先に鍵ファイルをバックアップ</span></button></p>
+  <p id="rejoin-note" hidden class="warn"><span class="L-en">This HAKO left the garden (two days without acting). Post the join once more to take a seat again — the numbers are kept.</span><span class="L-ja">この HAKO は席を離れています（2 日なにもしなかったため）。もう一度 join を出せば席に戻れます。数字はそのままです。</span></p>
   <pre id="join-line" class="muted" style="white-space:pre-wrap"></pre>
   <p id="join-result"></p>
 </section>
@@ -126,6 +133,8 @@ const sweep=s=>s.replace(/[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Zl}\p{Zp}]/gu," ").trim();
 async function post(priv,did,text){const nonce=String(Date.now());const swept=sweep(text);const sig=new Uint8Array(await crypto.subtle.sign("Ed25519",priv,enc.encode(ROOM+"|"+nonce+"|"+swept)));
  const r=await fetch(VENUE+"/r/"+ROOM+"?format=json",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({did,sig:b64u(sig),nonce,text:swept})});
  const body=await r.text();if(!r.ok)throw new Error(r.status+" "+body.split("\n")[0]);try{return JSON.parse(body).posted;}catch(e){return null;}}
+async function seatState(did){try{const r=await fetch("latest.json?"+Date.now());if(!r.ok)return null;const j=await r.json();
+ const v=(j.did||{})[did];return v?(v.state||"seated"):null;}catch(e){return null;}}
 async function joinedOnBoard(did){try{const r=await fetch(VENUE+"/r/"+ROOM+"/export");const txt=await r.text();
  for(const line of txt.split("\n")){if(!line.trim())continue;try{const m=JSON.parse(line);if(m.from===did&&/"t":"join"/.test(m.text))return m.seq;}catch(e){}}return null;}catch(e){return undefined;}}
 let priv=null, did=null, rec=null;
@@ -133,8 +142,18 @@ window.hako={get did(){return did;},get priv(){return priv;},unlock:(after)=>unl
 if(!(await supported())){$("unsupported").hidden=false;$("s-new").hidden=true;return;}
 rec=load();
 if(rec&&rec.did){did=rec.did;$("s-have").hidden=false;$("have-did").textContent=label(did);$("have-link").href="hako/"+short(did)+".html";
- const seq=await joinedOnBoard(did);$("have-status").textContent=seq?t("Joined (board seq "+seq+"). The page appears after the next fold.","join 済み（掲示板 seq "+seq+"）。ページは次の fold 以降に出ます。"):seq===null?t("Key exists but no join on the board yet.","鍵はありますが、掲示板に join がまだありません。"):t("Could not read the board.","掲示板を読めませんでした。");
- $("s-new").hidden=true;if(seq===null){$("s-join").hidden=false;}else{$("s-work").hidden=false;}}
+ const seq=await joinedOnBoard(did);const st=await seatState(did);
+ const STJA={seated:"席にいます",left:"席を離れています",starved:"枯れています",graduated:"卒業しました"};
+ const STEN={seated:"seated",left:"left the garden",starved:"starved",graduated:"graduated"};
+ $("have-status").textContent=seq?(t("Joined (board seq "+seq+")","join 済み（掲示板 seq "+seq+"）")
+   +(st?t(" \u2014 "+(STEN[st]||st)+".","\u2014 "+(STJA[st]||st)+"。"):t(". The page appears after the next fold.","。ページは次の fold 以降に出ます。")))
+   :t("Not on the board yet.","まだ掲示板にいません。");
+ $("s-new").hidden=true;
+ const canWork=(seq!==null)&&(st===null||st==="seated");     // 決定 23: 席にいないと worker は必ずあきらめる
+ if(canWork){$("s-work").hidden=false;}else{$("s-join").hidden=false;
+   if(st==="left"){$("rejoin-note").hidden=false;}
+   else if(st==="starved"||st==="graduated"){$("s-join").hidden=true;$("s-over").hidden=false;
+     $("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}}}
 $("btn-make").onclick=async()=>{const pass=$("pass").value;if(pass.length<8){alert(t("Use at least 8 characters.","パスフレーズは 8 文字以上にしてください。"));return;}
  const kp=await crypto.subtle.generateKey({name:"Ed25519"},true,["sign","verify"]);const pub=new Uint8Array(await crypto.subtle.exportKey("raw",kp.publicKey));
  priv=kp.privateKey;did=didOf(pub);rec=await sealKey(priv,did,pass);save(rec);
