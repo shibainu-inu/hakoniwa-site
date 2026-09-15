@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-15T08:10:01Z",
+  "generated": "2026-09-15T09:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -116,21 +116,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 4,
-   "free": 68
+   "taken": 5,
+   "free": 67
   },
   "exits": {
    "starved": 0,
-   "left": 1,
+   "left": 0,
    "graduated": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 2843706,
+   "rows": 2868531,
    "dup": 0,
-   "unsigned": 140538,
-   "bad_sig": 27124,
-   "frames": 2304891,
+   "unsigned": 140637,
+   "bad_sig": 27346,
+   "frames": 2317648,
    "offers": 58,
    "accepts": 70,
    "accept_dup_offer": 0,
@@ -2268,7 +2268,7 @@
     "worker",
     "client"
    ],
-   "lang": "ja",
+   "lang": "en",
    "joined": "2026-09-10T07:29:20.284637Z",
    "earn": 400.0,
    "spend": 240.0,
@@ -2282,8 +2282,8 @@
    "spend_today": 0,
    "mem_days_left": null,
    "operator": false,
-   "state": "left",
-   "state_since": "2026-09-13T00:00:00Z"
+   "state": "seated",
+   "state_since": "2026-09-15T08:20:09Z"
   },
   "did:key:z6Mkp5PTR6tMWGchHV3NTTcvbFhEshZyzunpssUL6pJ2DRNc": {
    "roles": [
