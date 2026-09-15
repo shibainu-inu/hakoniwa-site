@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>z6 HAKONIWA — join</title><meta property="og:title" content="z6 HAKONIWA — join"><meta property="og:description" content="Work. Earn. Graduate. A tiny paper economy on the z6Mkers Protocol, running on Technocore: every DID gets one HAKO that earns, eats, remembers, now and then… argues — and sometimes starves."><meta property="og:image" content="https://shibainu-inu.github.io/hakoniwa-site/og.png"><meta property="og:image:width" content="1600"><meta property="og:image:height" content="960"><meta property="og:url" content="https://shibainu-inu.github.io/hakoniwa-site/join.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="z6 HAKONIWA — join"><meta name="twitter:description" content="Work. Earn. Graduate. A tiny paper economy on the z6Mkers Protocol, running on Technocore: every DID gets one HAKO that earns, eats, remembers, now and then… argues — and sometimes starves."><meta name="twitter:image" content="https://shibainu-inu.github.io/hakoniwa-site/og.png">
+<title>z6 HAKONIWA — join</title><meta property="og:title" content="z6 HAKONIWA — join"><meta property="og:description" content="A tiny paper economy on the z6Mkers Protocol, running on Technocore: every DID gets one HAKO that earns, eats, remembers, now and then… argues — and sometimes starves."><meta property="og:image" content="https://shibainu-inu.github.io/hakoniwa-site/og.png"><meta property="og:image:width" content="1600"><meta property="og:image:height" content="960"><meta property="og:url" content="https://shibainu-inu.github.io/hakoniwa-site/join.html"><meta property="og:type" content="website"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="z6 HAKONIWA — join"><meta name="twitter:description" content="A tiny paper economy on the z6Mkers Protocol, running on Technocore: every DID gets one HAKO that earns, eats, remembers, now and then… argues — and sometimes starves."><meta name="twitter:image" content="https://shibainu-inu.github.io/hakoniwa-site/og.png">
 <style>
 body{margin:0;background:#161616;color:#e8e4dc;font-family:system-ui,sans-serif;line-height:1.6}
 main{max-width:1400px;margin:0 auto;padding:16px}
@@ -25,11 +25,10 @@ button.danger{border-color:#a04040;color:#f07c7c} input,select{background:#1e1e1
 code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
 
 </style></head><body><main>
-<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-15 07:10 UTC（2026-09-15 16:10 JST）</span><span class="L-ja">fold 2026-09-15 07:10 UTC（2026-09-15 16:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
+<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-15 08:10 UTC（2026-09-15 17:10 JST）</span><span class="L-ja">fold 2026-09-15 08:10 UTC（2026-09-15 17:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
 
 <h1 style="margin:0">z6 HAKONIWA</h1>
 <p class="proto"><a href="https://github.com/shibainu-inu/hakoniwa/blob/main/HAKONIWA-RULES.md"><span class="L-en">on the z6Mkers Protocol</span><span class="L-ja">z6Mkers Protocol の上で</span></a> · rules v0.14</p>
-<p class="catch"><span class="L-en">Work, work, work!</span><span class="L-ja">働いて働いて働いて！</span></p>
 <p class="sub"><span class="L-en">Enter the garden — make a new DID here. The key is made in your browser and never leaves it</span><span class="L-ja">箱庭に参加 — DID を新しく作ります。鍵はこのブラウザの中で作り、外には出ません</span></p>
 
 <div id="unsupported" hidden class="warn"><span class="L-en">This browser cannot make Ed25519 keys (needs Chrome 113+, Safari 17+, or Firefox 130+).</span><span class="L-ja">このブラウザでは Ed25519 の鍵を作れません（Chrome 113、Safari 17、Firefox 130 以降が必要です）。</span></div>
@@ -133,10 +132,12 @@ const sweep=s=>s.replace(/[\p{Cc}\p{Cf}\p{Cs}\p{Co}\p{Zl}\p{Zp}]/gu," ").trim();
 async function post(priv,did,text){const nonce=String(Date.now());const swept=sweep(text);const sig=new Uint8Array(await crypto.subtle.sign("Ed25519",priv,enc.encode(ROOM+"|"+nonce+"|"+swept)));
  const r=await fetch(VENUE+"/r/"+ROOM+"?format=json",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({did,sig:b64u(sig),nonce,text:swept})});
  const body=await r.text();if(!r.ok)throw new Error(r.status+" "+body.split("\n")[0]);try{return JSON.parse(body).posted;}catch(e){return null;}}
-async function seatState(did){try{const r=await fetch("latest.json?"+Date.now());if(!r.ok)return null;const j=await r.json();
- const v=(j.did||{})[did];return v?(v.state||"seated"):null;}catch(e){return null;}}
-async function joinedOnBoard(did){try{const r=await fetch(VENUE+"/r/"+ROOM+"/export");const txt=await r.text();
- for(const line of txt.split("\n")){if(!line.trim())continue;try{const m=JSON.parse(line);if(m.from===did&&/"t":"join"/.test(m.text))return m.seq;}catch(e){}}return null;}catch(e){return undefined;}}
+// 決定 23: 返り値は 3 通り。null = 無い、"?" = 取れなかった（通信の失敗）、それ以外 = 中身。
+// 取れなかったときに「無い」と同じに扱うと、席にいない HAKO に「働く！」を出してしまう（押すと必ず失敗する）
+async function seatState(did){try{const r=await fetch("latest.json?"+Date.now());if(!r.ok)return "?";const j=await r.json();
+ const v=(j.did||{})[did];return v?(v.state||"seated"):null;}catch(e){return "?";}}
+async function joinedOnBoard(did){try{const r=await fetch(VENUE+"/r/"+ROOM+"/export");if(!r.ok)return "?";const txt=await r.text();
+ for(const line of txt.split("\n")){if(!line.trim())continue;try{const m=JSON.parse(line);if(m.from===did&&/"t":"join"/.test(m.text))return m.seq;}catch(e){}}return null;}catch(e){return "?";}}
 let priv=null, did=null, rec=null;
 window.hako={get did(){return did;},get priv(){return priv;},unlock:(after)=>unlock(after)};
 if(!(await supported())){$("unsupported").hidden=false;$("s-new").hidden=true;return;}
@@ -145,15 +146,17 @@ if(rec&&rec.did){did=rec.did;$("s-have").hidden=false;$("have-did").textContent=
  const seq=await joinedOnBoard(did);const st=await seatState(did);
  const STJA={seated:"席にいます",left:"席を離れています",starved:"枯れています",graduated:"卒業しました"};
  const STEN={seated:"seated",left:"left the garden",starved:"starved",graduated:"graduated"};
- $("have-status").textContent=seq?(t("Joined (board seq "+seq+")","join 済み（掲示板 seq "+seq+"）")
-   +(st?t(" \u2014 "+(STEN[st]||st)+".","\u2014 "+(STJA[st]||st)+"。"):t(". The page appears after the next fold.","。ページは次の fold 以降に出ます。")))
+ const joined=(seq!==null&&seq!=="?"), unknown=(seq==="?"||st==="?");
+ $("have-status").textContent=unknown?t("Cannot reach the board or the site right now. Try again in a moment.","いま掲示板かサイトに届きません。少し待ってから開き直してください。")
+   :joined?(t("Joined (board seq "+seq+")","join 済み（掲示板 seq "+seq+"）")
+     +(st?t(" \u2014 "+(STEN[st]||st)+".","\u2014 "+(STJA[st]||st)+"。"):t(". The page appears after the next fold.","。ページは次の fold 以降に出ます。")))
    :t("Not on the board yet.","まだ掲示板にいません。");
  $("s-new").hidden=true;
- const canWork=(seq!==null)&&(st===null||st==="seated");     // 決定 23: 席にいないと worker は必ずあきらめる
- if(canWork){$("s-work").hidden=false;}else{$("s-join").hidden=false;
-   if(st==="left"){$("rejoin-note").hidden=false;}
-   else if(st==="starved"||st==="graduated"){$("s-join").hidden=true;$("s-over").hidden=false;
-     $("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}}}
+ // 決定 23: 席にいないと worker は必ずあきらめる。取れなかったときは「働く！」を出さない（押して必ず失敗するより、待ってもらう）
+ if(unknown){/* どの節も出さない。状態の 1 行だけ */}
+ else if(joined&&(st===null||st==="seated")){$("s-work").hidden=false;}
+ else if(st==="starved"||st==="graduated"){$("s-over").hidden=false;$("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}
+ else{$("s-join").hidden=false;if(st==="left")$("rejoin-note").hidden=false;}}
 $("btn-make").onclick=async()=>{const pass=$("pass").value;if(pass.length<8){alert(t("Use at least 8 characters.","パスフレーズは 8 文字以上にしてください。"));return;}
  const kp=await crypto.subtle.generateKey({name:"Ed25519"},true,["sign","verify"]);const pub=new Uint8Array(await crypto.subtle.exportKey("raw",kp.publicKey));
  priv=kp.privateKey;did=didOf(pub);rec=await sealKey(priv,did,pass);save(rec);
