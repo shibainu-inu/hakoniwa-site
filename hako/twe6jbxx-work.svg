@@ -1,32 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh87" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.26"/></filter><clipPath id="clip88"><path d="M-23.75,27.18 Q-30.45,27.18 -30.45,20.49 L-30.45,-20.49 Q-30.45,-27.18 -24.50,-30.26 L-13.26,-36.07 Q-7.31,-39.14 -0.61,-39.14 L40.80,-39.14 Q47.49,-39.14 47.49,-32.45 L47.49,10.32 Q47.49,17.02 41.74,20.45 L36.20,23.75 Q30.45,27.18 23.75,27.18 Z"/></clipPath><linearGradient id="gt89" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6c59d"/><stop offset="1" stop-color="#e9ba95"/></linearGradient><linearGradient id="gs90" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9f8066"/><stop offset="1" stop-color="#886d57"/></linearGradient><linearGradient id="gf91" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d1a786"/><stop offset="1" stop-color="#bc9779"/></linearGradient></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.11" cy="31.53" rx="37.75" ry="4.89" fill="#000" opacity="0.45" filter="url(#sh87)"/>
-<g transform="translate(0.00,0.00)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds19" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.26"/></filter></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="29.90" rx="26.10" ry="4.35" fill="#000" opacity="0.45" filter="url(#ds19)"/>
+<g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.37;0 0" dur="0.8s" begin="-0.10s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
-<g clip-path="url(#clip88)">
-<rect x="-31.44524524810198" y="-40.143886747559684" width="79.93982783514107" height="68.32714143336503" fill="url(#gf91)"/>
-<polygon points="-30.45,-27.18 30.45,-27.18 47.49,-39.14 -7.31,-39.14" fill="url(#gt89)"/>
-<polygon points="30.45,-27.18 47.49,-39.14 47.49,17.02 30.45,27.18" fill="url(#gs90)"/>
+<path d="M0.00 -76.37h5.18v5.18h-5.18zM-5.18 -71.19h15.53v5.18h-15.53zM-25.89 -66.02h51.78v5.18h-51.78zM-31.07 -60.84h5.18v5.18h-5.18zM25.89 -60.84h5.18v5.18h-5.18zM-31.07 -55.66h5.18v5.18h-5.18zM25.89 -55.66h5.18v5.18h-5.18zM-31.07 -50.48h5.18v5.18h-5.18zM25.89 -50.48h5.18v5.18h-5.18zM-31.07 -45.31h5.18v5.18h-5.18zM25.89 -45.31h5.18v5.18h-5.18zM-31.07 -40.13h5.18v5.18h-5.18zM25.89 -40.13h5.18v5.18h-5.18zM-31.07 -34.95h5.18v5.18h-5.18zM-15.53 -34.95h5.18v5.18h-5.18zM10.36 -34.95h5.18v5.18h-5.18zM25.89 -34.95h5.18v5.18h-5.18zM-31.07 -29.77h5.18v5.18h-5.18zM-15.53 -29.77h10.36v5.18h-10.36zM5.18 -29.77h10.36v5.18h-10.36zM25.89 -29.77h5.18v5.18h-5.18zM-31.07 -24.59h5.18v5.18h-5.18zM25.89 -24.59h5.18v5.18h-5.18zM-31.07 -19.42h5.18v5.18h-5.18zM-5.18 -19.42h10.36v5.18h-10.36zM25.89 -19.42h5.18v5.18h-5.18zM-31.07 -14.24h5.18v5.18h-5.18zM25.89 -14.24h5.18v5.18h-5.18zM-31.07 -9.06h5.18v5.18h-5.18zM25.89 -9.06h5.18v5.18h-5.18zM-31.07 -3.88h5.18v5.18h-5.18zM25.89 -3.88h5.18v5.18h-5.18zM-31.07 1.29h5.18v5.18h-5.18zM25.89 1.29h5.18v5.18h-5.18zM-31.07 6.47h5.18v5.18h-5.18zM25.89 6.47h5.18v5.18h-5.18zM-25.89 11.65h51.78v5.18h-51.78zM-20.71 16.83h10.36v5.18h-10.36zM10.36 16.83h10.36v5.18h-10.36zM-20.71 22.01h10.36v5.18h-10.36zM10.36 22.01h10.36v5.18h-10.36z" fill="#c9a181" shape-rendering="crispEdges"/>
 </g>
-<rect x="-16.44" y="-5.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
-<rect x="3.04" y="-5.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.03" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
-<circle cx="58.37" cy="16.31" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
-<rect x="57.39" y="13.86" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-0.6s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.03" dur="1.8s" begin="-0.6s" additive="sum" repeatCount="indefinite"/>
-<circle cx="63.80" cy="16.31" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
-<rect x="62.83" y="13.86" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-1.2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.03" dur="1.8s" begin="-1.2s" additive="sum" repeatCount="indefinite"/>
-<circle cx="69.24" cy="16.31" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
-<rect x="68.26" y="13.86" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
-</g>
-<g><animate attributeName="opacity" values="0;1;0" dur="1.2s" begin="0s" repeatCount="indefinite"/>
-<polygon points="56.98,-63.07 58.71,-58.92 63.19,-58.56 59.78,-55.63 60.82,-51.26 56.98,-53.61 53.15,-51.26 54.19,-55.63 50.78,-58.56 55.26,-58.92" fill="#f6c343"/>
-</g>
-<g transform="translate(53.49,-45.14) scale(0.625) translate(-53.49,45.14)">
-<rect x="53.49" y="-54.14" width="54" height="16" rx="8" fill="#5ec99a"/>
-<text x="80.49" y="-42.14" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
+<circle cx="39.77" cy="21.75" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
+<rect x="38.79" y="19.30" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
+<circle cx="46.29" cy="15.22" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
+<rect x="45.31" y="12.78" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
+<circle cx="52.81" cy="8.70" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
+<rect x="51.83" y="6.25" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
+<g transform="translate(37.07,-82.37) scale(0.625) translate(-37.07,82.37)">
+<rect x="37.07" y="-91.37" width="54" height="16" rx="8" fill="#5ec99a"/>
+<text x="64.07" y="-79.37" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
 </g></g>
 </svg>

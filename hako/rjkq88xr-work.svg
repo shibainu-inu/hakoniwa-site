@@ -1,32 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh57" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.81"/></filter><clipPath id="clip58"><path d="M-27.72,31.73 Q-35.54,31.73 -35.54,23.91 L-35.54,-23.91 Q-35.54,-31.73 -28.59,-35.32 L-15.47,-42.10 Q-8.53,-45.69 -0.71,-45.69 L47.62,-45.69 Q55.43,-45.69 55.43,-37.87 L55.43,12.04 Q55.43,19.86 48.72,23.87 L42.25,27.72 Q35.54,31.73 27.72,31.73 Z"/></clipPath><linearGradient id="gt59" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff"/></linearGradient><linearGradient id="gs60" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfbdb7"/><stop offset="1" stop-color="#a2a19c"/></linearGradient><linearGradient id="gf61" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9f6ef"/><stop offset="1" stop-color="#e1ded8"/></linearGradient></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.97" cy="36.80" rx="44.06" ry="5.71" fill="#000" opacity="0.45" filter="url(#sh57)"/>
-<g transform="translate(0.00,0.00)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds13" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.81"/></filter></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="34.90" rx="45.69" ry="5.08" fill="#000" opacity="0.45" filter="url(#ds13)"/>
+<g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.93;0 0" dur="0.8s" begin="-0.42s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
-<g clip-path="url(#clip58)">
-<rect x="-36.53502252074283" y="-46.68788609809791" width="92.96965765310165" height="79.41558477733258" fill="url(#gf61)"/>
-<polygon points="-35.54,-31.73 35.54,-31.73 55.43,-45.69 -8.53,-45.69" fill="url(#gt59)"/>
-<polygon points="35.54,-31.73 55.43,-45.69 55.43,19.86 35.54,31.73" fill="url(#gs60)"/>
+<path d="M-18.13 -64.97h12.09v6.04h-12.09zM12.09 -64.97h12.09v6.04h-12.09zM-6.04 -58.92h18.13v6.04h-18.13zM-48.35 -52.88h96.69v6.04h-96.69zM-54.39 -46.84h6.04v6.04h-6.04zM48.35 -46.84h6.04v6.04h-6.04zM-54.39 -40.79h6.04v6.04h-6.04zM48.35 -40.79h6.04v6.04h-6.04zM-54.39 -34.75h6.04v6.04h-6.04zM48.35 -34.75h6.04v6.04h-6.04zM-54.39 -28.71h6.04v6.04h-6.04zM-24.17 -28.71h6.04v6.04h-6.04zM18.13 -28.71h6.04v6.04h-6.04zM48.35 -28.71h6.04v6.04h-6.04zM-54.39 -22.66h6.04v6.04h-6.04zM48.35 -22.66h6.04v6.04h-6.04zM-54.39 -16.62h6.04v6.04h-6.04zM-6.04 -16.62h12.09v6.04h-12.09zM48.35 -16.62h6.04v6.04h-6.04zM-54.39 -10.58h6.04v6.04h-6.04zM-12.09 -10.58h6.04v6.04h-6.04zM6.04 -10.58h6.04v6.04h-6.04zM48.35 -10.58h6.04v6.04h-6.04zM-54.39 -4.53h6.04v6.04h-6.04zM48.35 -4.53h6.04v6.04h-6.04zM-54.39 1.51h6.04v6.04h-6.04zM48.35 1.51h6.04v6.04h-6.04zM-54.39 7.55h6.04v6.04h-6.04zM-42.30 7.55h84.61v6.04h-84.61zM48.35 7.55h6.04v6.04h-6.04zM-54.39 13.60h6.04v6.04h-6.04zM-42.30 13.60h84.61v6.04h-84.61zM48.35 13.60h6.04v6.04h-6.04zM-48.35 19.64h96.69v6.04h-96.69zM-42.30 25.68h12.09v6.04h-12.09zM30.22 25.68h12.09v6.04h-12.09z" fill="#f0ede6" shape-rendering="crispEdges"/>
 </g>
-<rect x="-22.03" y="-6.37" width="15.64" height="6.40" rx="3.20" fill="#151515"/>
-<rect x="6.40" y="-6.37" width="15.64" height="6.40" rx="3.20" fill="#151515"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.21" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
-<circle cx="68.13" cy="19.04" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="66.98" y="16.18" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-0.6s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.21" dur="1.8s" begin="-0.6s" additive="sum" repeatCount="indefinite"/>
-<circle cx="74.47" cy="19.04" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="73.33" y="16.18" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-1.2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.21" dur="1.8s" begin="-1.2s" additive="sum" repeatCount="indefinite"/>
-<circle cx="80.82" cy="19.04" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="79.67" y="16.18" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
-</g>
-<g><animate attributeName="opacity" values="0;1;0" dur="1.2s" begin="0s" repeatCount="indefinite"/>
-<polygon points="66.51,-73.61 68.53,-68.77 73.75,-68.35 69.77,-64.93 70.99,-59.83 66.51,-62.57 62.04,-59.83 63.25,-64.93 59.27,-68.35 64.50,-68.77" fill="#f6c343"/>
-</g>
-<g transform="translate(61.43,-51.69) scale(0.625) translate(-61.43,51.69)">
-<rect x="61.43" y="-60.69" width="54" height="16" rx="8" fill="#5ec99a"/>
-<text x="88.43" y="-48.69" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
+<circle cx="64.54" cy="25.38" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
+<rect x="63.40" y="22.53" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
+<circle cx="72.16" cy="17.77" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
+<rect x="71.02" y="14.91" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
+<circle cx="79.77" cy="10.15" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
+<rect x="78.63" y="7.30" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
+<g transform="translate(60.39,-70.97) scale(0.625) translate(-60.39,70.97)">
+<rect x="60.39" y="-79.97" width="54" height="16" rx="8" fill="#5ec99a"/>
+<text x="87.39" y="-67.97" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
 </g></g>
 </svg>

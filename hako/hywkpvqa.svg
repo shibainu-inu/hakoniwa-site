@@ -1,17 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh37" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.32"/></filter><clipPath id="clip38"><path d="M-24.20,27.70 Q-31.02,27.70 -31.02,20.87 L-31.02,-20.87 Q-31.02,-27.70 -24.96,-30.83 L-13.51,-36.75 Q-7.44,-39.88 -0.62,-39.88 L41.57,-39.88 Q48.39,-39.88 48.39,-33.06 L48.39,10.51 Q48.39,17.34 42.53,20.83 L36.88,24.20 Q31.02,27.70 24.20,27.70 Z"/></clipPath><linearGradient id="gt39" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e7cc81"/><stop offset="1" stop-color="#dac17a"/></linearGradient><linearGradient id="gs40" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#968454"/><stop offset="1" stop-color="#7f7147"/></linearGradient><linearGradient id="gf41" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c3ad6e"/><stop offset="1" stop-color="#b09c63"/></linearGradient></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.21" cy="32.13" rx="38.47" ry="4.99" fill="#000" opacity="0.45" filter="url(#sh37)"/>
-<g transform="translate(0.00,0.00) rotate(8.0 5.21 27.70)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds9" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.32"/></filter></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="30.47" rx="31.02" ry="4.43" fill="#000" opacity="0.45" filter="url(#ds9)"/>
+<g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -1.47;0 0" dur="1.5s" begin="-0.76s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
-<animateTransform attributeName="transform" type="rotate" values="0 5.21 27.70;3 5.21 27.70;0 5.21 27.70" dur="2.4s" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
-<g clip-path="url(#clip38)">
-<rect x="-32.0208233960702" y="-40.88391579494739" width="81.4133078939397" height="69.58107954143864" fill="url(#gf41)"/>
-<polygon points="-31.02,-27.70 31.02,-27.70 48.39,-39.88 -7.44,-39.88" fill="url(#gt39)"/>
-<polygon points="31.02,-27.70 48.39,-39.88 48.39,17.34 31.02,27.70" fill="url(#gs40)"/>
+<animateTransform attributeName="transform" type="rotate" values="0 0.00 27.70;3 0.00 27.70;0 0.00 27.70" dur="2.4s" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<path d="M-31.65 -46.16h63.31v5.28h-63.31zM-36.93 -40.89h5.28v5.28h-5.28zM31.65 -40.89h5.28v5.28h-5.28zM-36.93 -35.61h5.28v5.28h-5.28zM31.65 -35.61h5.28v5.28h-5.28zM-36.93 -30.33h5.28v5.28h-5.28zM31.65 -30.33h5.28v5.28h-5.28zM-36.93 -25.06h5.28v5.28h-5.28zM-26.38 -25.06h5.28v5.28h-5.28zM21.10 -25.06h5.28v5.28h-5.28zM31.65 -25.06h5.28v5.28h-5.28zM-36.93 -19.78h5.28v5.28h-5.28zM-26.38 -19.78h10.55v5.28h-10.55zM15.83 -19.78h10.55v5.28h-10.55zM31.65 -19.78h5.28v5.28h-5.28zM-36.93 -14.51h5.28v5.28h-5.28zM31.65 -14.51h5.28v5.28h-5.28zM-36.93 -9.23h5.28v5.28h-5.28zM-5.28 -9.23h10.55v5.28h-10.55zM31.65 -9.23h5.28v5.28h-5.28zM-36.93 -3.96h5.28v5.28h-5.28zM31.65 -3.96h5.28v5.28h-5.28zM-36.93 1.32h5.28v5.28h-5.28zM31.65 1.32h5.28v5.28h-5.28zM-36.93 6.59h5.28v5.28h-5.28zM31.65 6.59h5.28v5.28h-5.28zM-31.65 11.87h63.31v5.28h-63.31zM-26.38 17.15h10.55v5.28h-10.55zM15.83 17.15h10.55v5.28h-10.55zM-26.38 22.42h10.55v5.28h-10.55zM15.83 22.42h10.55v5.28h-10.55z" fill="#bca76a" shape-rendering="crispEdges"/>
 </g>
-<rect x="-19.23" y="-5.56" width="13.65" height="5.58" rx="2.79" fill="#151515" transform="rotate(-15.0 -12.41 -2.77)"/>
-<rect x="5.58" y="-5.56" width="13.65" height="5.58" rx="2.79" fill="#151515" transform="rotate(15.0 12.41 -2.77)"/>
-</g>
-<path d="M-17.65,23.27 q2.33,15.51 19.39,15.51 q17.06,0 19.39,-15.51 Z" fill="#e6e2d8"/>
-<path d="M-17.65,23.27 q19.39,6.20 38.78,0" stroke="#c9c4b8" stroke-width="1.16" fill="none"/>
-<ellipse cx="1.74" cy="23.27" rx="19.39" ry="3.88" fill="#c9c4b8"/></g>
+<path d="M26.40,22.16 q2.33,15.51 19.39,15.51 q17.06,0 19.39,-15.51 Z" fill="#e6e2d8"/>
+<path d="M26.40,22.16 q19.39,6.20 38.78,0" stroke="#c9c4b8" stroke-width="1.16" fill="none"/>
+<ellipse cx="45.79" cy="22.16" rx="19.39" ry="3.88" fill="#c9c4b8"/></g>
 </svg>
