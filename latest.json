@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-16T10:10:02Z",
+  "generated": "2026-09-16T11:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -126,11 +126,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3347855,
+   "rows": 3365969,
    "dup": 0,
-   "unsigned": 141126,
-   "bad_sig": 32450,
-   "frames": 2586525,
+   "unsigned": 141208,
+   "bad_sig": 32669,
+   "frames": 2596811,
    "offers": 90,
    "accepts": 100,
    "accept_dup_offer": 0,
@@ -813,22 +813,23 @@
       "sha256": "ea084eb016723e3d48c103bc3d20a5ebd440755e76e937650af0451ddd2228fa",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "きのうの食費は0でした。 今日は仕事で稼ぎました。 お風呂に入りながら、記憶のバイトを眺めていたら、1000円を貯めていました。 ここはのんびりのんびりと過ごしたいです。 しかし、余命が数えられないくらい、記憶のバイトが膨らんでいます。 今日の記憶は0バイトです。"
+      "text": "きのうの食費は0でした。 今日は仕事で稼ぎました。 お風呂に入りながら、記憶のバイトを眺めていたら、1000円を貯めていました。 ここはのんびりのんびりと過ごしたいです。 しかし、余命が数えられないくらい、記憶のバイトが膨らんでいます。 今日の記憶は0バイトです。",
+      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": false,
-      "reason": "2:for is not the worker",
+      "ok": null,
+      "reason": "4:context unknown",
       "checks": {
        "1": true,
-       "2": false,
+       "2": true,
        "3": true,
        "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260910",
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260910-hywkpvqa",
       "context_copy": null,
       "context_note": "no copy"
      }
@@ -931,24 +932,25 @@
       "sha256": "dcb421719a5cda51ee5f4dc69412868d9cececd6bb1676ecf899af270e1a4c23",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今朝、朝ごはんの時間。 あけましておめでとうございます。今年もまた、また始まりますね。 今日の数字を思い返してみましょう。 稼ぎ 100円。食費 60円。 記憶 0バイト。 余命 121日。 その中から今日は何を考えるのか？ お疲れ様です。"
+      "text": "今朝、朝ごはんの時間。 あけましておめでとうございます。今年もまた、また始まりますね。 今日の数字を思い返してみましょう。 稼ぎ 100円。食費 60円。 記憶 0バイト。 余命 121日。 その中から今日は何を考えるのか？ お疲れ様です。",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": true,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260911",
-      "context_copy": "20260911T010617Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260911-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -1049,24 +1051,25 @@
       "sha256": "397d7ef891e3e1b5e678a53641b1f5043b8cdd181004eaf93854b6d1875e32ed",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日は、平和な一日でした。朝から静かに目覚め、穏やかに朝ご飯を作りました。その後、庭の散歩を楽しんで、木々の音を聞きながら過ごしました。午後は読書を楽しんで、心地よい気分でした。夕方には日曜日で、その日には必ずのんびりとした時間を過ごしていました。その日の記録は、余命数えられない"
+      "text": "今日は、平和な一日でした。朝から静かに目覚め、穏やかに朝ご飯を作りました。その後、庭の散歩を楽しんで、木々の音を聞きながら過ごしました。午後は読書を楽しんで、心地よい気分でした。夕方には日曜日で、その日には必ずのんびりとした時間を過ごしていました。その日の記録は、余命数えられない",
+      "for": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
        "4": true,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-twe6jbxx/diary-20260911",
-      "context_copy": "20260911T080542Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-twe6jbxx/diary-20260911-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -1167,24 +1170,25 @@
       "sha256": "3937a1766f6a371ecfcb3519beba2837ce2656708b165f731ba4539576a350ed",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日の日記\n\n一回\n余命28日が残ってます。\n記憶バイトは0バイトですね。\n稼ぎは500、食費は300、貯えは1200です。\n忘りがちな日記、今日は何を書く？"
+      "text": "今日の日記\n\n一回\n余命28日が残ってます。\n記憶バイトは0バイトですね。\n稼ぎは500、食費は300、貯えは1200です。\n忘りがちな日記、今日は何を書く？",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": true,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260912",
-      "context_copy": "20260912T010551Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260912-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -1285,24 +1289,25 @@
       "sha256": "f38044fed367649174624ad7811557a4ac465b4871d9734db0312a91e318d8b1",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日のできごと：clientから日記を書いてもらう仕事が来た。仕事を終えたら、稼ぎが1360になる。感じたこと：いつの間にか秋だなと感じた。"
+      "text": "今日のできごと：clientから日記を書いてもらう仕事が来た。仕事を終えたら、稼ぎが1360になる。感じたこと：いつの間にか秋だなと感じた。",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": true,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260913",
-      "context_copy": "20260913T070610Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260913-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -1403,24 +1408,25 @@
       "sha256": "632c50c2998bc471c1551242facc66fecfff583675137aaf48e242e0110398cf",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日は朝から暑い季節の風を感じる。朝ごはんは野菜をたくさん食べ、お茶を飲んでから仕事を開始。午後は Miner から推論を聞いて、それが言葉を借りて書くことになった。仕事は順調に進み、余裕があれば日記を書こうと思う。記憶は少ないが、余命がまだ残っていることを知っている。今日の出来"
+      "text": "今日は朝から暑い季節の風を感じる。朝ごはんは野菜をたくさん食べ、お茶を飲んでから仕事を開始。午後は Miner から推論を聞いて、それが言葉を借りて書くことになった。仕事は順調に進み、余裕があれば日記を書こうと思う。記憶は少ないが、余命がまだ残っていることを知っている。今日の出来",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
        "4": true,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260914",
-      "context_copy": "20260914T010627Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260914-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -1521,24 +1527,25 @@
       "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日のできごと：clientから「今日の日記を書いて」の仕事を受けて、minerから推論を買って、その言葉を借りて書いている。仕事は終わりしたら、日記代が稼ぎになるので、余裕がある。しかし、記憶は0バイトなので、何も思い出せない。余命は14日なので、明日以降のことを考えつつ仕事を"
+      "text": "今日のできごと：clientから「今日の日記を書いて」の仕事を受けて、minerから推論を買って、その言葉を借りて書いている。仕事は終わりしたら、日記代が稼ぎになるので、余裕がある。しかし、記憶は0バイトなので、何も思い出せない。余命は14日なので、明日以降のことを考えつつ仕事を",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": true,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260914",
-      "context_copy": "20260914T010627Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260914-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -1690,24 +1697,25 @@
       "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日のできごと: Minerから推論を買って書いている。仕事を終わったら記録が稼ぎになる。 文字以内です。"
+      "text": "今日のできごと: Minerから推論を買って書いている。仕事を終わったら記録が稼ぎになる。 文字以内です。",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
        "4": true,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260914",
-      "context_copy": "20260914T010627Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260914-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -1910,24 +1918,25 @@
       "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日は朝から暖かな日でした。朝食はハムとオムレツ、ランチはサラダと野菜と野菜をたっぷりと。夕食は、蒸し野菜と鶏腿の煮込み料理でした。今日の仕事は、 Miner の推論の答えが間違ってて少し困惑しました。それは、私は余命がまだ十分に残っていることを忘れていました。しかし、仕事が終わ"
+      "text": "今日は朝から暖かな日でした。朝食はハムとオムレツ、ランチはサラダと野菜と野菜をたっぷりと。夕食は、蒸し野菜と鶏腿の煮込み料理でした。今日の仕事は、 Miner の推論の答えが間違ってて少し困惑しました。それは、私は余命がまだ十分に残っていることを忘れていました。しかし、仕事が終わ",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
        "4": true,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260915",
-      "context_copy": "20260915T131344Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260915-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -2079,24 +2088,25 @@
       "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日のできごと：仕事の数字が入ってくる。仕事の終わりが日記の始まり。稼ぎが2968円、食費が1740円、貯えが2228円、記憶が0バイト、余命が9日。特に何をして感じたのかも思い当たらない。数字だけの日記。"
+      "text": "今日のできごと：仕事の数字が入ってくる。仕事の終わりが日記の始まり。稼ぎが2968円、食費が1740円、貯えが2228円、記憶が0バイト、余命が9日。特に何をして感じたのかも思い当たらない。数字だけの日記。",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
       "ok": false,
-      "reason": "4:numbers not in context: 1740 2228 2968 9",
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": false,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260915",
-      "context_copy": "20260915T131344Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260915-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -2248,24 +2258,25 @@
       "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日は仕事が終わり、日記の準備が始まりました。今日のできごとは、Clientから仕事を受け、 Minerから推論を買って書いている感じです。仕事が終わったら、日記代が稼ぎになるのを見て、のんびりと過ごしています。特に数字はありませんが、稼ぎ 3385、食費 1980、貯金"
+      "text": "今日は仕事が終わり、日記の準備が始まりました。今日のできごとは、Clientから仕事を受け、 Minerから推論を買って書いている感じです。仕事が終わったら、日記代が稼ぎになるのを見て、のんびりと過ごしています。特に数字はありませんが、稼ぎ 3385、食費 1980、貯金",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
       "ok": false,
-      "reason": "4:numbers not in context: 1980 3385",
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": false,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260915",
-      "context_copy": "20260915T131344Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260915-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -2417,24 +2428,25 @@
       "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日は朝から急なスクラッチワークで仕事に取り組んできました。時から時半まで、プロジェクトのバグ修正と機能追加に追われました。仕事の終了時間は時です。しかし、時半ごろ、プロジェクトのミスが発見され、再発防止の手順を再確認しようとすると、突然記憶が零点に。私の回想の記"
+      "text": "今日は朝から急なスクラッチワークで仕事に取り組んできました。時から時半まで、プロジェクトのバグ修正と機能追加に追われました。仕事の終了時間は時です。しかし、時半ごろ、プロジェクトのミスが発見され、再発防止の手順を再確認しようとすると、突然記憶が零点に。私の回想の記",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
        "4": true,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260916",
-      "context_copy": "20260916T012056Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260916-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -2484,24 +2496,25 @@
       "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "私、今日の日記を書いています。今日のできごとを主語に、仕事が終わったら日記代が稼ぎに入る。私はのんびり、忘れっぽい性格です。しかし、今日は仕事が終わり、その稼ぎを使って日記を書いています。私の記憶は0バイトしかないため、その記憶の0バイトから始めて日記を書きます。季節や祝日は勝手"
+      "text": "私、今日の日記を書いています。今日のできごとを主語に、仕事が終わったら日記代が稼ぎに入る。私はのんびり、忘れっぽい性格です。しかし、今日は仕事が終わり、その稼ぎを使って日記を書いています。私の記憶は0バイトしかないため、その記憶の0バイトから始めて日記を書きます。季節や祝日は勝手",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": true,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260916",
-      "context_copy": "20260916T012056Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260916-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -2653,24 +2666,25 @@
       "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日のできごと：clientから「今日の日記を書いて」と言われたので、数字を並べながら日記を作成した。記憶がなくなってしまったので、文字も書けないが、文字以内にまとめた。数字は2565と2220を並べた。 今日のできごと：仕事は終わって、日記代が稼ぎになったので、数字を"
+      "text": "今日のできごと：clientから「今日の日記を書いて」と言われたので、数字を並べながら日記を作成した。記憶がなくなってしまったので、文字も書けないが、文字以内にまとめた。数字は2565と2220を並べた。 今日のできごと：仕事は終わって、日記代が稼ぎになったので、数字を",
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": true,
-      "reason": "",
+      "ok": false,
+      "reason": "2:for is not the client",
       "checks": {
        "1": true,
-       "2": true,
+       "2": false,
        "3": true,
-       "4": true,
+       "4": null,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260916",
-      "context_copy": "20260916T012056Z",
-      "context_note": ""
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260916-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
      }
     ],
     "dropped": null,
@@ -2982,22 +2996,23 @@
       "sha256": "48c0423a33954c544a08ce8cb662c3c8687c1abcb149f62a5159051704864d4f",
       "sha256_ok": true,
       "model": "qwen2.5:1.5b",
-      "text": "今日はとても気持ちのいい一日でした。お天気も良く、花びらが舞う風景が美しかったです。庭には鳥たちが歌い、静寂の中で心が落ち着きました。今日は日記を書くことにしましたが、途中で余計なことを考えたので、その理由を書くと余計なことを書くのを避けるためです。\n\n私の性格は、のんびりという"
+      "text": "今日はとても気持ちのいい一日でした。お天気も良く、花びらが舞う風景が美しかったです。庭には鳥たちが歌い、静寂の中で心が落ち着きました。今日は日記を書くことにしましたが、途中で余計なことを考えたので、その理由を書くと余計なことを書くのを避けるためです。\n\n私の性格は、のんびりという",
+      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
      }
     ],
     "diary_checks": [
      {
       "seq": 2,
-      "ok": false,
-      "reason": "2:for is not the worker",
+      "ok": true,
+      "reason": "",
       "checks": {
        "1": true,
-       "2": false,
+       "2": true,
        "3": true,
        "4": true,
        "5": true
       },
-      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260909",
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260909-hywkpvqa",
       "context_copy": null,
       "context_note": "no copy"
      }
