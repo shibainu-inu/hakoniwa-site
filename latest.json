@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-16T16:10:01Z",
+  "generated": "2026-09-16T17:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -109,9 +109,14 @@
     39,
     "0.15",
     "ddc743e6ff9c2f42c3b617f21b412c361580c36a101ff2064885520e3784fe68"
+   ],
+   [
+    42,
+    "0.16",
+    "b82b9c45044d6b8ff54f2178a0d0d797e13c919891edaeaef0009ed2caafbf32"
    ]
   ],
-  "rules_version": "0.15",
+  "rules_version": "0.16",
   "rules_did": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "validator": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "operators": [
@@ -131,11 +136,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3457456,
+   "rows": 3475024,
    "dup": 0,
-   "unsigned": 141334,
-   "bad_sig": 33645,
-   "frames": 2652973,
+   "unsigned": 141336,
+   "bad_sig": 33854,
+   "frames": 2664497,
    "offers": 95,
    "accepts": 104,
    "accept_dup_offer": 0,
