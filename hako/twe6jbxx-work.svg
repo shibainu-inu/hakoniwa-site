@@ -1,15 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds19" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.26"/></filter></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="29.90" rx="26.10" ry="4.35" fill="#000" opacity="0.45" filter="url(#ds19)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds18" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.26"/></filter></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="29.90" rx="26.10" ry="4.35" fill="#000" opacity="0.45" filter="url(#ds18)"/>
 <g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.37;0 0" dur="0.8s" begin="-0.10s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <path d="M0.00 -76.37h5.18v5.18h-5.18zM-5.18 -71.19h15.53v5.18h-15.53zM-25.89 -66.02h51.78v5.18h-51.78zM-31.07 -60.84h5.18v5.18h-5.18zM25.89 -60.84h5.18v5.18h-5.18zM-31.07 -55.66h5.18v5.18h-5.18zM25.89 -55.66h5.18v5.18h-5.18zM-31.07 -50.48h5.18v5.18h-5.18zM25.89 -50.48h5.18v5.18h-5.18zM-31.07 -45.31h5.18v5.18h-5.18zM25.89 -45.31h5.18v5.18h-5.18zM-31.07 -40.13h5.18v5.18h-5.18zM25.89 -40.13h5.18v5.18h-5.18zM-31.07 -34.95h5.18v5.18h-5.18zM-15.53 -34.95h5.18v5.18h-5.18zM10.36 -34.95h5.18v5.18h-5.18zM25.89 -34.95h5.18v5.18h-5.18zM-31.07 -29.77h5.18v5.18h-5.18zM-15.53 -29.77h10.36v5.18h-10.36zM5.18 -29.77h10.36v5.18h-10.36zM25.89 -29.77h5.18v5.18h-5.18zM-31.07 -24.59h5.18v5.18h-5.18zM25.89 -24.59h5.18v5.18h-5.18zM-31.07 -19.42h5.18v5.18h-5.18zM-5.18 -19.42h10.36v5.18h-10.36zM25.89 -19.42h5.18v5.18h-5.18zM-31.07 -14.24h5.18v5.18h-5.18zM25.89 -14.24h5.18v5.18h-5.18zM-31.07 -9.06h5.18v5.18h-5.18zM25.89 -9.06h5.18v5.18h-5.18zM-31.07 -3.88h5.18v5.18h-5.18zM25.89 -3.88h5.18v5.18h-5.18zM-31.07 1.29h5.18v5.18h-5.18zM25.89 1.29h5.18v5.18h-5.18zM-31.07 6.47h5.18v5.18h-5.18zM25.89 6.47h5.18v5.18h-5.18zM-25.89 11.65h51.78v5.18h-51.78zM-20.71 16.83h10.36v5.18h-10.36zM10.36 16.83h10.36v5.18h-10.36zM-20.71 22.01h10.36v5.18h-10.36zM10.36 22.01h10.36v5.18h-10.36z" fill="#c9a181" shape-rendering="crispEdges"/>
 </g>
-<circle cx="39.77" cy="21.75" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
-<rect x="38.79" y="19.30" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
-<circle cx="46.29" cy="15.22" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
-<rect x="45.31" y="12.78" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
-<circle cx="52.81" cy="8.70" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>
-<rect x="51.83" y="6.25" width="1.96" height="4.89" rx="0.54" fill="#e9b02c"/>
+<path d="M41.42 6.47h10.36v5.18h-10.36zM36.24 11.65h20.71v5.18h-20.71zM36.24 16.83h20.71v5.18h-20.71zM41.42 22.01h10.36v5.18h-10.36z" fill="#f6c343" shape-rendering="crispEdges"/><path d="M67.31 -9.06h10.36v5.18h-10.36zM62.13 -3.88h20.71v5.18h-20.71zM62.13 1.29h20.71v5.18h-20.71zM67.31 6.47h10.36v5.18h-10.36z" fill="#f6c343" shape-rendering="crispEdges"/><path d="M93.20 -24.59h10.36v5.18h-10.36zM88.02 -19.42h20.71v5.18h-20.71zM88.02 -14.24h20.71v5.18h-20.71zM93.20 -9.06h10.36v5.18h-10.36z" fill="#f6c343" shape-rendering="crispEdges"/>
 <g transform="translate(37.07,-82.37) scale(0.625) translate(-37.07,82.37)">
 <rect x="37.07" y="-91.37" width="54" height="16" rx="8" fill="#5ec99a"/>
 <text x="64.07" y="-79.37" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
