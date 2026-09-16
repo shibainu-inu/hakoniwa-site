@@ -8,13 +8,8 @@
 <polygon points="-30.83,-27.52 30.83,-27.52 48.09,-39.63 -7.40,-39.63" fill="url(#gt39)"/>
 <polygon points="30.83,-27.52 48.09,-39.63 48.09,17.23 30.83,27.52" fill="url(#gs40)"/>
 </g>
-<circle cx="-12.33" cy="-2.75" r="7.09" fill="#151515" transform="rotate(-15.0 -12.33 -2.75)"/>
-<circle cx="-14.46" cy="-5.45" r="3.26" fill="#ffffff" opacity="0.95" transform="rotate(-15.0 -12.33 -2.75)"/>
-<circle cx="-9.92" cy="-0.63" r="1.42" fill="#ffffff" opacity="0.8" transform="rotate(-15.0 -12.33 -2.75)"/>
-<circle cx="12.33" cy="-2.75" r="7.09" fill="#151515" transform="rotate(15.0 12.33 -2.75)"/>
-<circle cx="10.20" cy="-5.45" r="3.26" fill="#ffffff" opacity="0.95" transform="rotate(15.0 12.33 -2.75)"/>
-<circle cx="14.74" cy="-0.63" r="1.42" fill="#ffffff" opacity="0.8" transform="rotate(15.0 12.33 -2.75)"/>
-<circle cx="0.00" cy="6.61" r="2.03" fill="#151515"/>
+<rect x="-19.11" y="-5.53" width="13.56" height="5.55" rx="2.77" fill="#151515" transform="rotate(-15.0 -12.33 -2.75)"/>
+<rect x="5.55" y="-5.53" width="13.56" height="5.55" rx="2.77" fill="#151515" transform="rotate(15.0 12.33 -2.75)"/>
 </g>
 <path d="M-17.54,23.12 q2.31,15.41 19.27,15.41 q16.95,0 19.27,-15.41 Z" fill="#e6e2d8"/>
 <path d="M-17.54,23.12 q19.27,6.17 38.53,0" stroke="#c9c4b8" stroke-width="1.16" fill="none"/>

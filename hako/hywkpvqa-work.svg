@@ -7,13 +7,8 @@
 <polygon points="-30.83,-27.52 30.83,-27.52 48.09,-39.63 -7.40,-39.63" fill="url(#gt44)"/>
 <polygon points="30.83,-27.52 48.09,-39.63 48.09,17.23 30.83,27.52" fill="url(#gs45)"/>
 </g>
-<circle cx="-12.33" cy="-2.75" r="7.09" fill="#151515"/>
-<circle cx="-14.46" cy="-5.45" r="3.26" fill="#ffffff" opacity="0.95"/>
-<circle cx="-9.92" cy="-0.63" r="1.42" fill="#ffffff" opacity="0.8"/>
-<circle cx="12.33" cy="-2.75" r="7.09" fill="#151515"/>
-<circle cx="10.20" cy="-5.45" r="3.26" fill="#ffffff" opacity="0.95"/>
-<circle cx="14.74" cy="-0.63" r="1.42" fill="#ffffff" opacity="0.8"/>
-<circle cx="0.00" cy="6.61" r="2.03" fill="#151515"/>
+<rect x="-19.11" y="-5.53" width="13.56" height="5.55" rx="2.77" fill="#151515"/>
+<rect x="5.55" y="-5.53" width="13.56" height="5.55" rx="2.77" fill="#151515"/>
 </g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.27" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
 <circle cx="59.10" cy="16.51" r="5.50" fill="#f6c343" stroke="#e9b02c" stroke-width="1.10"/>

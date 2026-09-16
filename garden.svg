@@ -28,10 +28,10 @@
 </g>
 <text x="120" y="92" font-size="40" font-weight="bold" font-family="sans-serif" fill="#f0ede6" letter-spacing="2">z6 HAKONIWA</text>
 <text class="L-en" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">5 HAKO · 0 graduated</text><text class="L-ja" display="none" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">5 HAKO　卒業 0</text>
-<path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="7.00" opacity="0.79" stroke-linecap="round"/>
+<path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="7.00" opacity="0.78" stroke-linecap="round"/>
 <circle cx="336.0" cy="553.8" r="12.4" fill="#1a1a1a" stroke="#5ec99a" stroke-width="1.6" opacity="0.95"/>
 <text x="336.0" y="557.3" font-size="10" font-family="system-ui,sans-serif" fill="#5ec99a" text-anchor="middle" font-weight="bold">16</text>
-<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.78" stroke-linecap="round"/>
+<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.77" stroke-linecap="round"/>
 <circle cx="516.3" cy="492.2" r="11.5" fill="#1a1a1a" stroke="#3fbfd9" stroke-width="1.6" opacity="0.95"/>
 <text x="516.3" y="495.7" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">10</text>
 <path d="M819.7,417.3 Q637.9,402.2 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="1.80" opacity="0.42" stroke-linecap="round"/>
@@ -45,15 +45,9 @@
 <polygon points="-29.68,-48.50 29.68,-48.50 46.30,-60.16 -7.12,-60.16" fill="url(#gt9)"/>
 <polygon points="29.68,-48.50 46.30,-60.16 46.30,-5.41 29.68,4.50" fill="url(#gs10)"/>
 </g>
-<circle cx="-9.50" cy="-24.65" r="6.83" fill="#151515"/>
-<circle cx="-11.55" cy="-27.24" r="3.14" fill="#ffffff" opacity="0.95"/>
-<circle cx="-7.18" cy="-22.60" r="1.37" fill="#ffffff" opacity="0.8"/>
-<circle cx="9.50" cy="-24.65" r="6.83" fill="#151515"/>
-<circle cx="7.45" cy="-27.24" r="3.14" fill="#ffffff" opacity="0.95"/>
-<circle cx="11.82" cy="-22.60" r="1.37" fill="#ffffff" opacity="0.8"/>
-<rect x="-4.75" y="-15.64" width="9.50" height="2.08" rx="1.19" fill="#151515"/>
-<polygon points="-6.53,-52.21 -6.53,-68.91 2.37,-61.11 11.28,-74.47 20.18,-61.11 29.09,-68.91 29.09,-52.21" fill="#f6c343" stroke="#f6c343" stroke-width="1.78" stroke-linejoin="round"/>
-<rect x="-6.53" y="-57.11" width="35.62" height="4.90" fill="#e9b02c"/>
+<rect x="-16.03" y="-27.32" width="13.06" height="5.34" rx="2.67" fill="#151515"/>
+<rect x="2.97" y="-27.32" width="13.06" height="5.34" rx="2.67" fill="#151515"/>
+<path d="M4.75,-53.27 L17.81,-53.27 Q13.65,-70.23 12.47,-75.53 Q7.72,-65.99 4.75,-53.27 Z" fill="#f0e6c8"/>
 </g>
 </g>
 <g transform="translate(816.9,311.5) scale(0.525)">
@@ -67,10 +61,6 @@
 </g>
 <rect x="-20.59" y="-28.36" width="15.62" height="6.39" rx="3.19" fill="#151515"/>
 <rect x="4.97" y="-28.36" width="15.62" height="6.39" rx="3.19" fill="#151515"/>
-<circle cx="0.00" cy="-38.48" r="3.19" fill="#2a64b7" opacity="0.9"/>
-<path d="M19.88,-61.37 L-1.42,-74.04 Q-5.68,-61.37 -1.42,-51.22 Z" fill="#ff6b8a"/>
-<path d="M19.88,-61.37 L41.18,-74.04 Q45.44,-61.37 41.18,-51.22 Z" fill="#ff6b8a"/>
-<circle cx="19.88" cy="-61.37" r="4.97" fill="#d94a68"/>
 </g>
 </g>
 <g transform="translate(819.7,421.8) scale(0.566)">
@@ -82,16 +72,8 @@
 <polygon points="-30.45,-49.18 30.45,-49.18 47.49,-61.14 -7.31,-61.14" fill="url(#gt19)"/>
 <polygon points="30.45,-49.18 47.49,-61.14 47.49,-4.98 30.45,5.18" fill="url(#gs20)"/>
 </g>
-<circle cx="-9.74" cy="-24.72" r="7.00" fill="#151515"/>
-<circle cx="-11.84" cy="-27.38" r="3.22" fill="#ffffff" opacity="0.95"/>
-<circle cx="-7.36" cy="-22.62" r="1.40" fill="#ffffff" opacity="0.8"/>
-<circle cx="9.74" cy="-24.72" r="7.00" fill="#151515"/>
-<circle cx="7.64" cy="-27.38" r="3.22" fill="#ffffff" opacity="0.95"/>
-<circle cx="12.12" cy="-22.62" r="1.40" fill="#ffffff" opacity="0.8"/>
-<circle cx="0.00" cy="-15.48" r="2.01" fill="#151515"/>
-<path d="M11.57,-55.16 q1.22,-11.96 -1.22,-22.83" stroke="#4fae7c" stroke-width="3.65" fill="none" stroke-linecap="round"/>
-<ellipse cx="-0.61" cy="-78.00" rx="13.40" ry="5.98" fill="#5ec99a" transform="rotate(-30 -0.61 -78.00)"/>
-<ellipse cx="23.75" cy="-80.17" rx="13.40" ry="5.98" fill="#5ec99a" transform="rotate(30 23.75 -80.17)"/>
+<rect x="-16.44" y="-27.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
+<rect x="3.04" y="-27.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
 </g>
 </g>
 <g transform="translate(456.1,435.2) scale(0.571)">
@@ -104,13 +86,8 @@
 <polygon points="-30.83,-49.52 30.83,-49.52 48.09,-61.63 -7.40,-61.63" fill="url(#gt24)"/>
 <polygon points="30.83,-49.52 48.09,-61.63 48.09,-4.77 30.83,5.52" fill="url(#gs25)"/>
 </g>
-<circle cx="-12.33" cy="-24.75" r="7.09" fill="#151515" transform="rotate(-15.0 -12.33 -24.75)"/>
-<circle cx="-14.46" cy="-27.45" r="3.26" fill="#ffffff" opacity="0.95" transform="rotate(-15.0 -12.33 -24.75)"/>
-<circle cx="-9.92" cy="-22.63" r="1.42" fill="#ffffff" opacity="0.8" transform="rotate(-15.0 -12.33 -24.75)"/>
-<circle cx="12.33" cy="-24.75" r="7.09" fill="#151515" transform="rotate(15.0 12.33 -24.75)"/>
-<circle cx="10.20" cy="-27.45" r="3.26" fill="#ffffff" opacity="0.95" transform="rotate(15.0 12.33 -24.75)"/>
-<circle cx="14.74" cy="-22.63" r="1.42" fill="#ffffff" opacity="0.8" transform="rotate(15.0 12.33 -24.75)"/>
-<circle cx="0.00" cy="-15.39" r="2.03" fill="#151515"/>
+<rect x="-19.11" y="-27.53" width="13.56" height="5.55" rx="2.77" fill="#151515" transform="rotate(-15.0 -12.33 -24.75)"/>
+<rect x="5.55" y="-27.53" width="13.56" height="5.55" rx="2.77" fill="#151515" transform="rotate(15.0 12.33 -24.75)"/>
 </g>
 <path d="M-17.54,1.12 q2.31,15.41 19.27,15.41 q16.95,0 19.27,-15.41 Z" fill="#e6e2d8"/>
 <path d="M-17.54,1.12 q19.27,6.17 38.53,0" stroke="#c9c4b8" stroke-width="1.16" fill="none"/>
@@ -125,13 +102,8 @@
 <polygon points="-34.57,-52.87 34.57,-52.87 53.93,-66.45 -8.30,-66.45" fill="url(#gt29)"/>
 <polygon points="34.57,-52.87 53.93,-66.45 53.93,-2.68 34.57,8.87" fill="url(#gs30)"/>
 </g>
-<circle cx="-13.83" cy="-25.09" r="3.80" fill="#151515"/>
-<circle cx="13.83" cy="-25.09" r="3.80" fill="#151515"/>
-<rect x="-5.53" y="-14.59" width="11.06" height="2.42" rx="1.38" fill="#151515"/>
-<rect x="-30.42" y="-36.82" width="60.84" height="3.40" fill="#acaaa5" opacity="0.55"/>
-<path d="M19.36,-60.34 L-1.38,-72.68 Q-5.53,-60.34 -1.38,-50.46 Z" fill="#ff6b8a"/>
-<path d="M19.36,-60.34 L40.10,-72.68 Q44.25,-60.34 40.10,-50.46 Z" fill="#ff6b8a"/>
-<circle cx="19.36" cy="-60.34" r="4.84" fill="#d94a68"/>
+<rect x="-21.43" y="-28.20" width="15.21" height="6.22" rx="3.11" fill="#151515"/>
+<rect x="6.22" y="-28.20" width="15.21" height="6.22" rx="3.11" fill="#151515"/>
 </g>
 </g>
 <g transform="translate(215.8,667.7) scale(1.000) translate(-215.8,-667.7)" opacity="0.96"><rect x="97.6" y="632.7" width="236.4" height="27.0" rx="13.5" fill="#f0ede6" stroke="#2c2c2c" stroke-width="1"/><path d="M210.8,658.7 L215.8,666.7 L220.8,658.7 Z" fill="#f0ede6" stroke="#f0ede6"/><text x="215.8" y="651.6" font-size="15" font-family="system-ui,sans-serif" fill="#1a1a1a" text-anchor="middle">まだ起きている。 会う、取引。</text></g>
