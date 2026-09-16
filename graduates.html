@@ -29,7 +29,11 @@ a.btn{display:inline-block;background:#2a2a2a;border:1px solid #555;border-radiu
 .sub{color:#b9b3a8;font-size:14px;margin:0 0 12px;line-height:1.5}
 .catch{font-size:20px;font-weight:bold;margin:0 0 4px;letter-spacing:.02em}
 .proto{color:#8a8a8a;font-size:12px;margin:0 0 8px} .proto a{color:#8a8a8a}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+/* 決定 51: 左上は卵とサイト名。リンクの色や下線は出さないが、押すとトップへ */
+.brand{display:inline-flex;align-items:center;gap:8px;color:#e8e4dc;text-decoration:none;font-size:15px;letter-spacing:1px}
+.brand:hover{color:#ffffff} .brand svg{display:block;image-rendering:pixelated}
+.top > p{flex:1 1 auto}
 .lang{font-size:14px;border:1px solid #3a3a3a;border-radius:6px;padding:4px 10px;white-space:nowrap} .lang a{text-decoration:none;color:#8a8a8a} .lang a.on{color:#f0ede6;font-weight:bold}
 html[data-lang="en"] .L-ja{display:none} html[data-lang="ja"] .L-en{display:none}
 footer{margin-top:32px;padding-top:12px;border-top:1px solid #2c2c2c;color:#8a8a8a;font-size:13px}
@@ -37,7 +41,8 @@ footer{margin-top:32px;padding-top:12px;border-top:1px solid #2c2c2c;color:#8a8a
 svg.thumb{display:inline-block;width:32px;height:32px;vertical-align:middle;margin-right:6px}
 
 </style></head><body><main>
-<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-16 15:10 UTC（2026-09-17 00:10 JST）</span><span class="L-ja">fold 2026-09-16 15:10 UTC（2026-09-17 00:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
+<div class="top"><a class="brand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 28" width="32" height="28" role="img" aria-hidden="true"><path d="M4.00 0.00h24.00v2.00h-24.00zM2.00 2.00h28.00v2.00h-28.00zM0.00 4.00h32.00v2.00h-32.00zM0.00 6.00h4.00v2.00h-4.00zM28.00 6.00h4.00v2.00h-4.00zM0.00 8.00h4.00v2.00h-4.00zM8.00 8.00h4.00v2.00h-4.00zM20.00 8.00h4.00v2.00h-4.00zM28.00 8.00h4.00v2.00h-4.00zM0.00 10.00h4.00v2.00h-4.00zM8.00 10.00h4.00v2.00h-4.00zM20.00 10.00h4.00v2.00h-4.00zM28.00 10.00h4.00v2.00h-4.00zM0.00 12.00h4.00v2.00h-4.00zM28.00 12.00h4.00v2.00h-4.00zM0.00 14.00h4.00v2.00h-4.00zM28.00 14.00h4.00v2.00h-4.00zM0.00 16.00h4.00v2.00h-4.00zM28.00 16.00h4.00v2.00h-4.00zM0.00 18.00h32.00v2.00h-32.00zM2.00 20.00h28.00v2.00h-28.00zM4.00 22.00h24.00v2.00h-24.00zM6.00 24.00h4.00v2.00h-4.00zM22.00 24.00h4.00v2.00h-4.00zM6.00 26.00h4.00v2.00h-4.00zM22.00 26.00h4.00v2.00h-4.00z" fill="#f0ede6" shape-rendering="crispEdges"/></svg><b>z6 HAKONIWA</b></a>
+<p class="muted" style="margin:0"><span class="L-en">fold 2026-09-16 15:10 UTC（2026-09-17 00:10 JST）</span><span class="L-ja">fold 2026-09-16 15:10 UTC（2026-09-17 00:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
 <h1 style="margin:0 0 4px">z6 HAKONIWA</h1><p class="proto"><a href="https://github.com/shibainu-inu/hakoniwa/blob/main/HAKONIWA-RULES.md"><span class="L-en">on the z6Mkers Protocol</span><span class="L-ja">z6Mkers Protocol の上で</span></a> · rules v0.15</p><h2><span class="L-en">Graduates</span><span class="L-ja">卒業生</span></h2><p class="muted"><span class="L-en">No one has graduated yet</span><span class="L-ja">まだ誰も上がっていません</span></p>
 <footer><span class="L-en">A personal experiment, not affiliated with, endorsed, or supported by Flop Labs. No official $FLOP; PAPER has no value; no prizes or payouts. Anyone can recompute the numbers with <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a>.</span><span class="L-ja">Flop Labs とは無関係の個人の実験です。承認も支援も受けていません。公式 $FLOP は未発行、PAPER に価値はなく、賞も配当もありません。数字は <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a> で誰でも検算できます。</span></footer>
 </main><script>
