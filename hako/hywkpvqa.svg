@@ -1,17 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh37" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.31"/></filter><clipPath id="clip38"><path d="M-24.11,27.60 Q-30.91,27.60 -30.91,20.80 L-30.91,-20.80 Q-30.91,-27.60 -24.87,-30.72 L-13.46,-36.62 Q-7.42,-39.74 -0.62,-39.74 L41.42,-39.74 Q48.22,-39.74 48.22,-32.94 L48.22,10.48 Q48.22,17.28 42.38,20.76 L36.75,24.11 Q30.91,27.60 24.11,27.60 Z"/></clipPath><linearGradient id="gt39" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbdb81"/><stop offset="1" stop-color="#edcf7a"/></linearGradient><linearGradient id="gs40" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a38e54"/><stop offset="1" stop-color="#8a7947"/></linearGradient><linearGradient id="gf41" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d5ba6e"/><stop offset="1" stop-color="#c0a863"/></linearGradient></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.19" cy="32.01" rx="38.33" ry="4.97" fill="#000" opacity="0.45" filter="url(#sh37)"/>
-<g transform="translate(0.00,0.00) rotate(8.0 5.19 27.60)">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh37" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.30"/></filter><clipPath id="clip38"><path d="M-24.04,27.52 Q-30.83,27.52 -30.83,20.74 L-30.83,-20.74 Q-30.83,-27.52 -24.80,-30.64 L-13.42,-36.52 Q-7.40,-39.63 -0.62,-39.63 L41.31,-39.63 Q48.09,-39.63 48.09,-32.85 L48.09,10.45 Q48.09,17.23 42.26,20.70 L36.65,24.05 Q30.83,27.52 24.04,27.52 Z"/></clipPath><linearGradient id="gt39" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbdb81"/><stop offset="1" stop-color="#edcf7a"/></linearGradient><linearGradient id="gs40" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a38e54"/><stop offset="1" stop-color="#8a7947"/></linearGradient><linearGradient id="gf41" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d5ba6e"/><stop offset="1" stop-color="#c0a863"/></linearGradient></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.18" cy="31.93" rx="38.22" ry="4.95" fill="#000" opacity="0.45" filter="url(#sh37)"/>
+<g transform="translate(0.00,0.00) rotate(8.0 5.18 27.52)">
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -1.46;0 0" dur="1.5s" begin="-0.76s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
-<animateTransform attributeName="transform" type="rotate" values="0 5.19 27.60;3 5.19 27.60;0 5.19 27.60" dur="2.4s" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="rotate" values="0 5.18 27.52;3 5.18 27.52;0 5.18 27.52" dur="2.4s" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip38)">
-<rect x="-31.90829637750834" y="-40.73923819965358" width="81.12523872642134" height="69.33593139385745" fill="url(#gf41)"/>
-<polygon points="-30.91,-27.60 30.91,-27.60 48.22,-39.74 -7.42,-39.74" fill="url(#gt39)"/>
-<polygon points="30.91,-27.60 48.22,-39.74 48.22,17.28 30.91,27.60" fill="url(#gs40)"/>
+<rect x="-31.826389268377735" y="-40.6339290593428" width="80.915556527047" height="69.15749090610863" fill="url(#gf41)"/>
+<polygon points="-30.83,-27.52 30.83,-27.52 48.09,-39.63 -7.40,-39.63" fill="url(#gt39)"/>
+<polygon points="30.83,-27.52 48.09,-39.63 48.09,17.23 30.83,27.52" fill="url(#gs40)"/>
 </g>
-<rect x="-19.16" y="-5.54" width="13.60" height="5.56" rx="2.78" fill="#151515" transform="rotate(-15.0 -12.36 -2.76)"/>
-<rect x="5.56" y="-5.54" width="13.60" height="5.56" rx="2.78" fill="#151515" transform="rotate(15.0 12.36 -2.76)"/>
+<circle cx="-12.33" cy="-2.75" r="7.09" fill="#151515" transform="rotate(-15.0 -12.33 -2.75)"/>
+<circle cx="-14.46" cy="-5.45" r="3.26" fill="#ffffff" opacity="0.95" transform="rotate(-15.0 -12.33 -2.75)"/>
+<circle cx="-9.92" cy="-0.63" r="1.42" fill="#ffffff" opacity="0.8" transform="rotate(-15.0 -12.33 -2.75)"/>
+<circle cx="12.33" cy="-2.75" r="7.09" fill="#151515" transform="rotate(15.0 12.33 -2.75)"/>
+<circle cx="10.20" cy="-5.45" r="3.26" fill="#ffffff" opacity="0.95" transform="rotate(15.0 12.33 -2.75)"/>
+<circle cx="14.74" cy="-0.63" r="1.42" fill="#ffffff" opacity="0.8" transform="rotate(15.0 12.33 -2.75)"/>
+<circle cx="0.00" cy="6.61" r="2.03" fill="#151515"/>
 </g>
-<path d="M-17.59,23.18 q2.32,15.45 19.32,15.45 q17.00,0 19.32,-15.45 Z" fill="#e6e2d8"/>
-<path d="M-17.59,23.18 q19.32,6.18 38.64,0" stroke="#c9c4b8" stroke-width="1.16" fill="none"/>
-<ellipse cx="1.73" cy="23.18" rx="19.32" ry="3.86" fill="#c9c4b8"/></g>
+<path d="M-17.54,23.12 q2.31,15.41 19.27,15.41 q16.95,0 19.27,-15.41 Z" fill="#e6e2d8"/>
+<path d="M-17.54,23.12 q19.27,6.17 38.53,0" stroke="#c9c4b8" stroke-width="1.16" fill="none"/>
+<ellipse cx="1.73" cy="23.12" rx="19.27" ry="3.85" fill="#c9c4b8"/></g>
 </svg>

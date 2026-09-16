@@ -7,8 +7,14 @@
 <polygon points="-29.68,-26.50 29.68,-26.50 46.30,-38.16 -7.12,-38.16" fill="url(#gt99)"/>
 <polygon points="29.68,-26.50 46.30,-38.16 46.30,16.59 29.68,26.50" fill="url(#gs100)"/>
 </g>
-<rect x="-16.03" y="-5.32" width="13.06" height="5.34" rx="2.67" fill="#151515"/>
-<rect x="2.97" y="-5.32" width="13.06" height="5.34" rx="2.67" fill="#151515"/>
-<path d="M4.75,-31.27 L17.81,-31.27 Q13.65,-48.23 12.47,-53.53 Q7.72,-43.99 4.75,-31.27 Z" fill="#f0e6c8"/>
+<circle cx="-9.50" cy="-2.65" r="6.83" fill="#151515"/>
+<circle cx="-11.55" cy="-5.24" r="3.14" fill="#ffffff" opacity="0.95"/>
+<circle cx="-7.18" cy="-0.60" r="1.37" fill="#ffffff" opacity="0.8"/>
+<circle cx="9.50" cy="-2.65" r="6.83" fill="#151515"/>
+<circle cx="7.45" cy="-5.24" r="3.14" fill="#ffffff" opacity="0.95"/>
+<circle cx="11.82" cy="-0.60" r="1.37" fill="#ffffff" opacity="0.8"/>
+<rect x="-4.75" y="6.36" width="9.50" height="2.08" rx="1.19" fill="#151515"/>
+<polygon points="-6.53,-30.21 -6.53,-46.91 2.37,-39.11 11.28,-52.47 20.18,-39.11 29.09,-46.91 29.09,-30.21" fill="#f6c343" stroke="#f6c343" stroke-width="1.78" stroke-linejoin="round"/>
+<rect x="-6.53" y="-35.11" width="35.62" height="4.90" fill="#e9b02c"/>
 </g></g>
 </svg>

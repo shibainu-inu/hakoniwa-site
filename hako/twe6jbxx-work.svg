@@ -7,8 +7,16 @@
 <polygon points="-30.45,-27.18 30.45,-27.18 47.49,-39.14 -7.31,-39.14" fill="url(#gt89)"/>
 <polygon points="30.45,-27.18 47.49,-39.14 47.49,17.02 30.45,27.18" fill="url(#gs90)"/>
 </g>
-<rect x="-16.44" y="-5.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
-<rect x="3.04" y="-5.46" width="13.40" height="5.48" rx="2.74" fill="#151515"/>
+<circle cx="-9.74" cy="-2.72" r="7.00" fill="#151515"/>
+<circle cx="-11.84" cy="-5.38" r="3.22" fill="#ffffff" opacity="0.95"/>
+<circle cx="-7.36" cy="-0.62" r="1.40" fill="#ffffff" opacity="0.8"/>
+<circle cx="9.74" cy="-2.72" r="7.00" fill="#151515"/>
+<circle cx="7.64" cy="-5.38" r="3.22" fill="#ffffff" opacity="0.95"/>
+<circle cx="12.12" cy="-0.62" r="1.40" fill="#ffffff" opacity="0.8"/>
+<circle cx="0.00" cy="6.52" r="2.01" fill="#151515"/>
+<path d="M11.57,-33.16 q1.22,-11.96 -1.22,-22.83" stroke="#4fae7c" stroke-width="3.65" fill="none" stroke-linecap="round"/>
+<ellipse cx="-0.61" cy="-56.00" rx="13.40" ry="5.98" fill="#5ec99a" transform="rotate(-30 -0.61 -56.00)"/>
+<ellipse cx="23.75" cy="-58.17" rx="13.40" ry="5.98" fill="#5ec99a" transform="rotate(30 23.75 -58.17)"/>
 </g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -19.03" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
 <circle cx="58.37" cy="16.31" r="5.44" fill="#f6c343" stroke="#e9b02c" stroke-width="1.09"/>

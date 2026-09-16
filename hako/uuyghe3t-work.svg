@@ -9,6 +9,10 @@
 </g>
 <rect x="-20.59" y="-6.36" width="15.62" height="6.39" rx="3.19" fill="#151515"/>
 <rect x="4.97" y="-6.36" width="15.62" height="6.39" rx="3.19" fill="#151515"/>
+<circle cx="0.00" cy="-16.48" r="3.19" fill="#2a64b7" opacity="0.9"/>
+<path d="M19.88,-39.37 L-1.42,-52.04 Q-5.68,-39.37 -1.42,-29.22 Z" fill="#ff6b8a"/>
+<path d="M19.88,-39.37 L41.18,-52.04 Q45.44,-39.37 41.18,-29.22 Z" fill="#ff6b8a"/>
+<circle cx="19.88" cy="-39.37" r="4.97" fill="#d94a68"/>
 </g>
 <g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.19" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
 <circle cx="68.06" cy="19.02" r="6.34" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
