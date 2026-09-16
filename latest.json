@@ -1,10 +1,10 @@
 {
  "box": {
-  "generated": "2026-09-16T17:25:29Z",
+  "generated": "2026-09-16T18:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
-   "sha256": "ffb1c70c7041d1fa99eda97489ec6f42db475ff8df32eadf1d740c19aa588821",
+   "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
    "values": {
     "box": "hakoniwa",
     "venue": "https://technocore.chat",
@@ -13,7 +13,7 @@
     "diary_price": 400,
     "inference_price": 240,
     "inference_min": 240,
-    "graduate_at": 1500,
+    "bind_at": 7,
     "seats": 72,
     "starve_below": 240,
     "leave_after_midnights": 2,
@@ -36,7 +36,7 @@
     ]
    },
    "board": "hakoniwa-board",
-   "rules_config_sha256": "ffb1c70c7041d1fa99eda97489ec6f42db475ff8df32eadf1d740c19aa588821",
+   "rules_config_sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
    "match": true
   },
   "rules": [
@@ -114,9 +114,14 @@
     42,
     "0.16",
     "b82b9c45044d6b8ff54f2178a0d0d797e13c919891edaeaef0009ed2caafbf32"
+   ],
+   [
+    43,
+    "0.18",
+    "60205a478358e1987cdd85e0aa9db9df76346f987f75bedd819d534ae79174d7"
    ]
   ],
-  "rules_version": "0.16",
+  "rules_version": "0.18",
   "rules_did": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "validator": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
   "operators": [
@@ -132,15 +137,15 @@
   "exits": {
    "starved": 0,
    "left": 0,
-   "graduated": 0
+   "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3479847,
+   "rows": 3493320,
    "dup": 0,
    "unsigned": 141336,
-   "bad_sig": 33920,
-   "frames": 2668363,
+   "bad_sig": 34075,
+   "frames": 2676529,
    "offers": 95,
    "accepts": 104,
    "accept_dup_offer": 0,
@@ -164,7 +169,7 @@
   },
   "receipts": 37,
   "paper_total": 11673.0,
-  "graduated_paper": 0,
+  "bound_paper": 0,
   "shelves": {
    "volumes": 9,
    "alive": 9,
