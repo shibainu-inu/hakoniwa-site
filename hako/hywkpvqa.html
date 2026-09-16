@@ -20,6 +20,17 @@ a.btn{display:inline-block;background:#2a2a2a;border:1px solid #555;border-radiu
 .shelf .vol{background:#1e1e1e;border-left:4px solid #f5a3b5;padding:8px 12px;margin:6px 0}
 .shelf .vol.gone{border-left-color:#3a3833;color:#6e6a63}   /* 期限切れは灰色（決定 34-1） */
 .shelf .vol summary{cursor:pointer} .shelf .vol[open]{padding-bottom:4px}
+/* 決定 58: はなしのページ。1 節ずつ、絵と大きめの字 */
+.story{margin:24px 0}
+.beat{display:flex;gap:24px;align-items:center;padding:22px 0;border-top:1px solid #242424}
+.beat:first-child{border-top:none}
+.beat-art{flex:0 0 120px;display:flex;align-items:center;justify-content:center}
+.beat-art svg{image-rendering:pixelated}
+.beat-text h2{margin:0 0 6px;font-size:1.35em;letter-spacing:1px}
+.beat-text p{margin:0;color:#b9b3a8;line-height:1.8;max-width:46em}
+@media(max-width:520px){.beat{gap:14px}.beat-art{flex-basis:76px}.beat-text h2{font-size:1.1em}}
+.hero-story{text-align:center;margin:0 0 6px;color:#b9b3a8;line-height:2}
+.hero-story b{color:#f0ede6;font-weight:600}
 /* 決定 57: 庭の状態の 1 行。絵の上に置く */
 .stats{display:flex;flex-wrap:wrap;gap:6px 22px;margin:10px 0 12px;font-size:14px;align-items:baseline}
 .stats .s{white-space:nowrap} .stats .k{color:#8a8a8a} .stats .k::after{content:"："} .stats b{color:#f0ede6}
