@@ -1,32 +1,32 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh57" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.80"/></filter><clipPath id="clip58"><path d="M-27.70,31.70 Q-35.51,31.70 -35.51,23.89 L-35.51,-23.89 Q-35.51,-31.70 -28.57,-35.29 L-15.46,-42.06 Q-8.52,-45.65 -0.71,-45.65 L47.58,-45.65 Q55.39,-45.65 55.39,-37.84 L55.39,12.03 Q55.39,19.85 48.68,23.85 L42.22,27.70 Q35.51,31.70 27.70,31.70 Z"/></clipPath><linearGradient id="gt59" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff"/></linearGradient><linearGradient id="gs60" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfbdb7"/><stop offset="1" stop-color="#a2a19c"/></linearGradient><linearGradient id="gf61" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9f6ef"/><stop offset="1" stop-color="#e1ded8"/></linearGradient></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.97" cy="36.77" rx="44.03" ry="5.71" fill="#000" opacity="0.45" filter="url(#sh57)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh57" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.81"/></filter><clipPath id="clip58"><path d="M-27.72,31.73 Q-35.54,31.73 -35.54,23.91 L-35.54,-23.91 Q-35.54,-31.73 -28.59,-35.32 L-15.47,-42.10 Q-8.53,-45.69 -0.71,-45.69 L47.62,-45.69 Q55.43,-45.69 55.43,-37.87 L55.43,12.04 Q55.43,19.86 48.72,23.87 L42.25,27.72 Q35.54,31.73 27.72,31.73 Z"/></clipPath><linearGradient id="gt59" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ffffff"/></linearGradient><linearGradient id="gs60" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfbdb7"/><stop offset="1" stop-color="#a2a19c"/></linearGradient><linearGradient id="gf61" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f9f6ef"/><stop offset="1" stop-color="#e1ded8"/></linearGradient></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="5.97" cy="36.80" rx="44.06" ry="5.71" fill="#000" opacity="0.45" filter="url(#sh57)"/>
 <g transform="translate(0.00,0.00)">
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.93;0 0" dur="0.8s" begin="-0.42s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip58)">
-<rect x="-36.50678890227287" y="-46.65158573149368" width="92.89737958981856" height="79.35407582280874" fill="url(#gf61)"/>
-<polygon points="-35.51,-31.70 35.51,-31.70 55.39,-45.65 -8.52,-45.65" fill="url(#gt59)"/>
-<polygon points="35.51,-31.70 55.39,-45.65 55.39,19.85 35.51,31.70" fill="url(#gs60)"/>
+<rect x="-36.53502252074283" y="-46.68788609809791" width="92.96965765310165" height="79.41558477733258" fill="url(#gf61)"/>
+<polygon points="-35.54,-31.73 35.54,-31.73 55.43,-45.69 -8.53,-45.69" fill="url(#gt59)"/>
+<polygon points="35.54,-31.73 55.43,-45.69 55.43,19.86 35.54,31.73" fill="url(#gs60)"/>
 </g>
-<rect x="-22.01" y="-6.37" width="15.62" height="6.39" rx="3.20" fill="#151515"/>
-<rect x="6.39" y="-6.37" width="15.62" height="6.39" rx="3.20" fill="#151515"/>
+<rect x="-22.03" y="-6.37" width="15.64" height="6.40" rx="3.20" fill="#151515"/>
+<rect x="6.40" y="-6.37" width="15.64" height="6.40" rx="3.20" fill="#151515"/>
 </g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.19" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
-<circle cx="68.07" cy="19.02" r="6.34" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="66.93" y="16.17" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.21" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
+<circle cx="68.13" cy="19.04" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
+<rect x="66.98" y="16.18" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
 </g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-0.6s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.19" dur="1.8s" begin="-0.6s" additive="sum" repeatCount="indefinite"/>
-<circle cx="74.41" cy="19.02" r="6.34" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="73.27" y="16.17" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-0.6s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.21" dur="1.8s" begin="-0.6s" additive="sum" repeatCount="indefinite"/>
+<circle cx="74.47" cy="19.04" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
+<rect x="73.33" y="16.18" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
 </g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-1.2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.19" dur="1.8s" begin="-1.2s" additive="sum" repeatCount="indefinite"/>
-<circle cx="80.75" cy="19.02" r="6.34" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="79.61" y="16.17" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
+<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-1.2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.21" dur="1.8s" begin="-1.2s" additive="sum" repeatCount="indefinite"/>
+<circle cx="80.82" cy="19.04" r="6.35" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
+<rect x="79.67" y="16.18" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
 </g>
 <g><animate attributeName="opacity" values="0;1;0" dur="1.2s" begin="0s" repeatCount="indefinite"/>
-<polygon points="66.46,-73.55 68.47,-68.71 73.69,-68.29 69.71,-64.88 70.93,-59.79 66.46,-62.52 61.99,-59.79 63.20,-64.88 59.22,-68.29 64.45,-68.71" fill="#f6c343"/>
+<polygon points="66.51,-73.61 68.53,-68.77 73.75,-68.35 69.77,-64.93 70.99,-59.83 66.51,-62.57 62.04,-59.83 63.25,-64.93 59.27,-68.35 64.50,-68.77" fill="#f6c343"/>
 </g>
-<g transform="translate(61.39,-51.65) scale(0.625) translate(-61.39,51.65)">
-<rect x="61.39" y="-60.65" width="54" height="16" rx="8" fill="#5ec99a"/>
-<text x="88.39" y="-48.65" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
+<g transform="translate(61.43,-51.69) scale(0.625) translate(-61.43,51.69)">
+<rect x="61.43" y="-60.69" width="54" height="16" rx="8" fill="#5ec99a"/>
+<text x="88.43" y="-48.69" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
 </g></g>
 </svg>

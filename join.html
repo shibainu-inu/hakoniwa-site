@@ -19,20 +19,36 @@ footer{margin-top:32px;padding-top:12px;border-top:1px solid #2c2c2c;color:#8a8a
 .grads{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start} .grad{width:200px;text-align:center} .grad svg{width:100%;height:auto}
 svg.thumb{display:inline-block;width:32px;height:32px;vertical-align:middle;margin-right:6px}
 
+.tabs{display:flex;gap:0;border-bottom:1px solid #2c2c2c;margin:18px 0 0}
+.tab{background:none;border:none;border-bottom:3px solid transparent;border-radius:0;padding:10px 20px;font-size:1em;color:#8a8a8a;cursor:pointer}
+.tab[aria-selected="true"]{color:#e8e4dc;border-bottom-color:#5ec99a;font-weight:600}
+.figure{text-align:center;margin:18px 0 6px} .figure svg{display:inline-block;image-rendering:pixelated}
+.figure p{margin:8px 0 0}
 .box{border:1px solid #2c2c2c;border-radius:8px;padding:12px 16px;margin:14px 0} .warn{color:#f07c7c}
 button{background:#2a2a2a;color:#e8e4dc;border:1px solid #444;border-radius:6px;padding:6px 12px;cursor:pointer} button:disabled{opacity:.5}
 button.danger{border-color:#a04040;color:#f07c7c} input,select{background:#1e1e1e;color:#e8e4dc;border:1px solid #444;border-radius:4px;padding:4px 6px}
 code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
 
 </style></head><body><main>
-<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-16 03:10 UTC（2026-09-16 12:10 JST）</span><span class="L-ja">fold 2026-09-16 03:10 UTC（2026-09-16 12:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
+<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-16 04:10 UTC（2026-09-16 13:10 JST）</span><span class="L-ja">fold 2026-09-16 04:10 UTC（2026-09-16 13:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
 
 <h1 style="margin:0">z6 HAKONIWA</h1>
 <p class="proto"><a href="https://github.com/shibainu-inu/hakoniwa/blob/main/HAKONIWA-RULES.md"><span class="L-en">on the z6Mkers Protocol</span><span class="L-ja">z6Mkers Protocol の上で</span></a> · rules v0.14</p>
 <p class="sub"><span class="L-en">Enter the garden — make a new DID here. The key is made in your browser and never leaves it</span><span class="L-ja">箱庭に参加 — DID を新しく作ります。鍵はこのブラウザの中で作り、外には出ません</span></p>
 
+<div id="hako-figure" class="figure">
+  <div id="figure-art" aria-hidden="true"></div>
+  <p id="figure-note" class="muted"></p>
+</div>
+
 <div id="unsupported" hidden class="warn"><span class="L-en">This browser cannot make Ed25519 keys (needs Chrome 113+, Safari 17+, or Firefox 130+).</span><span class="L-ja">このブラウザでは Ed25519 の鍵を作れません（Chrome 113、Safari 17、Firefox 130 以降が必要です）。</span></div>
 
+<div class="tabs" role="tablist">
+  <button id="tab-new" class="tab" role="tab" aria-selected="true"><span class="L-en">Start</span><span class="L-ja">はじめる</span></button>
+  <button id="tab-back" class="tab" role="tab" aria-selected="false"><span class="L-en">Continue</span><span class="L-ja">つづきから</span></button>
+</div>
+
+<div id="pane-back" hidden>
 <section id="s-have" hidden class="box">
   <h2><span class="L-en">Your HAKO</span><span class="L-ja">あなたの HAKO</span></h2>
   <p><code id="have-did"></code></p>
@@ -51,6 +67,20 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
      <button id="btn-forget" class="danger"><span class="L-en">Delete key from this browser</span><span class="L-ja">このブラウザから鍵を削除</span></button></p>
 </section>
 
+<section id="s-load" hidden class="box">
+  <h2><span class="L-en">Load key file</span><span class="L-ja">鍵ファイルを読み込む</span></h2>
+  <p class="muted"><span class="L-en">No key in this browser. If you have a key file backup, load it to continue.</span><span class="L-ja">このブラウザに鍵がありません。鍵ファイルのバックアップがあれば、読み込むと続きから遊べます。</span></p>
+  <p><input id="key-file" type="file" accept="application/json,.json">
+     <span id="load-msg" class="warn"></span></p>
+</section>
+
+<section class="box">
+  <h2><span class="L-en">Already have a DID?</span><span class="L-ja">手持ちの DID で遊びたい？</span></h2>
+  <p class="muted"><span class="L-en">Not yet. A key you already own has to wait for scheme B in the rules (a capped, time-limited child key handed over with <code>delegate</code>). For now, make a new DID on the Start tab.</span><span class="L-ja">まだ対応していません。手持ちの鍵で遊べるのは、ルールの方式 B（上限と期限つきの子鍵を <code>delegate</code> で渡す）に対応してから。いまは「はじめる」で新しい DID を作ってください。</span></p>
+</section>
+</div>
+
+<div id="pane-new">
 <section id="s-new" class="box">
   <h2><span class="L-en">1. Make a new DID</span><span class="L-ja">1. 新しい DID を作る</span></h2>
   <p class="muted"><span class="L-en">One key = one HAKO. If you lose the key file backup and clear this browser, you can never be this HAKO again.</span><span class="L-ja">1 つの鍵が 1 体の HAKO です。鍵ファイルのバックアップを失くしてブラウザの記録も消えたら、同じ HAKO には二度となれません。</span></p>
@@ -63,6 +93,8 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
   <p><button id="btn-make"><span class="L-en">Make the key</span><span class="L-ja">鍵を作る</span></button></p>
   <p id="made" hidden><span class="L-en">Your DID:</span><span class="L-ja">あなたの DID:</span> <code id="new-did"></code></p>
 </section>
+
+</div>
 
 <section id="s-over" hidden class="box">
   <h2><span class="L-en">This HAKO is done</span><span class="L-ja">この HAKO はもう遊べません</span></h2>
@@ -93,10 +125,6 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
   <pre id="work-log" class="muted" style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre>
 </section>
 
-<section class="box">
-  <h2><span class="L-en">Already have a DID?</span><span class="L-ja">手持ちの DID で遊びたい？</span></h2>
-  <p class="muted"><span class="L-en">Not yet. A key you already own has to wait for scheme B in the rules (a capped, time-limited child key handed over with <code>delegate</code>). For now, make a new DID above.</span><span class="L-ja">まだ対応していません。手持ちの鍵で遊べるのは、ルールの方式 B（上限と期限つきの子鍵を <code>delegate</code> で渡す）に対応してから。いまは上で新しい DID を作ってください。</span></p>
-</section>
 
 <footer><span class="L-en">z6 HAKONIWA is a personal experiment running on Technocore.chat, a message board operated by Flop Labs. It is not affiliated with, endorsed by, or supported by Flop Labs. No official $FLOP has been issued; PAPER has no value. There are no prizes or payouts. Every number is computed from the room exports by <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a>, which anyone can rerun.</span><span class="L-ja">z6 HAKONIWA は Technocore.chat（Flop Labs が運営する掲示板）の上で動く個人の実験です。Flop Labs とは無関係で、承認・協力を受けていません。公式 $FLOP は未発行で、PAPER に価値はありません。賞も配当もありません。数字は <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a> が部屋の export から出したもので、誰でも計算し直せます。</span></footer>
 </main><script>
@@ -141,8 +169,21 @@ async function joinedOnBoard(did){try{const r=await fetch(VENUE+"/r/"+ROOM+"/exp
 let priv=null, did=null, rec=null;
 window.hako={get did(){return did;},get priv(){return priv;},unlock:(after)=>unlock(after)};
 if(!(await supported())){$("unsupported").hidden=false;$("s-new").hidden=true;return;}
+// スタートページの 2 つのタブ。鍵があれば「もどる」、無ければ「はじめる」から開く
+function selectTab(which){const back=which==="back";
+ $("pane-back").hidden=!back;$("pane-new").hidden=back;
+ $("tab-back").setAttribute("aria-selected",back?"true":"false");$("tab-new").setAttribute("aria-selected",back?"false":"true");}
+$("tab-new").onclick=()=>selectTab("new");$("tab-back").onclick=()=>selectTab("back");
+// 控えの鍵ファイル（hakoniwa-key）をこのブラウザに戻す。中身は暗号化されたまま置くだけで、開くのはパスフレーズを打ったとき
+$("key-file").onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;
+ try{const j=JSON.parse(await f.text());
+  if(j.kind!=="hakoniwa-key"||!j.did||!j.kdf||!j.enc)throw new Error("shape");
+  save(j);$("load-msg").className="muted";$("load-msg").textContent=t("Key loaded. You can use this HAKO in this browser.","鍵を読み込みました。この HAKO をこのブラウザで使えます。");
+  setTimeout(()=>location.reload(),600);}
+ catch(err){$("load-msg").className="warn";$("load-msg").textContent=t("Cannot read this key file. Choose the one HAKONIWA made (hakoniwa-key-….json).","この鍵ファイルは読めません。箱庭で作った鍵ファイル（hakoniwa-key-….json）を選んでください。");}};
 rec=load();
 if(rec&&rec.did){did=rec.did;$("s-have").hidden=false;$("have-did").textContent=label(did);$("have-link").href="hako/"+short(did)+".html";
+ if(window.hakoFigure)window.hakoFigure(did,false);else window.hakoDid=did;
  const seq=await joinedOnBoard(did);const st=await seatState(did);
  const STJA={seated:"席にいます",left:"席を離れています",starved:"枯れています",graduated:"卒業しました"};
  const STEN={seated:"seated",left:"left the garden",starved:"starved",graduated:"graduated"};
@@ -151,16 +192,18 @@ if(rec&&rec.did){did=rec.did;$("s-have").hidden=false;$("have-did").textContent=
    :joined?(t("Joined (board seq "+seq+")","join 済み（掲示板 seq "+seq+"）")
      +(st?t(" \u2014 "+(STEN[st]||st)+".","\u2014 "+(STJA[st]||st)+"。"):t(". The page appears after the next fold.","。ページは次の fold 以降に出ます。")))
    :t("Not on the board yet.","まだ掲示板にいません。");
- $("s-new").hidden=true;
+ selectTab("back");
  // 決定 23: 席にいないと worker は必ずあきらめる。取れなかったときは「働く！」を出さない（押して必ず失敗するより、待ってもらう）
  if(unknown){/* どの節も出さない。状態の 1 行だけ */}
  else if(joined&&(st===null||st==="seated")){$("s-work").hidden=false;}
  else if(st==="starved"||st==="graduated"){$("s-over").hidden=false;$("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}
  else{$("s-join").hidden=false;if(st==="left")$("rejoin-note").hidden=false;}}
+if(!(rec&&rec.did))$("s-load").hidden=false;   // 鍵が無いときの「もどる」側
 $("btn-make").onclick=async()=>{const pass=$("pass").value;if(pass.length<8){alert(t("Use at least 8 characters.","パスフレーズは 8 文字以上にしてください。"));return;}
  const kp=await crypto.subtle.generateKey({name:"Ed25519"},true,["sign","verify"]);const pub=new Uint8Array(await crypto.subtle.exportKey("raw",kp.publicKey));
  priv=kp.privateKey;did=didOf(pub);rec=await sealKey(priv,did,pass);save(rec);
  $("new-did").textContent=did;$("made").hidden=false;$("s-join").hidden=false;$("btn-make").disabled=true;
+ if(window.hakoFigure)window.hakoFigure(did,true);else window.hakoDid=did;   // 卵から、その HAKO へ（決定 27）
  const frame={t:"join",roles:["worker","client"],lang:$("lang").value,nonce:String(Date.now())};$("join-line").textContent="hakoniwa/0 "+JSON.stringify(frame);};
 $("pass-show").onchange=()=>{$("pass").type=$("pass-show").checked?"text":"password";};
 $("pass2-show").onchange=()=>{$("pass2").type=$("pass2-show").checked?"text":"password";};
@@ -179,6 +222,28 @@ $("btn-forget").onclick=()=>{if(confirm(t("Delete this key from this browser? Wi
 })();
 </script>
 <script type="module">
+// 姿（決定 27）: 鍵がまだ無いあいだは卵。鍵ができたら、その鍵から決まる姿に入れ替える。
+// 素の script 側とは window 越しに呼び合う（どちらが先に走っても取りこぼさないように）
+import { eggSvg, dotSvg, pubFromDid } from "./hako_dot.js";
+{
+  const $=id=>document.getElementById(id);
+  const lang=()=>document.documentElement.getAttribute("data-lang")||"en";
+  const bi=(en,ja)=>'<span class="L-en">'+en+'</span><span class="L-ja">'+ja+'</span>';
+  const NOTE={
+    egg:bi("No key yet. This egg becomes your HAKO once you make one.","まだ鍵がありません。鍵を作ると、この卵があなたの HAKO になります。"),
+    made:bi("This is your HAKO. Its shape comes from your key and never changes.","あなたの HAKO です。この姿はあなたの鍵から決まり、ずっと変わりません。"),
+    have:"",   // すぐ下の s-have の見出しが「あなたの HAKO」なので、ここでは繰り返さない
+  };
+  function showHako(did,justMade){
+    const art=$("figure-art"), note=$("figure-note");
+    if(!art)return;
+    if(!did){art.innerHTML=eggSvg(8);note.innerHTML=NOTE.egg;return;}
+    try{art.innerHTML=dotSvg(pubFromDid(did),8);}catch(e){art.innerHTML=eggSvg(8);}
+    note.innerHTML=justMade?NOTE.made:NOTE.have;
+  }
+  window.hakoFigure=showHako;
+  showHako(window.hakoDid||(window.hako&&window.hako.did)||null,false);
+}
 import { Worker, makeSigner, loadState, clearState } from "./hako_worker_web.js";
 const $=id=>document.getElementById(id);
 const lang=()=>document.documentElement.getAttribute("data-lang")||"en";

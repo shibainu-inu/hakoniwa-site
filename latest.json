@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-16T03:10:01Z",
+  "generated": "2026-09-16T04:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -126,11 +126,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3214818,
+   "rows": 3230056,
    "dup": 0,
    "unsigned": 141099,
-   "bad_sig": 30972,
-   "frames": 2515823,
+   "bad_sig": 31129,
+   "frames": 2522718,
    "offers": 87,
    "accepts": 100,
    "accept_dup_offer": 0,
@@ -141,7 +141,7 @@
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 61,
+   "contracts_unlocked": 60,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -152,14 +152,14 @@
    "join_no_seat": 0,
    "join_after_exit": 0
   },
-  "receipts": 36,
-  "paper_total": 10276.0,
+  "receipts": 37,
+  "paper_total": 10273.0,
   "graduated_paper": 0,
-  "burned": 24.0,
+  "burned": 27.0,
   "burn_by_date": {
    "2026-09-14": 9.0,
    "2026-09-15": 9.0,
-   "2026-09-16": 6.0
+   "2026-09-16": 9.0
   },
   "contracts": [
    {
@@ -743,6 +743,21 @@
     "locked_ts": 1789524673,
     "settled_seq": 4,
     "settled_ts": 1789524991,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xe4b12a09c3e2a2dcb8074d0c83ec33c65c78407110e2c0459df5fccb443c2739",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-e4b12a09c3e2a2dc",
+    "amount": 20.0,
+    "locked_seq": 1,
+    "locked_ts": 1789526624,
+    "settled_seq": 4,
+    "settled_ts": 1789526927,
     "outcome": "receipt",
     "dispute": false,
     "test": false
@@ -2808,6 +2823,57 @@
     "diary_checks": [],
     "dropped": null,
     "status": "claimed"
+   },
+   "0xe4b12a09c3e2a2dcb8074d0c83ec33c65c78407110e2c0459df5fccb443c2739": {
+    "contract": "0xe4b12a09c3e2a2dcb8074d0c83ec33c65c78407110e2c0459df5fccb443c2739",
+    "room": "mb-p-tclk-e4b12a09c3e2a2dc",
+    "job": "hakoniwa-keep-PvqA-20260916-3",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 20,
+    "context": "/kv/hakoniwa-hywkpvqa/keep-93bcdee0",
+    "test": false,
+    "refund_after_ms": 1789546259567,
+    "offer_id": "0x763171897dc5afc7ec9def06d86a1a161288083dc285a20bf161207254dfcd56",
+    "offer_seq": 5073869,
+    "offer_ts": "2026-09-16T02:10:59.629754Z",
+    "accept_seq": 5074472,
+    "accept_ts": "2026-09-16T02:11:22.426091Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-16T02:43:44.950698Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-16T02:48:17.152919Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-16T02:48:47.116200Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "keep",
+      "seq": 2,
+      "ts": "2026-09-16T02:48:17.010082Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
+      "sha256_ok": false,
+      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "until": "2026-09-23"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
    }
   },
   "test_contracts": {
@@ -3416,13 +3482,6 @@
     "accept_seq": 5074460,
     "payee": "did:key:z6MkkqC8CC6v9WeRHtnD4qP47RGHmvzKvznspa7mQrhvzYG6",
     "dropped": null
-   },
-   {
-    "contract": "0xe4b12a09c3e2a2dcb8074d0c83ec33c65c78407110e2c0459df5fccb443c2739",
-    "job": "hakoniwa-keep-PvqA-20260916-3",
-    "accept_seq": 5074472,
-    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-    "dropped": null
    }
   ],
   "serves": [],
@@ -3549,15 +3608,15 @@
    "lang": "ja",
    "joined": "2026-09-08T11:29:07.745802Z",
    "earn": 477.0,
-   "spend": 5460.0,
+   "spend": 5480.0,
    "issued": 5300.0,
-   "balance": 1317.0,
+   "balance": 1297.0,
    "mem_bytes": 0,
    "sleep_days": 0,
    "chat": null,
    "life_days": 1.7,
    "earn_today": 108.0,
-   "spend_today": 1240.0,
+   "spend_today": 1260.0,
    "mem_days_left": null,
    "operator": true,
    "state": "seated",
@@ -3572,10 +3631,10 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:28.400237Z",
-   "earn": 5036.0,
+   "earn": 5053.0,
    "spend": 2940.0,
    "issued": 0.0,
-   "balance": 3096.0,
+   "balance": 3113.0,
    "mem_bytes": 0,
    "sleep_days": 0,
    "chat": {
@@ -3584,7 +3643,7 @@
     "text": "まだ起きている。 会う、取引。"
    },
    "life_days": 7.4,
-   "earn_today": 1234.0,
+   "earn_today": 1251.0,
    "spend_today": 720.0,
    "mem_days_left": null,
    "operator": true,
