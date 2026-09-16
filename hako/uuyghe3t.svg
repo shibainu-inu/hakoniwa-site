@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="sh67" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.80"/></filter><clipPath id="clip68"><path d="M-27.69,31.70 Q-35.50,31.70 -35.50,23.89 L-35.50,-23.89 Q-35.50,-31.70 -28.56,-35.28 L-15.46,-42.05 Q-8.52,-45.64 -0.71,-45.64 L47.57,-45.64 Q55.38,-45.64 55.38,-37.83 L55.38,12.03 Q55.38,19.84 48.67,23.84 L42.21,27.70 Q35.50,31.70 27.69,31.70 Z"/></clipPath><linearGradient id="gt69" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#48abff"/><stop offset="1" stop-color="#44a2ff"/></linearGradient><linearGradient id="gs70" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2e6fcb"/><stop offset="1" stop-color="#275eac"/></linearGradient><linearGradient id="gf71" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d91ff"/><stop offset="1" stop-color="#3783ef"/></linearGradient></defs>
 <g transform="translate(160,190) scale(1.6)"><ellipse cx="5.96" cy="36.77" rx="44.02" ry="5.71" fill="#000" opacity="0.45" filter="url(#sh67)"/>
 <g transform="translate(0.00,0.00)">
-<animateTransform attributeName="transform" type="translate" values="0 0;0 -3.92;0 0" dur="0.8s" begin="-0.77s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
+<animateTransform attributeName="transform" type="translate" values="0 0;0 -3.36;0 0" dur="1.078s" begin="-1.04s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <g clip-path="url(#clip68)">
 <rect x="-36.49845538811156" y="-46.64087121328628" width="92.8760457935656" height="79.3359206669573" fill="url(#gf71)"/>
 <polygon points="-35.50,-31.70 35.50,-31.70 55.38,-45.64 -8.52,-45.64" fill="url(#gt69)"/>
@@ -9,20 +9,5 @@
 </g>
 <rect x="-20.59" y="-6.36" width="15.62" height="6.39" rx="3.19" fill="#151515"/>
 <rect x="4.97" y="-6.36" width="15.62" height="6.39" rx="3.19" fill="#151515"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="0.0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.19" dur="1.8s" begin="0.0s" additive="sum" repeatCount="indefinite"/>
-<circle cx="68.06" cy="19.02" r="6.34" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="66.91" y="16.16" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-0.6s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.19" dur="1.8s" begin="-0.6s" additive="sum" repeatCount="indefinite"/>
-<circle cx="74.39" cy="19.02" r="6.34" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="73.25" y="16.16" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
-</g>
-<g opacity="0"><animate attributeName="opacity" values="0;1;1;0" dur="1.8s" begin="-1.2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 -22.19" dur="1.8s" begin="-1.2s" additive="sum" repeatCount="indefinite"/>
-<circle cx="80.73" cy="19.02" r="6.34" fill="#f6c343" stroke="#e9b02c" stroke-width="1.27"/>
-<rect x="79.59" y="16.16" width="2.28" height="5.71" rx="0.63" fill="#e9b02c"/>
-</g>
-<g><animate attributeName="opacity" values="0;1;0" dur="1.2s" begin="0s" repeatCount="indefinite"/>
-<polygon points="66.44,-73.53 68.45,-68.70 73.68,-68.28 69.70,-64.87 70.91,-59.77 66.44,-62.50 61.97,-59.77 63.19,-64.87 59.21,-68.28 64.43,-68.70" fill="#f6c343"/>
 </g></g>
 </svg>
