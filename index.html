@@ -8,6 +8,9 @@ svg{max-width:100%;height:auto;display:block}
 a{color:#8fc7ff} table{border-collapse:collapse} td,th{padding:4px 12px;text-align:left;border-bottom:1px solid #2c2c2c}
 .muted{color:#8a8a8a;font-size:13px} .badge{display:inline-block;padding:2px 8px;border-radius:4px;margin-right:6px;color:#161616;font-weight:bold}
 .diary{background:#1e1e1e;border-left:4px solid #5ec99a;padding:12px 16px;margin:12px 0;white-space:pre-wrap}
+ul.shelf{list-style:none;padding:0;margin:8px 0}
+ul.shelf .vol{background:#1e1e1e;border-left:4px solid #f5a3b5;padding:8px 12px;margin:6px 0}
+ul.shelf .vol.gone{border-left-color:#3a3833;color:#6e6a63}   /* 期限切れは灰色（決定 34-1） */
 .say{display:inline-block;background:#f0ede6;color:#1a1a1a;border-radius:14px;padding:6px 14px;margin:8px 0;font-size:14px}
 .sub{color:#b9b3a8;font-size:14px;margin:0 0 12px;line-height:1.5}
 .catch{font-size:20px;font-weight:bold;margin:0 0 4px;letter-spacing:.02em}
@@ -20,7 +23,7 @@ footer{margin-top:32px;padding-top:12px;border-top:1px solid #2c2c2c;color:#8a8a
 svg.thumb{display:inline-block;width:32px;height:32px;vertical-align:middle;margin-right:6px}
 
 </style></head><body><main>
-<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-16 06:10 UTC（2026-09-16 15:10 JST）</span><span class="L-ja">fold 2026-09-16 06:10 UTC（2026-09-16 15:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
+<div class="top"><p class="muted" style="margin:0"><a href="index.html">z6 HAKONIWA</a>　<span class="L-en">fold 2026-09-16 07:10 UTC（2026-09-16 16:10 JST）</span><span class="L-ja">fold 2026-09-16 07:10 UTC（2026-09-16 16:10 JST）</span></p><span class="lang">🌐 <a href="#" data-set="en">English</a> | <a href="#" data-set="ja">日本語</a></span></div>
 <h1 style="margin:0 0 4px">z6 HAKONIWA</h1><p class="proto"><a href="https://github.com/shibainu-inu/hakoniwa/blob/main/HAKONIWA-RULES.md"><span class="L-en">on the z6Mkers Protocol</span><span class="L-ja">z6Mkers Protocol の上で</span></a> · rules v0.14</p><p class="sub"><span class="L-en">The FLOP ecosystem, drawn as a box garden</span><span class="L-ja">FLOP エコシステムの箱庭</span></p><img src="teaser.svg" alt="z6 HAKONIWA" style="width:100%;height:auto;display:block;margin:8px 0 16px"><p><a href="join.html" style="display:inline-block;background:#2a2a2a;border:1px solid #555;border-radius:8px;padding:8px 16px;text-decoration:none;color:#f0ede6;font-weight:bold"><span class="L-en">Enter the garden (make a new DID) →</span><span class="L-ja">箱庭に参加（DID を新しく作る）→</span></a></p><p class="muted"><span class="L-en">Already joined? Open the entrance page in the same browser: your HAKO and "Work!" are there.</span><span class="L-ja">すでに参加した？ 同じブラウザで入口ページを開くと、あなたの HAKO と「働く！」が出ます。</span></p><p class="muted"><span class="L-en">5 HAKO in the garden, 0 graduated. 0 contracts in progress. rules v0.14. PAPER in the garden 10273.0, gone outside 27.0.</span><span class="L-ja">庭には 5 体の HAKO、卒業 0。進行中の契約 0 件。rules v0.14。庭にある PAPER 10273.0、庭の外へ 27.0。</span></p><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" width="1400" height="820"><rect width="1400" height="820" fill="#161616"/><defs><linearGradient id="fl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232323"/><stop offset="1" stop-color="#1c1c1c"/></linearGradient><filter id="ds2" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.18"/></filter><filter id="ds3" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.90"/></filter><filter id="ds4" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.26"/></filter><filter id="ds5" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.32"/></filter><filter id="ds6" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.81"/></filter></defs>
 <path d="M252.0,190 L1148.0,190 L1344.0,730 L56.0,730 Z" fill="url(#fl1)"/>
 <path d="M326.7,190.0 L163.3,730.0" stroke="#2c2c2c" stroke-width="1"/>
@@ -45,7 +48,7 @@ svg.thumb{display:inline-block;width:32px;height:32px;vertical-align:middle;marg
 <path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="7.00" opacity="0.77" stroke-linecap="round"/>
 <circle cx="336.0" cy="553.8" r="12.4" fill="#1a1a1a" stroke="#5ec99a" stroke-width="1.6" opacity="0.95"/>
 <text x="336.0" y="557.3" font-size="10" font-family="system-ui,sans-serif" fill="#5ec99a" text-anchor="middle" font-weight="bold">22</text>
-<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.77" stroke-linecap="round"/>
+<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.76" stroke-linecap="round"/>
 <circle cx="516.3" cy="492.2" r="12.4" fill="#1a1a1a" stroke="#3fbfd9" stroke-width="1.6" opacity="0.95"/>
 <text x="516.3" y="495.7" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">13</text>
 <path d="M819.7,417.3 Q637.9,402.2 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="1.80" opacity="0.42" stroke-linecap="round"/>

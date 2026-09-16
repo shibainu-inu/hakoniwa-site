@@ -22,7 +22,7 @@
 <path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="7.00" opacity="0.77" stroke-linecap="round"/>
 <circle cx="336.0" cy="553.8" r="12.4" fill="#1a1a1a" stroke="#5ec99a" stroke-width="1.6" opacity="0.95"/>
 <text x="336.0" y="557.3" font-size="10" font-family="system-ui,sans-serif" fill="#5ec99a" text-anchor="middle" font-weight="bold">22</text>
-<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.77" stroke-linecap="round"/>
+<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.76" stroke-linecap="round"/>
 <circle cx="516.3" cy="492.2" r="12.4" fill="#1a1a1a" stroke="#3fbfd9" stroke-width="1.6" opacity="0.95"/>
 <text x="516.3" y="495.7" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">13</text>
 <path d="M819.7,417.3 Q637.9,402.2 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="1.80" opacity="0.42" stroke-linecap="round"/>
