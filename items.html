@@ -21,7 +21,8 @@ a.btn{display:inline-block;background:#2a2a2a;border:1px solid #555;border-radiu
 .shelf .vol.gone{border-left-color:#3a3833;color:#6e6a63}   /* 期限切れは灰色（決定 34-1） */
 .shelf .vol summary{cursor:pointer} .shelf .vol[open]{padding-bottom:4px}
 /* 決定 61: 綴じるまでのメーター。7 マス */
-.bar{display:flex;align-items:center;gap:4px;margin:10px 0 0}
+.bar{display:flex;align-items:center;gap:4px;margin:10px 0 0;font-size:14px}
+.bar .k{color:#8a8a8a;margin-right:4px} .bar .k::after{content:"："}
 .bar i{width:16px;height:16px;background:#242424;border:1px solid #3a3833;display:inline-block}
 .bar i.on{background:#f5a3b5;border-color:#f5a3b5}
 .bar span{margin-left:8px} .bar.done i.on{background:#f2cf6b;border-color:#f2cf6b}
