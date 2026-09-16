@@ -1,9 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds15" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.32"/></filter></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="30.47" rx="31.02" ry="4.43" fill="#000" opacity="0.45" filter="url(#ds15)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds17" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.32"/></filter></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="30.47" rx="31.02" ry="4.43" fill="#000" opacity="0.45" filter="url(#ds17)"/>
 <g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -1.47;0 0" dur="1.5s" begin="-0.76s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <animateTransform attributeName="transform" type="rotate" values="0 0.00 27.70;3 0.00 27.70;0 0.00 27.70" dur="2.4s" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <path d="M-31.65 -46.16h63.31v5.28h-63.31zM-36.93 -40.89h5.28v5.28h-5.28zM31.65 -40.89h5.28v5.28h-5.28zM-36.93 -35.61h5.28v5.28h-5.28zM31.65 -35.61h5.28v5.28h-5.28zM-36.93 -30.33h5.28v5.28h-5.28zM31.65 -30.33h5.28v5.28h-5.28zM-36.93 -25.06h5.28v5.28h-5.28zM-26.38 -25.06h5.28v5.28h-5.28zM21.10 -25.06h5.28v5.28h-5.28zM31.65 -25.06h5.28v5.28h-5.28zM-36.93 -19.78h5.28v5.28h-5.28zM-26.38 -19.78h10.55v5.28h-10.55zM15.83 -19.78h10.55v5.28h-10.55zM31.65 -19.78h5.28v5.28h-5.28zM-36.93 -14.51h5.28v5.28h-5.28zM31.65 -14.51h5.28v5.28h-5.28zM-36.93 -9.23h5.28v5.28h-5.28zM-5.28 -9.23h10.55v5.28h-10.55zM31.65 -9.23h5.28v5.28h-5.28zM-36.93 -3.96h5.28v5.28h-5.28zM31.65 -3.96h5.28v5.28h-5.28zM-36.93 1.32h5.28v5.28h-5.28zM31.65 1.32h5.28v5.28h-5.28zM-36.93 6.59h5.28v5.28h-5.28zM31.65 6.59h5.28v5.28h-5.28zM-31.65 11.87h63.31v5.28h-63.31zM-26.38 17.15h10.55v5.28h-10.55zM15.83 17.15h10.55v5.28h-10.55zM-26.38 22.42h10.55v5.28h-10.55zM15.83 22.42h10.55v5.28h-10.55z" fill="#bca76a" shape-rendering="crispEdges"/>
 </g>
-<path d="M42.21 1.32h5.28v5.28h-5.28zM79.13 1.32h5.28v5.28h-5.28zM42.21 6.59h5.28v5.28h-5.28zM79.13 6.59h5.28v5.28h-5.28zM42.21 11.87h42.21v5.28h-42.21zM47.48 17.15h31.65v5.28h-31.65zM52.76 22.42h21.10v5.28h-21.10z" fill="#e8e4dc" shape-rendering="crispEdges"/></g>
+<path d="M42.21 1.32h5.28v5.28h-5.28zM79.13 1.32h5.28v5.28h-5.28zM42.21 6.59h5.28v5.28h-5.28zM79.13 6.59h5.28v5.28h-5.28zM42.21 11.87h42.21v5.28h-42.21zM47.48 17.15h31.65v5.28h-31.65zM52.76 22.42h21.10v5.28h-21.10z" fill="#e8e4dc" shape-rendering="crispEdges"/>
+<g transform="translate(42.93,-62.71) scale(0.625) translate(-42.93,62.71)">
+<rect x="42.93" y="-71.71" width="54" height="16" rx="8" fill="#f6c343"/>
+<text x="69.93" y="-59.71" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">client</text>
+</g></g>
 </svg>
