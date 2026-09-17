@@ -119,8 +119,9 @@ html[data-lang="en"] #room-say .L-en,html[data-lang="ja"] #room-say .L-ja{displa
 #figure-art.born{animation:born .5s steps(2,end) 1 both} @keyframes born{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){#figure-art.born{animation:none}}
 .room-nav{display:none}
-body.in-room .room-nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;justify-content:center;gap:4px;background:#161616;border-top:1px solid #2c2c2c;padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
-body.in-room main{padding-bottom:64px}
+/* 決定 85: ナビは画面の下に付いてくる（sticky）が、ページの最後では footer の上で止まり、footer はその下に出る */
+body.in-room #v-room{flex:1;display:flex;flex-direction:column}
+body.in-room .room-nav{position:sticky;bottom:0;margin-top:auto;z-index:10;display:flex;justify-content:center;gap:4px;background:#161616;border-top:1px solid #2c2c2c;padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
 .room-nav button,.room-nav a{background:none;border:none;color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;border-bottom:2px solid transparent;border-radius:0}
 .room-nav .on{color:#f0ede6;border-bottom-color:#f0ede6}
 .small{font-size:12px} details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
@@ -263,13 +264,13 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
     <p><button id="btn-backup"><span class="L-en">Back up key</span><span class="L-ja">鍵をバックアップ</span></button>
        <button id="btn-forget-tab" hidden><span class="L-en">Forget passphrase in this tab</span><span class="L-ja">このタブで覚えたパスフレーズを忘れる</span></button></p>
     <details class="how"><summary><span class="L-en">About this room</span><span class="L-ja">この部屋について</span></summary>
-      <p class="muted small"><span class="L-en">GARDEN opens in a new tab, so your HAKO keeps working here.</span><span class="L-ja">GARDEN は新しいタブで開きます。この部屋の HAKO はそのまま動きます。</span></p>
+      <p class="muted small"><span class="L-en">Going to GARDEN leaves this room, and your HAKO's work pauses. Come back to pick up where it left off (with "Remember in this tab", you come straight back in).</span><span class="L-ja">GARDEN へ行くと部屋を出るので、HAKO の仕事は止まります。戻ってくれば続きから動きます（「このタブを閉じるまで覚える」を入れていれば、そのまま部屋に戻れます）。</span></p>
       <p class="muted small"><span class="L-en">Closing the tab won't lose your HAKO — the key and its progress stay in this browser. Open this page again in the same browser to continue.</span><span class="L-ja">タブを閉じても HAKO は消えません。鍵と途中経過はこのブラウザに残ります。続きは、同じブラウザでこのページを開き直すだけです。</span></p></details>
   </section>
   </div>
 
   <nav class="room-nav" aria-label="room">
-    <button data-go="work" class="on">WORK</button><button data-go="memory">MEMORY</button><button data-go="books">BOOKS</button><a href="garden.html" target="_blank" rel="noopener">GARDEN</a>
+    <button data-go="work" class="on">WORK</button><button data-go="memory">MEMORY</button><button data-go="books">BOOKS</button><a href="garden.html">GARDEN</a>
   </nav>
 
 </section>
