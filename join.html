@@ -271,7 +271,8 @@ if(rec&&rec.did){did=rec.did;$("s-have").hidden=false;$("have-did").textContent=
  // 決定 23: 席にいないと worker は必ずあきらめる。取れなかったときは「働く！」を出さない（押して必ず失敗するより、待ってもらう）
  if(unknown){/* どの節も出さない。状態の 1 行だけ */}
  else if(joined&&(st===null||st==="seated")){$("s-work").hidden=false;$("s-order").hidden=false;if(window.hakoOrderReady)window.hakoOrderReady();}
- else if(st==="starved"||st==="bound"||st==="graduated"){   // v0.18 から綴じた HAKO は bound（graduated は古い fold の名前）$("s-over").hidden=false;$("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}
+ // v0.18 から綴じた HAKO は bound（graduated は古い fold の名前）
+ else if(st==="starved"||st==="bound"||st==="graduated"){$("s-over").hidden=false;$("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}
  else{$("s-join").hidden=false;if(st==="left")$("rejoin-note").hidden=false;}}
 if(!(rec&&rec.did))$("s-load").hidden=false;   // 鍵が無いときの「もどる」側
 $("btn-make").onclick=async()=>{const pass=$("pass").value;if(pass.length<8){alert(t("Use at least 8 characters.","パスフレーズは 8 文字以上にしてください。"));return;}
