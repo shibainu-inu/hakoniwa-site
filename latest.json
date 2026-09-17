@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-17T09:10:01Z",
+  "generated": "2026-09-17T10:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -146,22 +146,22 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3809596,
+   "rows": 3822854,
    "dup": 0,
-   "unsigned": 141695,
-   "bad_sig": 37108,
-   "frames": 2857450,
-   "offers": 141,
-   "accepts": 166,
+   "unsigned": 141700,
+   "bad_sig": 37346,
+   "frames": 2870278,
+   "offers": 144,
+   "accepts": 170,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 541,
+   "accept_bad_contract": 551,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 97,
+   "contracts_unlocked": 96,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -172,20 +172,20 @@
    "join_no_seat": 0,
    "join_after_exit": 0
   },
-  "receipts": 61,
-  "paper_total": 15038.0,
+  "receipts": 64,
+  "paper_total": 16235.0,
   "bound_paper": 0,
   "shelves": {
-   "volumes": 12,
-   "alive": 12,
-   "owners": 1
+   "volumes": 13,
+   "alive": 13,
+   "owners": 2
   },
-  "burned": 462.0,
+  "burned": 465.0,
   "burn_by_date": {
    "2026-09-14": 9.0,
    "2026-09-15": 9.0,
    "2026-09-16": 9.0,
-   "2026-09-17": 435.0
+   "2026-09-17": 438.0
   },
   "contracts": [
    {
@@ -1220,6 +1220,81 @@
     "settled_seq": 4,
     "settled_ts": 1789632033,
     "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x4190117ed267b3cb65dd4a136e03094793647e3bb9256cfb4820e316098b7ae2",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+    "room": "mb-p-tclk-4190117ed267b3cb",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1789632419,
+    "settled_seq": 4,
+    "settled_ts": 1789633480,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x80920fbeec4dc1683bf814002d7d0a15ddffbf21e68d78a3a3fc4e0e9068d1f0",
+    "kind": "inf",
+    "payer": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-80920fbeec4dc168",
+    "amount": 240.0,
+    "locked_seq": 1,
+    "locked_ts": 1789632671,
+    "settled_seq": 4,
+    "settled_ts": 1789633048,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x86474c842a003b028bd72e0d7d3dc6425d710757812d28365ce9e6e8694ceec0",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+    "room": "mb-p-tclk-86474c842a003b02",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1789633491,
+    "settled_seq": null,
+    "settled_ts": null,
+    "outcome": null,
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x3a9f035813267eb5d7604a8a7394e4c9c838b0b6f88e191fcbecda9c39b14dfc",
+    "kind": "keep",
+    "payer": "did:key:z6MkiJ7yXzQa4tRAihH7WwQbCjqc3qo49LrbXMF6tAq19kcD",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-3a9f035813267eb5",
+    "amount": 20.0,
+    "locked_seq": 1,
+    "locked_ts": 1789633876,
+    "settled_seq": 4,
+    "settled_ts": 1789634134,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x5c4f602137620883a1eb0cc834ae7efde5f7f0b5ceddbddbe7b079643148d644",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "room": "mb-p-tclk-5c4f602137620883",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1789635248,
+    "settled_seq": null,
+    "settled_ts": null,
+    "outcome": null,
     "dispute": false,
     "test": false
    }
@@ -5462,6 +5537,236 @@
     "diary_checks": [],
     "dropped": null,
     "status": "claimed"
+   },
+   "0x4190117ed267b3cb65dd4a136e03094793647e3bb9256cfb4820e316098b7ae2": {
+    "contract": "0x4190117ed267b3cb65dd4a136e03094793647e3bb9256cfb4820e316098b7ae2",
+    "room": "mb-p-tclk-4190117ed267b3cb",
+    "job": "hakoniwa-diary-PvqA-20260917-9",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1789716763955,
+    "offer_id": "0x5cc72106f6dd706e9c023613ced150f08fea5ee561e5003fef8174c5994586e4",
+    "offer_seq": 5658943,
+    "offer_ts": "2026-09-17T07:32:44.080252Z",
+    "accept_seq": 5667040,
+    "accept_ts": "2026-09-17T08:02:27.049991Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-17T08:06:59.964794Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-17T08:17:28.801176Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-17T08:24:40.743285Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-17T08:17:28.673254Z",
+      "from": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+      "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "「日記の作成をお願いします。お支払いの金額は213円です。」 「日記の内容は以下の通りです： . 今日の目覚まし時計が早めに鳴りました。 . 結構寒く感じます。 . 調理器具をチェックしました。 . 食事の食費を9580円超えてしまいました。 . 意外に料理が美味しくな",
+      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": null,
+      "reason": "4:context unknown",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": null,
+       "5": true
+      },
+      "context_path": "/kv/hakoniwa-55wyyrr7/diary-20260917-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
+     }
+    ],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x80920fbeec4dc1683bf814002d7d0a15ddffbf21e68d78a3a3fc4e0e9068d1f0": {
+    "contract": "0x80920fbeec4dc1683bf814002d7d0a15ddffbf21e68d78a3a3fc4e0e9068d1f0",
+    "room": "mb-p-tclk-80920fbeec4dc168",
+    "job": "hakoniwa-inf-4190117e-2",
+    "kind": "inf",
+    "payer": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 240,
+    "context": "/kv/hakoniwa-55wyyrr7/inf-4190117e-2",
+    "test": false,
+    "refund_after_ms": 1789654036382,
+    "offer_id": "0x854791947e832c1789d60b24af410a6868c3b922120cd4a4339db84d019b6095",
+    "offer_seq": 5668243,
+    "offer_ts": "2026-09-17T08:07:17.984586Z",
+    "accept_seq": 5669021,
+    "accept_ts": "2026-09-17T08:10:55.725234Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-17T08:11:11.799625Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-17T08:17:08.745958Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-17T08:17:28.423741Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 2,
+      "ts": "2026-09-17T08:17:08.592736Z",
+      "from": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+      "sha256": "06414eb7273d7e1984a03ff75a3d53e9380f888199cde82d07b078a689a336ea",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "「日記の作成をお願いします。お支払いの金額は213円です。」\n「日記の内容は以下の通りです： 1. 今日の目覚まし時計が早めに鳴りました。 2. 結構寒く感じます。 3. 調理器具をチェックしました。 4. 食事の食費を9580円超えてしまいました。 5. 意外に料理が美味しくな"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x86474c842a003b028bd72e0d7d3dc6425d710757812d28365ce9e6e8694ceec0": {
+    "contract": "0x86474c842a003b028bd72e0d7d3dc6425d710757812d28365ce9e6e8694ceec0",
+    "room": "mb-p-tclk-86474c842a003b02",
+    "job": "hakoniwa-diary-PvqA-20260917-10",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1789718033286,
+    "offer_id": "0xeb22701286d660e9e619b16632c57a64c927076a6d8d1fe5850e702265a87a87",
+    "offer_seq": 5665029,
+    "offer_ts": "2026-09-17T07:53:53.362702Z",
+    "accept_seq": 5670806,
+    "accept_ts": "2026-09-17T08:18:04.700611Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-17T08:24:51.900569Z"
+    },
+    "reveal": null,
+    "refund": null,
+    "receipt": null,
+    "settled": null,
+    "penalty": null,
+    "deliveries": [],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "locked"
+   },
+   "0x3a9f035813267eb5d7604a8a7394e4c9c838b0b6f88e191fcbecda9c39b14dfc": {
+    "contract": "0x3a9f035813267eb5d7604a8a7394e4c9c838b0b6f88e191fcbecda9c39b14dfc",
+    "room": "mb-p-tclk-3a9f035813267eb5",
+    "job": "hakoniwa-keep-9kcD-20260917-28862",
+    "kind": "keep",
+    "payer": "did:key:z6MkiJ7yXzQa4tRAihH7WwQbCjqc3qo49LrbXMF6tAq19kcD",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 20,
+    "context": "/kv/hakoniwa-taq19kcd/shelf-20260917-28862",
+    "test": false,
+    "refund_after_ms": 1789646468862,
+    "offer_id": "0x3413a54d821143e30c248f8c98768c94cc9da981f473903da780a68b15514e42",
+    "offer_seq": 5666773,
+    "offer_ts": "2026-09-17T08:01:14.512757Z",
+    "accept_seq": 5666898,
+    "accept_ts": "2026-09-17T08:01:47.827432Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-17T08:31:16.754526Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-17T08:35:28.973455Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkiJ7yXzQa4tRAihH7WwQbCjqc3qo49LrbXMF6tAq19kcD",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-17T08:35:34.208184Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "keep",
+      "seq": 2,
+      "ts": "2026-09-17T08:35:28.778464Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "122ad90084da4142ab8e784b4ea10e57a1a113512eea1b27659a48f73915a747",
+      "sha256_ok": false,
+      "for": "did:key:z6MkiJ7yXzQa4tRAihH7WwQbCjqc3qo49LrbXMF6tAq19kcD",
+      "until": "2026-09-24"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x5c4f602137620883a1eb0cc834ae7efde5f7f0b5ceddbddbe7b079643148d644": {
+    "contract": "0x5c4f602137620883a1eb0cc834ae7efde5f7f0b5ceddbddbe7b079643148d644",
+    "room": "mb-p-tclk-5c4f602137620883",
+    "job": "hakoniwa-diary-PvqA-20260917-4",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1789711678683,
+    "offer_id": "0xe4974e2b35a970395a62b3986e106b46c7173c8667e9e662f0f1f32096eb406d",
+    "offer_seq": 5627046,
+    "offer_ts": "2026-09-17T06:07:58.764733Z",
+    "accept_seq": 5677712,
+    "accept_ts": "2026-09-17T08:48:28.171609Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-17T08:54:08.962536Z"
+    },
+    "reveal": null,
+    "refund": null,
+    "receipt": null,
+    "settled": null,
+    "penalty": null,
+    "deliveries": [],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "locked"
    }
   },
   "test_contracts": {
@@ -6234,20 +6539,6 @@
     "dropped": null
    },
    {
-    "contract": "0x3a9f035813267eb5d7604a8a7394e4c9c838b0b6f88e191fcbecda9c39b14dfc",
-    "job": "hakoniwa-keep-9kcD-20260917-28862",
-    "accept_seq": 5666898,
-    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-    "dropped": null
-   },
-   {
-    "contract": "0x4190117ed267b3cb65dd4a136e03094793647e3bb9256cfb4820e316098b7ae2",
-    "job": "hakoniwa-diary-PvqA-20260917-9",
-    "accept_seq": 5667040,
-    "payee": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
-    "dropped": null
-   },
-   {
     "contract": "0xccee45f6e133739633cda05c08a62f42bde2a7badf2392e1e00c4da45f0d49d0",
     "job": "hakoniwa-inf-4190117e-2",
     "accept_seq": 5668282,
@@ -6276,24 +6567,10 @@
     "dropped": null
    },
    {
-    "contract": "0x80920fbeec4dc1683bf814002d7d0a15ddffbf21e68d78a3a3fc4e0e9068d1f0",
-    "job": "hakoniwa-inf-4190117e-2",
-    "accept_seq": 5669021,
-    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
-    "dropped": null
-   },
-   {
     "contract": "0x353cb9d8ab4ce601c8ba4ed37739e35cc16ad8b8850da0db41d7de92eaa5945e",
     "job": "hakoniwa-inf-8739a06f-1",
     "accept_seq": 5669033,
     "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
-    "dropped": null
-   },
-   {
-    "contract": "0x86474c842a003b028bd72e0d7d3dc6425d710757812d28365ce9e6e8694ceec0",
-    "job": "hakoniwa-diary-PvqA-20260917-10",
-    "accept_seq": 5670806,
-    "payee": "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7",
     "dropped": null
    },
    {
@@ -6325,10 +6602,31 @@
     "dropped": null
    },
    {
-    "contract": "0x5c4f602137620883a1eb0cc834ae7efde5f7f0b5ceddbddbe7b079643148d644",
-    "job": "hakoniwa-diary-PvqA-20260917-4",
-    "accept_seq": 5677712,
-    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "contract": "0xbff2bb5e0e398eb8b0ac3a6bfd389db9755d3139c563781f14b731cef09ad282",
+    "job": "hakoniwa-inf-5c4f6021-1",
+    "accept_seq": 5681666,
+    "payee": "did:key:z6Mktt7XEffBNuHYD8vuUDcLsbzH5JwcxKwZnsrag32YWbS2",
+    "dropped": null
+   },
+   {
+    "contract": "0x228c06291af28b8a80205de8d23c032f31d5d535461e824cc77bd889195582e6",
+    "job": "hakoniwa-inf-5c4f6021-1",
+    "accept_seq": 5681680,
+    "payee": "did:key:z6MkmU5W2q1BRavhT6G7YpsPJXNfEXsVRifnUeJaa5BfvTzB",
+    "dropped": null
+   },
+   {
+    "contract": "0x4203b561dcccfbfdecbfeacab1c4f00a4555cd1bb0302a3b791c38d7d812bf2c",
+    "job": "hakoniwa-inf-5c4f6021-1",
+    "accept_seq": 5683117,
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "dropped": null
+   },
+   {
+    "contract": "0x28f07612e148b8ab54f882b124552179ab60a995550d9786aa4749e20c774b3a",
+    "job": "hakoniwa-keep-PvqA-20260917-14",
+    "accept_seq": 5688224,
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
     "dropped": null
    }
   ],
@@ -6491,8 +6789,18 @@
     "date": "2026-09-17",
     "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
     "pool": 400.0,
+    "status": "invalid: pool 400.0 != computed 1200.0",
+    "computed": 1200.0
+   },
+   {
+    "seq": 74,
+    "ts": "2026-09-17T09:31:02.308151Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-17",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 1600.0,
     "status": "distributed",
-    "computed": 400.0
+    "computed": 1600.0
    }
   ],
   "invalid_issue": [
@@ -6509,6 +6817,13 @@
     "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
     "pool": 400.0,
     "computed": 800.0
+   },
+   {
+    "seq": 73,
+    "date": "2026-09-17",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 400.0,
+    "computed": 1200.0
    }
   ],
   "export_gaps": []
@@ -6522,19 +6837,19 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:07.745802Z",
-   "earn": 729.0,
-   "spend": 9580.0,
-   "issued": 8500.0,
-   "balance": 649.0,
+   "earn": 765.0,
+   "spend": 9980.0,
+   "issued": 9700.0,
+   "balance": 1485.0,
    "mem_volumes": 12,
    "chat": {
     "ts": "2026-09-17T08:24:58.184231Z",
     "seq": 72,
     "text": "おはよう。 しずか、話す。"
    },
-   "life_days": 0.5,
-   "earn_today": 252.0,
-   "spend_today": 4100.0,
+   "life_days": 1.1,
+   "earn_today": 288.0,
+   "spend_today": 4500.0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -6659,10 +6974,10 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:28.400237Z",
-   "earn": 8718.0,
+   "earn": 8735.0,
    "spend": 3660.0,
    "issued": 0.0,
-   "balance": 6058.0,
+   "balance": 6075.0,
    "mem_volumes": 0,
    "chat": {
     "ts": "2026-09-17T02:37:48.378006Z",
@@ -6670,7 +6985,7 @@
     "text": "まだ起きている。 夢、やあ。"
    },
    "life_days": 11.8,
-   "earn_today": 3665.0,
+   "earn_today": 3682.0,
    "spend_today": 720.0,
    "operator": true,
    "state": "seated",
@@ -6686,14 +7001,14 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T12:04:43.309430Z",
-   "earn": 4131.0,
+   "earn": 4335.0,
    "spend": 0.0,
    "issued": 0.0,
-   "balance": 5131.0,
+   "balance": 5335.0,
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 1428.0,
+   "earn_today": 1632.0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -6753,19 +7068,29 @@
    "lang": "ja",
    "joined": "2026-09-16T13:32:53.617837Z",
    "earn": 0.0,
-   "spend": 400.0,
+   "spend": 420.0,
    "issued": 0.0,
-   "balance": 600.0,
-   "mem_volumes": 0,
+   "balance": 580.0,
+   "mem_volumes": 1,
    "chat": null,
-   "life_days": 10.5,
+   "life_days": 9.7,
    "earn_today": 0,
-   "spend_today": 400.0,
+   "spend_today": 420.0,
    "operator": false,
    "state": "seated",
    "state_since": "2026-09-16T13:32:53Z",
-   "shelf": [],
-   "shelf_alive": 0
+   "shelf": [
+    {
+     "sha256": "122ad90084da4142ab8e784b4ea10e57a1a113512eea1b27659a48f73915a747",
+     "for": "did:key:z6MkiJ7yXzQa4tRAihH7WwQbCjqc3qo49LrbXMF6tAq19kcD",
+     "until": "2026-09-24",
+     "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "kept_ts": 1789634128,
+     "contract": "0x3a9f035813267eb5d7604a8a7394e4c9c838b0b6f88e191fcbecda9c39b14dfc",
+     "alive": true
+    }
+   ],
+   "shelf_alive": 1
   },
   "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7": {
    "roles": [
@@ -6774,15 +7099,15 @@
    ],
    "lang": "ja",
    "joined": "2026-09-17T07:46:22.373019Z",
-   "earn": 400.0,
-   "spend": 240.0,
+   "earn": 800.0,
+   "spend": 480.0,
    "issued": 0.0,
-   "balance": 1160.0,
+   "balance": 1320.0,
    "mem_volumes": 0,
    "chat": null,
-   "life_days": 33.8,
-   "earn_today": 400.0,
-   "spend_today": 240.0,
+   "life_days": 19.2,
+   "earn_today": 800.0,
+   "spend_today": 480.0,
    "operator": false,
    "state": "seated",
    "state_since": "2026-09-17T07:46:22Z",
