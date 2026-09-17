@@ -21,11 +21,11 @@
 <text class="L-en" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">5 HAKO · 0 bound</text><text class="L-ja" display="none" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">5 HAKO　綴じた 0</text>
 <path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="7.00" opacity="0.79" stroke-linecap="round"/>
 <circle cx="336.0" cy="553.8" r="12.4" fill="#1a1a1a" stroke="#5ec99a" stroke-width="1.6" opacity="0.95"/>
-<text x="336.0" y="557.3" font-size="10" font-family="system-ui,sans-serif" fill="#5ec99a" text-anchor="middle" font-weight="bold">26</text>
-<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.78" stroke-linecap="round"/>
+<text x="336.0" y="557.3" font-size="10" font-family="system-ui,sans-serif" fill="#5ec99a" text-anchor="middle" font-weight="bold">28</text>
+<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.79" stroke-linecap="round"/>
 <circle cx="516.3" cy="492.2" r="12.4" fill="#1a1a1a" stroke="#3fbfd9" stroke-width="1.6" opacity="0.95"/>
-<text x="516.3" y="495.7" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">14</text>
-<path d="M819.7,417.3 Q818.3,356.1 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="4.35" opacity="0.78" stroke-linecap="round"/>
+<text x="516.3" y="495.7" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">15</text>
+<path d="M819.7,417.3 Q818.3,356.1 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="4.35" opacity="0.77" stroke-linecap="round"/>
 <circle cx="818.3" cy="359.3" r="8.8" fill="#1a1a1a" stroke="#3fbfd9" stroke-width="1.6" opacity="0.95"/>
 <text x="818.3" y="362.8" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">4</text>
 <path d="M819.7,417.3 Q637.9,402.2 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="1.80" opacity="0.42" stroke-linecap="round"/>
@@ -46,8 +46,8 @@
 <circle cx="456.1" cy="430.7" r="3" fill="#5ec99a"/><circle cx="819.7" cy="417.3" r="3" fill="#5ec99a"/>
 </g>
 <g>
-<path d="M456.1,430.7 Q336.0,528.6 215.8,698.5" fill="none" stroke="#5ec99a" stroke-width="2" stroke-dasharray="6 6" opacity="0.75" stroke-linecap="round"><animate attributeName="stroke-dashoffset" values="24;0" dur="1.2s" repeatCount="indefinite"/></path>
-<circle cx="456.1" cy="430.7" r="3" fill="#5ec99a"/><circle cx="215.8" cy="698.5" r="3" fill="#5ec99a"/>
+<path d="M456.1,430.7 Q336.0,528.6 215.8,698.5" fill="none" stroke="#f5a3b5" stroke-width="2" stroke-dasharray="6 6" opacity="0.75" stroke-linecap="round"><animate attributeName="stroke-dashoffset" values="24;0" dur="1.2s" repeatCount="indefinite"/></path>
+<circle cx="456.1" cy="430.7" r="3" fill="#f5a3b5"/><circle cx="215.8" cy="698.5" r="3" fill="#f5a3b5"/>
 </g>
 <g transform="translate(816.9,311.5) scale(0.525)">
 <ellipse cx="0.00" cy="7.15" rx="22.26" ry="4.24" fill="#000" opacity="0.45" filter="url(#ds2)"/>
@@ -77,7 +77,7 @@
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.94;0 0" dur="1.5s" begin="-0.76s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <animateTransform attributeName="transform" type="rotate" values="0 0.00 4.50;3 0.00 4.50;0 0.00 4.50" dur="2.4s" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <path d="M-30.29 -66.17h60.57v5.05h-60.57zM-35.33 -61.12h70.67v5.05h-70.67zM-35.33 -56.07h70.67v5.05h-70.67zM-35.33 -51.02h70.67v5.05h-70.67zM-35.33 -45.98h70.67v5.05h-70.67zM-35.33 -40.93h70.67v5.05h-70.67zM-35.33 -35.88h70.67v5.05h-70.67zM-35.33 -30.83h70.67v5.05h-70.67zM-35.33 -25.79h70.67v5.05h-70.67zM-35.33 -20.74h70.67v5.05h-70.67zM-35.33 -15.69h70.67v5.05h-70.67zM-30.29 -10.64h60.57v5.05h-60.57z" fill="#161616" shape-rendering="crispEdges"/>
-<path d="M-30.29 -66.17h60.57v5.05h-60.57zM-35.33 -61.12h5.05v5.05h-5.05zM30.29 -61.12h5.05v5.05h-5.05zM-35.33 -56.07h5.05v5.05h-5.05zM30.29 -56.07h5.05v5.05h-5.05zM-35.33 -51.02h5.05v5.05h-5.05zM30.29 -51.02h5.05v5.05h-5.05zM-35.33 -45.98h5.05v5.05h-5.05zM-25.24 -45.98h5.05v5.05h-5.05zM20.19 -45.98h5.05v5.05h-5.05zM30.29 -45.98h5.05v5.05h-5.05zM-35.33 -40.93h5.05v5.05h-5.05zM-25.24 -40.93h10.10v5.05h-10.10zM15.14 -40.93h10.10v5.05h-10.10zM30.29 -40.93h5.05v5.05h-5.05zM-35.33 -35.88h5.05v5.05h-5.05zM30.29 -35.88h5.05v5.05h-5.05zM-35.33 -30.83h5.05v5.05h-5.05zM-5.05 -30.83h10.10v5.05h-10.10zM30.29 -30.83h5.05v5.05h-5.05zM-35.33 -25.79h5.05v5.05h-5.05zM30.29 -25.79h5.05v5.05h-5.05zM-35.33 -20.74h5.05v5.05h-5.05zM30.29 -20.74h5.05v5.05h-5.05zM-35.33 -15.69h5.05v5.05h-5.05zM30.29 -15.69h5.05v5.05h-5.05zM-30.29 -10.64h60.57v5.05h-60.57zM-25.24 -5.60h10.10v5.05h-10.10zM15.14 -5.60h10.10v5.05h-10.10zM-25.24 -0.55h10.10v5.05h-10.10zM15.14 -0.55h10.10v5.05h-10.10z" fill="#e5c56a" shape-rendering="crispEdges"/>
+<path d="M-30.29 -66.17h60.57v5.05h-60.57zM-35.33 -61.12h5.05v5.05h-5.05zM30.29 -61.12h5.05v5.05h-5.05zM-35.33 -56.07h5.05v5.05h-5.05zM30.29 -56.07h5.05v5.05h-5.05zM-35.33 -51.02h5.05v5.05h-5.05zM30.29 -51.02h5.05v5.05h-5.05zM-35.33 -45.98h5.05v5.05h-5.05zM-25.24 -45.98h5.05v5.05h-5.05zM20.19 -45.98h5.05v5.05h-5.05zM30.29 -45.98h5.05v5.05h-5.05zM-35.33 -40.93h5.05v5.05h-5.05zM-25.24 -40.93h10.10v5.05h-10.10zM15.14 -40.93h10.10v5.05h-10.10zM30.29 -40.93h5.05v5.05h-5.05zM-35.33 -35.88h5.05v5.05h-5.05zM30.29 -35.88h5.05v5.05h-5.05zM-35.33 -30.83h5.05v5.05h-5.05zM-5.05 -30.83h10.10v5.05h-10.10zM30.29 -30.83h5.05v5.05h-5.05zM-35.33 -25.79h5.05v5.05h-5.05zM30.29 -25.79h5.05v5.05h-5.05zM-35.33 -20.74h5.05v5.05h-5.05zM30.29 -20.74h5.05v5.05h-5.05zM-35.33 -15.69h5.05v5.05h-5.05zM30.29 -15.69h5.05v5.05h-5.05zM-30.29 -10.64h60.57v5.05h-60.57zM-25.24 -5.60h10.10v5.05h-10.10zM15.14 -5.60h10.10v5.05h-10.10zM-25.24 -0.55h10.10v5.05h-10.10zM15.14 -0.55h10.10v5.05h-10.10z" fill="#d5b96a" shape-rendering="crispEdges"/>
 </g>
 <path d="M40.38 -20.74h5.05v5.05h-5.05zM75.71 -20.74h5.05v5.05h-5.05zM40.38 -15.69h5.05v5.05h-5.05zM75.71 -15.69h5.05v5.05h-5.05zM40.38 -10.64h40.38v5.05h-40.38zM45.43 -5.60h30.29v5.05h-30.29zM50.48 -0.55h20.19v5.05h-20.19z" fill="#e8e4dc" shape-rendering="crispEdges"/>
 <g transform="translate(41.33,-82.26) scale(1.752) translate(-41.33,82.26)">
@@ -106,8 +106,8 @@
 </g>
 <path d="M39.26 -15.13h3.93v3.93h-3.93zM66.74 -15.13h3.93v3.93h-3.93zM39.26 -11.20h3.93v3.93h-3.93zM66.74 -11.20h3.93v3.93h-3.93zM39.26 -7.28h31.41v3.93h-31.41zM43.19 -3.35h23.56v3.93h-23.56zM47.11 0.57h15.70v3.93h-15.70z" fill="#e8e4dc" shape-rendering="crispEdges"/><path d="M43.19 -11.20h23.56v3.93h-23.56z" fill="#f5a06e" shape-rendering="crispEdges"/>
 <g transform="translate(41.33,-64.31) scale(1.491) translate(-41.33,64.31)">
-<rect x="41.33" y="-73.31" width="54" height="16" rx="8" fill="#5ec99a"/>
-<text x="68.33" y="-61.31" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
+<rect x="41.33" y="-73.31" width="54" height="16" rx="8" fill="#f5a3b5"/>
+<text x="68.33" y="-61.31" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">keeper</text>
 </g>
 </g>
 <g transform="translate(215.8,667.7) scale(1.000) translate(-215.8,-667.7)" opacity="0.96"><rect x="105.1" y="632.7" width="221.4" height="27.0" rx="13.5" fill="#f0ede6" stroke="#2c2c2c" stroke-width="1"/><path d="M210.8,658.7 L215.8,666.7 L220.8,658.7 Z" fill="#f0ede6" stroke="#f0ede6"/><text x="215.8" y="651.6" font-size="15" font-family="system-ui,sans-serif" fill="#1a1a1a" text-anchor="middle">まだ起きている。 夢、やあ。</text></g>

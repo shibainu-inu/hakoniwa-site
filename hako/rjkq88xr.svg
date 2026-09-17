@@ -7,7 +7,7 @@
 </g>
 <path d="M39.26 6.87h3.93v3.93h-3.93zM66.74 6.87h3.93v3.93h-3.93zM39.26 10.80h3.93v3.93h-3.93zM66.74 10.80h3.93v3.93h-3.93zM39.26 14.72h31.41v3.93h-31.41zM43.19 18.65h23.56v3.93h-23.56zM47.11 22.57h15.70v3.93h-15.70z" fill="#e8e4dc" shape-rendering="crispEdges"/><path d="M43.19 10.80h23.56v3.93h-23.56z" fill="#f5a06e" shape-rendering="crispEdges"/>
 <g transform="translate(41.33,-42.31) scale(0.625) translate(-41.33,42.31)">
-<rect x="41.33" y="-51.31" width="54" height="16" rx="8" fill="#5ec99a"/>
-<text x="68.33" y="-39.31" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
+<rect x="41.33" y="-51.31" width="54" height="16" rx="8" fill="#f5a3b5"/>
+<text x="68.33" y="-39.31" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">keeper</text>
 </g></g>
 </svg>
