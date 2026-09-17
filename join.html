@@ -122,8 +122,9 @@ html[data-lang="en"] #room-say .L-en,html[data-lang="ja"] #room-say .L-ja{displa
 #figure-art.born{animation:born .5s steps(2,end) 1 both} @keyframes born{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){#figure-art.born{animation:none}}
 .room-nav{display:none}
-/* 決定 88: ナビは部屋のタイトルの下に、左揃え（決定 85 の画面の下に付いてくる形はやめた） */
-body.in-room .room-nav{display:flex;justify-content:flex-start;gap:4px;margin:0 0 8px -10px;flex-wrap:wrap}
+/* 決定 89: WORK / MEMORY / BOOKS / GARDEN は部屋の最後、footer の文章のすぐ上（中央、上に細い線） */
+body.in-room #v-room{flex:1;display:flex;flex-direction:column}
+body.in-room .room-nav{display:flex;justify-content:center;gap:4px;margin-top:auto;padding:6px 0;border-top:1px solid #2c2c2c}
 .room-nav button,.room-nav a{background:none;border:none;color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;border-bottom:2px solid transparent;border-radius:0}
 .room-nav .on{color:#f0ede6;border-bottom-color:#f0ede6}
 .small{font-size:12px} details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
@@ -207,10 +208,8 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
     <details class="did"><summary id="did-short" class="muted small"></summary>
       <div class="did-pop"><code id="did-full"></code><p><button id="btn-copy-did" class="small"><span class="L-en">Copy</span><span class="L-ja">コピー</span></button>
       <a id="have-link" class="small" href="#" target="_blank" rel="noopener"><span class="L-en">Public page</span><span class="L-ja">公開ページ</span></a></p></div></details></div>
-  <!-- 決定 88: ナビは部屋のタイトルの下、左揃え -->
-  <nav class="room-nav" aria-label="room">
-    <button data-go="work" class="on">WORK</button><button data-go="memory">MEMORY</button><button data-go="books">BOOKS</button><a href="garden.html">GARDEN</a>
-  </nav>
+  <!-- 決定 89: タイトルの下は ITEMS / GARDEN / LIBRARY（Public View と同じ） -->
+  <nav class="page-nav" aria-label="links"><a href="items.html"><span class="L-en">Items</span><span class="L-ja">アイテム</span></a><a href="garden.html"><span class="L-en">Garden</span><span class="L-ja">庭</span></a><a href="library.html"><span class="L-en">Library</span><span class="L-ja">図書館</span></a></nav>
   <div class="room-stage" id="room-stage">
     <img id="room-img" alt="" width="480" height="360">
     <div id="room-hako" aria-hidden="true"></div>
@@ -276,6 +275,10 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
   </div>
 
 
+  <!-- 決定 89: WORK / MEMORY / BOOKS / GARDEN は footer の文章の上 -->
+  <nav class="room-nav" aria-label="room">
+    <button data-go="work" class="on">WORK</button><button data-go="memory">MEMORY</button><button data-go="books">BOOKS</button><a href="garden.html">GARDEN</a>
+  </nav>
 </section>
 
 <div id="unlock" hidden>
