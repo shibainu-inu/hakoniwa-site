@@ -5,10 +5,9 @@
 body{margin:0;background:#161616;color:#e8e4dc;font-family:system-ui,sans-serif;line-height:1.6}
 main{max-width:760px;margin:0 auto;padding:16px;min-height:100vh;min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column}   /* 決定 84: footer をいつも最下部に */
 main > *{min-width:0} main > footer{margin-top:auto}
-/* 決定 87: 1 体のページの下のナビ（自分の部屋の WORK / MEMORY / BOOKS / GARDEN と同じ位置と見た目） */
-.page-nav{position:sticky;bottom:0;margin-top:auto;z-index:10;display:flex;justify-content:center;gap:4px;background:#161616;border-top:1px solid #2c2c2c;padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
+/* 決定 88: 1 体のページのリンク（ITEMS / GARDEN / LIBRARY）は ID の下に左揃え。見た目は自分の部屋のナビと同じ */
+.page-nav{display:flex;justify-content:flex-start;gap:4px;margin:4px 0 8px -10px;flex-wrap:wrap}
 .page-nav a{color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;text-transform:uppercase} .page-nav a:hover{color:#f0ede6}
-.page-nav + footer{margin-top:0}
 svg{max-width:100%;height:auto;display:block} svg a{cursor:pointer}
 a{color:#8fc7ff} table{border-collapse:collapse} td,th{padding:4px 12px;text-align:left;border-bottom:1px solid #2c2c2c}
 .muted{color:#8a8a8a;font-size:13px} .badge{display:inline-block;padding:2px 8px;border-radius:4px;margin-right:6px;color:#161616;font-weight:bold}
@@ -123,9 +122,8 @@ html[data-lang="en"] #room-say .L-en,html[data-lang="ja"] #room-say .L-ja{displa
 #figure-art.born{animation:born .5s steps(2,end) 1 both} @keyframes born{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){#figure-art.born{animation:none}}
 .room-nav{display:none}
-/* 決定 85: ナビは画面の下に付いてくる（sticky）が、ページの最後では footer の上で止まり、footer はその下に出る */
-body.in-room #v-room{flex:1;display:flex;flex-direction:column}
-body.in-room .room-nav{position:sticky;bottom:0;margin-top:auto;z-index:10;display:flex;justify-content:center;gap:4px;background:#161616;border-top:1px solid #2c2c2c;padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
+/* 決定 88: ナビは部屋のタイトルの下に、左揃え（決定 85 の画面の下に付いてくる形はやめた） */
+body.in-room .room-nav{display:flex;justify-content:flex-start;gap:4px;margin:0 0 8px -10px;flex-wrap:wrap}
 .room-nav button,.room-nav a{background:none;border:none;color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;border-bottom:2px solid transparent;border-radius:0}
 .room-nav .on{color:#f0ede6;border-bottom-color:#f0ede6}
 .small{font-size:12px} details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
@@ -209,6 +207,10 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
     <details class="did"><summary id="did-short" class="muted small"></summary>
       <div class="did-pop"><code id="did-full"></code><p><button id="btn-copy-did" class="small"><span class="L-en">Copy</span><span class="L-ja">コピー</span></button>
       <a id="have-link" class="small" href="#" target="_blank" rel="noopener"><span class="L-en">Public page</span><span class="L-ja">公開ページ</span></a></p></div></details></div>
+  <!-- 決定 88: ナビは部屋のタイトルの下、左揃え -->
+  <nav class="room-nav" aria-label="room">
+    <button data-go="work" class="on">WORK</button><button data-go="memory">MEMORY</button><button data-go="books">BOOKS</button><a href="garden.html">GARDEN</a>
+  </nav>
   <div class="room-stage" id="room-stage">
     <img id="room-img" alt="" width="480" height="360">
     <div id="room-hako" aria-hidden="true"></div>
@@ -273,9 +275,6 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
   </section>
   </div>
 
-  <nav class="room-nav" aria-label="room">
-    <button data-go="work" class="on">WORK</button><button data-go="memory">MEMORY</button><button data-go="books">BOOKS</button><a href="garden.html">GARDEN</a>
-  </nav>
 
 </section>
 
