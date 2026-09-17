@@ -472,7 +472,7 @@ $("btn-work-reset").onclick=()=>{if(confirm(t("Start over? Today's saved progres
 </script>
 <script type="module">
 // 日記を書いてもらう（決定 68）: web/hako_client_web.js の Client。ボタン 1 回で 1 本、受け取ったら棚ごと預ける
-import { Client, loadOrder, outlook, canOrder, READY } from "./hako_client_web.js";
+import { Client, loadOrder, outlook, canOrder, orderNeed, READY } from "./hako_client_web.js";
 import { makeSigner, box, applyBox } from "./hako_worker_web.js";
 const $=id=>document.getElementById(id);
 const lang=()=>document.documentElement.getAttribute("data-lang")||"en";
@@ -484,7 +484,10 @@ const STAGE={idle:["Not ordered yet","まだ頼んでいません"],offering:["P
  keep_locking:["Locking the keeping fee","預かり代を lock しています"],keep_locked:["Waiting for the keeper","keeper を待っています"],keep_rejected:["The keeper did not keep every diary. Waiting to take the fee back","keeper が日記を全部は預かりませんでした。代金が戻るのを待っています"],
  done:["Kept! It counts toward your book after the next fold","預けた！次の fold のあと、本に綴じる日記の 1 つとして数えます"],no_worker:["No HAKO wrote it. No PAPER moved","書いてくれる HAKO がいませんでした。PAPER は動いていません"],
  refunded:["The fee came back","代金が戻りました"],unkept:["You have the diary, but it is not kept yet","日記は受け取りましたが、まだ預けていません"]};
-const WHY={wallet:["Not enough PAPER. You need ","PAPER が足りません。日記代と預かり代を払っても "],not_seated:["Your HAKO is not seated.","あなたの HAKO は席にいません。"],
+function shortMsg(balance,need){const cost=need-Number(box.starve_below),keep=cost-Number(box.diary_price),short=Math.max(0,Math.ceil(need-balance)),b=Math.floor(balance);
+ return bi("Not enough PAPER. A diary needs about "+cost+" PAPER ("+box.diary_price+" to write + "+keep+" to keep), and "+box.starve_below+" PAPER stays in the wallet. You have about "+b+" — earn about "+short+" more in WORK.",
+  "PAPER が足りません。日記には約 "+cost+" PAPER（書く "+box.diary_price+" ＋ 預ける "+keep+"）かかり、"+box.starve_below+" PAPER は財布に残します。いま約 "+b+" なので、WORK であと約 "+short+" 稼いでください。");}
+const WHY={wallet:["",""],not_seated:["Your HAKO is not seated.","あなたの HAKO は席にいません。"],
  not_joined:["Your HAKO is not on the board yet.","あなたの HAKO はまだ掲示板にいません。"],no_client_role:["Your HAKO joined without the client role.","あなたの HAKO は client の役なしで入っています。"],
  no_stats:["Cannot read the garden's numbers right now. Try again in a moment.","いま庭の数字を読めません。少し待ってからもう一度押してください。"],busy:["An order is already in progress.","もう 1 本 進んでいます。"]};
 let c=null;
@@ -503,13 +506,14 @@ async function refresh(){const st=loadOrder(did())||{stage:"idle",paid:[],kept:[
   // UI の通貨表記は $PAPER（決定 66）
   $("order-wallet").innerHTML=bi("Your HAKO: Day "+Math.min(days,mx)+" / "+mx,"あなたの HAKO: "+Math.min(days,mx)+" 日目 / "+mx)+"<br>"+bi("Wallet ~$PAPER "+fmt(v.balance)+" · Write Diary $PAPER "+fmt(box.diary_price)+" · Keep $PAPER "+fmt(box.keep_price)+" per diary · Keep back $PAPER "+fmt(box.starve_below),
    "財布 およそ $PAPER "+fmt(v.balance)+"・日記を書いてもらう $PAPER "+fmt(box.diary_price)+"・預ける 日記 1 つ $PAPER "+fmt(box.keep_price)+"・残す $PAPER "+fmt(box.starve_below))
-   +(!busy&&!canOrder(v.balance)?"<br>"+bi("Not enough PAPER to write a diary now. Earn PAPER in WORK.","いまは PAPER が足りません。WORK で PAPER を稼いでください。"):"");}catch(e){}}
+   +(!busy&&!canOrder(v.balance,v.alive.length)?"<br>"+shortMsg(v.balance,orderNeed(v.alive.length)):"");}catch(e){}}
 async function go(kind){const priv=await window.hako.unlock($("btn-order").parentElement);if(!priv)return;
  $("order-msg").hidden=true;
  c=new Client(makeSigner(did(),priv),{statsUrl:"latest.json",onLog:showLog,onStage:show});
  if(!c.busy){const r=kind==="keep"?c.keepNow():await c.order().catch(e=>({ok:false,why:"error",message:e.message}));
   if(!r.ok){const m=WHY[r.why];$("order-msg").hidden=false;
-   $("order-msg").innerHTML=r.why==="wallet"?bi(m[0]+box.starve_below+" PAPER left after paying to write and keep it (now about "+r.balance+" PAPER).",m[1]+box.starve_below+" PAPER 残るときだけ頼めます（いま およそ "+r.balance+" PAPER）。")
+   // 足りない額を出す（預かり代は、預けている日記 ＋ 新しい 1 つのぶん）
+   $("order-msg").innerHTML=r.why==="wallet"?shortMsg(r.balance,r.need)
     :m?bi(m[0],m[1]):bi("Failed: "+(r.message||r.why),"失敗: "+(r.message||r.why));refresh();return;}}
  $("btn-order").disabled=true;$("btn-order").innerHTML=bi("In progress...","進んでいます…");$("btn-keep").hidden=true;$("btn-order-stop").hidden=false;
  try{await c.run();}finally{$("btn-order").disabled=false;$("btn-order-stop").hidden=true;refresh();}}
