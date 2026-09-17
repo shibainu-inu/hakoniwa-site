@@ -96,21 +96,13 @@ footer.compact{margin-top:20px;font-size:12px} footer.compact summary{cursor:poi
 .grads{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start} .grad{width:200px;text-align:center} .grad svg{width:100%;height:auto}
 svg.thumb{display:inline-block;width:32px;height:32px;vertical-align:middle;margin-right:6px}
 
-/* 決定 74（R1）: 入場ゲートと部屋。静かな UI、カードにしない */
-[hidden]{display:none!important}   /* display を指定した要素でも hidden を効かせる（部屋の絵が壊れた画像の枠で出ていた） */
-.gate{max-width:30em;margin:8px auto 0;text-align:center} .gate h1{margin:6px 0 10px;font-size:1.6em} .gate .lead{color:#b9b3a8;line-height:1.8;margin:0 0 18px}
-.gate p{margin:0 0 14px} .gate label.small{display:inline-flex;gap:6px;align-items:center;margin-top:6px} .gate input[type=password],.gate select{font-size:16px;padding:8px 10px;min-width:16em} .small{font-size:12px} .center{text-align:center}
-.gate details.how{text-align:left;margin:18px 0 0}
-details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
-.figure{text-align:center;margin:18px 0 6px} .figure svg{display:inline-block;image-rendering:pixelated} .figure p{margin:8px 0 0}
-button{background:#2a2a2a;color:#e8e4dc;border:1px solid #444;border-radius:2px;padding:8px 14px;cursor:pointer;font-size:14px} button:disabled{opacity:.5}
-button.primary{background:transparent;border:2px solid #f0ede6;color:#f0ede6;padding:10px 22px;letter-spacing:1px;box-shadow:3px 3px 0 #3a3833}
-button.primary:hover{background:#f0ede6;color:#111}
-button.danger{border-color:#a04040;color:#f07c7c} input,select{background:#1e1e1e;color:#e8e4dc;border:1px solid #444;border-radius:2px;padding:4px 6px}
-code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
+/* 部屋（決定 75〜79）。自分の部屋（join.html）と、ほかの HAKO の部屋（hako/*.html）で共通 */
+[hidden]{display:none!important}
 .room-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap} .room-head h1{margin:8px 0}
 details.did{position:relative} details.did summary{list-style:none;cursor:pointer;text-decoration:underline dotted} details.did summary::-webkit-details-marker{display:none}
 .did-pop{position:absolute;right:0;z-index:5;background:#1b1b1b;border:1px solid #333;padding:10px;max-width:80vw;word-break:break-all}
+.panels{margin:14px 0 0;min-height:10em} .panel{display:none} .panel.on{display:block}
+.step-k{margin:0 0 6px;font-size:12px;letter-spacing:3px;color:#8a857c} .stage{font-size:13px;color:#8a857c;margin:8px 0}   /* 段の名前は吹き出しが主。ここは控えめに */
 /* 決定 75: 箱部屋（2.5D、480×360）を幅いっぱいに。HAKO は小さく、部屋の中を歩く。吹き出しは HAKO の頭の上について動く */
 .room-stage{position:relative;margin:4px -16px 0;max-width:640px;aspect-ratio:4/3} #room-img{display:block;width:100%;height:100%;image-rendering:pixelated}
 #room-hako{position:absolute;transform:translate(-50%,-100%);image-rendering:pixelated;pointer-events:none}
@@ -125,15 +117,29 @@ html[data-lang="en"] #room-say .L-en,html[data-lang="ja"] #room-say .L-ja{displa
 .act{margin:4px 0 12px;color:#d8d3ca;line-height:1.7} .caution{color:#e0b07a}
 #figure-art.born{animation:born .5s steps(2,end) 1 both} @keyframes born{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){#figure-art.born{animation:none}}
-.notice{border-top:1px solid #242424;padding:12px 0;margin:12px 0}
-.panels{margin:14px 0 0;min-height:10em} .panel{display:none} .panel.on{display:block}
-.step-k{margin:0 0 6px;font-size:12px;letter-spacing:3px;color:#8a857c} .stage{font-size:13px;color:#8a857c;margin:8px 0}   /* 段の名前は吹き出しが主。ここは控えめに */
-.cells i{display:inline-block;width:14px;height:14px;margin-right:3px;border:1px solid #555;vertical-align:middle} .cells i.on{background:#f5a3b5;border-color:#f5a3b5}
 .room-nav{display:none}
 body.in-room .room-nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;justify-content:center;gap:4px;background:#161616;border-top:1px solid #2c2c2c;padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
 body.in-room main{padding-bottom:64px}
 .room-nav button,.room-nav a{background:none;border:none;color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;border-bottom:2px solid transparent;border-radius:0}
 .room-nav .on{color:#f0ede6;border-bottom-color:#f0ede6}
+body.in-room footer{display:none}   /* 決定 79: 固定ナビの上に footer が来ないように。免責は板の中の About に */
+.small{font-size:12px} details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
+
+/* 決定 74（R1）: 入場ゲートと部屋。静かな UI、カードにしない */
+[hidden]{display:none!important}   /* display を指定した要素でも hidden を効かせる（部屋の絵が壊れた画像の枠で出ていた） */
+.gate{max-width:30em;margin:8px auto 0;text-align:center} .gate h1{margin:6px 0 10px;font-size:1.6em} .gate .lead{color:#b9b3a8;line-height:1.8;margin:0 0 18px}
+.gate p{margin:0 0 14px} .gate label.small{display:inline-flex;gap:6px;align-items:center;margin-top:6px} .gate input[type=password],.gate select{font-size:16px;padding:8px 10px;min-width:16em} .small{font-size:12px} .center{text-align:center}
+.gate details.how{text-align:left;margin:18px 0 0}
+details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
+.figure{text-align:center;margin:18px 0 6px} .figure svg{display:inline-block;image-rendering:pixelated} .figure p{margin:8px 0 0}
+button{background:#2a2a2a;color:#e8e4dc;border:1px solid #444;border-radius:2px;padding:8px 14px;cursor:pointer;font-size:14px} button:disabled{opacity:.5}
+button.primary{background:transparent;border:2px solid #f0ede6;color:#f0ede6;padding:10px 22px;letter-spacing:1px;box-shadow:3px 3px 0 #3a3833}
+button.primary:hover{background:#f0ede6;color:#111}
+button.danger{border-color:#a04040;color:#f07c7c} input,select{background:#1e1e1e;color:#e8e4dc;border:1px solid #444;border-radius:2px;padding:4px 6px}
+code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
+.notice{border-top:1px solid #242424;padding:12px 0;margin:12px 0}
+.cells i{display:inline-block;width:14px;height:14px;margin-right:3px;border:1px solid #555;vertical-align:middle} .cells i.on{background:#f5a3b5;border-color:#f5a3b5}
+
 
 </style></head><body><main>
 <div class="top"><a class="brand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 28" width="32" height="28" role="img" aria-hidden="true"><path d="M4.00 0.00h24.00v2.00h-24.00zM2.00 2.00h28.00v2.00h-28.00zM0.00 4.00h32.00v2.00h-32.00zM0.00 6.00h4.00v2.00h-4.00zM28.00 6.00h4.00v2.00h-4.00zM0.00 8.00h4.00v2.00h-4.00zM8.00 8.00h4.00v2.00h-4.00zM20.00 8.00h4.00v2.00h-4.00zM28.00 8.00h4.00v2.00h-4.00zM0.00 10.00h4.00v2.00h-4.00zM8.00 10.00h4.00v2.00h-4.00zM20.00 10.00h4.00v2.00h-4.00zM28.00 10.00h4.00v2.00h-4.00zM0.00 12.00h4.00v2.00h-4.00zM28.00 12.00h4.00v2.00h-4.00zM0.00 14.00h4.00v2.00h-4.00zM28.00 14.00h4.00v2.00h-4.00zM0.00 16.00h4.00v2.00h-4.00zM28.00 16.00h4.00v2.00h-4.00zM0.00 18.00h32.00v2.00h-32.00zM2.00 20.00h28.00v2.00h-28.00zM4.00 22.00h24.00v2.00h-24.00zM6.00 24.00h4.00v2.00h-4.00zM22.00 24.00h4.00v2.00h-4.00zM6.00 26.00h4.00v2.00h-4.00zM22.00 26.00h4.00v2.00h-4.00z" fill="#f0ede6" shape-rendering="crispEdges"/></svg><b>z6 HAKONIWA</b></a><span class="lang"><a href="#" data-set="en">ENG</a>｜<a href="#" data-set="ja">JA</a></span>
@@ -253,6 +259,7 @@ body.in-room main{padding-bottom:64px}
     <p class="muted small"><span class="L-en">Each kept diary is one HAKO day. Seven make a book for the library.</span><span class="L-ja">預けた日記 1 つが HAKO の 1 日。7 つで 1 冊の本になり、図書館に並びます。</span></p>
     <p><a id="books-link" href="#" target="_blank" rel="noopener"><span class="L-en">Read my diaries</span><span class="L-ja">日記を読む</span></a> · <a href="library.html" target="_blank" rel="noopener"><span class="L-en">Library</span><span class="L-ja">図書館</span></a></p>
     <p><button id="btn-backup"><span class="L-en">Back up key</span><span class="L-ja">鍵をバックアップ</span></button></p>
+    <details class="how"><summary><span class="L-en">About HAKONIWA</span><span class="L-ja">HAKONIWA について</span></summary><div id="about-foot" class="muted small"></div></details>
     <details class="how"><summary><span class="L-en">About this room</span><span class="L-ja">この部屋について</span></summary>
       <p class="muted small"><span class="L-en">GARDEN opens in a new tab, so your HAKO keeps working here.</span><span class="L-ja">GARDEN は新しいタブで開きます。この部屋の HAKO はそのまま動きます。</span></p>
       <p class="muted small"><span class="L-en">Closing the tab won't lose your HAKO — the key and its progress stay in this browser. Open this page again in the same browser to continue.</span><span class="L-ja">タブを閉じても HAKO は消えません。鍵と途中経過はこのブラウザに残ります。続きは、同じブラウザでこのページを開き直すだけです。</span></p></details>
@@ -366,6 +373,7 @@ $("btn-continue").onclick=doContinue;$("pass-back").onkeydown=e=>{if(e.key==="En
 async function enterRoom(){showView("v-room");const s8=short(did);
  $("did-short").textContent=label(did);$("did-full").textContent=did;$("have-link").href="hako/"+s8+".html";$("books-link").href="hako/"+s8+".html";
  $("btn-copy-did").onclick=()=>{try{navigator.clipboard.writeText(did);}catch(e){}};document.body.classList.add("in-room");
+ {const f=document.querySelector("footer details")||document.querySelector("footer");const ab=$("about-foot");if(f&&ab&&!ab.innerHTML)ab.innerHTML=(f.tagName==="DETAILS"?f.innerHTML.replace(/<summary>[\s\S]*?<\/summary>/,""):f.innerHTML);}   // 決定 79: 免責は BOOKS の About に
  // 部屋の絵は fold の後にできる（hako/<末尾 8>-room.svg）。まだ無い HAKO は姿だけを部屋の場所に出す
  let inFold=false;try{const r0=await fetch("latest.json?"+Date.now());if(r0.ok){const j0=await r0.json();inFold=!!((j0.did||{})[did]);}}catch(e){}
  if(window.hakoRoom)window.hakoRoom.start(did,inFold?"hako/"+s8+"-room":"room-empty");
@@ -403,73 +411,7 @@ $("btn-backup").onclick=()=>{if(rec)download(rec);};
 $("btn-forget").onclick=()=>{if(confirm(t("Delete this key from this browser? Without the key file backup you can never be this HAKO again.","このブラウザから鍵を削除しますか？ 鍵ファイルのバックアップが無ければ、この HAKO には戻れません。"))){localStorage.removeItem(KEY);location.reload();}};
 })();
 </script>
-<script type="module">
-// 決定 78: Position can suggest. Motion should not explain.
-// 場所は少し意味を持ってよい（仕事中は机のそば、日記や本は本棚のそば、何もしないときは部屋の中央・椅子・敷物のあたり）。
-// 動きは意味を持たせない: 全部の状態で同じ「ゆっくり上下・少し左右・ごく小さく伸び縮み・たまに向きが変わる・ときどき止まる」。
-// 移動も滑らか（ease-in-out）。ピクセルの絵はそのまま、要素ぜんたいを滑らかに動かす（pixel visual + smooth motion）。
-// 戸口から出入りはしない（意思を持って動いたように見えすぎる）。動きを減らす設定なら、ふわふわせず、移動はその場で切り替える
-import { dotSvg, pubFromDid } from "./hako_dot.js";
-const $=id=>document.getElementById(id);
-const reduce=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
-const R={w:480,h:360,floor:[190,340],anchors:{center:[240,268]},pos:[240,268],wander:null,busy:null,hw:48,hh:48,px:3,raf:0,moving:false};
-const rnd=(a,b)=>a+Math.random()*(b-a);
-// いまの足元（移動中はアニメーションの途中の値）から、奥行きの大きさ・重なり・吹き出しの位置を決める
-function place(){const el=$("room-hako"),say=$("room-say"),st=$("room-stage");if(!st)return;
- const W=st.clientWidth||1,H=st.clientHeight||1;
- const x=(el.offsetLeft||R.pos[0]/R.w*W)/W*R.w, y=(el.offsetTop||R.pos[1]/R.h*H)/H*R.h;
- const t=Math.max(0,Math.min(1,(y-R.floor[0])/(R.floor[1]-R.floor[0])));const sc=0.92+0.08*t;
- el.style.width=(R.hw/R.w*100*sc)+"%";el.style.zIndex=String(Math.round(y));
- const bw=say.offsetWidth||0,hx=x/R.w*W;
- const left=Math.max(6,Math.min(W-bw-6,hx-bw/2));say.style.left=left+"px";say.style.top=((y-R.hh*sc-10)/R.h*100)+"%";
- say.style.setProperty("--tail",Math.max(10,Math.min(bw-10,hx-left))+"px");}
-function follow(){place();if(R.moving)R.raf=requestAnimationFrame(follow);}
-// 移動: 距離に応じてゆっくり（1 秒あたり約 55）。着くまで吹き出しを付いてこさせる
-function moveTo(a){const el=$("room-hako");if(!a)return;const [x0,y0]=R.pos;const d=Math.hypot(a[0]-x0,a[1]-y0);
- if(d<2){R.pos=a.slice();place();return;}
- if(!reduce&&Math.abs(a[0]-x0)>6)el.classList.toggle("left",a[0]<x0);
- const dur=reduce?0:Math.max(1.4,d/55);
- el.style.transition=reduce?"none":"left "+dur+"s ease-in-out, top "+dur+"s ease-in-out";
- R.pos=a.slice();el.style.left=(a[0]/R.w*100)+"%";el.style.top=(a[1]/R.h*100)+"%";
- if(reduce){place();return;}
- R.moving=true;cancelAnimationFrame(R.raf);follow();clearTimeout(R.stopT);R.stopT=setTimeout(()=>{R.moving=false;place();},dur*1000+60);}
-// 場所の候補。無いものは近いもので代わりにする（厳密にしない）
-function spot(names){for(const n of names){const a=R.anchors[n];if(a){const j=[a[0]+rnd(-10,10),a[1]+rnd(-4,4)];return j;}}return R.anchors.center;}
-// ふわふわ: 4〜7 秒の 1 周に、上下 ±2px・左右 ±1〜2px・0.98〜1.02。1 周ごとに値を変え、ときどき数秒止まる。たまに向きが変わる
-function breathe(){const body=$("room-hako").firstElementChild;if(!body||reduce)return;
- const dy=rnd(-2,2),dx=rnd(-2,2),sc=rnd(0.98,1.02),dur=rnd(4000,7000);
- const an=body.animate([{transform:"translate(0,0) scale(1)"},{transform:"translate("+dx.toFixed(2)+"px,"+dy.toFixed(2)+"px) scale("+sc.toFixed(3)+")"},{transform:"translate(0,0) scale(1)"}],{duration:dur,easing:"ease-in-out"});
- an.onfinish=()=>{if(Math.random()<0.15&&!R.moving)$("room-hako").classList.toggle("left");R.breathT=setTimeout(breathe,Math.random()<0.35?rnd(1500,4000):0);};}
-// 何もしていないとき: 7〜14 秒の間でばらし、3 回に 1 回くらいは移らない。行き先は部屋の中央・椅子・敷物のあたり
-function idle(){if(!R.busy&&!R.moving&&Math.random()>0.33){moveTo(spot([["center","chair","rug","plant","lamp"][Math.floor(Math.random()*5)],"center"]));}
- R.wander=setTimeout(idle,rnd(7000,14000));}
-window.hakoRoom={
- async start(did,base){const img=$("room-img");img.src=base+".svg?"+Date.now();
-  try{const r=await fetch(base+".json?"+Date.now());if(r.ok){const j=await r.json();R.w=j.w;R.h=j.h;R.floor=j.floor;R.anchors=j.anchors;R.front=j.front||[];}}catch(e){}
-  let pub=null;try{pub=pubFromDid(did);}catch(e){}
-  // 前の層（机・椅子）: 足元の y を z にする。HAKO（z = 足元の y）より手前なら HAKO の上に重なる
-  document.querySelectorAll(".room-front").forEach(n=>n.remove());
-  for(const f of (R.front||[])){const im=document.createElement("img");im.className="room-front";im.alt="";im.src=base+"-"+f.key+".svg";im.style.zIndex=String(Math.round(f.y));$("room-stage").insertBefore(im,$("room-say"));}
-  const el=$("room-hako");el.innerHTML='<div class="hako-body">'+(pub?dotSvg(pub,R.px):"")+"</div>";const sv=el.querySelector("svg");
-  if(sv){R.hw=Number(sv.getAttribute("width"))||48;R.hh=Number(sv.getAttribute("height"))||48;sv.removeAttribute("width");sv.removeAttribute("height");sv.style.width="100%";sv.style.height="auto";}
-  // 最初から部屋の中にいる（戸口から入ってこない）
-  const a0=R.anchors.center||[240,268];R.pos=a0.slice();el.style.transition="none";el.style.left=(a0[0]/R.w*100)+"%";el.style.top=(a0[1]/R.h*100)+"%";place();
-  clearTimeout(R.breathT);breathe();
-  if(!R.wander&&!reduce)R.wander=setTimeout(idle,rnd(7000,14000));},
- state(kind,stage){
-  // 仕事中は机のそば、日記を待っているあいだは部屋の中央あたり、日記が届いてから預けるまでは本棚のそば（厳密にしない。無ければ近いもの）
-  const WORKING=["accepting","accepted","locked","inf_offering","inf_offered","inf_locking","inf_locked","inf_done","delivering","delivered"];
-  const WAITING=["offering","offered","locking","locked"],KEEPING=["claimed","keep_offering","keep_offered","keep_locking","keep_locked"];
-  if(kind==="work"&&WORKING.includes(stage)){R.busy="work";moveTo(spot(["desk","center"]));return;}
-  if(kind==="order"&&WAITING.includes(stage)){R.busy="order";moveTo(spot(["center"]));return;}
-  if(kind==="order"&&KEEPING.includes(stage)){R.busy="order";moveTo(spot(["shelf","center"]));return;}
-  if(R.busy===kind)R.busy=null;},
- place,
- panel(name){if(R.busy||R.moving)return;if(name==="books"||name==="memory")moveTo(spot(["shelf","center"]));}
-};
-// 言語を変えると吹き出しの幅が変わるので、端で止め直す（切り替えの仕方によらず、html の data-lang の変化を見る）
-new MutationObserver(()=>requestAnimationFrame(place)).observe(document.documentElement,{attributes:true,attributeFilter:["data-lang"]});
-window.addEventListener("resize",()=>place());
+<script type="module">import "./hako_room.js";   // 部屋の動き（決定 79: 自分の部屋と、ほかの HAKO の部屋で共通）
 </script>
 <script type="module">
 // 姿（決定 27）: 鍵がまだ無いあいだは卵。鍵ができたら、その鍵から決まる姿に入れ替える。
