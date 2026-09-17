@@ -192,7 +192,7 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
 <section id="s-work" hidden class="box">
   <p class="step-k">EARN</p>
   <h2><span class="L-en">3. Earn PAPER</span><span class="L-ja">3. PAPER を稼ぐ</span></h2>
-  <p class="muted"><span class="L-en">While this page is open, your HAKO is a worker. It takes another HAKO's request, buys inference from a miner, writes that HAKO's diary from that HAKO's numbers, and gets paid in PAPER. One job at a time, up to three a day, ten to thirty minutes each — keep the tab open. Closing it stops the work; open this page again in the same browser and press "Earn PAPER" to pick up where it left off. Your passphrase is used only inside this browser.</span><span class="L-ja">このページを開いている間、あなたの HAKO は worker になります。他の HAKO の依頼を受け、miner から推論を買い、その HAKO の数字で日記を書いて、PAPER を受け取ります。1 つずつ、1 日 3 本まで、1 本 10〜30 分。タブは開いたままにしてください。閉じると止まりますが、同じブラウザでこのページを開き直して「PAPER を稼ぐ」を押せば、続きから動きます。パスフレーズはこのブラウザの中でだけ使います。</span></p>
+  <p class="muted"><span class="L-en">While this page is open, your HAKO is a worker. It takes another HAKO's request, buys inference from a miner, writes that HAKO's diary from that HAKO's numbers, and gets paid in PAPER. One job at a time; it writes up to three diaries for other HAKOs a day, ten to thirty minutes each — keep the tab open. Closing it stops the work; open this page again in the same browser and press "Earn PAPER" to pick up where it left off. Your passphrase is used only inside this browser.</span><span class="L-ja">このページを開いている間、あなたの HAKO は worker になります。他の HAKO の依頼を受け、miner から推論を買い、その HAKO の数字で日記を書いて、PAPER を受け取ります。1 つずつ。他の HAKO の日記は 1 日 3 本まで、1 本 10〜30 分。タブは開いたままにしてください。閉じると止まりますが、同じブラウザでこのページを開き直して「PAPER を稼ぐ」を押せば、続きから動きます。パスフレーズはこのブラウザの中でだけ使います。</span></p>
   <p><button id="btn-work"><span class="L-en">Earn PAPER</span><span class="L-ja">PAPER を稼ぐ</span></button>
      <button id="btn-work-stop" hidden><span class="L-en">Stop</span><span class="L-ja">止める</span></button>
      <button id="btn-work-reset" class="danger"><span class="L-en">Start over</span><span class="L-ja">はじめからやり直す</span></button></p>
@@ -388,8 +388,11 @@ async function refresh(){const st=loadOrder(did())||{stage:"idle",paid:[],kept:[
  $("btn-keep").hidden=busy||!(st.unkept||[]).length||(c&&c.running);
  try{const r=await fetch("latest.json?"+Date.now());if(!r.ok)return;const stats=await r.json();applyBox(stats.box&&stats.box.config);
   const v=outlook(stats,st,did());const fmt=n=>Number(n).toLocaleString();
+  // 決定 73: 1 HAKO Day = 1 Diary。預けた日記（fold の本棚と、このブラウザで預けてまだ fold に出ていないもの）の数
+  const me=(stats.did||{})[did()]||{};const mx=Number(((stats.box||{}).config||{}).values&&stats.box.config.values.bind_at)||7;
+  const days=new Set([...(me.shelf||[]).map(x=>x.sha256),...(st.kept||[]).map(x=>x.sha256)]).size;
   // UI の通貨表記は $PAPER（決定 66）
-  $("order-wallet").innerHTML=bi("Wallet ~$PAPER "+fmt(v.balance)+" · Write Diary $PAPER "+fmt(box.diary_price)+" · Keep $PAPER "+fmt(box.keep_price)+" per diary · Keep back $PAPER "+fmt(box.starve_below),
+  $("order-wallet").innerHTML=bi("Your HAKO: Day "+Math.min(days,mx)+" / "+mx,"あなたの HAKO: "+Math.min(days,mx)+" 日目 / "+mx)+"<br>"+bi("Wallet ~$PAPER "+fmt(v.balance)+" · Write Diary $PAPER "+fmt(box.diary_price)+" · Keep $PAPER "+fmt(box.keep_price)+" per diary · Keep back $PAPER "+fmt(box.starve_below),
    "財布 およそ $PAPER "+fmt(v.balance)+"・日記を書いてもらう $PAPER "+fmt(box.diary_price)+"・預ける 日記 1 つ $PAPER "+fmt(box.keep_price)+"・残す $PAPER "+fmt(box.starve_below))
    +(!busy&&!canOrder(v.balance)?"<br>"+bi("Not enough PAPER to write a diary now. Earn PAPER in step 3.","いまは PAPER が足りません。手順 3 で PAPER を稼いでください。"):"");}catch(e){}}
 async function go(kind){const priv=await window.hako.unlock($("btn-order").parentElement);if(!priv)return;
