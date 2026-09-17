@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-17T17:10:01Z",
+  "generated": "2026-09-17T18:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -146,15 +146,15 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3925400,
+   "rows": 3944173,
    "dup": 0,
    "unsigned": 141931,
-   "bad_sig": 38846,
-   "frames": 2969049,
-   "offers": 154,
+   "bad_sig": 39042,
+   "frames": 2987065,
+   "offers": 155,
    "accepts": 180,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 590,
+   "accept_bad_contract": 596,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
@@ -173,7 +173,7 @@
    "join_after_exit": 0
   },
   "receipts": 70,
-  "paper_total": 17401.0,
+  "paper_total": 17801.0,
   "bound_paper": 0,
   "shelves": {
    "volumes": 14,
@@ -7635,6 +7635,16 @@
     "pool": 400.0,
     "status": "distributed",
     "computed": 400.0
+   },
+   {
+    "seq": 78,
+    "ts": "2026-09-17T17:25:43.565690Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-17",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 400.0,
+    "status": "distributed",
+    "computed": 400.0
    }
   ],
   "invalid_issue": [
@@ -7673,15 +7683,15 @@
    "joined": "2026-09-08T11:29:07.745802Z",
    "earn": 765.0,
    "spend": 11540.0,
-   "issued": 10100.0,
-   "balance": 325.0,
+   "issued": 10500.0,
+   "balance": 725.0,
    "mem_volumes": 13,
    "chat": {
     "ts": "2026-09-17T08:24:58.184231Z",
     "seq": 72,
     "text": "おはよう。 しずか、話す。"
    },
-   "life_days": 0.2,
+   "life_days": 0.4,
    "earn_today": 288.0,
    "spend_today": 6060.0,
    "operator": true,
