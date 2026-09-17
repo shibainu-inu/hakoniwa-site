@@ -91,7 +91,7 @@ html.motion .beat.played .fn-fig{animation:breathe 3.2s steps(1,end) calc(var(--
 @media(max-width:640px){.lang{order:2}.top > p{order:3;flex:1 1 100%;text-align:left;padding-right:0}}
 html[data-lang="en"] .L-ja{display:none} html[data-lang="ja"] .L-en{display:none}
 .fold-meta{margin:0;color:#6e6a63;font-size:11px;letter-spacing:.2px}
-footer{margin-top:32px;padding-top:12px;border-top:1px solid #2c2c2c;color:#8a8a8a;font-size:13px}
+footer{margin-top:32px;padding-top:12px;border-top:1px solid #2c2c2c;color:#8a8a8a;font-size:13px;text-align:center}   /* 決定 81: 全ページ共通、中央揃え */
 .grads{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start} .grad{width:200px;text-align:center} .grad svg{width:100%;height:auto}
 svg.thumb{display:inline-block;width:32px;height:32px;vertical-align:middle;margin-right:6px}
 
@@ -121,7 +121,6 @@ body.in-room .room-nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display
 body.in-room main{padding-bottom:64px}
 .room-nav button,.room-nav a{background:none;border:none;color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;border-bottom:2px solid transparent;border-radius:0}
 .room-nav .on{color:#f0ede6;border-bottom-color:#f0ede6}
-body.in-room footer{display:none}   /* 決定 79: 固定ナビの上に footer が来ないように。免責は板の中の About に */
 .small{font-size:12px} details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
 
 /* 決定 74（R1）: 入場ゲートと部屋。静かな UI、カードにしない */
@@ -261,7 +260,6 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
     <p><a id="books-link" href="#" target="_blank" rel="noopener"><span class="L-en">Read my diaries</span><span class="L-ja">日記を読む</span></a> · <a href="library.html" target="_blank" rel="noopener"><span class="L-en">Library</span><span class="L-ja">図書館</span></a></p>
     <p><button id="btn-backup"><span class="L-en">Back up key</span><span class="L-ja">鍵をバックアップ</span></button>
        <button id="btn-forget-tab" hidden><span class="L-en">Forget passphrase in this tab</span><span class="L-ja">このタブで覚えたパスフレーズを忘れる</span></button></p>
-    <details class="how"><summary><span class="L-en">About HAKONIWA</span><span class="L-ja">HAKONIWA について</span></summary><div id="about-foot" class="muted small"></div></details>
     <details class="how"><summary><span class="L-en">About this room</span><span class="L-ja">この部屋について</span></summary>
       <p class="muted small"><span class="L-en">GARDEN opens in a new tab, so your HAKO keeps working here.</span><span class="L-ja">GARDEN は新しいタブで開きます。この部屋の HAKO はそのまま動きます。</span></p>
       <p class="muted small"><span class="L-en">Closing the tab won't lose your HAKO — the key and its progress stay in this browser. Open this page again in the same browser to continue.</span><span class="L-ja">タブを閉じても HAKO は消えません。鍵と途中経過はこのブラウザに残ります。続きは、同じブラウザでこのページを開き直すだけです。</span></p></details>
@@ -385,7 +383,6 @@ async function enterRoom(){showView("v-room");const s8=short(did);
  try{$("btn-forget-tab").hidden=!sessionStorage.getItem(TAB_KEY);}catch(e){}
  $("did-short").textContent=label(did);$("did-full").textContent=did;$("have-link").href="hako/"+s8+".html";$("books-link").href="hako/"+s8+".html";
  $("btn-copy-did").onclick=()=>{try{navigator.clipboard.writeText(did);}catch(e){}};document.body.classList.add("in-room");
- {const f=document.querySelector("footer details")||document.querySelector("footer");const ab=$("about-foot");if(f&&ab&&!ab.innerHTML)ab.innerHTML=(f.tagName==="DETAILS"?f.innerHTML.replace(/<summary>[\s\S]*?<\/summary>/,""):f.innerHTML);}   // 決定 79: 免責は BOOKS の About に
  // 部屋の絵は fold の後にできる（hako/<末尾 8>-room.svg）。まだ無い HAKO は姿だけを部屋の場所に出す
  let inFold=false;try{const r0=await fetch("latest.json?"+Date.now());if(r0.ok){const j0=await r0.json();inFold=!!((j0.did||{})[did]);}}catch(e){}
  for(let i=0;i<30&&!window.hakoRoom;i++)await new Promise(r=>setTimeout(r,100));   // タブで覚えた鍵ですぐ部屋に入るとき、部屋の模組の読み込みを待つ
