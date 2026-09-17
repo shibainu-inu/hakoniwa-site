@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-17T21:10:02Z",
+  "generated": "2026-09-17T22:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -146,15 +146,15 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 4021101,
+   "rows": 4050481,
    "dup": 0,
-   "unsigned": 141933,
-   "bad_sig": 39714,
-   "frames": 3061021,
-   "offers": 158,
+   "unsigned": 142031,
+   "bad_sig": 39929,
+   "frames": 3089659,
+   "offers": 159,
    "accepts": 181,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 605,
+   "accept_bad_contract": 608,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
