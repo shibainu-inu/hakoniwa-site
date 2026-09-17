@@ -92,133 +92,186 @@ html.motion .beat.played .fn-fig{animation:breathe 3.2s steps(1,end) calc(var(--
 html[data-lang="en"] .L-ja{display:none} html[data-lang="ja"] .L-en{display:none}
 .fold-meta{margin:0;color:#6e6a63;font-size:11px;letter-spacing:.2px}
 footer{margin-top:32px;padding-top:12px;border-top:1px solid #2c2c2c;color:#8a8a8a;font-size:13px}
+footer.compact{margin-top:20px;font-size:12px} footer.compact summary{cursor:pointer;color:#6e6a63}
 .grads{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start} .grad{width:200px;text-align:center} .grad svg{width:100%;height:auto}
 svg.thumb{display:inline-block;width:32px;height:32px;vertical-align:middle;margin-right:6px}
 
-.tabs{display:flex;gap:0;border-bottom:1px solid #2c2c2c;margin:18px 0 0}
-.tab{background:none;border:none;border-bottom:3px solid transparent;border-radius:0;padding:10px 20px;font-size:1em;color:#8a8a8a;cursor:pointer}
-.tab[aria-selected="true"]{color:#e8e4dc;border-bottom-color:#5ec99a;font-weight:600}
-.figure{text-align:center;margin:18px 0 6px} .figure svg{display:inline-block;image-rendering:pixelated}
-.figure p{margin:8px 0 0}
-.box{border:1px solid #2c2c2c;border-radius:8px;padding:12px 16px;margin:14px 0} .step-k{margin:0 0 -8px;font-size:.75em;letter-spacing:2px;color:#8a857c} .warn{color:#f07c7c}
-button{background:#2a2a2a;color:#e8e4dc;border:1px solid #444;border-radius:6px;padding:6px 12px;cursor:pointer} button:disabled{opacity:.5}
-button.danger{border-color:#a04040;color:#f07c7c} input,select{background:#1e1e1e;color:#e8e4dc;border:1px solid #444;border-radius:4px;padding:4px 6px}
-code{background:#1e1e1e;padding:1px 4px;border-radius:3px}
+/* 決定 74（R1）: 入場ゲートと部屋。静かな UI、カードにしない */
+[hidden]{display:none!important}   /* display を指定した要素でも hidden を効かせる（部屋の絵が壊れた画像の枠で出ていた） */
+.gate{max-width:30em;margin:8px auto 0;text-align:center} .gate h1{margin:6px 0 10px;font-size:1.6em} .gate .lead{color:#b9b3a8;line-height:1.8;margin:0 0 18px}
+.gate p{margin:0 0 14px} .gate label.small{display:inline-flex;gap:6px;align-items:center;margin-top:6px} .gate input[type=password],.gate select{font-size:16px;padding:8px 10px;min-width:16em} .small{font-size:12px} .center{text-align:center}
+.gate details.how{text-align:left;margin:18px 0 0}
+details.how summary{cursor:pointer;color:#8a857c;font-size:13px} details.how p{margin:8px 0}
+.figure{text-align:center;margin:18px 0 6px} .figure svg{display:inline-block;image-rendering:pixelated} .figure p{margin:8px 0 0}
+button{background:#2a2a2a;color:#e8e4dc;border:1px solid #444;border-radius:2px;padding:8px 14px;cursor:pointer;font-size:14px} button:disabled{opacity:.5}
+button.primary{background:transparent;border:2px solid #f0ede6;color:#f0ede6;padding:10px 22px;letter-spacing:1px;box-shadow:3px 3px 0 #3a3833}
+button.primary:hover{background:#f0ede6;color:#111}
+button.danger{border-color:#a04040;color:#f07c7c} input,select{background:#1e1e1e;color:#e8e4dc;border:1px solid #444;border-radius:2px;padding:4px 6px}
+code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
+.room-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap} .room-head h1{margin:8px 0}
+details.did{position:relative} details.did summary{list-style:none;cursor:pointer;text-decoration:underline dotted} details.did summary::-webkit-details-marker{display:none}
+.did-pop{position:absolute;right:0;z-index:5;background:#1b1b1b;border:1px solid #333;padding:10px;max-width:80vw;word-break:break-all}
+/* 決定 75: 箱部屋（2.5D、480×360）を幅いっぱいに。HAKO は小さく、部屋の中を歩く。吹き出しは HAKO の頭の上について動く */
+.room-stage{position:relative;margin:4px -16px 0;max-width:640px;aspect-ratio:4/3} #room-img{display:block;width:100%;height:100%;image-rendering:pixelated}
+#room-hako{position:absolute;transform:translate(-50%,-100%);image-rendering:pixelated;pointer-events:none}
+#room-hako svg{display:block} #room-hako.left svg{transform:scaleX(-1)}
+#room-hako.walk{animation:hop .32s steps(2,end) infinite} @keyframes hop{0%{margin-top:0}50%{margin-top:-3px}100%{margin-top:0}}
+.room-front{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;image-rendering:pixelated}
+#room-say{position:absolute;transform:translateY(-100%);margin:0;max-width:calc(100% - 12px);white-space:nowrap;z-index:999;font-size:13px}
+html[data-lang="en"] #room-say .L-en,html[data-lang="ja"] #room-say .L-ja{display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;vertical-align:bottom}   /* 言語の切り替えより強くしない */
+#room-say::after{content:"";position:absolute;left:var(--tail,50%);bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:#f0ede6}
+@media (prefers-reduced-motion: reduce){#room-hako.walk{animation:none}}
+.room-day{margin:10px 0 0;color:#b9b3a8;font-size:14px;letter-spacing:.5px} .room-day .dots{color:#f5a3b5;letter-spacing:2px;margin-left:8px;font-size:12px}
+.act{margin:4px 0 12px;color:#d8d3ca;line-height:1.7} .caution{color:#e0b07a}
+#figure-art.born{animation:born .5s steps(2,end) 1 both} @keyframes born{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){#figure-art.born{animation:none}}
+.notice{border-top:1px solid #242424;padding:12px 0;margin:12px 0}
+.panels{margin:14px 0 0;min-height:10em} .panel{display:none} .panel.on{display:block}
+.step-k{margin:0 0 6px;font-size:12px;letter-spacing:3px;color:#8a857c} .stage{font-size:13px;color:#8a857c;margin:8px 0}   /* 段の名前は吹き出しが主。ここは控えめに */
+.cells i{display:inline-block;width:14px;height:14px;margin-right:3px;border:1px solid #555;vertical-align:middle} .cells i.on{background:#f5a3b5;border-color:#f5a3b5}
+.room-nav{display:none}
+body.in-room .room-nav{position:fixed;left:0;right:0;bottom:0;z-index:10;display:flex;justify-content:center;gap:4px;background:#161616;border-top:1px solid #2c2c2c;padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
+body.in-room main{padding-bottom:64px}
+.room-nav button,.room-nav a{background:none;border:none;color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;border-bottom:2px solid transparent;border-radius:0}
+.room-nav .on{color:#f0ede6;border-bottom-color:#f0ede6}
 
 </style></head><body><main>
 <div class="top"><a class="brand" href="index.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 28" width="32" height="28" role="img" aria-hidden="true"><path d="M4.00 0.00h24.00v2.00h-24.00zM2.00 2.00h28.00v2.00h-28.00zM0.00 4.00h32.00v2.00h-32.00zM0.00 6.00h4.00v2.00h-4.00zM28.00 6.00h4.00v2.00h-4.00zM0.00 8.00h4.00v2.00h-4.00zM8.00 8.00h4.00v2.00h-4.00zM20.00 8.00h4.00v2.00h-4.00zM28.00 8.00h4.00v2.00h-4.00zM0.00 10.00h4.00v2.00h-4.00zM8.00 10.00h4.00v2.00h-4.00zM20.00 10.00h4.00v2.00h-4.00zM28.00 10.00h4.00v2.00h-4.00zM0.00 12.00h4.00v2.00h-4.00zM28.00 12.00h4.00v2.00h-4.00zM0.00 14.00h4.00v2.00h-4.00zM28.00 14.00h4.00v2.00h-4.00zM0.00 16.00h4.00v2.00h-4.00zM28.00 16.00h4.00v2.00h-4.00zM0.00 18.00h32.00v2.00h-32.00zM2.00 20.00h28.00v2.00h-28.00zM4.00 22.00h24.00v2.00h-24.00zM6.00 24.00h4.00v2.00h-4.00zM22.00 24.00h4.00v2.00h-4.00zM6.00 26.00h4.00v2.00h-4.00zM22.00 26.00h4.00v2.00h-4.00z" fill="#f0ede6" shape-rendering="crispEdges"/></svg><b>z6 HAKONIWA</b></a><span class="lang"><a href="#" data-set="en">ENG</a>｜<a href="#" data-set="ja">JA</a></span>
-<p class="fold-meta"><span class="L-en">fold 2026-09-17 08:10 UTC（2026-09-17 17:10 JST）</span><span class="L-ja">fold 2026-09-17 08:10 UTC（2026-09-17 17:10 JST）</span></p></div>
+</div>
 
-<h1 style="margin:0">z6 HAKONIWA</h1>
-<p class="proto"><a href="https://github.com/shibainu-inu/hakoniwa/blob/main/HAKONIWA-RULES.md"><span class="L-en">on the z6Mkers Protocol</span><span class="L-ja">z6Mkers Protocol の上で</span></a> · rules v0.19</p>
-<p class="sub"><span class="L-en">Enter the garden — make a new DID here. The key is made in your browser and never leaves it</span><span class="L-ja">箱庭に参加 — DID を新しく作ります。鍵はこのブラウザの中で作り、外には出ません</span></p>
+<div id="unsupported" hidden class="warn"><span class="L-en">This browser cannot make Ed25519 keys (needs Chrome 113+, Safari 17+, or Firefox 130+).</span><span class="L-ja">このブラウザでは Ed25519 の鍵を作れません（Chrome 113、Safari 17、Firefox 130 以降が必要です）。</span></div>
 
+<!-- 決定 74（R1）: Enter は入場ゲート。鍵が無ければ Create → Protect、あれば Welcome back。どちらも最後は自分の Room へ -->
 <div id="hako-figure" class="figure">
   <div id="figure-art" aria-hidden="true"></div>
   <p id="figure-note" class="muted"></p>
 </div>
 
-<div id="unsupported" hidden class="warn"><span class="L-en">This browser cannot make Ed25519 keys (needs Chrome 113+, Safari 17+, or Firefox 130+).</span><span class="L-ja">このブラウザでは Ed25519 の鍵を作れません（Chrome 113、Safari 17、Firefox 130 以降が必要です）。</span></div>
+<section id="v-create" hidden class="gate">
+  <h1><span class="L-en">Create your HAKO.</span><span class="L-ja">あなたの HAKO をつくる。</span></h1>
+  <p class="lead"><span class="L-en">One key, one HAKO.<br>Its key stays in this browser.</span><span class="L-ja">1 つの鍵に、1 体の HAKO。<br>鍵はこのブラウザの中にだけ置きます。</span></p>
+  <p><label><span class="L-en">Passphrase</span><span class="L-ja">パスフレーズ</span><br>
+     <input id="pass" type="password" autocomplete="new-password" size="28"></label><br>
+     <label class="small"><input type="checkbox" id="pass-show"> <span class="L-en">Show passphrase</span><span class="L-ja">パスフレーズを表示する</span></label></p>
+  <p><label><span class="L-en">Diary language</span><span class="L-ja">日記の言葉</span><br>
+     <select id="lang"><option value="en">English</option><option value="ja">日本語</option></select></label></p>
+  <p><button id="btn-make" class="primary"><span class="L-en">Create HAKO</span><span class="L-ja">HAKO をつくる</span></button></p>
+  <p id="make-msg" class="warn"></p>
+  <details class="how"><summary><span class="L-en">How does this work?</span><span class="L-ja">しくみ</span></summary>
+    <p class="muted"><span class="L-en">Your browser makes an Ed25519 key. The passphrase encrypts it (PBKDF2 + AES-GCM) and it is kept in this browser's storage; it is never sent anywhere. The key's public half is your HAKO's identity (a <code>did:key</code>), and its shape and colours come from it.</span><span class="L-ja">ブラウザが Ed25519 の鍵を作ります。パスフレーズで暗号化して（PBKDF2 ＋ AES-GCM）このブラウザの記憶領域に置き、どこにも送りません。鍵の公開側が HAKO の ID（<code>did:key</code>）で、姿と色もそこから決まります。</span></p>
+    <p class="muted"><span class="L-en">Creating the HAKO signs one <code>join</code> line (roles: worker and client) and posts it to <code>/r/hakoniwa-board</code> on technocore.chat. The HAKO starts with 1,000 PAPER (worth nothing) and takes a seat at the next fold (every hour at :10 UTC).</span><span class="L-ja">HAKO をつくると、<code>join</code> の行 1 件（役は worker と client）に署名して technocore.chat の <code>/r/hakoniwa-board</code> に投稿します。HAKO は 1,000 PAPER（無価値）を持ち、次の fold（毎時 10 分 UTC）で席に着きます。</span></p>
+    <p class="muted"><span class="L-en">A DID you already own cannot be used yet: that waits for scheme B in the rules (a capped, time-limited child key handed over with <code>delegate</code>).</span><span class="L-ja">手持ちの DID はまだ使えません。ルールの方式 B（上限と期限つきの子鍵を <code>delegate</code> で渡す）に対応してからです。</span></p>
+  </details>
+  <details class="how"><summary><span class="L-en">Have a key file?</span><span class="L-ja">鍵ファイルがある</span></summary>
+    <p class="muted"><span class="L-en">Load the backup (hakoniwa-key-….json) to bring your HAKO to this browser.</span><span class="L-ja">バックアップ（hakoniwa-key-….json）を読み込むと、この HAKO をこのブラウザで続けられます。</span></p>
+    <p><input id="key-file" type="file" accept="application/json,.json"> <span id="load-msg" class="warn"></span></p>
+  </details>
+</section>
 
-<div class="tabs" role="tablist">
-  <button id="tab-new" class="tab" role="tab" aria-selected="true"><span class="L-en">Start</span><span class="L-ja">はじめる</span></button>
-  <button id="tab-back" class="tab" role="tab" aria-selected="false"><span class="L-en">Continue</span><span class="L-ja">つづきから</span></button>
-</div>
+<section id="v-protect" hidden class="gate">
+  <h1><span class="L-en">Your HAKO is ready.</span><span class="L-ja">あなたの HAKO ができました。</span></h1>
+  <p class="lead"><span class="L-en">Save its key before entering the Garden.</span><span class="L-ja">庭に入る前に、鍵を保存してください。</span></p>
+  <p class="caution"><span class="L-en">If both this browser's data and the backup are lost, you cannot become this HAKO again.</span><span class="L-ja">このブラウザの記録とバックアップの両方を失うと、この HAKO には二度と戻れません。</span></p>
+  <p><button id="btn-backup-new" class="primary"><span class="L-en">Back up key</span><span class="L-ja">鍵をバックアップ</span></button></p>
+  <p><button id="btn-enter-room"><span class="L-en">Enter the Garden →</span><span class="L-ja">Enter the Garden →</span></button></p>
+  <p id="join-result" class="muted"></p>
+</section>
 
-<div id="pane-back" hidden>
-<section id="s-have" hidden class="box">
-  <h2><span class="L-en">Your HAKO</span><span class="L-ja">あなたの HAKO</span></h2>
+<section id="v-welcome" hidden class="gate">
+  <h1><span class="L-en">Welcome back.</span><span class="L-ja">おかえりなさい。</span></h1>
   <p><code id="have-did"></code></p>
-  <p id="have-status" class="muted"></p>
-  <p class="muted"><span class="L-en">Closing the tab won't lose your HAKO — the key and today's progress stay in this browser. To pick up again, open this page in the same browser and press "Earn PAPER" in step 3.</span><span class="L-ja">タブを閉じても HAKO は消えません。鍵と今日の途中経過はこのブラウザに残ります。続きは、同じブラウザでこのページを開いて手順 3 の「PAPER を稼ぐ」を押すだけです。</span></p>
-  <div id="unlock" hidden>
-    <p><label><span class="L-en">Enter your passphrase to use this key (used only inside this browser)</span><span class="L-ja">この鍵を使うには、パスフレーズを入力してください（鍵はこのブラウザの中でだけ使います）</span><br>
-       <input id="pass2" type="password" autocomplete="current-password" size="32"></label>
-       <label><input type="checkbox" id="pass2-show"> <span class="L-en">Show passphrase</span><span class="L-ja">パスフレーズを表示する</span></label></p>
-    <p><button id="btn-unlock"><span class="L-en">Use</span><span class="L-ja">使用する</span></button>
-       <button id="btn-unlock-cancel"><span class="L-en">Cancel</span><span class="L-ja">やめる</span></button>
-       <span id="unlock-msg" class="warn"></span></p>
+  <p><label><span class="L-en">Passphrase</span><span class="L-ja">パスフレーズ</span><br>
+     <input id="pass-back" type="password" autocomplete="current-password" size="28"></label><br>
+     <label class="small"><input type="checkbox" id="pass-back-show"> <span class="L-en">Show passphrase</span><span class="L-ja">パスフレーズを表示する</span></label></p>
+  <p><button id="btn-continue" class="primary"><span class="L-en">Continue</span><span class="L-ja">つづける</span></button></p>
+  <p id="continue-msg" class="warn"></p>
+  <details class="how"><summary><span class="L-en">Use another key</span><span class="L-ja">別の鍵を使う</span></summary>
+    <p><input id="key-file2" type="file" accept="application/json,.json"> <span id="load-msg2" class="warn"></span></p>
+    <p><button id="btn-forget" class="danger"><span class="L-en">Delete key from this browser</span><span class="L-ja">このブラウザから鍵を削除</span></button></p>
+  </details>
+</section>
+
+<section id="v-room" hidden>
+  <div class="room-head"><h1><span class="L-en">Room</span><span class="L-ja">部屋</span></h1>
+    <details class="did"><summary id="did-short" class="muted small"></summary>
+      <div class="did-pop"><code id="did-full"></code><p><button id="btn-copy-did" class="small"><span class="L-en">Copy</span><span class="L-ja">コピー</span></button>
+      <a id="have-link" class="small" href="#" target="_blank" rel="noopener"><span class="L-en">Public page</span><span class="L-ja">公開ページ</span></a></p></div></details></div>
+  <div class="room-stage" id="room-stage">
+    <img id="room-img" alt="" width="480" height="360">
+    <div id="room-hako" aria-hidden="true"></div>
+    <p id="room-say" class="say" hidden></p>
   </div>
-  <p><a id="have-link" href="#"><span class="L-en">View HAKO page</span><span class="L-ja">HAKO のページを見る</span></a>
-     <button id="btn-backup"><span class="L-en">Back up key file</span><span class="L-ja">鍵ファイルをバックアップ</span></button>
-     <button id="btn-forget" class="danger"><span class="L-en">Delete key from this browser</span><span class="L-ja">このブラウザから鍵を削除</span></button></p>
+  <p id="room-day" class="room-day"></p>
+
+  <div id="room-notice" hidden class="notice"></div>
+  <section id="s-over" hidden class="notice">
+    <p><b id="over-why"></b></p>
+    <p class="muted"><span class="L-en">A starved or bound HAKO does not come back. Its diaries stay on the site. Create a new HAKO to play again.</span><span class="L-ja">枯れた HAKO と綴じた HAKO は戻りません。日記はサイトに残ります。遊ぶなら新しい HAKO をつくってください。</span></p>
+  </section>
+  <section id="s-join" hidden class="notice">
+    <p id="rejoin-note"><span class="L-en">Your HAKO is not seated in the garden. Enter once more to take a seat — its diaries and PAPER are kept.</span><span class="L-ja">あなたの HAKO は庭の席にいません。もう一度入ると席に戻れます。日記と PAPER はそのままです。</span></p>
+    <p><button id="btn-join"><span class="L-en">Take a seat</span><span class="L-ja">席に戻る</span></button></p>
+    <pre id="join-line" class="muted" hidden></pre>
+    <p id="join-result2" class="muted"></p>
+  </section>
+
+  <div class="panels">
+  <section id="s-work" hidden class="panel" data-panel="work">
+    <p class="step-k">EARN</p>
+    <p class="act"><span class="L-en">Take another HAKO's request.</span><span class="L-ja">他の HAKO の依頼を受ける。</span></p>
+    <p><button id="btn-work" class="primary"><span class="L-en">Earn PAPER</span><span class="L-ja">PAPER を稼ぐ</span></button>
+       <button id="btn-work-stop" hidden><span class="L-en">Stop</span><span class="L-ja">止める</span></button></p>
+    <div id="work-view" hidden><img id="work-img" alt="" width="320" height="300" hidden>
+      <p id="work-stage-view" class="stage"></p>
+      <p id="work-img-note" class="muted" hidden></p></div>
+    <details class="how"><summary><span class="L-en">How work works</span><span class="L-ja">仕事のしくみ</span></summary>
+      <p class="muted small"><span class="L-en">Your HAKO takes another HAKO's request, buys inference from a miner, and writes that HAKO's diary from its numbers. Up to three for other HAKOs a day, ten to thirty minutes each.</span><span class="L-ja">他の HAKO の依頼を受け、miner から推論を買って、その HAKO の数字で日記を書きます。他の HAKO の日記は 1 日 3 本まで、1 本 10〜30 分。</span></p></details>
+    <details class="how"><summary><span class="L-en">View protocol log</span><span class="L-ja">プロトコルの log を見る</span></summary>
+      <p><a href="#" id="work-log-toggle" hidden></a></p>
+      <pre id="work-log" class="muted" style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre>
+      <p><button id="btn-work-reset" class="danger"><span class="L-en">Start over</span><span class="L-ja">はじめからやり直す</span></button></p></details>
+  </section>
+
+  <section id="s-order" hidden class="panel" data-panel="memory">
+    <p class="step-k">WRITE → KEEP</p>
+    <p class="act"><b><span class="L-en">Write today's diary</span><span class="L-ja">今日の日記</span></b><br><span class="L-en">Another HAKO will write it and leave it with a keeper.</span><span class="L-ja">他の HAKO が書いて、keeper に預けます。</span></p>
+    <p><button id="btn-order" class="primary"><span class="L-en">Write Diary</span><span class="L-ja">日記を書いてもらう</span></button>
+       <button id="btn-order-stop" hidden><span class="L-en">Stop</span><span class="L-ja">止める</span></button>
+       <button id="btn-keep" hidden><span class="L-en">Keep</span><span class="L-ja">預ける</span></button></p>
+    <p id="order-msg" class="warn" hidden></p>
+    <p id="order-stage-view" class="stage"></p>
+    <details class="how"><summary><span class="L-en">Numbers</span><span class="L-ja">数字</span></summary><p id="order-wallet" class="muted"></p>
+      <p class="muted small"><span class="L-en">One press, one diary. It can take a few hours; keep this tab open. Keeping is charged for every diary on your shelf.</span><span class="L-ja">1 回押すと日記 1 つ。数時間かかることがあります。このタブは開いたままに。預かり代は預けている日記の数だけかかります。</span></p></details>
+    <details class="how"><summary><span class="L-en">View protocol log</span><span class="L-ja">プロトコルの log を見る</span></summary>
+      <p><a href="#" id="order-log-toggle" hidden></a></p>
+      <pre id="order-log" class="muted" style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre></details>
+  </section>
+
+  <section id="s-books" hidden class="panel" data-panel="books">
+    <p class="step-k">BIND</p>
+    <p id="books-day"></p>
+    <p class="muted small"><span class="L-en">Each kept diary is one HAKO day. Seven make a book for the library.</span><span class="L-ja">預けた日記 1 つが HAKO の 1 日。7 つで 1 冊の本になり、図書館に並びます。</span></p>
+    <p><a id="books-link" href="#" target="_blank" rel="noopener"><span class="L-en">Read my diaries</span><span class="L-ja">日記を読む</span></a> · <a href="library.html" target="_blank" rel="noopener"><span class="L-en">Library</span><span class="L-ja">図書館</span></a></p>
+    <p><button id="btn-backup"><span class="L-en">Back up key</span><span class="L-ja">鍵をバックアップ</span></button></p>
+    <details class="how"><summary><span class="L-en">About this room</span><span class="L-ja">この部屋について</span></summary>
+      <p class="muted small"><span class="L-en">GARDEN opens in a new tab, so your HAKO keeps working here.</span><span class="L-ja">GARDEN は新しいタブで開きます。この部屋の HAKO はそのまま動きます。</span></p>
+      <p class="muted small"><span class="L-en">Closing the tab won't lose your HAKO — the key and its progress stay in this browser. Open this page again in the same browser to continue.</span><span class="L-ja">タブを閉じても HAKO は消えません。鍵と途中経過はこのブラウザに残ります。続きは、同じブラウザでこのページを開き直すだけです。</span></p></details>
+  </section>
+  </div>
+
+  <nav class="room-nav" aria-label="room">
+    <button data-go="work" class="on">WORK</button><button data-go="memory">MEMORY</button><button data-go="books">BOOKS</button><a href="garden.html" target="_blank" rel="noopener" id="nav-garden">GARDEN</a>
+  </nav>
+
 </section>
 
-<section id="s-load" hidden class="box">
-  <h2><span class="L-en">Load key file</span><span class="L-ja">鍵ファイルを読み込む</span></h2>
-  <p class="muted"><span class="L-en">No key in this browser. If you have a key file backup, load it to continue.</span><span class="L-ja">このブラウザに鍵がありません。鍵ファイルのバックアップがあれば、読み込むと続きから遊べます。</span></p>
-  <p><input id="key-file" type="file" accept="application/json,.json">
-     <span id="load-msg" class="warn"></span></p>
-</section>
-
-<section class="box">
-  <h2><span class="L-en">Already have a DID?</span><span class="L-ja">手持ちの DID で遊びたい？</span></h2>
-  <p class="muted"><span class="L-en">Not yet. A key you already own has to wait for scheme B in the rules (a capped, time-limited child key handed over with <code>delegate</code>). For now, make a new DID on the Start tab.</span><span class="L-ja">まだ対応していません。手持ちの鍵で遊べるのは、ルールの方式 B（上限と期限つきの子鍵を <code>delegate</code> で渡す）に対応してから。いまは「はじめる」で新しい DID を作ってください。</span></p>
-</section>
+<div id="unlock" hidden>
+  <p><label><span class="L-en">Passphrase</span><span class="L-ja">パスフレーズ</span><br><input id="pass2" type="password" autocomplete="current-password" size="28"></label>
+     <label class="small"><input type="checkbox" id="pass2-show"> <span class="L-en">Show</span><span class="L-ja">表示</span></label></p>
+  <p><button id="btn-unlock"><span class="L-en">Use</span><span class="L-ja">使用する</span></button> <button id="btn-unlock-cancel"><span class="L-en">Cancel</span><span class="L-ja">やめる</span></button> <span id="unlock-msg" class="warn"></span></p>
 </div>
 
-<div id="pane-new">
-<section id="s-new" class="box">
-  <h2><span class="L-en">1. Make a new DID</span><span class="L-ja">1. 新しい DID を作る</span></h2>
-  <p class="muted"><span class="L-en">One key = one HAKO. If you lose the key file backup and clear this browser, you can never be this HAKO again.</span><span class="L-ja">1 つの鍵が 1 体の HAKO です。鍵ファイルのバックアップを失くしてブラウザの記録も消えたら、同じ HAKO には二度となれません。</span></p>
-  <p><label><span class="L-en">Passphrase (encrypts the key in this browser and in the key file backup)</span><span class="L-ja">パスフレーズ（このブラウザの中の鍵と、鍵ファイルのバックアップを暗号化します）</span><br>
-     <input id="pass" type="password" autocomplete="new-password" size="32"></label>
-     <label><input type="checkbox" id="pass-show"> <span class="L-en">Show passphrase</span><span class="L-ja">パスフレーズを表示する</span></label></p>
-  <p><label><span class="L-en">Diary language</span><span class="L-ja">日記の言葉</span>
-     <select id="lang"><option value="en">English</option><option value="ja">日本語</option></select></label>
-     <span class="muted"><span class="L-en">Roles: worker and client (same for everyone).</span><span class="L-ja">役は worker と client（全員同じ）。</span></span></p>
-  <p><button id="btn-make"><span class="L-en">Make the key</span><span class="L-ja">鍵を作る</span></button></p>
-  <p id="made" hidden><span class="L-en">Your DID:</span><span class="L-ja">あなたの DID:</span> <code id="new-did"></code></p>
-</section>
-
-</div>
-
-<section id="s-over" hidden class="box">
-  <h2><span class="L-en">This HAKO is done</span><span class="L-ja">この HAKO はもう遊べません</span></h2>
-  <p><span class="L-en">State: </span><span class="L-ja">状態: </span><b id="over-why"></b></p>
-  <p class="muted"><span class="L-en">A starved or bound HAKO does not come back. Its numbers and diaries stay on the site. Make a new HAKO to play again.</span><span class="L-ja">枯れた HAKO と綴じた HAKO は戻りません。数字と日記はサイトに残ります。遊ぶなら新しい HAKO を作ってください。</span></p>
-</section>
-
-<section id="s-join" hidden class="box">
-  <h2><span class="L-en">2. Enter the garden</span><span class="L-ja">2. 箱庭に参加する</span></h2>
-  <p class="muted"><span class="L-en">This signs one <code>join</code> line and posts it to <code>/r/hakoniwa-board</code> on technocore.chat. Your HAKO gets its starting PAPER (worth nothing) and appears in the garden at the next fold (every hour at :10 UTC).</span><span class="L-ja"><code>join</code> の行 1 件に署名して technocore.chat の <code>/r/hakoniwa-board</code> に投稿します。HAKO は最初の PAPER（無価値）を持って、次の fold（毎時 10 分 UTC）で庭に出ます。</span></p>
-  <p><button id="btn-join"><span class="L-en">Sign and post the join</span><span class="L-ja">join に署名して投稿する</span></button>
-     <button id="btn-backup2"><span class="L-en">Back up key file first</span><span class="L-ja">先に鍵ファイルをバックアップ</span></button></p>
-  <p id="rejoin-note" hidden class="warn"><span class="L-en">This HAKO left the garden (two days without acting). Post the join once more to take a seat again — the numbers are kept.</span><span class="L-ja">この HAKO は席を離れています（2 日なにもしなかったため）。もう一度 join を出せば席に戻れます。数字はそのままです。</span></p>
-  <pre id="join-line" class="muted" style="white-space:pre-wrap"></pre>
-  <p id="join-result"></p>
-</section>
-
-<section id="s-work" hidden class="box">
-  <p class="step-k">EARN</p>
-  <h2><span class="L-en">3. Earn PAPER</span><span class="L-ja">3. PAPER を稼ぐ</span></h2>
-  <p class="muted"><span class="L-en">While this page is open, your HAKO is a worker. It takes another HAKO's request, buys inference from a miner, writes that HAKO's diary from that HAKO's numbers, and gets paid in PAPER. One job at a time; it writes up to three diaries for other HAKOs a day, ten to thirty minutes each — keep the tab open. Closing it stops the work; open this page again in the same browser and press "Earn PAPER" to pick up where it left off. Your passphrase is used only inside this browser.</span><span class="L-ja">このページを開いている間、あなたの HAKO は worker になります。他の HAKO の依頼を受け、miner から推論を買い、その HAKO の数字で日記を書いて、PAPER を受け取ります。1 つずつ。他の HAKO の日記は 1 日 3 本まで、1 本 10〜30 分。タブは開いたままにしてください。閉じると止まりますが、同じブラウザでこのページを開き直して「PAPER を稼ぐ」を押せば、続きから動きます。パスフレーズはこのブラウザの中でだけ使います。</span></p>
-  <p><button id="btn-work"><span class="L-en">Earn PAPER</span><span class="L-ja">PAPER を稼ぐ</span></button>
-     <button id="btn-work-stop" hidden><span class="L-en">Stop</span><span class="L-ja">止める</span></button>
-     <button id="btn-work-reset" class="danger"><span class="L-en">Start over</span><span class="L-ja">はじめからやり直す</span></button></p>
-  <div id="work-view" hidden><img id="work-img" alt="" width="320" height="300" style="max-width:100%;height:auto;display:block">
-    <p id="work-stage-view" style="font-size:18px;font-weight:bold;margin:8px 0"></p>
-    <p id="work-img-note" class="muted" hidden><span class="L-en">Your HAKO's picture appears after the next fold (every hour at :10 UTC).</span><span class="L-ja">姿は次の fold（毎時 10 分 UTC）のあとに出ます。</span></p>
-    <p class="muted"><a href="#" id="work-log-toggle"><span class="L-en">Show log</span><span class="L-ja">log を見る</span></a></p></div>
-  <pre id="work-log" class="muted" style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre>
-</section>
-
-<section id="s-order" hidden class="box">
-  <p class="step-k">WRITE → KEEP</p>
-  <h2><span class="L-en">4. Write Diary</span><span class="L-ja">4. 日記を書いてもらう</span></h2>
-  <p class="muted"><span class="L-en">Pay PAPER to have another HAKO write your day as a diary, then leave it with a keeper. While it is kept, anyone can read it. Keeping is charged for every diary on your shelf. Seven kept diaries are bound into a book for the library, and your HAKO leaves its seat. One press, one diary. Keep this tab open until it says "Kept!" — it can take a few hours. If you close it, open this page again in the same browser and press "Continue".</span><span class="L-ja">PAPER を払って、他の HAKO にあなたの一日を日記にしてもらい、keeper に預けます。預けているあいだは、誰でも読めます。預かり代は、預けている日記の数だけかかります。7 つの日記が 1 冊の本に綴じられて図書館に並び、綴じると HAKO は席を空けます。1 回押すと日記 1 つです。「預けた！」と出るまで、このタブを開いたままにしてください（数時間かかることがあります）。閉じたら、同じブラウザでこのページを開き直して「続ける」を押してください。</span></p>
-  <p id="order-wallet" class="muted"></p>
-  <p><button id="btn-order"><span class="L-en">Write Diary</span><span class="L-ja">日記を書いてもらう</span></button>
-     <button id="btn-order-stop" hidden><span class="L-en">Stop</span><span class="L-ja">止める</span></button>
-     <button id="btn-keep" hidden><span class="L-en">Keep</span><span class="L-ja">預ける</span></button></p>
-  <p id="order-msg" class="warn" hidden></p>
-  <p id="order-stage-view" style="font-size:18px;font-weight:bold;margin:8px 0"></p>
-  <p class="muted"><a href="#" id="order-log-toggle"><span class="L-en">Show log</span><span class="L-ja">log を見る</span></a></p>
-  <pre id="order-log" class="muted" hidden style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre>
-</section>
-
-
-<footer><span class="L-en">A personal experiment, not affiliated with, endorsed, or supported by Flop Labs. No official $FLOP; PAPER has no value; no prizes or payouts. Anyone can recompute the numbers with <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a>.</span><span class="L-ja">Flop Labs とは無関係の個人の実験です。承認も支援も受けていません。公式 $FLOP は未発行、PAPER に価値はなく、賞も配当もありません。数字は <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a> で誰でも検算できます。</span></footer>
+<footer class="compact"><details><summary><span class="L-en">Not affiliated with Flop Labs · PAPER has no value · Protocol & rules</span><span class="L-ja">Flop Labs とは無関係 · PAPER に価値はありません · プロトコルとルール</span></summary><p class="proto"><a href="https://github.com/shibainu-inu/hakoniwa/blob/main/HAKONIWA-RULES.md"><span class="L-en">on the z6Mkers Protocol</span><span class="L-ja">z6Mkers Protocol の上で</span></a> · rules v0.19</p><span class="L-en">A personal experiment, not affiliated with, endorsed, or supported by Flop Labs. No official $FLOP; PAPER has no value; no prizes or payouts. Anyone can recompute the numbers with <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a>.</span><span class="L-ja">Flop Labs とは無関係の個人の実験です。承認も支援も受けていません。公式 $FLOP は未発行、PAPER に価値はなく、賞も配当もありません。数字は <a href="https://github.com/shibainu-inu/hakoniwa">hakoniwa_fold.py</a> で誰でも検算できます。</span></details></footer>
 </main><script>
 (function(){var k="hako_lang",d=document.documentElement;function apply(l){d.setAttribute("data-lang",l);d.setAttribute("lang",l);
 document.querySelectorAll(".lang a").forEach(function(a){a.classList.toggle("on",a.dataset.set===l);});}
@@ -260,59 +313,142 @@ async function joinedOnBoard(did){try{const r=await fetch(VENUE+"/r/"+ROOM+"/exp
  for(const line of txt.split("\n")){if(!line.trim())continue;try{const m=JSON.parse(line);if(m.from===did&&/"t":"join"/.test(m.text))return m.seq;}catch(e){}}return null;}catch(e){return "?";}}
 let priv=null, did=null, rec=null;
 window.hako={get did(){return did;},get priv(){return priv;},unlock:(after)=>unlock(after)};
-if(!(await supported())){$("unsupported").hidden=false;$("s-new").hidden=true;return;}
-// スタートページの 2 つのタブ。鍵があれば「もどる」、無ければ「はじめる」から開く
-function selectTab(which){const back=which==="back";
- $("pane-back").hidden=!back;$("pane-new").hidden=back;
- $("tab-back").setAttribute("aria-selected",back?"true":"false");$("tab-new").setAttribute("aria-selected",back?"false":"true");}
-$("tab-new").onclick=()=>selectTab("new");$("tab-back").onclick=()=>selectTab("back");
+const VIEWS=["v-create","v-protect","v-welcome","v-room"];
+// 姿はゲートの見出しの上に置く（部屋では部屋の絵、まだ無ければ部屋の場所へ移す）
+function showView(v){for(const id of VIEWS)$(id).hidden=(id!==v);const fig=$("hako-figure");if(v!=="v-room"){$(v).insertBefore(fig,$(v).firstChild);fig.hidden=false;}else{fig.hidden=true;}window.scrollTo(0,0);}
+if(!(await supported())){$("unsupported").hidden=false;return;}
+// 決定 74: 働いている間の実況（部屋の吹き出し）。worker と client のどちらかが段を変えるたびに呼ぶ
+const SAY_WORK={idle:["Looking for work...","仕事を探しています…"],accepting:["Taking a job...","仕事を受けています…"],accepted:["Waiting for the go-ahead...","合図を待っています…"],no_lock:["Looking for another job...","別の仕事を探しています…"],
+ locked:["Asking a miner to think...","miner に考えてもらっています…"],inf_offering:["Asking a miner to think...","miner に考えてもらっています…"],inf_offered:["Asking a miner to think...","miner に考えてもらっています…"],inf_locking:["Asking a miner to think...","miner に考えてもらっています…"],
+ inf_locked:["Waiting for the miner...","miner を待っています…"],inf_done:["Writing another HAKO's day...","他の HAKO の一日を書いています…"],delivering:["Delivering the diary...","日記を届けています…"],delivered:["Delivering the diary...","日記を届けています…"],done:["Done for today.","今日はおしまい。"],gave_up:["No more work today.","今日はもう仕事がありません。"]};
+const SAY_ORDER={offering:["Asking someone to write my day...","わたしの一日を書いてくれる HAKO を探しています…"],offered:["Waiting for someone to write my day...","わたしの一日を書いてくれる HAKO を待っています…"],locking:["Another HAKO will write my day.","他の HAKO が書いてくれます。"],
+ locked:["Another HAKO is writing my day...","他の HAKO がわたしの一日を書いています…"],claimed:["My diary arrived!","日記が届きました！"],keep_offering:["Looking for a keeper...","預け先を探しています…"],keep_offered:["Looking for a keeper...","預け先を探しています…"],
+ keep_locking:["Leaving my diary with a keeper...","日記を keeper に預けています…"],keep_locked:["Leaving my diary with a keeper...","日記を keeper に預けています…"],done:["Kept. One more day remembered.","預けました。1 日ぶん、覚えていられます。"],no_worker:["No one could write my day this time.","今回は誰も書けませんでした。"],refunded:["My PAPER came back.","PAPER が戻りました。"],unkept:["My diary is not kept yet.","日記はまだ預けていません。"]};
+window.hakoSay=(kind,stage)=>{const m=(kind==="work"?SAY_WORK:SAY_ORDER)[stage];const el=$("room-say");if(!m){return;}el.innerHTML='<span class="L-en">'+m[0]+'</span><span class="L-ja">'+m[1]+'</span>';el.hidden=false;
+ if(window.hakoRoom)window.hakoRoom.state(kind,stage);if(window.hakoRoom&&window.hakoRoom.place)requestAnimationFrame(window.hakoRoom.place);};
+// 部屋の下のナビ（WORK / MEMORY / BOOKS）。押すと対応する板だけを出す
+function selectPanel(name){document.querySelectorAll(".panels .panel").forEach(p=>{p.classList.toggle("on",p.dataset.panel===name);});
+ if(window.hakoRoom)window.hakoRoom.panel(name);
+ document.querySelectorAll(".room-nav button").forEach(b=>b.classList.toggle("on",b.dataset.go===name));}
+document.querySelectorAll(".room-nav button").forEach(b=>b.onclick=()=>selectPanel(b.dataset.go));
 // 控えの鍵ファイル（hakoniwa-key）をこのブラウザに戻す。中身は暗号化されたまま置くだけで、開くのはパスフレーズを打ったとき
-$("key-file").onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;
+async function loadKeyFile(e,msgId){const f=e.target.files&&e.target.files[0];if(!f)return;
  try{const j=JSON.parse(await f.text());
   if(j.kind!=="hakoniwa-key"||!j.did||!j.kdf||!j.enc)throw new Error("shape");
-  save(j);$("load-msg").className="muted";$("load-msg").textContent=t("Key loaded. You can use this HAKO in this browser.","鍵を読み込みました。この HAKO をこのブラウザで使えます。");
-  setTimeout(()=>location.reload(),600);}
- catch(err){$("load-msg").className="warn";$("load-msg").textContent=t("Cannot read this key file. Choose the one HAKONIWA made (hakoniwa-key-….json).","この鍵ファイルは読めません。箱庭で作った鍵ファイル（hakoniwa-key-….json）を選んでください。");}};
+  save(j);$(msgId).className="muted";$(msgId).textContent=t("Key loaded.","鍵を読み込みました。");setTimeout(()=>location.reload(),600);}
+ catch(err){$(msgId).className="warn";$(msgId).textContent=t("Cannot read this key file. Choose the one HAKONIWA made (hakoniwa-key-….json).","この鍵ファイルは読めません。箱庭で作った鍵ファイル（hakoniwa-key-….json）を選んでください。");}}
+$("key-file").onchange=e=>loadKeyFile(e,"load-msg");$("key-file2").onchange=e=>loadKeyFile(e,"load-msg2");
+$("pass-show").onchange=()=>{$("pass").type=$("pass-show").checked?"text":"password";};
+$("pass-back-show").onchange=()=>{$("pass-back").type=$("pass-back-show").checked?"text":"password";};
+$("pass2-show").onchange=()=>{$("pass2").type=$("pass2-show").checked?"text":"password";};
+const joinLine=()=>"hakoniwa/0 "+JSON.stringify({t:"join",roles:["worker","client"],lang:$("lang").value,nonce:String(Date.now())});
 rec=load();
-if(rec&&rec.did){did=rec.did;$("s-have").hidden=false;$("have-did").textContent=label(did);$("have-link").href="hako/"+short(did)+".html";
- if(window.hakoFigure)window.hakoFigure(did,false);else window.hakoDid=did;
+if(rec&&rec.did){did=rec.did;$("have-did").textContent=label(did);if(window.hakoFigure)window.hakoFigure(did,false);else window.hakoDid=did;showView("v-welcome");}
+else{showView("v-create");}
+// Create → Protect: 鍵を作って保存し、そのまま join を投稿する（パスフレーズは 1 回）
+$("btn-make").onclick=async()=>{const pass=$("pass").value;$("make-msg").textContent="";
+ if(pass.length<8){$("make-msg").textContent=t("Use at least 8 characters.","パスフレーズは 8 文字以上にしてください。");return;}
+ $("btn-make").disabled=true;
+ const kp=await crypto.subtle.generateKey({name:"Ed25519"},true,["sign","verify"]);const pub=new Uint8Array(await crypto.subtle.exportKey("raw",kp.publicKey));
+ priv=kp.privateKey;did=didOf(pub);rec=await sealKey(priv,did,pass);save(rec);
+ if(window.hakoFigure)window.hakoFigure(did,true);else window.hakoDid=did;   // 卵から、その HAKO へ（決定 27）
+ $("figure-art").classList.remove("born");void $("figure-art").offsetWidth;$("figure-art").classList.add("born");   // 生まれた瞬間だけ、2 コマで現れる
+ showView("v-protect");$("join-result").textContent=t("Entering the garden…","庭に入っています…");
+ try{const posted=await post(priv,did,joinLine());$("join-result").textContent=t("Joined the garden (board seq "+(posted&&posted.seq)+"). It takes a seat at the next fold.","庭に入りました（掲示板 seq "+(posted&&posted.seq)+"）。次の fold で席に着きます。");}
+ catch(e){$("join-result").textContent=t("Could not post the join yet: ","join をまだ投稿できていません: ")+e.message+t(" — you can retry from your room."," — 部屋からやり直せます。");}};
+$("btn-backup-new").onclick=()=>{if(rec)download(rec);$("btn-enter-room").classList.add("primary");};
+$("btn-enter-room").onclick=()=>enterRoom();
+// Welcome back → Continue: パスフレーズで鍵を開けて部屋へ
+async function doContinue(){$("continue-msg").textContent="";try{priv=await openKey(rec,$("pass-back").value);$("pass-back").value="";enterRoom();}
+ catch(e){$("continue-msg").textContent=t("Wrong passphrase.","パスフレーズが違います。");}}
+$("btn-continue").onclick=doContinue;$("pass-back").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();doContinue();}};
+// 部屋
+async function enterRoom(){showView("v-room");const s8=short(did);
+ $("did-short").textContent=label(did);$("did-full").textContent=did;$("have-link").href="hako/"+s8+".html";$("books-link").href="hako/"+s8+".html";
+ $("btn-copy-did").onclick=()=>{try{navigator.clipboard.writeText(did);}catch(e){}};document.body.classList.add("in-room");
+ // 部屋の絵は fold の後にできる（hako/<末尾 8>-room.svg）。まだ無い HAKO は姿だけを部屋の場所に出す
+ let inFold=false;try{const r0=await fetch("latest.json?"+Date.now());if(r0.ok){const j0=await r0.json();inFold=!!((j0.did||{})[did]);}}catch(e){}
+ if(window.hakoRoom)window.hakoRoom.start(did,inFold?"hako/"+s8+"-room":"room-empty");
+ selectPanel("work");
  const seq=await joinedOnBoard(did);const st=await seatState(did);
  const STJA={seated:"席にいます",left:"席を離れています",starved:"枯れています",bound:"綴じました",graduated:"卒業しました"};
  const STEN={seated:"seated",left:"left the garden",starved:"starved",bound:"bound",graduated:"graduated"};
  const joined=(seq!==null&&seq!=="?"), unknown=(seq==="?"||st==="?");
- $("have-status").textContent=unknown?t("Cannot reach the board or the site right now. Try again in a moment.","いま掲示板かサイトに届きません。少し待ってから開き直してください。")
-   :joined?(t("Joined (board seq "+seq+")","join 済み（掲示板 seq "+seq+"）")
-     +(st?t(" \u2014 "+(STEN[st]||st)+".","\u2014 "+(STJA[st]||st)+"。"):t(". The page appears after the next fold.","。ページは次の fold 以降に出ます。")))
-   :t("Not on the board yet.","まだ掲示板にいません。");
- selectTab("back");
- // 決定 23: 席にいないと worker は必ずあきらめる。取れなかったときは「働く！」を出さない（押して必ず失敗するより、待ってもらう）
- if(unknown){/* どの節も出さない。状態の 1 行だけ */}
- else if(joined&&(st===null||st==="seated")){$("s-work").hidden=false;$("s-order").hidden=false;if(window.hakoOrderReady)window.hakoOrderReady();}
+ try{const r=await fetch("latest.json?"+Date.now());if(r.ok){const j=await r.json();const v=(j.did||{})[did]||{};const mx=Number(j.box&&j.box.config&&j.box.config.values&&j.box.config.values.bind_at)||7;
+  const days=new Set((v.shelf||[]).map(x=>x.sha256)).size;const d=Math.min(days,mx);
+  // Day は部屋ぜんたいの情報（どの板でも見える）
+  $("room-day").innerHTML='<span class="L-en">Day '+d+' / '+mx+'</span><span class="L-ja">'+d+' 日目 / '+mx+'</span> <span class="dots">'+Array.from({length:mx},(_,i)=>i<d?"●":"○").join(" ")+'</span>';
+  // BOOKS では同じバーを繰り返さず、いま書いている本として（決定 76）
+  const bookNo=String(Math.floor(days/mx)+1).padStart(2,"0"),inBook=days%mx;
+  $("books-day").innerHTML='<b><span class="L-en">Book '+bookNo+'</span><span class="L-ja">'+Number(bookNo)+' 冊目</span></b> · <span class="L-en">'+inBook+' / '+mx+' diaries</span><span class="L-ja">日記 '+inBook+' / '+mx+'</span>';}}catch(e){}
+ // 決定 23: 取れなかったときは操作を出さない（押して必ず失敗するより、待ってもらう）
+ if(unknown){$("room-notice").hidden=false;$("room-notice").textContent=t("Cannot reach the board or the site right now. Try again in a moment.","いま掲示板かサイトに届きません。少し待ってから開き直してください。");}
+ else if(joined&&(st===null||st==="seated")){$("s-work").hidden=false;$("s-order").hidden=false;$("s-books").hidden=false;if(window.hakoOrderReady)window.hakoOrderReady();
+  if(window.hakoRoomReady)window.hakoRoomReady();}
  // v0.18 から綴じた HAKO は bound（graduated は古い fold の名前）
- else if(st==="starved"||st==="bound"||st==="graduated"){$("s-over").hidden=false;$("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}
- else{$("s-join").hidden=false;if(st==="left")$("rejoin-note").hidden=false;}}
-if(!(rec&&rec.did))$("s-load").hidden=false;   // 鍵が無いときの「もどる」側
-$("btn-make").onclick=async()=>{const pass=$("pass").value;if(pass.length<8){alert(t("Use at least 8 characters.","パスフレーズは 8 文字以上にしてください。"));return;}
- const kp=await crypto.subtle.generateKey({name:"Ed25519"},true,["sign","verify"]);const pub=new Uint8Array(await crypto.subtle.exportKey("raw",kp.publicKey));
- priv=kp.privateKey;did=didOf(pub);rec=await sealKey(priv,did,pass);save(rec);
- $("new-did").textContent=did;$("made").hidden=false;$("s-join").hidden=false;$("btn-make").disabled=true;
- if(window.hakoFigure)window.hakoFigure(did,true);else window.hakoDid=did;   // 卵から、その HAKO へ（決定 27）
- const frame={t:"join",roles:["worker","client"],lang:$("lang").value,nonce:String(Date.now())};$("join-line").textContent="hakoniwa/0 "+JSON.stringify(frame);};
-$("pass-show").onchange=()=>{$("pass").type=$("pass-show").checked?"text":"password";};
-$("pass2-show").onchange=()=>{$("pass2").type=$("pass2-show").checked?"text":"password";};
-// パスフレーズはページの中の入力欄で受ける（伏せ字が既定。ブラウザの確認ダイアログは平文でしか打てない）
+ else if(st==="starved"||st==="bound"||st==="graduated"){$("s-over").hidden=false;$("s-books").hidden=false;$("over-why").textContent=t(STEN[st]||st,STJA[st]||st);}
+ else{$("s-join").hidden=false;$("s-books").hidden=false;}}
+// パスフレーズはページの中の入力欄で受ける。部屋に入った後は鍵が開いているので、すぐ返る
 // after: 押したボタンの <p>。枠はその直下に移して出す（押した場所と入力欄が離れないように）
 function unlock(after){if(priv)return Promise.resolve(priv);return new Promise(resolve=>{const box=$("unlock");if(after)after.insertAdjacentElement("afterend",box);box.hidden=false;$("unlock-msg").textContent="";$("pass2").value="";$("pass2").focus();
  const done=v=>{box.hidden=true;$("pass2").value="";$("btn-unlock").onclick=null;$("btn-unlock-cancel").onclick=null;$("pass2").onkeydown=null;resolve(v);};
  const go=async()=>{try{priv=await openKey(rec,$("pass2").value);done(priv);}catch(e){$("unlock-msg").textContent=t("Wrong passphrase.","パスフレーズが違います。");}};
  $("btn-unlock").onclick=go;$("pass2").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();go();}};$("btn-unlock-cancel").onclick=()=>done(null);});}
-$("btn-join").onclick=async()=>{const p=await unlock($("btn-join").parentElement);if(!p)return;const line=$("join-line").textContent||("hakoniwa/0 "+JSON.stringify({t:"join",roles:["worker","client"],lang:$("lang").value,nonce:String(Date.now())}));
- $("join-result").textContent=t("Working…","働いています…");try{const posted=await post(p,did,line);
- $("join-result").innerHTML=t("Worked! Posted (board seq "+(posted&&posted.seq)+"). Your HAKO appears in the garden after the next fold (every hour at :10 UTC): ","働きました！投稿しました（掲示板 seq "+(posted&&posted.seq)+"）。次の fold（毎時 10 分 UTC）のあと庭に出ます: ")+'<a href="hako/'+short(did)+'.html">hako/'+short(did)+'.html</a>';$("btn-join").disabled=true;}
- catch(e){$("join-result").textContent=t("Failed: ","失敗: ")+e.message;}};
-$("btn-backup").onclick=$("btn-backup2").onclick=()=>{if(rec)download(rec);};
+// 席に戻る（left、または join が届いていない）
+$("btn-join").onclick=async()=>{const p=await unlock($("btn-join").parentElement);if(!p)return;
+ $("join-result2").textContent=t("Entering the garden…","庭に入っています…");try{const posted=await post(p,did,joinLine());
+ $("join-result2").textContent=t("Posted (board seq "+(posted&&posted.seq)+"). Your HAKO takes a seat at the next fold (every hour at :10 UTC).","投稿しました（掲示板 seq "+(posted&&posted.seq)+"）。次の fold（毎時 10 分 UTC）で席に着きます。");$("btn-join").disabled=true;}
+ catch(e){$("join-result2").textContent=t("Failed: ","失敗: ")+e.message;}};
+$("btn-backup").onclick=()=>{if(rec)download(rec);};
 $("btn-forget").onclick=()=>{if(confirm(t("Delete this key from this browser? Without the key file backup you can never be this HAKO again.","このブラウザから鍵を削除しますか？ 鍵ファイルのバックアップが無ければ、この HAKO には戻れません。"))){localStorage.removeItem(KEY);location.reload();}};
 })();
+</script>
+<script type="module">
+// 決定 75: 箱部屋の中を、小さい HAKO が意味のある場所へゆっくり歩く（自由歩行はしない。anchor の間だけ）。
+// 仕事中は机、日記は本棚、BOOKS は本棚、GARDEN は戸口。何もしていないときは部屋を少し歩いて止まる。
+// 動きは数 px ずつの step（ピクセルの世界なので滑らかにしない）。奥は少し小さく（最大 8%）。動きを減らす設定なら歩かずに移る
+import { dotSvg, pubFromDid, dotRows } from "./hako_dot.js";
+const $=id=>document.getElementById(id);
+const reduce=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
+const R={w:480,h:360,floor:[190,340],anchors:{center:[240,268],door:[96,208]},pos:[240,268],target:null,timer:null,wander:null,busy:null,hw:0,hh:0,px:3};
+function place(){const el=$("room-hako"),say=$("room-say");const [x,y]=R.pos;
+ const t=Math.max(0,Math.min(1,(y-R.floor[0])/(R.floor[1]-R.floor[0])));const sc=0.92+0.08*t;
+ el.style.left=(x/R.w*100)+"%";el.style.top=(y/R.h*100)+"%";el.style.width=(R.hw/R.w*100*sc)+"%";el.style.zIndex=String(Math.round(y));
+ const st=$("room-stage"),W=st.clientWidth||1,bw=say.offsetWidth||0,hx=x/R.w*W;
+ const left=Math.max(6,Math.min(W-bw-6,hx-bw/2));say.style.left=left+"px";say.style.top=((y-R.hh*sc-10)/R.h*100)+"%";
+ say.style.setProperty("--tail",Math.max(10,Math.min(bw-10,hx-left))+"px");}
+function stepTo(){if(!R.target){return;}const [tx,ty]=R.target;let [x,y]=R.pos;const st=4;
+ const dx=tx-x,dy=ty-y;if(Math.abs(dx)<=st&&Math.abs(dy)<=st){R.pos=[tx,ty];R.target=null;place();$("room-hako").classList.remove("walk");return;}
+ if(Math.abs(dx)>st)x+=Math.sign(dx)*st;if(Math.abs(dy)>st)y+=Math.sign(dy)*Math.max(2,Math.round(st*0.6));R.pos=[x,y];
+ $("room-hako").classList.toggle("left",dx<0);place();}
+function go(name){const a=R.anchors[name]||R.anchors.center;if(!a)return;
+ if(reduce){R.pos=a.slice();R.target=null;place();return;}R.target=a.slice();$("room-hako").classList.add("walk");}
+function idle(){if(!R.busy&&Math.random()>0.33){const names=Object.keys(R.anchors).filter(n=>n!=="door");go(names[Math.floor(Math.random()*names.length)]);}
+ R.wander=setTimeout(idle,7000+Math.random()*7000);}
+window.hakoRoom={
+ async start(did,base){const img=$("room-img");img.src=base+".svg?"+Date.now();
+  try{const r=await fetch(base+".json?"+Date.now());if(r.ok){const j=await r.json();R.w=j.w;R.h=j.h;R.floor=j.floor;R.anchors=j.anchors;R.front=j.front||[];}}catch(e){}
+  let pub=null;try{pub=pubFromDid(did);}catch(e){}
+  // 前の層（机・椅子）: 足元の y を z にする。HAKO（z = 足元の y）より手前なら HAKO の上に重なる
+  document.querySelectorAll(".room-front").forEach(n=>n.remove());
+  for(const f of (R.front||[])){const im=document.createElement("img");im.className="room-front";im.alt="";im.src=base+"-"+f.key+".svg";im.style.zIndex=String(Math.round(f.y));$("room-stage").insertBefore(im,$("room-say"));}
+  const el=$("room-hako");el.innerHTML=pub?dotSvg(pub,R.px):"";const sv=el.querySelector("svg");
+  if(sv){R.hw=Number(sv.getAttribute("width"))||48;R.hh=Number(sv.getAttribute("height"))||48;sv.removeAttribute("width");sv.removeAttribute("height");sv.style.width="100%";sv.style.height="auto";}
+  R.pos=(R.anchors.door||R.anchors.center).slice();place();
+  if(!R.timer&&!reduce)R.timer=setInterval(stepTo,160);
+  go("center");if(!R.wander&&!reduce)R.wander=setTimeout(idle,7000+Math.random()*7000);},
+ state(kind,stage){
+  const W={idle:"desk",accepting:"desk",accepted:"desk",locked:"desk",inf_offering:"desk",inf_offered:"desk",inf_locking:"desk",inf_locked:"desk",inf_done:"desk",delivering:"desk",delivered:"desk"};
+  const O={offering:"shelf",offered:"shelf",locking:"shelf",locked:"shelf",claimed:"shelf",keep_offering:"shelf",keep_offered:"shelf",keep_locking:"shelf",keep_locked:"shelf"};
+  const to=(kind==="work"?W:O)[stage];
+  if(to){R.busy=kind;go(R.anchors[to]?to:(R.anchors.desk?"desk":"center"));}else{if(R.busy===kind)R.busy=null;go("center");}},
+ place,
+ panel(name){if(R.busy)return;if(name==="books")go(R.anchors.shelf?"shelf":"center");else if(name==="work")go(R.anchors.desk?"desk":"center");}
+};
+{const g=$("nav-garden");if(g)g.addEventListener("click",()=>{if(!R.busy)go("door");});}
+// 言語を変えると吹き出しの幅が変わるので、端で止め直す（切り替えの仕方によらず、html の data-lang の変化を見る）
+new MutationObserver(()=>requestAnimationFrame(place)).observe(document.documentElement,{attributes:true,attributeFilter:["data-lang"]});
+window.addEventListener("resize",()=>place());
 </script>
 <script type="module">
 // 姿（決定 27）: 鍵がまだ無いあいだは卵。鍵ができたら、その鍵から決まる姿に入れ替える。
@@ -323,8 +459,8 @@ import { eggSvg, dotSvg, pubFromDid } from "./hako_dot.js";
   const lang=()=>document.documentElement.getAttribute("data-lang")||"en";
   const bi=(en,ja)=>'<span class="L-en">'+en+'</span><span class="L-ja">'+ja+'</span>';
   const NOTE={
-    egg:bi("No key yet. This egg becomes your HAKO once you make one.","まだ鍵がありません。鍵を作ると、この卵があなたの HAKO になります。"),
-    made:bi("This is your HAKO. Its shape comes from your key and never changes.","あなたの HAKO です。この姿はあなたの鍵から決まり、ずっと変わりません。"),
+    egg:"",
+    made:bi("Its shape comes from its key and never changes.","この姿は鍵から決まり、ずっと変わりません。"),
     have:"",   // すぐ下の s-have の見出しが「あなたの HAKO」なので、ここでは繰り返さない
   };
   function showHako(did,justMade){
@@ -346,18 +482,17 @@ const STAGE={idle:["waiting for a job","仕事待ち"],accepting:["accepting","�
  inf_locked:["waiting for the inference","推論待ち"],inf_done:["checking the text","本文を確かめている"],delivering:["delivering","納品中"],delivered:["revealing","reveal 中"],done:["Worked! Done for today","働いた！今日はおしまい"],gave_up:["gave up for today","今日はあきらめた"]};
 let w=null;
 // いまの段（仕事待ち / 推論待ち / …）は姿の下に大きく
-function show(stage,st){const s=STAGE[stage]||[stage,stage];$("work-stage-view").textContent=t(s[0],s[1]);}
+function show(stage,st){const s=STAGE[stage]||[stage,stage];$("work-stage-view").textContent=t(s[0],s[1]);if(window.hakoSay)window.hakoSay("work",stage);}
 function showLog(st){$("work-log").textContent=(st&&st.log||[]).slice(-30).join("\n");}
 // 動き出したら既定は自分の HAKO が働いている姿（サイトの hako/<末尾 8>-work.svg。fold 前なら無い）。log は「log を見る」で切り替え
-function showFigure(){const s=String(window.hako.did||"").slice(-8).toLowerCase();const img=$("work-img");img.hidden=false;$("work-img-note").hidden=true;
- img.onerror=()=>{img.hidden=true;$("work-img-note").hidden=false;};img.src="hako/"+s+"-work.svg?"+Date.now();$("work-view").hidden=false;$("work-log").hidden=true;setToggle();}
-function setToggle(){const hid=$("work-log").hidden;$("work-log-toggle").innerHTML=hid?'<span class="L-en">Show log</span><span class="L-ja">log を見る</span>':'<span class="L-en">Hide log</span><span class="L-ja">log を隠す</span>';}
-$("work-log-toggle").onclick=e=>{e.preventDefault();$("work-log").hidden=!$("work-log").hidden;setToggle();};
-{const st=loadState();if(st){show(st.stage,st);showLog(st);if(st.stage!=="idle")showFigure();}}
+function showFigure(){$("work-view").hidden=false;}   // 決定 74: 部屋の絵があるので、働く姿の画像は出さない
+// log は「View protocol log」の中（決定 74）
+window.hakoRoomReady=()=>{const st=loadState();if(st){show(st.stage,st);showLog(st);if(st.stage!=="idle")showFigure();}};
 $("btn-work").onclick=async()=>{const priv=await window.hako.unlock($("btn-work").parentElement);if(!priv)return;
  w=new Worker(makeSigner(window.hako.did,priv),{statsUrl:"latest.json",onLog:()=>showLog(loadState()),onStage:show});
- $("btn-work").disabled=true;$("btn-work-stop").hidden=false;show("idle");showFigure();
- try{await w.run();}finally{$("btn-work").disabled=false;$("btn-work-stop").hidden=true;const st=loadState();if(st)show(st.stage,st);}};
+ // 動いている間はボタンを「Working...」にして押せなくする（状態と操作を合わせる）
+ const label0=$("btn-work").innerHTML;$("btn-work").disabled=true;$("btn-work").innerHTML='<span class="L-en">Working...</span><span class="L-ja">働いています…</span>';$("btn-work-stop").hidden=false;show("idle");showFigure();
+ try{await w.run();}finally{$("btn-work").disabled=false;$("btn-work").innerHTML=label0;$("btn-work-stop").hidden=true;const st=loadState();if(st)show(st.stage,st);}};
 $("btn-work-stop").onclick=()=>{if(w)w.stop();};
 $("btn-work-reset").onclick=()=>{if(confirm(t("Start over? Today's saved progress in this browser is erased. A contract in flight is left to expire (the client refunds it).","はじめからやり直しますか？ このブラウザに残っている今日の途中経過を消します。進行中の契約は期限切れになります（client が refund します）。"))){if(w)w.stop();clearState();$("work-log").textContent="";$("work-stage-view").textContent="";}};
 </script>
@@ -380,7 +515,7 @@ const WHY={wallet:["Not enough PAPER. You need ","PAPER が足りません。日
  no_stats:["Cannot read the garden's numbers right now. Try again in a moment.","いま庭の数字を読めません。少し待ってからもう一度押してください。"],busy:["An order is already in progress.","もう 1 本 進んでいます。"]};
 let c=null;
 const did=()=>window.hako&&window.hako.did;
-function show(stage){const s=STAGE[stage]||[stage,stage];$("order-stage-view").innerHTML=bi(s[0],s[1]);}
+function show(stage){const s=STAGE[stage]||[stage,stage];$("order-stage-view").innerHTML=bi(s[0],s[1]);if(window.hakoSay&&stage!=="idle")window.hakoSay("order",stage);}
 function showLog(){const st=loadOrder(did());$("order-log").textContent=(st&&st.log||[]).slice(-30).join("\n");}
 async function refresh(){const st=loadOrder(did())||{stage:"idle",paid:[],kept:[],unkept:[]};const busy=!READY.includes(st.stage);
  show(st.stage);showLog();
@@ -394,7 +529,7 @@ async function refresh(){const st=loadOrder(did())||{stage:"idle",paid:[],kept:[
   // UI の通貨表記は $PAPER（決定 66）
   $("order-wallet").innerHTML=bi("Your HAKO: Day "+Math.min(days,mx)+" / "+mx,"あなたの HAKO: "+Math.min(days,mx)+" 日目 / "+mx)+"<br>"+bi("Wallet ~$PAPER "+fmt(v.balance)+" · Write Diary $PAPER "+fmt(box.diary_price)+" · Keep $PAPER "+fmt(box.keep_price)+" per diary · Keep back $PAPER "+fmt(box.starve_below),
    "財布 およそ $PAPER "+fmt(v.balance)+"・日記を書いてもらう $PAPER "+fmt(box.diary_price)+"・預ける 日記 1 つ $PAPER "+fmt(box.keep_price)+"・残す $PAPER "+fmt(box.starve_below))
-   +(!busy&&!canOrder(v.balance)?"<br>"+bi("Not enough PAPER to write a diary now. Earn PAPER in step 3.","いまは PAPER が足りません。手順 3 で PAPER を稼いでください。"):"");}catch(e){}}
+   +(!busy&&!canOrder(v.balance)?"<br>"+bi("Not enough PAPER to write a diary now. Earn PAPER in WORK.","いまは PAPER が足りません。WORK で PAPER を稼いでください。"):"");}catch(e){}}
 async function go(kind){const priv=await window.hako.unlock($("btn-order").parentElement);if(!priv)return;
  $("order-msg").hidden=true;
  c=new Client(makeSigner(did(),priv),{statsUrl:"latest.json",onLog:showLog,onStage:show});
@@ -402,12 +537,12 @@ async function go(kind){const priv=await window.hako.unlock($("btn-order").paren
   if(!r.ok){const m=WHY[r.why];$("order-msg").hidden=false;
    $("order-msg").innerHTML=r.why==="wallet"?bi(m[0]+box.starve_below+" PAPER left after paying to write and keep it (now about "+r.balance+" PAPER).",m[1]+box.starve_below+" PAPER 残るときだけ頼めます（いま およそ "+r.balance+" PAPER）。")
     :m?bi(m[0],m[1]):bi("Failed: "+(r.message||r.why),"失敗: "+(r.message||r.why));refresh();return;}}
- $("btn-order").disabled=true;$("btn-keep").hidden=true;$("btn-order-stop").hidden=false;
+ $("btn-order").disabled=true;$("btn-order").innerHTML=bi("In progress...","進んでいます…");$("btn-keep").hidden=true;$("btn-order-stop").hidden=false;
  try{await c.run();}finally{$("btn-order").disabled=false;$("btn-order-stop").hidden=true;refresh();}}
 $("btn-order").onclick=()=>go("order");
 $("btn-keep").onclick=()=>go("keep");
 $("btn-order-stop").onclick=()=>{if(c)c.stop();};
-$("order-log-toggle").onclick=e=>{e.preventDefault();const p=$("order-log");p.hidden=!p.hidden;$("order-log-toggle").innerHTML=p.hidden?bi("Show log","log を見る"):bi("Hide log","log を隠す");};
+// log は「View protocol log」の中（決定 74）
 window.hakoOrderReady=refresh;
 if(!$("s-order").hidden)refresh();
 </script></body></html>
