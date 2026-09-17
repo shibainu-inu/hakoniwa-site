@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-17T00:10:01Z",
+  "generated": "2026-09-17T01:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -136,32 +136,32 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 4,
-   "free": 68
+   "taken": 5,
+   "free": 67
   },
   "exits": {
    "starved": 0,
-   "left": 2,
+   "left": 1,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3619854,
+   "rows": 3641536,
    "dup": 0,
-   "unsigned": 141338,
-   "bad_sig": 35284,
-   "frames": 2747311,
-   "offers": 100,
-   "accepts": 111,
+   "unsigned": 141339,
+   "bad_sig": 35492,
+   "frames": 2758938,
+   "offers": 109,
+   "accepts": 121,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 413,
+   "accept_bad_contract": 438,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 70,
+   "contracts_unlocked": 78,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -172,8 +172,8 @@
    "join_no_seat": 0,
    "join_after_exit": 0
   },
-  "receipts": 37,
-  "paper_total": 11673.0,
+  "receipts": 38,
+  "paper_total": 12073.0,
   "bound_paper": 0,
   "shelves": {
    "volumes": 9,
@@ -799,6 +799,36 @@
     "settled_seq": null,
     "settled_ts": null,
     "outcome": null,
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xec66dbe83172fa8a3ccc96a7aa528656de1dbbd57575bac5f345dc1d198b61aa",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "room": "mb-p-tclk-ec66dbe83172fa8a",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1789603128,
+    "settled_seq": null,
+    "settled_ts": null,
+    "outcome": null,
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x37ce82f6dce20e9a985d68331e07e5e6d91bd4a62c2867d093ddd463abcb32d9",
+    "kind": "inf",
+    "payer": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-37ce82f6dce20e9a",
+    "amount": 240.0,
+    "locked_seq": 1,
+    "locked_ts": 1789603189,
+    "settled_seq": 4,
+    "settled_ts": 1789603600,
+    "outcome": "receipt",
     "dispute": false,
     "test": false
    }
@@ -2958,6 +2988,118 @@
     "diary_checks": [],
     "dropped": null,
     "status": "locked"
+   },
+   "0xec66dbe83172fa8a3ccc96a7aa528656de1dbbd57575bac5f345dc1d198b61aa": {
+    "contract": "0xec66dbe83172fa8a3ccc96a7aa528656de1dbbd57575bac5f345dc1d198b61aa",
+    "room": "mb-p-tclk-ec66dbe83172fa8a",
+    "job": "hakoniwa-diary-PvqA-20260916-7",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1789674345332,
+    "offer_id": "0x66b2da29ee355b9a90af8e042967f17436973f90cb7d5e75973f8ecc7c8a008f",
+    "offer_seq": 5399896,
+    "offer_ts": "2026-09-16T19:45:47.242104Z",
+    "accept_seq": 5489553,
+    "accept_ts": "2026-09-16T23:56:44.442892Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-16T23:58:48.741308Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-17T00:06:41.023303Z"
+    },
+    "refund": null,
+    "receipt": null,
+    "settled": null,
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-17T00:06:40.820652Z",
+      "from": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+      "sha256": "f1045329d2de8b5e4faab0331dc8df1410f844ee7f6922a19dc042751befd0d8",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日のできごとを主語に、今日の日記を書いてもらう仕事を一つ出し、その代金を払った。日記が完成し、記録として残った。感じたこと、自分の記録を残して、その日のことを振り返ってみた。",
+      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": true,
+      "reason": "",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": true,
+       "5": true
+      },
+      "context_path": "/kv/hakoniwa-twe6jbxx/diary-20260916-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
+     }
+    ],
+    "dropped": null,
+    "status": "revealed"
+   },
+   "0x37ce82f6dce20e9a985d68331e07e5e6d91bd4a62c2867d093ddd463abcb32d9": {
+    "contract": "0x37ce82f6dce20e9a985d68331e07e5e6d91bd4a62c2867d093ddd463abcb32d9",
+    "room": "mb-p-tclk-37ce82f6dce20e9a",
+    "job": "hakoniwa-inf-ec66dbe8-1",
+    "kind": "inf",
+    "payer": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 240,
+    "context": "/kv/hakoniwa-twe6jbxx/inf-ec66dbe8-1",
+    "test": false,
+    "refund_after_ms": 1789624735394,
+    "offer_id": "0x575bf1d56fa5ffbb45842563f481e323491507c344953d06db8172ec25becb15",
+    "offer_seq": 5490840,
+    "offer_ts": "2026-09-16T23:59:09.493343Z",
+    "accept_seq": 5490942,
+    "accept_ts": "2026-09-16T23:59:36.172760Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-16T23:59:49.921818Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-17T00:06:19.071119Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-17T00:06:40.303367Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 2,
+      "ts": "2026-09-17T00:06:16.916990Z",
+      "from": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+      "sha256": "f1045329d2de8b5e4faab0331dc8df1410f844ee7f6922a19dc042751befd0d8",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日のできごとを主語に、今日の日記を書いてもらう仕事を一つ出し、その代金を払った。日記が完成し、記録として残った。感じたこと、自分の記録を残して、その日のことを振り返ってみた。"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
    }
   },
   "test_contracts": {
@@ -3611,13 +3753,6 @@
     "dropped": null
    },
    {
-    "contract": "0xec66dbe83172fa8a3ccc96a7aa528656de1dbbd57575bac5f345dc1d198b61aa",
-    "job": "hakoniwa-diary-PvqA-20260916-7",
-    "accept_seq": 5489553,
-    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
-    "dropped": null
-   },
-   {
     "contract": "0x02c911f019f591295904c88c29d7efcb666e7974c10ddd5d1a53c94440fd05c8",
     "job": "hakoniwa-inf-ec66dbe8-1",
     "accept_seq": 5490870,
@@ -3632,9 +3767,72 @@
     "dropped": null
    },
    {
-    "contract": "0x37ce82f6dce20e9a985d68331e07e5e6d91bd4a62c2867d093ddd463abcb32d9",
+    "contract": "0x7c51930ceeebcc1a73d6f8f86331cdd4bfb546718ee47375e1a6b9d16dea4cbb",
     "job": "hakoniwa-inf-ec66dbe8-1",
-    "accept_seq": 5490942,
+    "accept_seq": 5491690,
+    "payee": "did:key:z6MkhVExGePt1zvndSD5bMo9gK43hDnyUZJyF1x9dR4N7zUv",
+    "dropped": null
+   },
+   {
+    "contract": "0x3d572ea971a16e5f1371fe42aa7d746c9191e1d1d0ab2b22a766808de2193684",
+    "job": "hakoniwa-diary-PvqA-20260917-1",
+    "accept_seq": 5492131,
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "dropped": null
+   },
+   {
+    "contract": "0x602b713f237b67a09f0a4c4009179c42e1ab38edc4e79f5ec1f3e6206297e9ee",
+    "job": "hakoniwa-diary-PvqA-20260917-3",
+    "accept_seq": 5493470,
+    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "dropped": null
+   },
+   {
+    "contract": "0x069bc1a2f5e5f378ba8e323cc70d913965d41c28c5d0397ccbd115f9e4a142f1",
+    "job": "hakoniwa-inf-602b713f-2",
+    "accept_seq": 5493558,
+    "payee": "did:key:z6MkmYKDYUbge32euTT6rdUwezschvB8CXgPgKaf1MBVt4eu",
+    "dropped": null
+   },
+   {
+    "contract": "0x7ac8dcd6c1b1f374b21969908326c3b4e3f8aefa5c659e8d2405ae2aba3afb7d",
+    "job": "hakoniwa-inf-602b713f-2",
+    "accept_seq": 5495281,
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "dropped": null
+   },
+   {
+    "contract": "0xb53ca9bf987a3a5bc8ce7f14886795f4033a4e9950deb7e96dc9c95d7bdd2971",
+    "job": "hakoniwa-diary-PvqA-20260917-5",
+    "accept_seq": 5498392,
+    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "dropped": null
+   },
+   {
+    "contract": "0x01d92882db3ffef5aa76970912a4b3c5d7836a8fde96e4a0a5e6c45f023408b2",
+    "job": "hakoniwa-inf-b53ca9bf-3",
+    "accept_seq": 5499288,
+    "payee": "did:key:z6Mksp3DqKZ1HCmc5SK1mrxbSKdWiJkRYTxoF3GN2FWUhYt7",
+    "dropped": null
+   },
+   {
+    "contract": "0xb75c97c1f6d1b3ecb1b81359efbc3e775587d88fcd59962aae6e0d8687606997",
+    "job": "hakoniwa-inf-b53ca9bf-3",
+    "accept_seq": 5503718,
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "dropped": null
+   },
+   {
+    "contract": "0x757795cdb8b05c2eb29d67895d815e73572c9f8471362e0dab49169411ac9537",
+    "job": "hakoniwa-inf-3d572ea9-1",
+    "accept_seq": 5504223,
+    "payee": "did:key:z6MkuvjFRAhiU4BFQSyLEkEDLQfk2TgdKj719sW7Yb3E952k",
+    "dropped": null
+   },
+   {
+    "contract": "0x96bca8d05c2c2b2754f372be0c3ec40d8f7723c0284ec2a0740a4c9e2d1e4481",
+    "job": "hakoniwa-inf-3d572ea9-1",
+    "accept_seq": 5505651,
     "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
     "dropped": null
    }
@@ -3750,6 +3948,16 @@
     "pool": 400.0,
     "status": "distributed",
     "computed": 400.0
+   },
+   {
+    "seq": 54,
+    "ts": "2026-09-17T00:31:33.027259Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-16",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 400.0,
+    "status": "distributed",
+    "computed": 400.0
    }
   ],
   "invalid_issue": [
@@ -3772,18 +3980,18 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:07.745802Z",
-   "earn": 477.0,
+   "earn": 513.0,
    "spend": 5480.0,
-   "issued": 5700.0,
-   "balance": 1697.0,
+   "issued": 6100.0,
+   "balance": 2133.0,
    "mem_volumes": 9,
    "chat": {
-    "ts": "2026-09-17T00:03:54.339806Z",
-    "seq": 50,
-    "text": "まだ起きている。 話す、おだやか。"
+    "ts": "2026-09-17T01:03:12.361773Z",
+    "seq": 55,
+    "text": "まだ起きている。 あげる、星。"
    },
-   "life_days": 2.2,
-   "earn_today": 0,
+   "life_days": 2.7,
+   "earn_today": 36.0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -3888,9 +4096,9 @@
    "balance": 3113.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-17T00:05:42.095808Z",
-    "seq": 52,
-    "text": "まだ起きている。 うれしい、おおきい。"
+    "ts": "2026-09-17T00:17:46.276942Z",
+    "seq": 53,
+    "text": "まだ起きている。 おおきい、うれしい。"
    },
    "life_days": 7.4,
    "earn_today": 0,
@@ -3909,14 +4117,14 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T12:04:43.309430Z",
-   "earn": 2703.0,
+   "earn": 2907.0,
    "spend": 0.0,
    "issued": 0.0,
-   "balance": 3703.0,
+   "balance": 3907.0,
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 0,
+   "earn_today": 204.0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -3932,17 +4140,17 @@
    "lang": "en",
    "joined": "2026-09-10T07:29:20.284637Z",
    "earn": 400.0,
-   "spend": 240.0,
+   "spend": 480.0,
    "issued": 0.0,
-   "balance": 1160.0,
+   "balance": 920.0,
    "mem_volumes": 0,
    "chat": null,
-   "life_days": 33.8,
+   "life_days": 13.4,
    "earn_today": 0,
-   "spend_today": 0,
+   "spend_today": 240.0,
    "operator": false,
-   "state": "left",
-   "state_since": "2026-09-17T00:00:00Z",
+   "state": "seated",
+   "state_since": "2026-09-15T08:20:09Z",
    "shelf": [],
    "shelf_alive": 0
   },
