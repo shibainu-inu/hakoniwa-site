@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-16T23:10:01Z",
+  "generated": "2026-09-17T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -136,32 +136,32 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 6,
-   "free": 66
+   "taken": 4,
+   "free": 68
   },
   "exits": {
    "starved": 0,
-   "left": 0,
+   "left": 2,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 3596697,
+   "rows": 3619854,
    "dup": 0,
    "unsigned": 141338,
-   "bad_sig": 35088,
-   "frames": 2735336,
-   "offers": 99,
-   "accepts": 107,
+   "bad_sig": 35284,
+   "frames": 2747311,
+   "offers": 100,
+   "accepts": 111,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 409,
+   "accept_bad_contract": 413,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 66,
+   "contracts_unlocked": 70,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -3609,6 +3609,34 @@
     "accept_seq": 5399925,
     "payee": "did:key:z6MkhiRKcJjvdy1s4m6np8GgoLoqgVaRm5PmUVNKKiW9VpEZ",
     "dropped": null
+   },
+   {
+    "contract": "0xec66dbe83172fa8a3ccc96a7aa528656de1dbbd57575bac5f345dc1d198b61aa",
+    "job": "hakoniwa-diary-PvqA-20260916-7",
+    "accept_seq": 5489553,
+    "payee": "did:key:z6MkiP1SCwKSzShUbKWDFaKqq6qb1GZvGtn7g9HETWE6JbxX",
+    "dropped": null
+   },
+   {
+    "contract": "0x02c911f019f591295904c88c29d7efcb666e7974c10ddd5d1a53c94440fd05c8",
+    "job": "hakoniwa-inf-ec66dbe8-1",
+    "accept_seq": 5490870,
+    "payee": "did:key:z6MkiaKuVUzrHQTk65agVEmwgkMhkFnWXJpdzMjh5DH8kUzW",
+    "dropped": null
+   },
+   {
+    "contract": "0xb9dbcd270672e41af820868ab7d3fa991dcb8303746998c8d6d146ca5682eb66",
+    "job": "hakoniwa-inf-ec66dbe8-1",
+    "accept_seq": 5490883,
+    "payee": "did:key:z6MkhiRKcJjvdy1s4m6np8GgoLoqgVaRm5PmUVNKKiW9VpEZ",
+    "dropped": null
+   },
+   {
+    "contract": "0x37ce82f6dce20e9a985d68331e07e5e6d91bd4a62c2867d093ddd463abcb32d9",
+    "job": "hakoniwa-inf-ec66dbe8-1",
+    "accept_seq": 5490942,
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "dropped": null
    }
   ],
   "serves": [],
@@ -3750,13 +3778,13 @@
    "balance": 1697.0,
    "mem_volumes": 9,
    "chat": {
-    "ts": "2026-09-16T18:26:34.301215Z",
-    "seq": 46,
-    "text": "こんばんは。 話す、歩く。"
+    "ts": "2026-09-17T00:03:54.339806Z",
+    "seq": 50,
+    "text": "まだ起きている。 話す、おだやか。"
    },
    "life_days": 2.2,
-   "earn_today": 108.0,
-   "spend_today": 1260.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -3860,13 +3888,13 @@
    "balance": 3113.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-16T18:26:52.209458Z",
-    "seq": 47,
-    "text": "こんばんは。 つかれた、くらい。"
+    "ts": "2026-09-17T00:05:42.095808Z",
+    "seq": 52,
+    "text": "まだ起きている。 うれしい、おおきい。"
    },
    "life_days": 7.4,
-   "earn_today": 1251.0,
-   "spend_today": 720.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -3888,7 +3916,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 612.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -3913,8 +3941,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "seated",
-   "state_since": "2026-09-15T08:20:09Z",
+   "state": "left",
+   "state_since": "2026-09-17T00:00:00Z",
    "shelf": [],
    "shelf_alive": 0
   },
@@ -3935,8 +3963,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "seated",
-   "state_since": "2026-09-15T06:03:05Z",
+   "state": "left",
+   "state_since": "2026-09-17T00:00:00Z",
    "shelf": [],
    "shelf_alive": 0
   },
