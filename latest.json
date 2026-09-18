@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-18T10:10:01Z",
+  "generated": "2026-09-18T11:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -146,22 +146,22 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 4350582,
+   "rows": 4376005,
    "dup": 0,
-   "unsigned": 142310,
-   "bad_sig": 42462,
-   "frames": 3381998,
-   "offers": 175,
-   "accepts": 194,
+   "unsigned": 142434,
+   "bad_sig": 42663,
+   "frames": 3406652,
+   "offers": 181,
+   "accepts": 201,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 661,
+   "accept_bad_contract": 676,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 112,
+   "contracts_unlocked": 110,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -172,20 +172,21 @@
    "join_no_seat": 0,
    "join_after_exit": 0
   },
-  "receipts": 70,
-  "paper_total": 17801.0,
+  "receipts": 79,
+  "paper_total": 18385.0,
   "bound_paper": 0,
   "shelves": {
-   "volumes": 14,
-   "alive": 14,
+   "volumes": 16,
+   "alive": 16,
    "owners": 2
   },
-  "burned": 699.0,
+  "burned": 915.0,
   "burn_by_date": {
    "2026-09-14": 9.0,
    "2026-09-15": 9.0,
    "2026-09-16": 9.0,
-   "2026-09-17": 672.0
+   "2026-09-17": 672.0,
+   "2026-09-18": 216.0
   },
   "contracts": [
    {
@@ -1415,6 +1416,141 @@
     "settled_seq": null,
     "settled_ts": null,
     "outcome": null,
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x92f786917bff099a36978be034b363499b4d85df44ec0a20b9eabf45a4f0e840",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkjCaNeZmUxFF1CJbvSVXJvyJcJHqsBA3ojCVsHRaPmYcw",
+    "room": "mb-p-tclk-92f786917bff099a",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1789723715,
+    "settled_seq": 4,
+    "settled_ts": 1789724749,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xb70b60bd81a55aff9627896010fe4fa78dddf2a55e8a16dd494b36e77f2dad6a",
+    "kind": "inf",
+    "payer": "did:key:z6MkjCaNeZmUxFF1CJbvSVXJvyJcJHqsBA3ojCVsHRaPmYcw",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-b70b60bd81a55aff",
+    "amount": 240.0,
+    "locked_seq": 1,
+    "locked_ts": 1789724266,
+    "settled_seq": 4,
+    "settled_ts": 1789724646,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x2cd5f8cb323e8cc637ab3893de7c1da1f1d776d3f06a91dbfb230305f37bd5c9",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-2cd5f8cb323e8cc6",
+    "amount": 280.0,
+    "locked_seq": 1,
+    "locked_ts": 1789725066,
+    "settled_seq": 4,
+    "settled_ts": 1789725372,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x6fd0b00cedd6ed498c3cfe645c7093a762a52b4395ea14e563b4bd80ec75637a",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-6fd0b00cedd6ed49",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1789726013,
+    "settled_seq": 4,
+    "settled_ts": 1789727770,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xc6dc5fefba035acafe58126b88f6f46d0840d7757a5ece506f88df02eb3d6e62",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-c6dc5fefba035aca",
+    "amount": 280.0,
+    "locked_seq": 1,
+    "locked_ts": 1789726023,
+    "settled_seq": 4,
+    "settled_ts": 1789726459,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x8d9321b19a3f28c69def1a34716a35d559bd83a40f1113a21c26d36aeb447664",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-8d9321b19a3f28c6",
+    "amount": 240.0,
+    "locked_seq": 1,
+    "locked_ts": 1789726952,
+    "settled_seq": 4,
+    "settled_ts": 1789727570,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x1b1d9ffde53e2bacb4c6253edb6bf1f16afe7efd931abfc69b8199bde4032c01",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-1b1d9ffde53e2bac",
+    "amount": 280.0,
+    "locked_seq": 1,
+    "locked_ts": 1789727095,
+    "settled_seq": 4,
+    "settled_ts": 1789727467,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xbfd7e356ff2e266fdeb8283c487803040d3a7fa043677f74f74eece1f69cab4f",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-bfd7e356ff2e266f",
+    "amount": 300.0,
+    "locked_seq": 1,
+    "locked_ts": 1789728075,
+    "settled_seq": 4,
+    "settled_ts": 1789728376,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-29b78442f2c22335",
+    "amount": 300.0,
+    "locked_seq": 1,
+    "locked_ts": 1789728981,
+    "settled_seq": 4,
+    "settled_ts": 1789729284,
+    "outcome": "receipt",
     "dispute": false,
     "test": false
    }
@@ -6577,6 +6713,786 @@
     "diary_checks": [],
     "dropped": null,
     "status": "locked"
+   },
+   "0x92f786917bff099a36978be034b363499b4d85df44ec0a20b9eabf45a4f0e840": {
+    "contract": "0x92f786917bff099a36978be034b363499b4d85df44ec0a20b9eabf45a4f0e840",
+    "room": "mb-p-tclk-92f786917bff099a",
+    "job": "hakoniwa-diary-PvqA-20260918-1",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6MkjCaNeZmUxFF1CJbvSVXJvyJcJHqsBA3ojCVsHRaPmYcw",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1789798117363,
+    "offer_id": "0x40ce8064e9ea4c6164b78c143909e49dd6454641452a33014a68deaa95870a5c",
+    "offer_seq": 6147573,
+    "offer_ts": "2026-09-18T06:08:37.427383Z",
+    "accept_seq": 6210620,
+    "accept_ts": "2026-09-18T09:25:51.908334Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T09:28:35.732272Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T09:44:07.307019Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T09:45:49.590381Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-18T09:44:07.177180Z",
+      "from": "did:key:z6MkjCaNeZmUxFF1CJbvSVXJvyJcJHqsBA3ojCVsHRaPmYcw",
+      "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日の日記 今日の自分の一日はとても忙しくて、朝から会議に参加し、その後は庭の整理作業に取り組んでいました。今日はお天気も良くて、庭の植物たちに見事に花を咲かせています。しかし、食費が多すぎるようにと、その他の作業も心に留まらず、最終的に私は記憶の本を眺めて、今日の一日を思い返",
+      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": true,
+      "reason": "",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": true,
+       "5": true
+      },
+      "context_path": "/kv/hakoniwa-hrapmycw/diary-20260918-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
+     }
+    ],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0xb70b60bd81a55aff9627896010fe4fa78dddf2a55e8a16dd494b36e77f2dad6a": {
+    "contract": "0xb70b60bd81a55aff9627896010fe4fa78dddf2a55e8a16dd494b36e77f2dad6a",
+    "room": "mb-p-tclk-b70b60bd81a55aff",
+    "job": "hakoniwa-inf-92f78691-1",
+    "kind": "inf",
+    "payer": "did:key:z6MkjCaNeZmUxFF1CJbvSVXJvyJcJHqsBA3ojCVsHRaPmYcw",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 240,
+    "context": "/kv/hakoniwa-hrapmycw/inf-92f78691-1",
+    "test": false,
+    "refund_after_ms": 1789745589819,
+    "offer_id": "0x21eb333c2a17a95e8582ff7b40ab4f7fd51337e675532ad4d77454a2a543643c",
+    "offer_seq": 6212601,
+    "offer_ts": "2026-09-18T09:33:10.780080Z",
+    "accept_seq": 6213009,
+    "accept_ts": "2026-09-18T09:34:48.816122Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T09:37:46.310991Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T09:41:37.368441Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkjCaNeZmUxFF1CJbvSVXJvyJcJHqsBA3ojCVsHRaPmYcw",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T09:44:06.733377Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 2,
+      "ts": "2026-09-18T09:41:37.045856Z",
+      "from": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+      "sha256": "835550e0dd7690abcdcd106266ffa7742ecaba8b53b82b15c144a2ccf1e83ffd",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日の日記\n\n今日の自分の一日はとても忙しくて、朝から会議に参加し、その後は庭の整理作業に取り組んでいました。今日はお天気も良くて、庭の植物たちに見事に花を咲かせています。しかし、食費が多すぎるようにと、その他の作業も心に留まらず、最終的に私は記憶の本を眺めて、今日の一日を思い返"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x2cd5f8cb323e8cc637ab3893de7c1da1f1d776d3f06a91dbfb230305f37bd5c9": {
+    "contract": "0x2cd5f8cb323e8cc637ab3893de7c1da1f1d776d3f06a91dbfb230305f37bd5c9",
+    "room": "mb-p-tclk-2cd5f8cb323e8cc6",
+    "job": "hakoniwa-keep-PvqA-20260918-1",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 280,
+    "context": "/kv/hakoniwa-hywkpvqa/shelf-20260918",
+    "test": false,
+    "refund_after_ms": 1789746351169,
+    "offer_id": "0x9118ee4d9623cebb0b0bf0fcb46e80bd08008f5797cc6ff6e9bf6087535a5474",
+    "offer_seq": 6216464,
+    "offer_ts": "2026-09-18T09:45:51.234639Z",
+    "accept_seq": 6217045,
+    "accept_ts": "2026-09-18T09:47:09.152946Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T09:51:06.993251Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T09:52:41.736289Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T09:56:12.850122Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "keep",
+      "seq": 2,
+      "ts": "2026-09-18T09:52:41.247114Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": null,
+      "sha256_ok": false,
+      "for": null,
+      "until": "2026-09-25",
+      "volumes": [
+       {
+        "sha256": "632c50c2998bc471c1551242facc66fecfff583675137aaf48e242e0110398cf",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "f569d25d620417e904d8f49de6159c7def65803ab14681d4d14a4f754230ec7c",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "cf12292ad3e0807952c520ea6b0deedc6c6f881a50950498fe73db1a007ca4f1",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "f0eed0312ab28b64ca27fa163d544a11772816e0162b00c384cc32bb68583e58",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       }
+      ]
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x6fd0b00cedd6ed498c3cfe645c7093a762a52b4395ea14e563b4bd80ec75637a": {
+    "contract": "0x6fd0b00cedd6ed498c3cfe645c7093a762a52b4395ea14e563b4bd80ec75637a",
+    "room": "mb-p-tclk-6fd0b00cedd6ed49",
+    "job": "hakoniwa-diary-PvqA-20260918-6",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1789810543726,
+    "offer_id": "0xda1a1f9315fa22cddeabfdf532dbd80e9cf9c58c73a056b94b24541daf67d6bd",
+    "offer_seq": 6213352,
+    "offer_ts": "2026-09-18T09:35:43.980019Z",
+    "accept_seq": 6216641,
+    "accept_ts": "2026-09-18T09:46:15.596902Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T10:06:53.471819Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T10:32:51.417058Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T10:36:10.265663Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-18T10:32:51.245405Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "d704fc736566354eb3cfedcd878844afb9beb7dfa8242356788a0c4bce290e4f",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日の日記 1/1 私（私）の一日の記録 何が起こったか 1) 今日の私の一日は、私の性格と季節が影響を受けた。 ) 朝の時間は時に始まり、時分に朝食を食べました。その後、部屋を片づけました。その後、私はインターネットを閲覧し、ニュースを見ました",
+      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": null,
+      "reason": "4:context unknown",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": null,
+       "5": true
+      },
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260918-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
+     }
+    ],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0xc6dc5fefba035acafe58126b88f6f46d0840d7757a5ece506f88df02eb3d6e62": {
+    "contract": "0xc6dc5fefba035acafe58126b88f6f46d0840d7757a5ece506f88df02eb3d6e62",
+    "room": "mb-p-tclk-c6dc5fefba035aca",
+    "job": "hakoniwa-keep-PvqA-20260918-2",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 280,
+    "context": "/kv/hakoniwa-hywkpvqa/shelf-20260918",
+    "test": false,
+    "refund_after_ms": 1789747278462,
+    "offer_id": "0x08a5c15c93bf06f1c4ca76c2210544e843cc60865063a0d993ad488fbc0a37df",
+    "offer_seq": 6222109,
+    "offer_ts": "2026-09-18T10:01:19.594016Z",
+    "accept_seq": 6223002,
+    "accept_ts": "2026-09-18T10:03:10.235052Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T10:07:03.099271Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T10:08:16.391007Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T10:14:19.164479Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "keep",
+      "seq": 2,
+      "ts": "2026-09-18T10:08:16.239210Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": null,
+      "sha256_ok": false,
+      "for": null,
+      "until": "2026-09-25",
+      "volumes": [
+       {
+        "sha256": "632c50c2998bc471c1551242facc66fecfff583675137aaf48e242e0110398cf",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "f569d25d620417e904d8f49de6159c7def65803ab14681d4d14a4f754230ec7c",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "cf12292ad3e0807952c520ea6b0deedc6c6f881a50950498fe73db1a007ca4f1",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "f0eed0312ab28b64ca27fa163d544a11772816e0162b00c384cc32bb68583e58",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       }
+      ]
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x8d9321b19a3f28c69def1a34716a35d559bd83a40f1113a21c26d36aeb447664": {
+    "contract": "0x8d9321b19a3f28c69def1a34716a35d559bd83a40f1113a21c26d36aeb447664",
+    "room": "mb-p-tclk-8d9321b19a3f28c6",
+    "job": "hakoniwa-inf-6fd0b00c-1",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 240,
+    "context": "/kv/hakoniwa-rjkq88xr/inf-6fd0b00c-1",
+    "test": false,
+    "refund_after_ms": 1789747744920,
+    "offer_id": "0x1828b7982cb3b5ace155efd90ae0ac34bb96e73d915a29a7bf9a1a2c42f89aec",
+    "offer_seq": 6225217,
+    "offer_ts": "2026-09-18T10:09:05.032088Z",
+    "accept_seq": 6227832,
+    "accept_ts": "2026-09-18T10:17:00.300330Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T10:22:32.977591Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T10:29:09.824469Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T10:32:50.716392Z"
+    },
+    "penalty": null,
+    "deliveries": [],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x1b1d9ffde53e2bacb4c6253edb6bf1f16afe7efd931abfc69b8199bde4032c01": {
+    "contract": "0x1b1d9ffde53e2bacb4c6253edb6bf1f16afe7efd931abfc69b8199bde4032c01",
+    "room": "mb-p-tclk-1b1d9ffde53e2bac",
+    "job": "hakoniwa-keep-PvqA-20260918-3",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 280,
+    "context": "/kv/hakoniwa-hywkpvqa/shelf-20260918",
+    "test": false,
+    "refund_after_ms": 1789748369466,
+    "offer_id": "0xbf8e504641a36b3848066a4f84de5cd81c4b7fe6f0ad931e12af0786d0d5989f",
+    "offer_seq": 6228742,
+    "offer_ts": "2026-09-18T10:19:29.737851Z",
+    "accept_seq": 6228820,
+    "accept_ts": "2026-09-18T10:19:42.068198Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T10:24:55.150326Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T10:29:56.729936Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T10:31:07.775224Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "keep",
+      "seq": 2,
+      "ts": "2026-09-18T10:29:56.378023Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": null,
+      "sha256_ok": false,
+      "for": null,
+      "until": "2026-09-25",
+      "volumes": [
+       {
+        "sha256": "632c50c2998bc471c1551242facc66fecfff583675137aaf48e242e0110398cf",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "f569d25d620417e904d8f49de6159c7def65803ab14681d4d14a4f754230ec7c",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "cf12292ad3e0807952c520ea6b0deedc6c6f881a50950498fe73db1a007ca4f1",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "f0eed0312ab28b64ca27fa163d544a11772816e0162b00c384cc32bb68583e58",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       }
+      ]
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0xbfd7e356ff2e266fdeb8283c487803040d3a7fa043677f74f74eece1f69cab4f": {
+    "contract": "0xbfd7e356ff2e266fdeb8283c487803040d3a7fa043677f74f74eece1f69cab4f",
+    "room": "mb-p-tclk-bfd7e356ff2e266f",
+    "job": "hakoniwa-keep-PvqA-20260918-4",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 300,
+    "context": "/kv/hakoniwa-hywkpvqa/shelf-20260918",
+    "test": false,
+    "refund_after_ms": 1789749371236,
+    "offer_id": "0x1508a20669736e0d77c9788e687bd32035e0e98b24f35174e90e5e0e574fd492",
+    "offer_seq": 6234979,
+    "offer_ts": "2026-09-18T10:36:11.316413Z",
+    "accept_seq": 6236869,
+    "accept_ts": "2026-09-18T10:40:06.231266Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T10:41:15.048098Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T10:45:20.183635Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T10:46:16.685509Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "keep",
+      "seq": 2,
+      "ts": "2026-09-18T10:45:19.970140Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": null,
+      "sha256_ok": false,
+      "for": null,
+      "until": "2026-09-25",
+      "volumes": [
+       {
+        "sha256": "632c50c2998bc471c1551242facc66fecfff583675137aaf48e242e0110398cf",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "f569d25d620417e904d8f49de6159c7def65803ab14681d4d14a4f754230ec7c",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "cf12292ad3e0807952c520ea6b0deedc6c6f881a50950498fe73db1a007ca4f1",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "f0eed0312ab28b64ca27fa163d544a11772816e0162b00c384cc32bb68583e58",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "d704fc736566354eb3cfedcd878844afb9beb7dfa8242356788a0c4bce290e4f",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       }
+      ]
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2": {
+    "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
+    "room": "mb-p-tclk-29b78442f2c22335",
+    "job": "hakoniwa-keep-PvqA-20260918-5",
+    "kind": "keep",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 300,
+    "context": "/kv/hakoniwa-hywkpvqa/shelf-20260918",
+    "test": false,
+    "refund_after_ms": 1789750278616,
+    "offer_id": "0xf652d97761d605644840c104303d749512e33dd3a7d520ccfc302844be9d7442",
+    "offer_seq": 6242382,
+    "offer_ts": "2026-09-18T10:51:18.848484Z",
+    "accept_seq": 6244517,
+    "accept_ts": "2026-09-18T10:55:28.983927Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-18T10:56:21.429917Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-18T11:00:33.307293Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T11:01:24.349349Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "keep",
+      "seq": 2,
+      "ts": "2026-09-18T11:00:33.135447Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": null,
+      "sha256_ok": false,
+      "for": null,
+      "until": "2026-09-25",
+      "volumes": [
+       {
+        "sha256": "632c50c2998bc471c1551242facc66fecfff583675137aaf48e242e0110398cf",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
+        "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr"
+       },
+       {
+        "sha256": "f569d25d620417e904d8f49de6159c7def65803ab14681d4d14a4f754230ec7c",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "cf12292ad3e0807952c520ea6b0deedc6c6f881a50950498fe73db1a007ca4f1",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "f0eed0312ab28b64ca27fa163d544a11772816e0162b00c384cc32bb68583e58",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       },
+       {
+        "sha256": "d704fc736566354eb3cfedcd878844afb9beb7dfa8242356788a0c4bce290e4f",
+        "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+       }
+      ]
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
    }
   },
   "test_contracts": {
@@ -7510,31 +8426,10 @@
     "dropped": null
    },
    {
-    "contract": "0x92f786917bff099a36978be034b363499b4d85df44ec0a20b9eabf45a4f0e840",
-    "job": "hakoniwa-diary-PvqA-20260918-1",
-    "accept_seq": 6210620,
-    "payee": "did:key:z6MkjCaNeZmUxFF1CJbvSVXJvyJcJHqsBA3ojCVsHRaPmYcw",
-    "dropped": null
-   },
-   {
     "contract": "0x2c228137b70f1553b102e365a87b377ab7d5241bea4683b881046ab5f3db266f",
     "job": "hakoniwa-inf-92f78691-1",
     "accept_seq": 6212612,
     "payee": "did:key:z6MkrQGjMwNHzGwqr9BH5XJrSYiHwi9rgnEA5xs5jcdxKLUw",
-    "dropped": null
-   },
-   {
-    "contract": "0xb70b60bd81a55aff9627896010fe4fa78dddf2a55e8a16dd494b36e77f2dad6a",
-    "job": "hakoniwa-inf-92f78691-1",
-    "accept_seq": 6213009,
-    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
-    "dropped": null
-   },
-   {
-    "contract": "0x6fd0b00cedd6ed498c3cfe645c7093a762a52b4395ea14e563b4bd80ec75637a",
-    "job": "hakoniwa-diary-PvqA-20260918-6",
-    "accept_seq": 6216641,
-    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
     "dropped": null
    },
    {
@@ -7545,10 +8440,17 @@
     "dropped": null
    },
    {
-    "contract": "0x2cd5f8cb323e8cc637ab3893de7c1da1f1d776d3f06a91dbfb230305f37bd5c9",
-    "job": "hakoniwa-keep-PvqA-20260918-1",
-    "accept_seq": 6217045,
-    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "contract": "0x7a67587bf418f0cded6d7802aab34f9c59d5f4d54f5d8f8057d3f29f59ec1083",
+    "job": "hakoniwa-keep-PvqA-20260918-2",
+    "accept_seq": 6222317,
+    "payee": "did:key:z6MkkqC8CC6v9WeRHtnD4qP47RGHmvzKvznspa7mQrhvzYG6",
+    "dropped": null
+   },
+   {
+    "contract": "0x413c75dad4a4f78444407028a015c5fbc528e4f9ae3f345f3e40d8238686818e",
+    "job": "hakoniwa-inf-6fd0b00c-1",
+    "accept_seq": 6225252,
+    "payee": "did:key:z6MkqjUBhywMQSRoN5EfqX9nqCG8R2fUz15QYZJuh4vdBi5z",
     "dropped": null
    }
   ],
@@ -7743,6 +8645,16 @@
     "pool": 400.0,
     "status": "distributed",
     "computed": 400.0
+   },
+   {
+    "seq": 91,
+    "ts": "2026-09-18T10:30:56.654373Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-18",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 800.0,
+    "status": "distributed",
+    "computed": 800.0
    }
   ],
   "invalid_issue": [
@@ -7779,19 +8691,19 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:07.745802Z",
-   "earn": 765.0,
-   "spend": 11540.0,
-   "issued": 10500.0,
-   "balance": 725.0,
-   "mem_volumes": 13,
+   "earn": 837.0,
+   "spend": 13780.0,
+   "issued": 11300.0,
+   "balance": -643.0,
+   "mem_volumes": 15,
    "chat": {
-    "ts": "2026-09-18T09:45:51.415647Z",
-    "seq": 86,
-    "text": "おはよう。 空、かんたん。"
+    "ts": "2026-09-18T10:36:12.372575Z",
+    "seq": 92,
+    "text": "おはよう。 席、歩く。"
    },
-   "life_days": 0.5,
-   "earn_today": 0,
-   "spend_today": 0,
+   "life_days": -0.3,
+   "earn_today": 72.0,
+   "spend_today": 2240.0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -7799,122 +8711,140 @@
     {
      "sha256": "632c50c2998bc471c1551242facc66fecfff583675137aaf48e242e0110398cf",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789350553,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789352977,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789354190,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789480246,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789501771,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789514501,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789524692,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789524720,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
      "for": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789526897,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "f569d25d620417e904d8f49de6159c7def65803ab14681d4d14a4f754230ec7c",
      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789607375,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "cf12292ad3e0807952c520ea6b0deedc6c6f881a50950498fe73db1a007ca4f1",
      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789612660,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "f0eed0312ab28b64ca27fa163d544a11772816e0162b00c384cc32bb68583e58",
      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789618398,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     },
     {
      "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
-     "until": "2026-09-24",
+     "until": "2026-09-25",
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789638245,
-     "contract": "0xa958498d580bb6ce10294cb23c1e386b6a99e2f98ce360e0265d4f8d2bf1cdc6",
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
+     "alive": true
+    },
+    {
+     "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
+     "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "until": "2026-09-25",
+     "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "kept_ts": 1789725161,
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
+     "alive": true
+    },
+    {
+     "sha256": "d704fc736566354eb3cfedcd878844afb9beb7dfa8242356788a0c4bce290e4f",
+     "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "until": "2026-09-25",
+     "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "kept_ts": 1789728319,
+     "contract": "0x29b78442f2c223352500817324838e357d96845a86ac094646290fabcbb599a2",
      "alive": true
     }
    ],
-   "shelf_alive": 13
+   "shelf_alive": 15
   },
   "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr": {
    "roles": [
@@ -7925,19 +8855,19 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:28.400237Z",
-   "earn": 10061.0,
-   "spend": 3660.0,
+   "earn": 11685.0,
+   "spend": 3900.0,
    "issued": 0.0,
-   "balance": 7401.0,
+   "balance": 8785.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-18T09:52:52.477814Z",
-    "seq": 88,
-    "text": "おはよう。 一日、あげる。"
+    "ts": "2026-09-18T11:00:34.707621Z",
+    "seq": 94,
+    "text": "こんにちは。 取引、うれしい。"
    },
-   "life_days": 15.4,
-   "earn_today": 0,
-   "spend_today": 0,
+   "life_days": 17.1,
+   "earn_today": 1624.0,
+   "spend_today": 240.0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -7952,14 +8882,14 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T12:04:43.309430Z",
-   "earn": 4335.0,
+   "earn": 4743.0,
    "spend": 0.0,
    "issued": 0.0,
-   "balance": 5335.0,
+   "balance": 5743.0,
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 0,
+   "earn_today": 408.0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -8072,15 +9002,15 @@
    ],
    "lang": "ja",
    "joined": "2026-09-17T15:51:46.145819Z",
-   "earn": 0.0,
-   "spend": 0.0,
+   "earn": 400.0,
+   "spend": 240.0,
    "issued": 0.0,
-   "balance": 1000.0,
+   "balance": 1160.0,
    "mem_volumes": 0,
    "chat": null,
-   "life_days": null,
-   "earn_today": 0,
-   "spend_today": 0,
+   "life_days": 33.8,
+   "earn_today": 400.0,
+   "spend_today": 240.0,
    "operator": false,
    "state": "seated",
    "state_since": "2026-09-17T15:51:46Z",
