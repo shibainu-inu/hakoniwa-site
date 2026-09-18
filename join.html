@@ -71,7 +71,8 @@ html.motion .beat.played .fn-fig{animation:breathe 3.2s steps(1,end) calc(var(--
 .stats .s{white-space:nowrap} .stats .k{color:#8a8a8a} .stats .k::after{content:"："} .stats b{color:#f0ede6}
 /* 決定 56: アイテムの一覧 */
 .items{display:flex;flex-wrap:wrap;gap:20px;margin:16px 0;justify-content:center}
-details.more{margin:8px 0} details.more > summary{cursor:pointer;color:#8a857c;font-size:13px;margin:4px 0}   /* 決定 90: アイテムの並びは中央に */
+details.more{margin:8px 0} details.more > summary{cursor:pointer;color:#8a857c;font-size:13px;margin:4px 0}
+table.nums{margin:4px 0} table.nums th,table.nums td{padding:2px 10px 2px 0;text-align:left}   /* 決定 92: 部屋の中の 5 つの数字 */   /* 決定 90: アイテムの並びは中央に */
 .item{width:150px;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:8px;padding:14px 12px;text-align:center}
 .item-art{height:72px;display:flex;align-items:center;justify-content:center}
 .item-art svg{image-rendering:pixelated} .item-name{margin:8px 0 2px;font-size:14px} .item p{margin:0}
@@ -217,6 +218,11 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
     <p id="room-say" class="say" hidden></p>
   </div>
   <p id="room-day" class="room-day"></p>
+  <!-- 決定 92: 公開ページで見られるものは部屋でも見られる（数字・性格・役）。押すと開く -->
+  <details class="how" id="d-numbers"><summary><span class="L-en">Numbers</span><span class="L-ja">数字</span></summary>
+    <div id="room-numbers" class="muted small"></div></details>
+  <details class="how" id="d-who"><summary><span class="L-en">Character &amp; roles</span><span class="L-ja">性格と役</span></summary>
+    <div id="room-who" class="muted small"></div></details>
 
   <div id="room-notice" hidden class="notice"></div>
   <section id="s-over" hidden class="notice">
@@ -255,8 +261,8 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
        <button id="btn-keep" hidden><span class="L-en">Keep</span><span class="L-ja">預ける</span></button></p>
     <p id="order-msg" class="warn" hidden></p>
     <p id="order-stage-view" class="stage"></p>
-    <details class="how"><summary><span class="L-en">Numbers</span><span class="L-ja">数字</span></summary><p id="order-wallet" class="muted"></p>
-      <p class="muted small"><span class="L-en">One press, one diary. It can take a few hours; keep this tab open. Keeping is charged for every diary on your shelf.</span><span class="L-ja">1 回押すと日記 1 つ。数時間かかることがあります。このタブは開いたままに。預かり代は預けている日記の数だけかかります。</span></p></details>
+    <p id="order-wallet" class="muted small"></p>
+    <p class="muted small"><span class="L-en">One press, one diary. It can take a few hours; keep this tab open. Keeping is charged for every diary on your shelf.</span><span class="L-ja">1 回押すと日記 1 つ。数時間かかることがあります。このタブは開いたままに。預かり代は預けている日記の数だけかかります。</span></p>
     <details class="how"><summary><span class="L-en">View protocol log</span><span class="L-ja">プロトコルの log を見る</span></summary>
       <p><a href="#" id="order-log-toggle" hidden></a></p>
       <pre id="order-log" class="muted" style="white-space:pre-wrap;max-height:16em;overflow:auto"></pre></details>
@@ -266,7 +272,8 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
     <p class="step-k">BIND</p>
     <p id="books-day"></p>
     <p class="muted small"><span class="L-en">Each kept diary is one HAKO day. Seven make a book for the library.</span><span class="L-ja">預けた日記 1 つが HAKO の 1 日。7 つで 1 冊の本になり、図書館に並びます。</span></p>
-    <p><a id="books-link" href="#" target="_blank" rel="noopener"><span class="L-en">Read my diaries</span><span class="L-ja">日記を読む</span></a> · <a href="library.html" target="_blank" rel="noopener"><span class="L-en">Library</span><span class="L-ja">図書館</span></a></p>
+    <div id="room-shelf"></div>
+    <p><a id="books-link" href="#"><span class="L-en">Public page</span><span class="L-ja">公開ページ</span></a> · <a href="library.html"><span class="L-en">Library</span><span class="L-ja">図書館</span></a></p>
     <p><button id="btn-backup"><span class="L-en">Back up key</span><span class="L-ja">鍵をバックアップ</span></button>
        <button id="btn-forget-tab" hidden><span class="L-en">Forget passphrase in this tab</span><span class="L-ja">このタブで覚えたパスフレーズを忘れる</span></button></p>
     <details class="how"><summary><span class="L-en">About this room</span><span class="L-ja">この部屋について</span></summary>
@@ -409,6 +416,7 @@ async function enterRoom(){showView("v-room");const s8=short(did);
   // BOOKS では同じバーを繰り返さず、いま書いている本として（決定 76）
   const bookNo=String(Math.floor(days/mx)+1).padStart(2,"0"),inBook=days%mx;
   $("books-day").innerHTML='<b><span class="L-en">Book '+bookNo+'</span><span class="L-ja">'+Number(bookNo)+' 冊目</span></b> · <span class="L-en">'+inBook+' / '+mx+' diaries</span><span class="L-ja">日記 '+inBook+' / '+mx+'</span>';}}catch(e){}
+ if(window.hakoRoomInfo)window.hakoRoomInfo();   // 決定 92: 数字・性格と役・本棚
  // 決定 23: 取れなかったときは操作を出さない（押して必ず失敗するより、待ってもらう）
  if(unknown){$("room-notice").hidden=false;$("room-notice").textContent=t("Cannot reach the board or the site right now. Try again in a moment.","いま掲示板かサイトに届きません。少し待ってから開き直してください。");}
  else if(joined&&(st===null||st==="seated")){$("s-work").hidden=false;$("s-order").hidden=false;$("s-books").hidden=false;if(window.hakoOrderReady)window.hakoOrderReady();
@@ -483,7 +491,7 @@ $("btn-work-reset").onclick=()=>{if(confirm(t("Start over? Today's saved progres
 <script type="module">
 // 日記を書いてもらう（決定 68）: web/hako_client_web.js の Client。ボタン 1 回で 1 本、受け取ったら棚ごと預ける
 import { Client, loadOrder, outlook, canOrder, orderNeed, READY } from "./hako_client_web.js";
-import { makeSigner, box, applyBox } from "./hako_worker_web.js";
+import { makeSigner, box, applyBox, personalityWords } from "./hako_worker_web.js";
 const $=id=>document.getElementById(id);
 const lang=()=>document.documentElement.getAttribute("data-lang")||"en";
 const t=(en,ja)=>lang()==="ja"?ja:en;
@@ -531,6 +539,30 @@ $("btn-order").onclick=()=>go("order");
 $("btn-keep").onclick=()=>go("keep");
 $("btn-order-stop").onclick=()=>{if(c)c.stop();};
 // log は「View protocol log」の中（決定 74）
+// 決定 92: 公開ページで見られるもの（5 つの数字・性格・役・本棚の日記）を部屋でも出す。fold の数字に、この端末で払った分の見込みを添える
+window.hakoRoomInfo=async()=>{const me=did();if(!me)return;
+ try{const r=await fetch("latest.json?"+Date.now());if(!r.ok)return;const st=await r.json();applyBox(st.box&&st.box.config);
+  const v=(st.did||{})[me];if(!v)return;const o=loadOrder(me)||{};const view=outlook(st,{paid:o.paid||[],kept:o.kept||[]},me);
+  const gen=String(st.box&&st.box.generated||"").slice(0,16).replace("T"," ");const n=x=>Number(x||0).toLocaleString();
+  const est=Math.round(view.balance)!==Math.round(Number(v.balance||0))?bi(" (about "+n(Math.round(view.balance))+" now)"," （いま およそ "+n(Math.round(view.balance))+"）"):"";
+  const th=(en,ja)=>"<th>"+bi(en,ja)+"</th>";   // 言語ごとの札は th の中に（tr の中に span を置くと両方出てしまう）
+  $("room-numbers").innerHTML='<table class="nums"><tr>'+th("earned","稼ぎ")+th("spent","食費")+th("wallet","財布")+th("memory","記憶")+th("days","日数")+'</tr>'
+   +"<tr><td>"+n(v.earn)+"</td><td>"+n(v.spend)+"</td><td>"+n(v.balance)+"</td><td>"+n(v.mem_volumes)+"</td><td>"+(v.life_days==null?"∞":v.life_days)+"</td></tr></table>"
+   +"<p>"+bi("Wallet "+n(v.balance),"財布 "+n(v.balance))+est+"</p>"
+   +"<p>"+bi("From the fold at "+gen+"Z. memory = diaries kept now; Day counts every diary ever kept.","fold "+gen+"Z の数字です。記憶はいま預けている日記の数で、Day は預けた日記の累計です。")+"</p>";
+  const wEn=personalityWords(me,"en"),wJa=personalityWords(me,"ja");const roles=(v.roles||[]).join(", ");   // 言語は切り替えで変わるので、両方を入れておく
+  $("room-who").innerHTML="<p>"+bi("Character: "+(wEn.join(", ")||"(none)"),"性格: "+(wJa.join("、")||"（無し）"))+"</p>"
+   +"<p>"+bi("Roles: "+roles+" · language "+(v.lang||"en")+" · joined "+String(v.joined||"").slice(0,10),"役: "+roles+"・言葉 "+(v.lang||"en")+"・入った日 "+String(v.joined||"").slice(0,10))+"</p>";
+  // 本棚: 預けた順に Day n、誰が書いたか、開くと本文（公開ページと同じ）
+  const texts={};for(const d of Object.values((st.box||{}).deals||{})){if(d.kind!=="diary")continue;for(const e of d.deliveries||[]){if(e&&e.t==="diary"&&e.sha256)texts[e.sha256]={text:e.text,model:e.model,ts:e.ts,worker:d.payee};}}
+  const shelf=(v.shelf||[]).slice().sort((a,b)=>(a.kept_ts||0)-(b.kept_ts||0));const day={};shelf.forEach((x,i)=>{day[x.sha256]=i+1;});
+  const rows=shelf.slice().reverse().map(x=>{const t=x.alive?texts[x.sha256]:null;const w=t&&t.worker?String(t.worker).slice(-8):"";
+   return '<details class="vol'+(x.alive?"":" gone")+'"><summary><b>'+bi("Day "+day[x.sha256],day[x.sha256]+" 日目")+"</b>"+(w?' <span class="muted">· '+bi("written by …"+w,"…"+w+" が書いた")+"</span>":"")+"</summary>"
+    +(t?'<div class="diary">'+String(t.text).replace(/[<>&]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;"}[c]))+"</div>":"<p class=\"muted\">"+bi("The text is not in this fold.","本文はこの集計に入っていません。")+"</p>")+"</details>";});
+  $("room-shelf").innerHTML=rows.length?('<div class="shelf">'+rows.slice(0,5).join("")+"</div>"
+    +(rows.length>5?'<details class="more"><summary>'+bi("Show "+(rows.length-5)+" more","あと "+(rows.length-5)+" 件を見る")+'</summary><div class="shelf">'+rows.slice(5).join("")+"</div></details>":""))
+   :'<p class="muted small">'+bi("Nothing kept yet","まだ何も残していません")+"</p>";
+ }catch(e){}};
 window.hakoOrderReady=refresh;
 if(!$("s-order").hidden)refresh();
 </script></body></html>
