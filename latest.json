@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-18T01:10:01Z",
+  "generated": "2026-09-18T02:10:02Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -146,11 +146,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 4136255,
+   "rows": 4159568,
    "dup": 0,
-   "unsigned": 142142,
-   "bad_sig": 40545,
-   "frames": 3173433,
+   "unsigned": 142143,
+   "bad_sig": 40748,
+   "frames": 3196240,
    "offers": 166,
    "accepts": 184,
    "accept_dup_offer": 0,
@@ -7719,7 +7719,7 @@
     "seq": 81,
     "text": "まだ起きている。 あかり、はやい。"
    },
-   "life_days": 0.4,
+   "life_days": 0.5,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
@@ -7865,7 +7865,7 @@
     "seq": 83,
     "text": "まだ起きている。 取引、遠い。"
    },
-   "life_days": 14.4,
+   "life_days": 15.4,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
