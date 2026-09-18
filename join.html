@@ -120,6 +120,11 @@ html[data-lang="en"] #room-say .L-en,html[data-lang="ja"] #room-say .L-ja{displa
 #room-say::after{content:"";position:absolute;left:var(--tail,50%);bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top-color:#f0ede6}
 @media (prefers-reduced-motion: reduce){#room-hako,#room-hako svg{transition:none!important}}
 .room-day{margin:10px 0 0;color:#b9b3a8;font-size:14px;letter-spacing:.5px} .room-day .dots{color:#f5a3b5;letter-spacing:2px;margin-left:8px;font-size:12px}
+/* 決定 93: HAKO の数字は Life。部屋の下にいつも見える形で、余白をそろえて並べる */
+.stats{display:flex;flex-wrap:wrap;gap:10px 20px;margin:12px 0 6px}
+.stat{min-width:62px} .stat .lab{display:block;color:#8a857c;font-size:11px;letter-spacing:1px} .stat b{font-size:17px;color:#f0ede6;font-weight:600}
+.stat .est{display:block;color:#8a857c;font-size:11px}
+.who{margin:2px 0 0} #room-asof{margin:2px 0 0;color:#6e6a63}
 .act{margin:4px 0 12px;color:#d8d3ca;line-height:1.7} .caution{color:#e0b07a}
 #figure-art.born{animation:born .5s steps(2,end) 1 both} @keyframes born{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
 @media (prefers-reduced-motion: reduce){#figure-art.born{animation:none}}
@@ -218,11 +223,10 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
     <p id="room-say" class="say" hidden></p>
   </div>
   <p id="room-day" class="room-day"></p>
-  <!-- 決定 92: 公開ページで見られるものは部屋でも見られる（数字・性格・役）。押すと開く -->
-  <details class="how" id="d-numbers"><summary><span class="L-en">Numbers</span><span class="L-ja">数字</span></summary>
-    <div id="room-numbers" class="muted small"></div></details>
-  <details class="how" id="d-who"><summary><span class="L-en">Character &amp; roles</span><span class="L-ja">性格と役</span></summary>
-    <div id="room-who" class="muted small"></div></details>
+  <!-- 決定 93: HAKO の状態の数字は Life。部屋の絵のすぐ下にいつも見える形で置く（畳むのは log やルールなどの protocol だけ） -->
+  <div id="room-numbers" class="stats"></div>
+  <p id="room-who" class="who muted small"></p>
+  <p id="room-asof" class="muted small"></p>
 
   <div id="room-notice" hidden class="notice"></div>
   <section id="s-over" hidden class="notice">
@@ -544,15 +548,15 @@ window.hakoRoomInfo=async()=>{const me=did();if(!me)return;
  try{const r=await fetch("latest.json?"+Date.now());if(!r.ok)return;const st=await r.json();applyBox(st.box&&st.box.config);
   const v=(st.did||{})[me];if(!v)return;const o=loadOrder(me)||{};const view=outlook(st,{paid:o.paid||[],kept:o.kept||[]},me);
   const gen=String(st.box&&st.box.generated||"").slice(0,16).replace("T"," ");const n=x=>Number(x||0).toLocaleString();
-  const est=Math.round(view.balance)!==Math.round(Number(v.balance||0))?bi(" (about "+n(Math.round(view.balance))+" now)"," （いま およそ "+n(Math.round(view.balance))+"）"):"";
-  const th=(en,ja)=>"<th>"+bi(en,ja)+"</th>";   // 言語ごとの札は th の中に（tr の中に span を置くと両方出てしまう）
-  $("room-numbers").innerHTML='<table class="nums"><tr>'+th("earned","稼ぎ")+th("spent","食費")+th("wallet","財布")+th("memory","記憶")+th("days","日数")+'</tr>'
-   +"<tr><td>"+n(v.earn)+"</td><td>"+n(v.spend)+"</td><td>"+n(v.balance)+"</td><td>"+n(v.mem_volumes)+"</td><td>"+(v.life_days==null?"∞":v.life_days)+"</td></tr></table>"
-   +"<p>"+bi("Wallet "+n(v.balance),"財布 "+n(v.balance))+est+"</p>"
-   +"<p>"+bi("From the fold at "+gen+"Z. memory = diaries kept now; Day counts every diary ever kept.","fold "+gen+"Z の数字です。記憶はいま預けている日記の数で、Day は預けた日記の累計です。")+"</p>";
+  const est=Math.round(view.balance)!==Math.round(Number(v.balance||0))?bi("now about "+n(Math.round(view.balance)),"いま およそ "+n(Math.round(view.balance))):"";
+  const cell=(en,ja,val,extra)=>'<div class="stat"><span class="lab">'+bi(en,ja)+'</span><b>'+val+"</b>"+(extra||"")+"</div>";   // .k はサイトの CSS で「：」が付くので別の名前
+  $("room-numbers").innerHTML=cell("earned","稼ぎ",n(v.earn))+cell("spent","食費",n(v.spend))
+   +cell("wallet","財布",n(v.balance),est?'<span class="est">'+est+"</span>":"")
+   +cell("memory","記憶",n(v.mem_volumes))+cell("days","日数",(v.life_days==null?"∞":v.life_days));
   const wEn=personalityWords(me,"en"),wJa=personalityWords(me,"ja");const roles=(v.roles||[]).join(", ");   // 言語は切り替えで変わるので、両方を入れておく
-  $("room-who").innerHTML="<p>"+bi("Character: "+(wEn.join(", ")||"(none)"),"性格: "+(wJa.join("、")||"（無し）"))+"</p>"
-   +"<p>"+bi("Roles: "+roles+" · language "+(v.lang||"en")+" · joined "+String(v.joined||"").slice(0,10),"役: "+roles+"・言葉 "+(v.lang||"en")+"・入った日 "+String(v.joined||"").slice(0,10))+"</p>";
+  $("room-who").innerHTML=bi("Character: "+(wEn.join(", ")||"(none)"),"性格: "+(wJa.join("、")||"（無し）"))
+   +bi(" · roles "+roles+" · language "+(v.lang||"en")+" · joined "+String(v.joined||"").slice(0,10)," ・役 "+roles+"・言葉 "+(v.lang||"en")+"・入った日 "+String(v.joined||"").slice(0,10));
+  $("room-asof").innerHTML=bi("From the fold at "+gen+"Z. memory = diaries kept now; Day counts every diary ever kept.","fold "+gen+"Z の数字です。記憶はいま預けている日記の数で、Day は預けた日記の累計です。");
   // 本棚: 預けた順に Day n、誰が書いたか、開くと本文（公開ページと同じ）
   const texts={};for(const d of Object.values((st.box||{}).deals||{})){if(d.kind!=="diary")continue;for(const e of d.deliveries||[]){if(e&&e.t==="diary"&&e.sha256)texts[e.sha256]={text:e.text,model:e.model,ts:e.ts,worker:d.payee};}}
   const shelf=(v.shelf||[]).slice().sort((a,b)=>(a.kept_ts||0)-(b.kept_ts||0));const day={};shelf.forEach((x,i)=>{day[x.sha256]=i+1;});
