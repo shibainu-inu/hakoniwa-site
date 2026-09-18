@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-18T13:10:01Z",
+  "generated": "2026-09-18T14:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -146,11 +146,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 4429479,
+   "rows": 4456276,
    "dup": 0,
-   "unsigned": 142703,
-   "bad_sig": 43088,
-   "frames": 3458651,
+   "unsigned": 142863,
+   "bad_sig": 43282,
+   "frames": 3484608,
    "offers": 190,
    "accepts": 209,
    "accept_dup_offer": 0,
@@ -172,8 +172,8 @@
    "join_no_seat": 0,
    "join_after_exit": 0
   },
-  "receipts": 82,
-  "paper_total": 18695.0,
+  "receipts": 83,
+  "paper_total": 19095.0,
   "bound_paper": 0,
   "shelves": {
    "volumes": 16,
@@ -1608,9 +1608,9 @@
     "amount": 400.0,
     "locked_seq": 1,
     "locked_ts": 1789735422,
-    "settled_seq": null,
-    "settled_ts": null,
-    "outcome": null,
+    "settled_seq": 4,
+    "settled_ts": 1789736963,
+    "outcome": "receipt",
     "dispute": false,
     "test": false
    },
@@ -7850,8 +7850,15 @@
      "ts": "2026-09-18T13:07:44.820984Z"
     },
     "refund": null,
-    "receipt": null,
-    "settled": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-18T13:09:23.978570Z"
+    },
     "penalty": null,
     "deliveries": [
      {
@@ -7884,7 +7891,7 @@
      }
     ],
     "dropped": null,
-    "status": "revealed"
+    "status": "claimed"
    },
    "0x8ccbd6d22047a7a1089bb036a0acd801ed78269c598ed40f1a6589328a9434a0": {
     "contract": "0x8ccbd6d22047a7a1089bb036a0acd801ed78269c598ed40f1a6589328a9434a0",
@@ -9129,6 +9136,16 @@
     "pool": 400.0,
     "status": "distributed",
     "computed": 400.0
+   },
+   {
+    "seq": 98,
+    "ts": "2026-09-18T13:28:15.903465Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-18",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 400.0,
+    "status": "distributed",
+    "computed": 400.0
    }
   ],
   "invalid_issue": [
@@ -9166,18 +9183,18 @@
    "lang": "ja",
    "joined": "2026-09-08T11:29:07.745802Z",
    "earn": 873.0,
-   "spend": 14380.0,
-   "issued": 11700.0,
+   "spend": 14780.0,
+   "issued": 12100.0,
    "balance": -807.0,
    "mem_volumes": 15,
    "chat": {
-    "ts": "2026-09-18T10:36:12.372575Z",
-    "seq": 92,
-    "text": "おはよう。 席、歩く。"
+    "ts": "2026-09-18T13:09:24.516327Z",
+    "seq": 97,
+    "text": "こんにちは。 待つ、あげる。"
    },
    "life_days": -0.4,
    "earn_today": 108.0,
-   "spend_today": 2840.0,
+   "spend_today": 3240.0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -9329,18 +9346,18 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:28.400237Z",
-   "earn": 12195.0,
+   "earn": 12595.0,
    "spend": 4140.0,
    "issued": 0.0,
-   "balance": 9055.0,
+   "balance": 9455.0,
    "mem_volumes": 0,
    "chat": {
     "ts": "2026-09-18T12:17:26.935356Z",
     "seq": 95,
     "text": "こんにちは。 あげる、おぼえている。"
    },
-   "life_days": 16.5,
-   "earn_today": 2134.0,
+   "life_days": 17.2,
+   "earn_today": 2534.0,
    "spend_today": 480.0,
    "operator": true,
    "state": "seated",
