@@ -3,7 +3,6 @@
   "generated": "2026-09-19T12:10:01Z",
   "config": {
    "box": "hakoniwa",
-   "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
    "values": {
     "box": "hakoniwa",
