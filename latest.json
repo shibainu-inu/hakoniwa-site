@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-19T03:10:01Z",
+  "generated": "2026-09-19T04:10:01Z",
   "config": {
    "box": "hakoniwa",
    "path": "/home/sbs-tech001/hakoniwa/hako_box.json",
@@ -146,11 +146,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 4820981,
+   "rows": 4850067,
    "dup": 0,
    "unsigned": 142913,
-   "bad_sig": 47208,
-   "frames": 3837417,
+   "bad_sig": 47633,
+   "frames": 3865173,
    "offers": 203,
    "accepts": 209,
    "accept_dup_offer": 0,
