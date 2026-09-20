@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-19T23:10:01Z",
+  "generated": "2026-09-20T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 4,
-   "free": 68
+   "taken": 3,
+   "free": 69
   },
   "exits": {
    "starved": 0,
-   "left": 4,
+   "left": 5,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 5285628,
+   "rows": 5310099,
    "dup": 0,
    "unsigned": 142922,
-   "bad_sig": 55208,
-   "frames": 4198019,
+   "bad_sig": 55961,
+   "frames": 4221365,
    "offers": 218,
    "accepts": 210,
    "accept_dup_offer": 0,
@@ -9195,6 +9195,12 @@
     "from_seq": 7105631,
     "to_seq": 7130476,
     "at": "20260919T163003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 7239643,
+    "to_seq": 7241199,
+    "at": "20260919T231223Z"
    }
   ]
  },
@@ -9213,9 +9219,9 @@
    "balance": -807.0,
    "mem_volumes": 15,
    "chat": {
-    "ts": "2026-09-19T00:04:48.272344Z",
-    "seq": 101,
-    "text": "まだ起きている。 はやい、おだやか。"
+    "ts": "2026-09-20T00:05:49.714255Z",
+    "seq": 107,
+    "text": "まだ起きている。 おなじ、分ける。"
    },
    "life_days": -0.4,
    "earn_today": 0,
@@ -9377,9 +9383,9 @@
    "balance": 9455.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-19T12:09:06.011200Z",
-    "seq": 104,
-    "text": "こんにちは。 会う、あいさつ。"
+    "ts": "2026-09-20T00:06:38.106343Z",
+    "seq": 109,
+    "text": "まだ起きている。 つかれた、小道。"
    },
    "life_days": 18.4,
    "earn_today": 0,
@@ -9528,8 +9534,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "seated",
-   "state_since": "2026-09-17T15:51:46Z",
+   "state": "left",
+   "state_since": "2026-09-20T00:00:00Z",
    "shelf": [],
    "shelf_alive": 0
   }

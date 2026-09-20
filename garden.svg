@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" width="1400" height="820"><rect width="1400" height="820" fill="#161616"/><defs><linearGradient id="fl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232323"/><stop offset="1" stop-color="#1c1c1c"/></linearGradient><filter id="ds2" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.26"/></filter><filter id="ds3" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.18"/></filter><filter id="ds4" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.18"/></filter><filter id="ds5" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.18"/></filter></defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 820" width="1400" height="820"><rect width="1400" height="820" fill="#161616"/><defs><linearGradient id="fl1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232323"/><stop offset="1" stop-color="#1c1c1c"/></linearGradient><filter id="ds2" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.18"/></filter><filter id="ds3" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.18"/></filter><filter id="ds4" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.18"/></filter></defs>
 <path d="M252.0,190 L1148.0,190 L1344.0,730 L56.0,730 Z" fill="url(#fl1)"/>
 <path d="M326.7,190.0 L163.3,730.0" stroke="#2c2c2c" stroke-width="1"/>
 <path d="M401.3,190.0 L270.7,730.0" stroke="#2c2c2c" stroke-width="1"/>
@@ -18,37 +18,15 @@
 <path d="M88.7,640.0 L1311.3,640.0" stroke="#2c2c2c" stroke-width="1"/>
 <path d="M52.80 56.00h40.80v3.40h-40.80zM49.40 59.40h47.60v3.40h-47.60zM46.00 62.80h54.40v3.40h-54.40zM46.00 66.20h6.80v3.40h-6.80zM93.60 66.20h6.80v3.40h-6.80zM46.00 69.60h6.80v3.40h-6.80zM59.60 69.60h6.80v3.40h-6.80zM80.00 69.60h6.80v3.40h-6.80zM93.60 69.60h6.80v3.40h-6.80zM46.00 73.00h6.80v3.40h-6.80zM59.60 73.00h6.80v3.40h-6.80zM80.00 73.00h6.80v3.40h-6.80zM93.60 73.00h6.80v3.40h-6.80zM46.00 76.40h6.80v3.40h-6.80zM93.60 76.40h6.80v3.40h-6.80zM46.00 79.80h6.80v3.40h-6.80zM93.60 79.80h6.80v3.40h-6.80zM46.00 83.20h6.80v3.40h-6.80zM93.60 83.20h6.80v3.40h-6.80zM46.00 86.60h54.40v3.40h-54.40zM49.40 90.00h47.60v3.40h-47.60zM52.80 93.40h40.80v3.40h-40.80zM56.20 96.80h6.80v3.40h-6.80zM83.40 96.80h6.80v3.40h-6.80zM56.20 100.20h6.80v3.40h-6.80zM83.40 100.20h6.80v3.40h-6.80z" fill="#f0ede6" shape-rendering="crispEdges"/>
 <text x="120" y="92" font-size="40" font-weight="bold" font-family="sans-serif" fill="#f0ede6" letter-spacing="2">z6 HAKONIWA</text>
-<text class="L-en" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">4 HAKO · 0 bound</text><text class="L-ja" display="none" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">4 HAKO　綴じた 0</text>
-<path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#f5a3b5" stroke-width="7.00" opacity="0.53" stroke-linecap="round"/>
+<text class="L-en" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">3 HAKO · 0 bound</text><text class="L-ja" display="none" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">3 HAKO　綴じた 0</text>
+<path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#f5a3b5" stroke-width="7.00" opacity="0.52" stroke-linecap="round"/>
 <circle cx="336.0" cy="553.8" r="12.4" fill="#1a1a1a" stroke="#f5a3b5" stroke-width="1.6" opacity="0.95"/>
 <text x="336.0" y="557.3" font-size="10" font-family="system-ui,sans-serif" fill="#f5a3b5" text-anchor="middle" font-weight="bold">53</text>
-<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.53" stroke-linecap="round"/>
+<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.52" stroke-linecap="round"/>
 <circle cx="516.3" cy="492.2" r="12.4" fill="#1a1a1a" stroke="#3fbfd9" stroke-width="1.6" opacity="0.95"/>
 <text x="516.3" y="495.7" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">18</text>
-<path d="M289.6,238.8 Q372.9,319.5 456.1,430.7" fill="none" stroke="#5ec99a" stroke-width="1.80" opacity="0.50" stroke-linecap="round"/>
-<path d="M289.6,238.8 Q553.2,251.4 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="1.80" opacity="0.50" stroke-linecap="round"/>
-<g>
-<path d="M456.1,430.7 Q372.9,306.1 289.6,238.8" fill="none" stroke="#5ec99a" stroke-width="2" stroke-dasharray="6 6" opacity="0.75" stroke-linecap="round"><animate attributeName="stroke-dashoffset" values="24;0" dur="1.2s" repeatCount="indefinite"/></path>
-<circle cx="456.1" cy="430.7" r="3" fill="#5ec99a"/><circle cx="289.6" cy="238.8" r="3" fill="#5ec99a"/>
-</g>
-<g>
-<path d="M456.1,430.7 Q372.9,306.1 289.6,238.8" fill="none" stroke="#5ec99a" stroke-width="2" stroke-dasharray="6 6" opacity="0.75" stroke-linecap="round"><animate attributeName="stroke-dashoffset" values="24;0" dur="1.2s" repeatCount="indefinite"/></path>
-<circle cx="456.1" cy="430.7" r="3" fill="#5ec99a"/><circle cx="289.6" cy="238.8" r="3" fill="#5ec99a"/>
-</g>
-<g transform="translate(289.6,241.8) scale(0.499)">
-<ellipse cx="0.00" cy="7.90" rx="22.83" ry="4.35" fill="#000" opacity="0.45" filter="url(#ds2)"/>
-<g>
-<animateTransform attributeName="transform" type="translate" values="0 0;0 -9.25;0 0" dur="0.9570000000000001s" begin="-0.81s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
-<path d="M-22.65 -76.37h45.31v4.53h-45.31zM-27.18 -71.84h54.37v4.53h-54.37zM-27.18 -67.31h54.37v4.53h-54.37zM-27.18 -62.77h54.37v4.53h-54.37zM-27.18 -58.24h54.37v4.53h-54.37zM-27.18 -53.71h54.37v4.53h-54.37zM-27.18 -49.18h54.37v4.53h-54.37zM-27.18 -44.65h54.37v4.53h-54.37zM-27.18 -40.12h54.37v4.53h-54.37zM-27.18 -35.59h54.37v4.53h-54.37zM-27.18 -31.06h54.37v4.53h-54.37zM-27.18 -26.53h54.37v4.53h-54.37zM-27.18 -22.00h54.37v4.53h-54.37zM-27.18 -17.47h54.37v4.53h-54.37zM-27.18 -12.94h54.37v4.53h-54.37zM-22.65 -8.41h45.31v4.53h-45.31z" fill="#161616" shape-rendering="crispEdges"/>
-<path d="M-9.06 -85.43h4.53v4.53h-4.53zM9.06 -85.43h4.53v4.53h-4.53zM-4.53 -80.90h13.59v4.53h-13.59zM-22.65 -76.37h45.31v4.53h-45.31zM-27.18 -71.84h4.53v4.53h-4.53zM22.65 -71.84h4.53v4.53h-4.53zM-27.18 -67.31h4.53v4.53h-4.53zM22.65 -67.31h4.53v4.53h-4.53zM-27.18 -62.77h4.53v4.53h-4.53zM22.65 -62.77h4.53v4.53h-4.53zM-27.18 -58.24h4.53v4.53h-4.53zM22.65 -58.24h4.53v4.53h-4.53zM-27.18 -53.71h4.53v4.53h-4.53zM22.65 -53.71h4.53v4.53h-4.53zM-27.18 -49.18h4.53v4.53h-4.53zM-18.12 -49.18h9.06v4.53h-9.06zM9.06 -49.18h9.06v4.53h-9.06zM22.65 -49.18h4.53v4.53h-4.53zM-27.18 -44.65h4.53v4.53h-4.53zM-18.12 -44.65h9.06v4.53h-9.06zM9.06 -44.65h9.06v4.53h-9.06zM22.65 -44.65h4.53v4.53h-4.53zM-27.18 -40.12h4.53v4.53h-4.53zM-9.06 -40.12h4.53v4.53h-4.53zM4.53 -40.12h4.53v4.53h-4.53zM22.65 -40.12h4.53v4.53h-4.53zM-27.18 -35.59h4.53v4.53h-4.53zM-4.53 -35.59h9.06v4.53h-9.06zM22.65 -35.59h4.53v4.53h-4.53zM-27.18 -31.06h4.53v4.53h-4.53zM22.65 -31.06h4.53v4.53h-4.53zM-27.18 -26.53h4.53v4.53h-4.53zM22.65 -26.53h4.53v4.53h-4.53zM-27.18 -22.00h4.53v4.53h-4.53zM22.65 -22.00h4.53v4.53h-4.53zM-27.18 -17.47h4.53v4.53h-4.53zM22.65 -17.47h4.53v4.53h-4.53zM-27.18 -12.94h4.53v4.53h-4.53zM22.65 -12.94h4.53v4.53h-4.53zM-22.65 -8.41h45.31v4.53h-45.31zM-18.12 -3.88h9.06v4.53h-9.06zM9.06 -3.88h9.06v4.53h-9.06zM-18.12 0.65h9.06v4.53h-9.06zM9.06 0.65h9.06v4.53h-9.06z" fill="#c9a181" shape-rendering="crispEdges"/>
-</g>
-<g transform="translate(33.18,-91.43) scale(2.003) translate(-33.18,91.43)">
-<rect x="33.18" y="-100.43" width="54" height="16" rx="8" fill="#5ec99a"/>
-<text x="60.18" y="-88.43" font-size="10" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#151515">worker</text>
-</g>
-</g>
 <g transform="translate(816.9,311.5) scale(0.525)">
-<ellipse cx="0.00" cy="7.15" rx="22.26" ry="4.24" fill="#000" opacity="0.45" filter="url(#ds3)"/>
+<ellipse cx="0.00" cy="7.15" rx="22.26" ry="4.24" fill="#000" opacity="0.45" filter="url(#ds2)"/>
 <g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -8.57;0 0" dur="1.078s" begin="-1.04s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <path d="M-22.08 -70.58h44.17v4.42h-44.17zM-26.50 -66.17h53.00v4.42h-53.00zM-26.50 -61.75h53.00v4.42h-53.00zM-26.50 -57.33h53.00v4.42h-53.00zM-26.50 -52.92h53.00v4.42h-53.00zM-26.50 -48.50h53.00v4.42h-53.00zM-26.50 -44.08h53.00v4.42h-53.00zM-26.50 -39.67h53.00v4.42h-53.00zM-26.50 -35.25h53.00v4.42h-53.00zM-26.50 -30.83h53.00v4.42h-53.00zM-26.50 -26.42h53.00v4.42h-53.00zM-26.50 -22.00h53.00v4.42h-53.00zM-26.50 -17.58h53.00v4.42h-53.00zM-26.50 -13.17h53.00v4.42h-53.00zM-26.50 -8.75h53.00v4.42h-53.00zM-22.08 -4.33h44.17v4.42h-44.17z" fill="#161616" shape-rendering="crispEdges"/>
@@ -56,7 +34,7 @@
 </g>
 </g>
 <g transform="translate(456.1,435.2) scale(0.571)">
-<ellipse cx="0.00" cy="7.15" rx="29.68" ry="4.24" fill="#000" opacity="0.45" filter="url(#ds4)"/>
+<ellipse cx="0.00" cy="7.15" rx="29.68" ry="4.24" fill="#000" opacity="0.45" filter="url(#ds3)"/>
 <g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.94;0 0" dur="1.5s" begin="-0.76s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <animateTransform attributeName="transform" type="rotate" values="0 0.00 4.50;3 0.00 4.50;0 0.00 4.50" dur="2.4s" begin="0s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
@@ -70,12 +48,12 @@
 </g>
 </g>
 <g transform="translate(215.8,705.2) scale(0.671)">
-<ellipse cx="0.00" cy="7.15" rx="29.68" ry="4.24" fill="#000" opacity="0.45" filter="url(#ds5)"/>
+<ellipse cx="0.00" cy="7.15" rx="29.68" ry="4.24" fill="#000" opacity="0.45" filter="url(#ds4)"/>
 <g>
 <animateTransform attributeName="transform" type="translate" values="-5.59 0;5.59 0;-5.59 0" dur="2.14s" begin="-1.11s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <path d="M-31.41 -50.46h62.81v3.93h-62.81zM-35.33 -46.54h70.67v3.93h-70.67zM-35.33 -42.61h70.67v3.93h-70.67zM-35.33 -38.69h70.67v3.93h-70.67zM-35.33 -34.76h70.67v3.93h-70.67zM-35.33 -30.83h70.67v3.93h-70.67zM-35.33 -26.91h70.67v3.93h-70.67zM-35.33 -22.98h70.67v3.93h-70.67zM-35.33 -19.06h70.67v3.93h-70.67zM-35.33 -15.13h70.67v3.93h-70.67zM-35.33 -11.20h70.67v3.93h-70.67zM-35.33 -7.28h70.67v3.93h-70.67zM-31.41 -3.35h62.81v3.93h-62.81z" fill="#161616" shape-rendering="crispEdges"/>
 <path d="M-11.78 -58.31h7.85v3.93h-7.85zM7.85 -58.31h7.85v3.93h-7.85zM-3.93 -54.39h11.78v3.93h-11.78zM-31.41 -50.46h62.81v3.93h-62.81zM-35.33 -46.54h3.93v3.93h-3.93zM31.41 -46.54h3.93v3.93h-3.93zM-35.33 -42.61h3.93v3.93h-3.93zM31.41 -42.61h3.93v3.93h-3.93zM-35.33 -38.69h3.93v3.93h-3.93zM31.41 -38.69h3.93v3.93h-3.93zM-35.33 -34.76h3.93v3.93h-3.93zM-15.70 -34.76h3.93v3.93h-3.93zM11.78 -34.76h3.93v3.93h-3.93zM31.41 -34.76h3.93v3.93h-3.93zM-35.33 -30.83h3.93v3.93h-3.93zM31.41 -30.83h3.93v3.93h-3.93zM-35.33 -26.91h3.93v3.93h-3.93zM-3.93 -26.91h7.85v3.93h-7.85zM31.41 -26.91h3.93v3.93h-3.93zM-35.33 -22.98h3.93v3.93h-3.93zM-7.85 -22.98h3.93v3.93h-3.93zM3.93 -22.98h3.93v3.93h-3.93zM31.41 -22.98h3.93v3.93h-3.93zM-35.33 -19.06h3.93v3.93h-3.93zM31.41 -19.06h3.93v3.93h-3.93zM-35.33 -15.13h3.93v3.93h-3.93zM31.41 -15.13h3.93v3.93h-3.93zM-35.33 -11.20h3.93v3.93h-3.93zM-27.48 -11.20h54.96v3.93h-54.96zM31.41 -11.20h3.93v3.93h-3.93zM-35.33 -7.28h3.93v3.93h-3.93zM-27.48 -7.28h54.96v3.93h-54.96zM31.41 -7.28h3.93v3.93h-3.93zM-31.41 -3.35h62.81v3.93h-62.81zM-27.48 0.57h7.85v3.93h-7.85zM19.63 0.57h7.85v3.93h-7.85z" fill="#f0ede6" shape-rendering="crispEdges"/>
 </g>
 </g>
-<g transform="translate(215.8,667.7) scale(1.000) translate(-215.8,-667.7)" opacity="0.96"><rect x="97.6" y="632.7" width="236.4" height="27.0" rx="13.5" fill="#f0ede6" stroke="#2c2c2c" stroke-width="1"/><path d="M210.8,658.7 L215.8,666.7 L220.8,658.7 Z" fill="#f0ede6" stroke="#f0ede6"/><text x="215.8" y="651.6" font-size="15" font-family="system-ui,sans-serif" fill="#1a1a1a" text-anchor="middle">こんにちは。 会う、あいさつ。</text></g>
+<g transform="translate(215.8,667.7) scale(1.000) translate(-215.8,-667.7)" opacity="0.96"><rect x="82.6" y="632.7" width="266.4" height="27.0" rx="13.5" fill="#f0ede6" stroke="#2c2c2c" stroke-width="1"/><path d="M210.8,658.7 L215.8,666.7 L220.8,658.7 Z" fill="#f0ede6" stroke="#f0ede6"/><text x="215.8" y="651.6" font-size="15" font-family="system-ui,sans-serif" fill="#1a1a1a" text-anchor="middle">まだ起きている。 つかれた、小道。</text></g>
 </svg>
