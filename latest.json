@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-21T08:10:01Z",
+  "generated": "2026-09-21T09:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 6038912,
+   "rows": 6067052,
    "dup": 0,
    "unsigned": 142933,
-   "bad_sig": 71974,
-   "frames": 4925497,
+   "bad_sig": 72631,
+   "frames": 4952598,
    "offers": 233,
    "accepts": 216,
    "accept_dup_offer": 0,
@@ -9436,6 +9436,12 @@
     "from_seq": 7996103,
     "to_seq": 8004237,
     "at": "20260921T074331Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 8027969,
+    "to_seq": 8028779,
+    "at": "20260921T082347Z"
    }
   ]
  },
