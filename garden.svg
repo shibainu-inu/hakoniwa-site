@@ -19,10 +19,10 @@
 <path d="M52.80 56.00h40.80v3.40h-40.80zM49.40 59.40h47.60v3.40h-47.60zM46.00 62.80h54.40v3.40h-54.40zM46.00 66.20h6.80v3.40h-6.80zM93.60 66.20h6.80v3.40h-6.80zM46.00 69.60h6.80v3.40h-6.80zM59.60 69.60h6.80v3.40h-6.80zM80.00 69.60h6.80v3.40h-6.80zM93.60 69.60h6.80v3.40h-6.80zM46.00 73.00h6.80v3.40h-6.80zM59.60 73.00h6.80v3.40h-6.80zM80.00 73.00h6.80v3.40h-6.80zM93.60 73.00h6.80v3.40h-6.80zM46.00 76.40h6.80v3.40h-6.80zM93.60 76.40h6.80v3.40h-6.80zM46.00 79.80h6.80v3.40h-6.80zM93.60 79.80h6.80v3.40h-6.80zM46.00 83.20h6.80v3.40h-6.80zM93.60 83.20h6.80v3.40h-6.80zM46.00 86.60h54.40v3.40h-54.40zM49.40 90.00h47.60v3.40h-47.60zM52.80 93.40h40.80v3.40h-40.80zM56.20 96.80h6.80v3.40h-6.80zM83.40 96.80h6.80v3.40h-6.80zM56.20 100.20h6.80v3.40h-6.80zM83.40 100.20h6.80v3.40h-6.80z" fill="#f0ede6" shape-rendering="crispEdges"/>
 <text x="120" y="92" font-size="40" font-weight="bold" font-family="sans-serif" fill="#f0ede6" letter-spacing="2">z6 HAKONIWA</text>
 <text class="L-en" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">3 HAKO · 0 bound</text><text class="L-ja" display="none" x="122" y="118" font-size="13" font-family="sans-serif" fill="#8a8a8a">3 HAKO　綴じた 0</text>
-<path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#f5a3b5" stroke-width="7.00" opacity="0.67" stroke-linecap="round"/>
+<path d="M215.8,698.5 Q336.0,543.0 456.1,430.7" fill="none" stroke="#f5a3b5" stroke-width="7.00" opacity="0.66" stroke-linecap="round"/>
 <circle cx="336.0" cy="553.8" r="12.4" fill="#1a1a1a" stroke="#f5a3b5" stroke-width="1.6" opacity="0.95"/>
 <text x="336.0" y="557.3" font-size="10" font-family="system-ui,sans-serif" fill="#f5a3b5" text-anchor="middle" font-weight="bold">54</text>
-<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.67" stroke-linecap="round"/>
+<path d="M215.8,698.5 Q516.3,481.2 816.9,307.9" fill="none" stroke="#3fbfd9" stroke-width="7.00" opacity="0.66" stroke-linecap="round"/>
 <circle cx="516.3" cy="492.2" r="12.4" fill="#1a1a1a" stroke="#3fbfd9" stroke-width="1.6" opacity="0.95"/>
 <text x="516.3" y="495.7" font-size="10" font-family="system-ui,sans-serif" fill="#3fbfd9" text-anchor="middle" font-weight="bold">19</text>
 <g transform="translate(816.9,311.5) scale(0.525)">
