@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-20T23:10:01Z",
+  "generated": "2026-09-21T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 5821278,
+   "rows": 5846126,
    "dup": 0,
    "unsigned": 142931,
-   "bad_sig": 66339,
-   "frames": 4716474,
+   "bad_sig": 66983,
+   "frames": 4740358,
    "offers": 229,
    "accepts": 214,
    "accept_dup_offer": 0,
@@ -9398,13 +9398,13 @@
    "balance": -771.0,
    "mem_volumes": 15,
    "chat": {
-    "ts": "2026-09-20T07:10:08.046635Z",
-    "seq": 111,
-    "text": "おはよう。 しずか、休む。"
+    "ts": "2026-09-21T00:01:21.529012Z",
+    "seq": 115,
+    "text": "まだ起きている。 話す、はじまる。"
    },
    "life_days": -0.4,
-   "earn_today": 36.0,
-   "spend_today": 400.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -9562,13 +9562,13 @@
    "balance": 9615.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-20T12:10:46.750184Z",
-    "seq": 113,
-    "text": "こんにちは。 くらい、夢。"
+    "ts": "2026-09-21T00:07:56.062263Z",
+    "seq": 118,
+    "text": "まだ起きている。 かみ、取引。"
    },
    "life_days": 18.7,
-   "earn_today": 400.0,
-   "spend_today": 240.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -9590,7 +9590,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 204.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
