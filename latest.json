@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-21T05:10:01Z",
+  "generated": "2026-09-21T06:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 5961905,
+   "rows": 5994239,
    "dup": 0,
-   "unsigned": 142931,
-   "bad_sig": 69930,
-   "frames": 4851603,
+   "unsigned": 142933,
+   "bad_sig": 70854,
+   "frames": 4882574,
    "offers": 231,
    "accepts": 215,
    "accept_dup_offer": 0,
@@ -9411,6 +9411,12 @@
     "from_seq": 7910871,
     "to_seq": 7915302,
     "at": "20260921T043010Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 7946927,
+    "to_seq": 7947764,
+    "at": "20260921T053004Z"
    }
   ]
  },
@@ -9593,9 +9599,9 @@
    "balance": 9615.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-21T00:07:56.062263Z",
-    "seq": 118,
-    "text": "まだ起きている。 かみ、取引。"
+    "ts": "2026-09-21T06:07:23.785741Z",
+    "seq": 119,
+    "text": "おはよう。 一日、うれしい。"
    },
    "life_days": 23.4,
    "earn_today": 0,
