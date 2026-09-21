@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-21T02:10:01Z",
+  "generated": "2026-09-21T03:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 5878955,
+   "rows": 5917896,
    "dup": 0,
    "unsigned": 142931,
-   "bad_sig": 67769,
-   "frames": 4771940,
+   "bad_sig": 68777,
+   "frames": 4809367,
    "offers": 231,
    "accepts": 215,
    "accept_dup_offer": 0,
@@ -9393,6 +9393,18 @@
     "from_seq": 7807588,
     "to_seq": 7817812,
     "at": "20260921T005007Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 7846949,
+    "to_seq": 7849941,
+    "at": "20260921T021017Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 7865883,
+    "to_seq": 7866424,
+    "at": "20260921T024004Z"
    }
   ]
  },
@@ -9579,7 +9591,7 @@
     "seq": 118,
     "text": "まだ起きている。 かみ、取引。"
    },
-   "life_days": 21.6,
+   "life_days": 23.4,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
