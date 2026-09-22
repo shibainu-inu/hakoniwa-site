@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-21T23:10:01Z",
+  "generated": "2026-09-22T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 3,
-   "free": 69
+   "taken": 4,
+   "free": 68
   },
   "exits": {
    "starved": 0,
-   "left": 5,
+   "left": 4,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 6391391,
+   "rows": 6412337,
    "dup": 0,
    "unsigned": 142941,
-   "bad_sig": 78403,
-   "frames": 5266476,
+   "bad_sig": 78704,
+   "frames": 5286849,
    "offers": 237,
    "accepts": 220,
    "accept_dup_offer": 0,
@@ -9657,13 +9657,13 @@
    "balance": -735.0,
    "mem_volumes": 15,
    "chat": {
-    "ts": "2026-09-21T15:08:47.707399Z",
-    "seq": 123,
-    "text": "こんにちは。 歩く、さいご。"
+    "ts": "2026-09-22T00:04:37.980180Z",
+    "seq": 128,
+    "text": "まだ起きている。 おなじ、おそい。"
    },
    "life_days": -0.4,
-   "earn_today": 36.0,
-   "spend_today": 400.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -9821,13 +9821,13 @@
    "balance": 9775.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-21T18:08:48.803101Z",
-    "seq": 124,
-    "text": "こんばんは。 つかれた、あげる。"
+    "ts": "2026-09-22T00:04:52.661833Z",
+    "seq": 129,
+    "text": "まだ起きている。 うれしい、あげる。"
    },
    "life_days": 21.9,
-   "earn_today": 400.0,
-   "spend_today": 240.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -9849,7 +9849,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 204.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -9960,7 +9960,7 @@
     "worker",
     "client"
    ],
-   "lang": "ja",
+   "lang": "en",
    "joined": "2026-09-17T15:51:46.145819Z",
    "earn": 400.0,
    "spend": 240.0,
@@ -9972,8 +9972,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "left",
-   "state_since": "2026-09-20T00:00:00Z",
+   "state": "seated",
+   "state_since": "2026-09-21T23:08:44Z",
    "shelf": [],
    "shelf_alive": 0
   }
