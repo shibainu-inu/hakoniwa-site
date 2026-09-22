@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-22T06:10:01Z",
+  "generated": "2026-09-22T07:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,22 +145,22 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 6533679,
+   "rows": 6544971,
    "dup": 0,
    "unsigned": 142945,
-   "bad_sig": 80516,
-   "frames": 5404664,
-   "offers": 242,
-   "accepts": 224,
+   "bad_sig": 80744,
+   "frames": 5415523,
+   "offers": 244,
+   "accepts": 226,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 820,
+   "accept_bad_contract": 826,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 122,
+   "contracts_unlocked": 124,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -9431,6 +9431,20 @@
     "job": "hakoniwa-inf-a36f0cb4-1",
     "accept_seq": 8446281,
     "payee": "did:key:z6MkqgoDcWhrBedLfnPgUhMbyDk1Qyc4qQRxiVJPTLUsbxeA",
+    "dropped": null
+   },
+   {
+    "contract": "0xfb1ad3b12c681ed6b937416f84f8b5073ac7b68fcd3b8803a720bee933ebae76",
+    "job": "hakoniwa-diary-PvqA-20260922-1",
+    "accept_seq": 8542825,
+    "payee": "did:key:z6MkhefoSonhn5baYJn2dXvvotuyhjmuqfaZ43QMjy23zJM4",
+    "dropped": null
+   },
+   {
+    "contract": "0x70fabab0707583401a92aedeb939b436840e495aab14f3dd05937cb61957f6cd",
+    "job": "hakoniwa-diary-PvqA-20260922-2",
+    "accept_seq": 8542826,
+    "payee": "did:key:z6MkhefoSonhn5baYJn2dXvvotuyhjmuqfaZ43QMjy23zJM4",
     "dropped": null
    }
   ],
