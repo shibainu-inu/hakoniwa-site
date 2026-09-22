@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-22T22:10:01Z",
+  "generated": "2026-09-22T23:10:02Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 6777658,
+   "rows": 6789826,
    "dup": 0,
-   "unsigned": 142957,
-   "bad_sig": 84915,
-   "frames": 5640436,
+   "unsigned": 142959,
+   "bad_sig": 85109,
+   "frames": 5652197,
    "offers": 253,
    "accepts": 238,
    "accept_dup_offer": 0,
@@ -10241,7 +10241,7 @@
     "seq": 135,
     "text": "おはよう。 読む、あげる。"
    },
-   "life_days": 22.6,
+   "life_days": 24.5,
    "earn_today": 800.0,
    "spend_today": 480.0,
    "operator": true,
