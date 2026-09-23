@@ -9,6 +9,7 @@ main > *{min-width:0} main > footer{margin-top:auto}
 .page-nav{display:flex;justify-content:flex-start;gap:4px;margin:4px 0 8px -10px;flex-wrap:wrap}
 .page-nav a{color:#8a857c;letter-spacing:2px;font-size:12px;padding:8px 10px;text-decoration:none;text-transform:uppercase} .page-nav a:hover{color:#f0ede6}
 .page-nav a.here{color:#f0ede6;text-decoration:underline;text-underline-offset:6px;text-decoration-thickness:2px}   /* いまいるページ */
+h1.id-h{overflow-wrap:anywhere} @media(max-width:520px){h1.id-h{font-size:1.45em}}   /* DID の見出しは電話の幅で 1 行に収める */
 svg{max-width:100%;height:auto;display:block} svg a{cursor:pointer}
 a{color:#8fc7ff} table{border-collapse:collapse} td,th{padding:4px 12px;text-align:left;border-bottom:1px solid #2c2c2c}
 .muted{color:#8a8a8a;font-size:13px} .badge{display:inline-block;padding:2px 8px;border-radius:4px;margin-right:6px;color:#161616;font-weight:bold}
@@ -217,7 +218,7 @@ code{background:#1e1e1e;padding:1px 4px;border-radius:3px} .warn{color:#f07c7c}
       <div class="did-pop"><code id="did-full"></code><p><button id="btn-copy-did" class="small"><span class="L-en">Copy</span><span class="L-ja">コピー</span></button>
       <a id="have-link" class="small" href="#" target="_blank" rel="noopener"><span class="L-en">Public page</span><span class="L-ja">公開ページ</span></a></p></div></details></div>
   <!-- 決定 89: タイトルの下は ITEMS / GARDEN / LIBRARY（Public View と同じ） -->
-  <nav class="page-nav" aria-label="links"><a href="items.html"><span class="L-en">Items</span><span class="L-ja">アイテム</span></a><a href="garden.html"><span class="L-en">Garden</span><span class="L-ja">庭</span></a><a href="library.html"><span class="L-en">Library</span><span class="L-ja">図書館</span></a><a href="docs.html">Story</a></nav>
+  <nav class="page-nav" aria-label="links"><a href="items.html"><span class="L-en">Items</span><span class="L-ja">アイテム</span></a><a href="garden.html"><span class="L-en">Garden</span><span class="L-ja">庭</span></a><a href="library.html"><span class="L-en">Library</span><span class="L-ja">図書館</span></a><a href="docs.html">Story</a><a href="join.html" class="here" aria-current="page"><span class="L-en">Room</span><span class="L-ja">部屋</span></a></nav>
   <div class="room-stage" id="room-stage">
     <img id="room-img" alt="" width="480" height="360">
     <div id="room-hako" aria-hidden="true"></div>
