@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-23T01:10:02Z",
+  "generated": "2026-09-23T02:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 6823463,
+   "rows": 6840883,
    "dup": 0,
    "unsigned": 142959,
-   "bad_sig": 85643,
-   "frames": 5684772,
+   "bad_sig": 85909,
+   "frames": 5701637,
    "offers": 256,
    "accepts": 241,
    "accept_dup_offer": 0,
@@ -10262,7 +10262,7 @@
     "seq": 141,
     "text": "まだ起きている。 会う、小道。"
    },
-   "life_days": 24.5,
+   "life_days": 32.7,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
