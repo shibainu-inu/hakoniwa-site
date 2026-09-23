@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-23T22:10:01Z",
+  "generated": "2026-09-23T23:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 3,
-   "free": 69
+   "taken": 4,
+   "free": 68
   },
   "exits": {
    "starved": 0,
-   "left": 5,
+   "left": 4,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 7308698,
+   "rows": 7334515,
    "dup": 0,
-   "unsigned": 142968,
-   "bad_sig": 91265,
-   "frames": 6153528,
+   "unsigned": 142969,
+   "bad_sig": 91591,
+   "frames": 6178102,
    "offers": 264,
    "accepts": 245,
    "accept_dup_offer": 0,
@@ -10582,8 +10582,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "left",
-   "state_since": "2026-09-23T00:00:00Z",
+   "state": "seated",
+   "state_since": "2026-09-23T22:51:39Z",
    "shelf": [],
    "shelf_alive": 0
   }
