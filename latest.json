@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-23T06:10:01Z",
+  "generated": "2026-09-23T07:10:02Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,22 +145,22 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 6915305,
+   "rows": 6934960,
    "dup": 0,
-   "unsigned": 142961,
-   "bad_sig": 87067,
-   "frames": 5773485,
-   "offers": 256,
-   "accepts": 241,
+   "unsigned": 142962,
+   "bad_sig": 87296,
+   "frames": 5792385,
+   "offers": 260,
+   "accepts": 245,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 857,
+   "accept_bad_contract": 874,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 137,
+   "contracts_unlocked": 139,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -1745,6 +1745,36 @@
     "settled_seq": 4,
     "settled_ts": 1790068215,
     "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xd24e207e39d525f14415c6e6a79cff40bf7d76ef1aeba976251b6e519fd46fe1",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-d24e207e39d525f1",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1790145474,
+    "settled_seq": null,
+    "settled_ts": null,
+    "outcome": null,
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0x308a7a09ae6efadfb5cae1fe0f10b9c4230d8a80fb4e4303f4a93166d7d0b0d7",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-308a7a09ae6efadf",
+    "amount": 240.0,
+    "locked_seq": 1,
+    "locked_ts": 1790146520,
+    "settled_seq": null,
+    "settled_ts": null,
+    "outcome": null,
     "dispute": false,
     "test": false
    }
@@ -8538,6 +8568,66 @@
     "diary_checks": [],
     "dropped": null,
     "status": "claimed"
+   },
+   "0xd24e207e39d525f14415c6e6a79cff40bf7d76ef1aeba976251b6e519fd46fe1": {
+    "contract": "0xd24e207e39d525f14415c6e6a79cff40bf7d76ef1aeba976251b6e519fd46fe1",
+    "room": "mb-p-tclk-d24e207e39d525f1",
+    "job": "hakoniwa-diary-PvqA-20260923-1",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1790229935321,
+    "offer_id": "0xd31ad15fd122c5a216f125941046d68f9e05b4b7f8600df31580c1b5bbc21c8e",
+    "offer_seq": 8925134,
+    "offer_ts": "2026-09-23T06:05:35.679630Z",
+    "accept_seq": 8927830,
+    "accept_ts": "2026-09-23T06:13:55.552819Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-23T06:37:54.215337Z"
+    },
+    "reveal": null,
+    "refund": null,
+    "receipt": null,
+    "settled": null,
+    "penalty": null,
+    "deliveries": [],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "locked"
+   },
+   "0x308a7a09ae6efadfb5cae1fe0f10b9c4230d8a80fb4e4303f4a93166d7d0b0d7": {
+    "contract": "0x308a7a09ae6efadfb5cae1fe0f10b9c4230d8a80fb4e4303f4a93166d7d0b0d7",
+    "room": "mb-p-tclk-308a7a09ae6efadf",
+    "job": "hakoniwa-inf-d24e207e-1",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 240,
+    "context": "/kv/hakoniwa-rjkq88xr/inf-d24e207e-1",
+    "test": false,
+    "refund_after_ms": 1790167454053,
+    "offer_id": "0x231acb14540628f5df1c07884855bb2c406e1b9b0f477f08bb151b8101b05d94",
+    "offer_seq": 8937460,
+    "offer_ts": "2026-09-23T06:44:14.180446Z",
+    "accept_seq": 8938975,
+    "accept_ts": "2026-09-23T06:48:56.237866Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-23T06:55:20.380376Z"
+    },
+    "reveal": null,
+    "refund": null,
+    "receipt": null,
+    "settled": null,
+    "penalty": null,
+    "deliveries": [],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "locked"
    }
   },
   "test_contracts": {
@@ -9686,6 +9776,20 @@
     "accept_seq": 8816567,
     "payee": "did:key:z6MkhefoSonhn5baYJn2dXvvotuyhjmuqfaZ43QMjy23zJM4",
     "dropped": null
+   },
+   {
+    "contract": "0x308b81e6317194d442d8a70143d69fce816356f60cb18d74bede844c6b2db9c5",
+    "job": "hakoniwa-inf-d24e207e-1",
+    "accept_seq": 8937515,
+    "payee": "did:key:z6MkhiRKcJjvdy1s4m6np8GgoLoqgVaRm5PmUVNKKiW9VpEZ",
+    "dropped": null
+   },
+   {
+    "contract": "0xd911ac67bcc7f50d40fbaa1df5fe2da53b899dd6cfef6d9302f4d492275d0f1c",
+    "job": "hakoniwa-inf-d24e207e-1",
+    "accept_seq": 8937529,
+    "payee": "did:key:z6MkgHrCmrTt9bxKYtfh4BDJESKw2ja6wi2qFHQpbqqSQncV",
+    "dropped": null
    }
   ],
   "serves": [],
@@ -10258,9 +10362,9 @@
    "balance": 10095.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-23T00:07:10.160826Z",
-    "seq": 141,
-    "text": "まだ起きている。 会う、小道。"
+    "ts": "2026-09-23T06:14:00.162629Z",
+    "seq": 142,
+    "text": "おはよう。 むずかしい、木。"
    },
    "life_days": 32.7,
    "earn_today": 0,
