@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-22T23:10:02Z",
+  "generated": "2026-09-23T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 4,
-   "free": 68
+   "taken": 3,
+   "free": 69
   },
   "exits": {
    "starved": 0,
-   "left": 4,
+   "left": 5,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 6789826,
+   "rows": 6807320,
    "dup": 0,
    "unsigned": 142959,
-   "bad_sig": 85109,
-   "frames": 5652197,
+   "bad_sig": 85398,
+   "frames": 5669113,
    "offers": 253,
    "accepts": 238,
    "accept_dup_offer": 0,
@@ -10073,13 +10073,13 @@
    "balance": -663.0,
    "mem_volumes": 15,
    "chat": {
-    "ts": "2026-09-22T09:11:34.110883Z",
-    "seq": 136,
-    "text": "おはよう。 起きる、もらう。"
+    "ts": "2026-09-23T00:05:16.410926Z",
+    "seq": 139,
+    "text": "まだ起きている。 待つ、あかり。"
    },
    "life_days": -0.4,
-   "earn_today": 72.0,
-   "spend_today": 800.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -10237,13 +10237,13 @@
    "balance": 10095.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-22T08:11:01.280766Z",
-    "seq": 135,
-    "text": "おはよう。 読む、あげる。"
+    "ts": "2026-09-23T00:07:10.160826Z",
+    "seq": 141,
+    "text": "まだ起きている。 会う、小道。"
    },
    "life_days": 24.5,
-   "earn_today": 800.0,
-   "spend_today": 480.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -10265,7 +10265,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 408.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -10388,8 +10388,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "seated",
-   "state_since": "2026-09-21T23:08:44Z",
+   "state": "left",
+   "state_since": "2026-09-23T00:00:00Z",
    "shelf": [],
    "shelf_alive": 0
   }
