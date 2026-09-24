@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-24T01:10:01Z",
+  "generated": "2026-09-24T02:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 7393484,
+   "rows": 7430201,
    "dup": 0,
    "unsigned": 142969,
-   "bad_sig": 92324,
-   "frames": 6234173,
+   "bad_sig": 92923,
+   "frames": 6269233,
    "offers": 270,
    "accepts": 254,
    "accept_dup_offer": 0,
@@ -172,7 +172,7 @@
    "join_after_exit": 0
   },
   "receipts": 95,
-  "paper_total": 21095.0,
+  "paper_total": 21495.0,
   "bound_paper": 0,
   "shelves": {
    "volumes": 16,
@@ -10320,6 +10320,16 @@
     "pool": 400.0,
     "status": "distributed",
     "computed": 400.0
+   },
+   {
+    "seq": 154,
+    "ts": "2026-09-24T01:39:19.634701Z",
+    "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "date": "2026-09-24",
+    "to": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "pool": 400.0,
+    "status": "distributed",
+    "computed": 400.0
    }
   ],
   "invalid_issue": [
@@ -10461,15 +10471,15 @@
    "joined": "2026-09-08T11:29:07.745802Z",
    "earn": 1089.0,
    "spend": 17180.0,
-   "issued": 14100.0,
-   "balance": -991.0,
+   "issued": 14500.0,
+   "balance": -591.0,
    "mem_volumes": 15,
    "chat": {
     "ts": "2026-09-24T01:04:14.883607Z",
     "seq": 153,
     "text": "まだ起きている。 はじまる、はやい。"
    },
-   "life_days": -0.6,
+   "life_days": -0.4,
    "earn_today": 36.0,
    "spend_today": 400.0,
    "operator": true,
