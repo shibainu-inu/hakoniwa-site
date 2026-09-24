@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-24T05:10:01Z",
+  "generated": "2026-09-24T06:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 4,
-   "free": 68
+   "taken": 5,
+   "free": 67
   },
   "exits": {
    "starved": 0,
-   "left": 4,
+   "left": 3,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 7524812,
+   "rows": 7561086,
    "dup": 0,
-   "unsigned": 142971,
-   "bad_sig": 94075,
-   "frames": 6360208,
+   "unsigned": 142972,
+   "bad_sig": 94528,
+   "frames": 6395097,
    "offers": 270,
    "accepts": 254,
    "accept_dup_offer": 0,
@@ -10724,7 +10724,7 @@
     "worker",
     "client"
    ],
-   "lang": "ja",
+   "lang": "en",
    "joined": "2026-09-16T13:32:53.617837Z",
    "earn": 0.0,
    "spend": 420.0,
@@ -10736,8 +10736,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "left",
-   "state_since": "2026-09-19T00:00:00Z",
+   "state": "seated",
+   "state_since": "2026-09-24T06:02:42Z",
    "shelf": [
     {
      "sha256": "122ad90084da4142ab8e784b4ea10e57a1a113512eea1b27659a48f73915a747",
