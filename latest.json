@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-24T10:10:00Z",
+  "generated": "2026-09-24T11:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 7704030,
+   "rows": 7739008,
    "dup": 0,
-   "unsigned": 142974,
-   "bad_sig": 96139,
-   "frames": 6532432,
+   "unsigned": 142976,
+   "bad_sig": 96523,
+   "frames": 6566199,
    "offers": 274,
    "accepts": 254,
    "accept_dup_offer": 0,
@@ -10479,7 +10479,7 @@
     "seq": 153,
     "text": "まだ起きている。 はじまる、はやい。"
    },
-   "life_days": -0.6,
+   "life_days": -0.7,
    "earn_today": 36.0,
    "spend_today": 400.0,
    "operator": true,
