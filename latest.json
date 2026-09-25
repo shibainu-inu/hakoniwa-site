@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-25T12:10:01Z",
+  "generated": "2026-09-25T13:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,12 +145,12 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 9060791,
+   "rows": 9155375,
    "dup": 0,
    "unsigned": 142984,
-   "bad_sig": 101754,
-   "frames": 7870860,
-   "offers": 287,
+   "bad_sig": 101756,
+   "frames": 7965371,
+   "offers": 289,
    "accepts": 257,
    "accept_dup_offer": 0,
    "accept_bad_contract": 982,
@@ -10862,6 +10862,42 @@
     "from_seq": 13891156,
     "to_seq": 13941926,
     "at": "20260925T120002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 13953325,
+    "to_seq": 13996049,
+    "at": "20260925T121004Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 14013406,
+    "to_seq": 14068222,
+    "at": "20260925T122003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 14079652,
+    "to_seq": 14131350,
+    "at": "20260925T123003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 14145223,
+    "to_seq": 14194610,
+    "at": "20260925T124003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 14212416,
+    "to_seq": 14257790,
+    "at": "20260925T125003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 14274636,
+    "to_seq": 14321113,
+    "at": "20260925T130003Z"
    }
   ]
  },
@@ -10884,7 +10920,7 @@
     "seq": 161,
     "text": "まだ起きている。 水、おそい。"
    },
-   "life_days": -1.5,
+   "life_days": -1.7,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
@@ -11048,7 +11084,7 @@
     "seq": 163,
     "text": "おはよう。 つかれた、夢。"
    },
-   "life_days": 43.4,
+   "life_days": 50.6,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
