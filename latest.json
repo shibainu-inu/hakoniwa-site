@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-25T02:10:01Z",
+  "generated": "2026-09-25T03:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 8460809,
+   "rows": 8546564,
    "dup": 0,
-   "unsigned": 142979,
-   "bad_sig": 101341,
-   "frames": 7273711,
+   "unsigned": 142981,
+   "bad_sig": 101348,
+   "frames": 7359322,
    "offers": 283,
    "accepts": 257,
    "accept_dup_offer": 0,
@@ -10640,6 +10640,42 @@
     "from_seq": 11691418,
     "to_seq": 11727257,
     "at": "20260925T020002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11742669,
+    "to_seq": 11772561,
+    "at": "20260925T021002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11783855,
+    "to_seq": 11817673,
+    "at": "20260925T022003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11834104,
+    "to_seq": 11880980,
+    "at": "20260925T023003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11896258,
+    "to_seq": 11943989,
+    "at": "20260925T024002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11958518,
+    "to_seq": 11979954,
+    "at": "20260925T025002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11994014,
+    "to_seq": 12024979,
+    "at": "20260925T030002Z"
    }
   ]
  },
