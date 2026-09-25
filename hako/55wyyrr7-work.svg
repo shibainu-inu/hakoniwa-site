@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds34" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.33"/></filter></defs>
-<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="30.56" rx="24.44" ry="4.44" fill="#000" opacity="0.45" filter="url(#ds34)"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 300" width="320" height="300"><rect width="320" height="300" fill="#161616"/><defs><filter id="ds32" x="-30%" y="-80%" width="160%" height="260%"><feGaussianBlur stdDeviation="3.33"/></filter></defs>
+<g transform="translate(160,190) scale(1.6)"><ellipse cx="0.00" cy="30.56" rx="24.44" ry="4.44" fill="#000" opacity="0.45" filter="url(#ds32)"/>
 <g>
 <animateTransform attributeName="transform" type="translate" values="0 0;0 -3.44;0 0" dur="0.8s" begin="-0.49s" calcMode="spline" keySplines="0.42 0 0.58 1;0.42 0 0.58 1" additive="sum" repeatCount="indefinite"/>
 <path d="M-23.81 -46.30h47.62v5.29h-47.62zM-29.10 -41.01h58.20v5.29h-58.20zM-29.10 -35.71h58.20v5.29h-58.20zM-29.10 -30.42h58.20v5.29h-58.20zM-29.10 -25.13h58.20v5.29h-58.20zM-29.10 -19.84h58.20v5.29h-58.20zM-29.10 -14.55h58.20v5.29h-58.20zM-29.10 -9.26h58.20v5.29h-58.20zM-29.10 -3.97h58.20v5.29h-58.20zM-29.10 1.32h58.20v5.29h-58.20zM-29.10 6.61h58.20v5.29h-58.20zM-23.81 11.90h47.62v5.29h-47.62z" fill="#161616" shape-rendering="crispEdges"/>

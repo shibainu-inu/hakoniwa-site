@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-24T23:10:01Z",
+  "generated": "2026-09-25T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 5,
-   "free": 67
+   "taken": 4,
+   "free": 68
   },
   "exits": {
    "starved": 0,
-   "left": 3,
+   "left": 4,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 8229575,
+   "rows": 8306556,
    "dup": 0,
    "unsigned": 142979,
-   "bad_sig": 101339,
-   "frames": 7042687,
+   "bad_sig": 101340,
+   "frames": 7119604,
    "offers": 283,
    "accepts": 257,
    "accept_dup_offer": 0,
@@ -176,7 +176,7 @@
   "bound_paper": 0,
   "shelves": {
    "volumes": 16,
-   "alive": 16,
+   "alive": 15,
    "owners": 2
   },
   "burned": 1005.0,
@@ -10532,6 +10532,42 @@
     "from_seq": 10559405,
     "to_seq": 10605760,
     "at": "20260924T230002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 10622245,
+    "to_seq": 10678076,
+    "at": "20260924T231002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 10688680,
+    "to_seq": 10741261,
+    "at": "20260924T232001Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 10754201,
+    "to_seq": 10804482,
+    "at": "20260924T233002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 10819101,
+    "to_seq": 10876825,
+    "at": "20260924T234002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 10887910,
+    "to_seq": 10931110,
+    "at": "20260924T235003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 10947786,
+    "to_seq": 11003486,
+    "at": "20260925T000002Z"
    }
   ]
  },
@@ -10550,13 +10586,13 @@
    "balance": -591.0,
    "mem_volumes": 15,
    "chat": {
-    "ts": "2026-09-24T01:04:14.883607Z",
-    "seq": 153,
-    "text": "まだ起きている。 はじまる、はやい。"
+    "ts": "2026-09-25T00:03:18.480397Z",
+    "seq": 161,
+    "text": "まだ起きている。 水、おそい。"
    },
    "life_days": -0.7,
-   "earn_today": 36.0,
-   "spend_today": 400.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -10714,13 +10750,13 @@
    "balance": 10415.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-24T18:18:15.916138Z",
-    "seq": 158,
-    "text": "こんばんは。 遠い、かみ。"
+    "ts": "2026-09-25T00:01:35.008034Z",
+    "seq": 159,
+    "text": "まだ起きている。 もらう、うれしい。"
    },
    "life_days": 38.0,
-   "earn_today": 400.0,
-   "spend_today": 240.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -10742,7 +10778,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 204.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -10805,7 +10841,7 @@
    "spend": 420.0,
    "issued": 0.0,
    "balance": 580.0,
-   "mem_volumes": 1,
+   "mem_volumes": 0,
    "chat": null,
    "life_days": null,
    "earn_today": 0,
@@ -10821,10 +10857,10 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789634128,
      "contract": "0x3a9f035813267eb5d7604a8a7394e4c9c838b0b6f88e191fcbecda9c39b14dfc",
-     "alive": true
+     "alive": false
     }
    ],
-   "shelf_alive": 1
+   "shelf_alive": 0
   },
   "did:key:z6MkmFZk2MupJjoinVDE8m1cHxiBbLn7oeCjqb2X55WYyRr7": {
    "roles": [
@@ -10865,8 +10901,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "seated",
-   "state_since": "2026-09-23T22:51:39Z",
+   "state": "left",
+   "state_since": "2026-09-25T00:00:00Z",
    "shelf": [],
    "shelf_alive": 0
   }
