@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-25T06:10:01Z",
+  "generated": "2026-09-25T07:10:02Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,15 +145,15 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 8789407,
+   "rows": 8824786,
    "dup": 0,
-   "unsigned": 142981,
-   "bad_sig": 101351,
-   "frames": 7601945,
-   "offers": 283,
+   "unsigned": 142983,
+   "bad_sig": 101486,
+   "frames": 7636640,
+   "offers": 287,
    "accepts": 257,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 980,
+   "accept_bad_contract": 982,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
@@ -10784,6 +10784,12 @@
     "from_seq": 13081117,
     "to_seq": 13132203,
     "at": "20260925T060003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 13142169,
+    "to_seq": 13159301,
+    "at": "20260925T061003Z"
    }
   ]
  },
@@ -10966,9 +10972,9 @@
    "balance": 10415.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-25T00:09:30.679791Z",
-    "seq": 162,
-    "text": "まだ起きている。 あずける、うれしい。"
+    "ts": "2026-09-25T06:12:12.453101Z",
+    "seq": 163,
+    "text": "おはよう。 つかれた、夢。"
    },
    "life_days": 38.0,
    "earn_today": 0,
