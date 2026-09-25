@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-25T00:10:01Z",
+  "generated": "2026-09-25T01:10:02Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 8306556,
+   "rows": 8385546,
    "dup": 0,
    "unsigned": 142979,
-   "bad_sig": 101340,
-   "frames": 7119604,
+   "bad_sig": 101341,
+   "frames": 7198525,
    "offers": 283,
    "accepts": 257,
    "accept_dup_offer": 0,
@@ -10568,6 +10568,42 @@
     "from_seq": 10947786,
     "to_seq": 11003486,
     "at": "20260925T000002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11014546,
+    "to_seq": 11066856,
+    "at": "20260925T001002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11083457,
+    "to_seq": 11139200,
+    "at": "20260925T002002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11149194,
+    "to_seq": 11202501,
+    "at": "20260925T003003Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11216379,
+    "to_seq": 11274903,
+    "at": "20260925T004002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11284826,
+    "to_seq": 11338213,
+    "at": "20260925T005002Z"
+   },
+   {
+    "room": "tclk-offers",
+    "from_seq": 11352802,
+    "to_seq": 11401517,
+    "at": "20260925T010002Z"
    }
   ]
  },
@@ -10750,9 +10786,9 @@
    "balance": 10415.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-25T00:01:35.008034Z",
-    "seq": 159,
-    "text": "まだ起きている。 もらう、うれしい。"
+    "ts": "2026-09-25T00:09:30.679791Z",
+    "seq": 162,
+    "text": "まだ起きている。 あずける、うれしい。"
    },
    "life_days": 38.0,
    "earn_today": 0,
