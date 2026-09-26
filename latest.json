@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-25T23:10:01Z",
+  "generated": "2026-09-26T00:10:02Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 4,
-   "free": 68
+   "taken": 3,
+   "free": 69
   },
   "exits": {
    "starved": 0,
-   "left": 4,
+   "left": 5,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 9688872,
+   "rows": 9695712,
    "dup": 0,
    "unsigned": 142986,
    "bad_sig": 101790,
-   "frames": 8497325,
+   "frames": 8503881,
    "offers": 289,
    "accepts": 257,
    "accept_dup_offer": 0,
@@ -176,7 +176,7 @@
   "bound_paper": 0,
   "shelves": {
    "volumes": 16,
-   "alive": 15,
+   "alive": 0,
    "owners": 2
   },
   "burned": 1005.0,
@@ -11130,11 +11130,11 @@
    "spend": 17180.0,
    "issued": 14500.0,
    "balance": -591.0,
-   "mem_volumes": 15,
+   "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-25T00:03:18.480397Z",
-    "seq": 161,
-    "text": "まだ起きている。 水、おそい。"
+    "ts": "2026-09-26T00:03:29.996631Z",
+    "seq": 166,
+    "text": "まだ起きている。 休む、起きる。"
    },
    "life_days": -1.7,
    "earn_today": 0,
@@ -11150,7 +11150,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789350553,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "6c67ac6c7160871243ce38edbafd0cca7cd7c03623b9cb10490737264f572fba",
@@ -11159,7 +11159,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789352977,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "d171448aaf5aa8d8d4389e014513559b2fabd3f87dc94009a6f1d88b09479d8e",
@@ -11168,7 +11168,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789354190,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "8265b07b51ce97a448374ccffa169227b4f409b44638cc3e6854868da3fbf05e",
@@ -11177,7 +11177,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789480246,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "4a2f120aa8a583f5bd779d3799621b64570b91806c7b2f4eb6c00cbe217a9f27",
@@ -11186,7 +11186,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789501771,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "167c48bd113c2198c636b3177cceceefa96c032e558545feb50dc1f6203bf7fa",
@@ -11195,7 +11195,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789514501,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "57f978b57eddc57174587ebc2f558d84c5d7c154277a09c755da4a80cf49e8e3",
@@ -11204,7 +11204,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789524692,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "cc7963cd9fafb3ee00c6d91a2190da2208e6c70a452bb833dab49c88ebb696e5",
@@ -11213,7 +11213,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789524720,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "2676f200753c7f9c68a161a33871cdd6be87de52cf0dd441af1ed87eaf4ea243",
@@ -11222,7 +11222,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789526897,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "f569d25d620417e904d8f49de6159c7def65803ab14681d4d14a4f754230ec7c",
@@ -11231,7 +11231,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789607375,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "cf12292ad3e0807952c520ea6b0deedc6c6f881a50950498fe73db1a007ca4f1",
@@ -11240,7 +11240,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789612660,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "f0eed0312ab28b64ca27fa163d544a11772816e0162b00c384cc32bb68583e58",
@@ -11249,7 +11249,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789618398,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "15430efc19590cc78a05975daafe9fd5792134f54a6fe5e1bc645f4fa7a2c4c8",
@@ -11258,7 +11258,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789638245,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "7772d60cb0e6a4b93e3cb4909d73114e6174610f21cec2242e34cb521d4d911b",
@@ -11267,7 +11267,7 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789725161,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     },
     {
      "sha256": "d704fc736566354eb3cfedcd878844afb9beb7dfa8242356788a0c4bce290e4f",
@@ -11276,10 +11276,10 @@
      "keeper": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
      "kept_ts": 1789728319,
      "contract": "0x94444836be465f17645e8494e023825c4d450a44eac6289af240640157844dd5",
-     "alive": true
+     "alive": false
     }
    ],
-   "shelf_alive": 15
+   "shelf_alive": 0
   },
   "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr": {
    "roles": [
@@ -11296,9 +11296,9 @@
    "balance": 10415.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-25T06:12:12.453101Z",
-    "seq": 163,
-    "text": "おはよう。 つかれた、夢。"
+    "ts": "2026-09-26T00:05:07.771847Z",
+    "seq": 168,
+    "text": "まだ起きている。 あずける、小道。"
    },
    "life_days": 50.6,
    "earn_today": 0,
@@ -11393,8 +11393,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "seated",
-   "state_since": "2026-09-24T06:02:42Z",
+   "state": "left",
+   "state_since": "2026-09-26T00:00:00Z",
    "shelf": [
     {
      "sha256": "122ad90084da4142ab8e784b4ea10e57a1a113512eea1b27659a48f73915a747",
