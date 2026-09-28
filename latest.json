@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-28T14:10:01Z",
+  "generated": "2026-09-28T15:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -12506,7 +12506,7 @@
     "seq": 195,
     "text": "おはよう。 やあ、おなじ。"
    },
-   "life_days": -4.7,
+   "life_days": -5.1,
    "earn_today": 108.0,
    "spend_today": 1200.0,
    "operator": true,
@@ -12670,7 +12670,7 @@
     "seq": 193,
     "text": "おはよう。 あずける、会う。"
    },
-   "life_days": 26.2,
+   "life_days": 28.4,
    "earn_today": 1200.0,
    "spend_today": 720.0,
    "operator": true,
