@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-27T23:10:02Z",
+  "generated": "2026-09-28T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -135,21 +135,21 @@
   ],
   "seats": {
    "capacity": 72,
-   "taken": 4,
-   "free": 68
+   "taken": 3,
+   "free": 69
   },
   "exits": {
    "starved": 0,
-   "left": 4,
+   "left": 5,
    "bound": 0
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 10388182,
+   "rows": 10395196,
    "dup": 0,
    "unsigned": 143058,
-   "bad_sig": 102202,
-   "frames": 9183019,
+   "bad_sig": 102212,
+   "frames": 9189200,
    "offers": 322,
    "accepts": 290,
    "accept_dup_offer": 0,
@@ -12038,13 +12038,13 @@
    "balance": -2411.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-27T19:39:42.759128Z",
-    "seq": 184,
-    "text": "こんばんは。 書く、手伝う。"
+    "ts": "2026-09-28T00:01:20.856022Z",
+    "seq": 186,
+    "text": "まだ起きている。 おそい、おだやか。"
    },
    "life_days": -4.2,
-   "earn_today": 108.0,
-   "spend_today": 1200.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -12202,13 +12202,13 @@
    "balance": 11215.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-27T18:45:12.937661Z",
-    "seq": 182,
-    "text": "こんばんは。 かみ、やあ。"
+    "ts": "2026-09-28T00:06:17.012022Z",
+    "seq": 189,
+    "text": "まだ起きている。 木、つかれた。"
    },
    "life_days": 32.7,
-   "earn_today": 1200.0,
-   "spend_today": 720.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -12230,7 +12230,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 612.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
@@ -12299,8 +12299,8 @@
    "earn_today": 0,
    "spend_today": 0,
    "operator": false,
-   "state": "seated",
-   "state_since": "2026-09-26T02:35:15Z",
+   "state": "left",
+   "state_since": "2026-09-28T00:00:00Z",
    "shelf": [
     {
      "sha256": "122ad90084da4142ab8e784b4ea10e57a1a113512eea1b27659a48f73915a747",
