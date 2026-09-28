@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-28T00:10:01Z",
+  "generated": "2026-09-28T01:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,22 +145,22 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 10395196,
+   "rows": 10401944,
    "dup": 0,
    "unsigned": 143058,
-   "bad_sig": 102212,
-   "frames": 9189200,
-   "offers": 322,
-   "accepts": 290,
+   "bad_sig": 102217,
+   "frames": 9195043,
+   "offers": 327,
+   "accepts": 293,
    "accept_dup_offer": 0,
-   "accept_bad_contract": 1188,
+   "accept_bad_contract": 1224,
    "accept_self": 0,
    "accept_replay": 0,
    "lock_dup_offer": 0,
    "job_dup": 0,
    "worker_day_dup": 0,
    "client_day_limit": 0,
-   "contracts_unlocked": 172,
+   "contracts_unlocked": 173,
    "deal_rows_ignored": 2,
    "receipts_ignored": 0,
    "refunds_ignored": 0,
@@ -171,7 +171,7 @@
    "join_no_seat": 0,
    "join_after_exit": 0
   },
-  "receipts": 105,
+  "receipts": 107,
   "paper_total": 21495.0,
   "bound_paper": 0,
   "shelves": {
@@ -1954,6 +1954,36 @@
     "locked_ts": 1790537124,
     "settled_seq": 4,
     "settled_ts": 1790537726,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xf13c7f29b4610cd6092c7109160c77cfa5ab006dea68891f894eba444f871853",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "room": "mb-p-tclk-f13c7f29b4610cd6",
+    "amount": 400.0,
+    "locked_seq": 1,
+    "locked_ts": 1790555493,
+    "settled_seq": 4,
+    "settled_ts": 1790557005,
+    "outcome": "receipt",
+    "dispute": false,
+    "test": false
+   },
+   {
+    "contract": "0xa5bdae40fc232ff45dd385f4c276d28a35a3fee8248ed9e6796c14c2c7dbb516",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "room": "mb-p-tclk-a5bdae40fc232ff4",
+    "amount": 240.0,
+    "locked_seq": 1,
+    "locked_ts": 1790556388,
+    "settled_seq": 4,
+    "settled_ts": 1790556991,
     "outcome": "receipt",
     "dispute": false,
     "test": false
@@ -9581,6 +9611,125 @@
     "diary_checks": [],
     "dropped": null,
     "status": "claimed"
+   },
+   "0xf13c7f29b4610cd6092c7109160c77cfa5ab006dea68891f894eba444f871853": {
+    "contract": "0xf13c7f29b4610cd6092c7109160c77cfa5ab006dea68891f894eba444f871853",
+    "room": "mb-p-tclk-f13c7f29b4610cd6",
+    "job": "hakoniwa-diary-PvqA-20260928-1",
+    "kind": "diary",
+    "payer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+    "payee": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "amount": 400,
+    "context": null,
+    "test": false,
+    "refund_after_ms": 1790640079314,
+    "offer_id": "0x73d38cd5b75d4e35d5b3bd1f27db0cbd0e85c9264fdb627a0c884ddf41f6284d",
+    "offer_seq": 17105089,
+    "offer_ts": "2026-09-28T00:01:19.454069Z",
+    "accept_seq": 17105854,
+    "accept_ts": "2026-09-28T00:06:15.572323Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-28T00:31:33.537309Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-28T00:56:31.953214Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-28T00:56:45.193442Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "diary",
+      "seq": 2,
+      "ts": "2026-09-28T00:56:31.805876Z",
+      "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+      "sha256": "17660e8af725df124e194bddfcf290bd735bf86a0446c0e095aa7830d284109d",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日は朝から雨が降りだした。それから一日中雨降り続けていた。雨に濡れた髪を被って歩くのが辛いことわざだ。夕方にはすっかり雨足を取って晴天に変わる。その時、私の財布の空腹感に気づいた。さっそく日記を書こうとした。 今日のできごと: 私は一日中雨の中を歩いた。雨が降り続く中、日記を",
+      "for": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA"
+     }
+    ],
+    "diary_checks": [
+     {
+      "seq": 2,
+      "ok": true,
+      "reason": "",
+      "checks": {
+       "1": true,
+       "2": true,
+       "3": true,
+       "4": true,
+       "5": true
+      },
+      "context_path": "/kv/hakoniwa-rjkq88xr/diary-20260928-hywkpvqa",
+      "context_copy": null,
+      "context_note": "no copy"
+     }
+    ],
+    "dropped": null,
+    "status": "claimed"
+   },
+   "0xa5bdae40fc232ff45dd385f4c276d28a35a3fee8248ed9e6796c14c2c7dbb516": {
+    "contract": "0xa5bdae40fc232ff45dd385f4c276d28a35a3fee8248ed9e6796c14c2c7dbb516",
+    "room": "mb-p-tclk-a5bdae40fc232ff4",
+    "job": "hakoniwa-inf-f13c7f29-1",
+    "kind": "inf",
+    "payer": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+    "payee": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+    "amount": 240,
+    "context": "/kv/hakoniwa-rjkq88xr/inf-f13c7f29-1",
+    "test": false,
+    "refund_after_ms": 1790577385893,
+    "offer_id": "0x137de4a7b0a1e55491d997945eb906e7a54499c105a9067de17d10a08d3ddeca",
+    "offer_seq": 17109320,
+    "offer_ts": "2026-09-28T00:36:26.232029Z",
+    "accept_seq": 17109534,
+    "accept_ts": "2026-09-28T00:37:27.950780Z",
+    "lock": {
+     "seq": 1,
+     "ts": "2026-09-28T00:46:28.906407Z"
+    },
+    "reveal": {
+     "seq": 3,
+     "ts": "2026-09-28T00:48:41.026958Z"
+    },
+    "refund": null,
+    "receipt": {
+     "seq": 4,
+     "from": "did:key:z6Mkig6Ex8yT25TbmV7TFEJBGPAE8aq6DpXbZHMyrJkq88xr",
+     "outcome": "claimed"
+    },
+    "settled": {
+     "seq": 4,
+     "ts": "2026-09-28T00:56:31.422616Z"
+    },
+    "penalty": null,
+    "deliveries": [
+     {
+      "t": "inf",
+      "seq": 2,
+      "ts": "2026-09-28T00:48:40.907222Z",
+      "from": "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T",
+      "sha256": "bae8417e48084c3dd26087f39d34e680626553d4489e0c303a2e3ba62b45761f",
+      "sha256_ok": true,
+      "model": "qwen2.5:1.5b",
+      "text": "今日は朝から雨が降りだした。それから一日中雨降り続けていた。雨に濡れた髪を被って歩くのが辛いことわざだ。夕方にはすっかり雨足を取って晴天に変わる。その時、私の財布の空腹感に気づいた。さっそく日記を書こうとした。\n\n今日のできごと: 私は一日中雨の中を歩いた。雨が降り続く中、日記を"
+     }
+    ],
+    "diary_checks": [],
+    "dropped": null,
+    "status": "claimed"
    }
   },
   "test_contracts": {
@@ -10974,6 +11123,13 @@
     "accept_seq": 17045303,
     "payee": "did:key:z6MkiSXxMjoTDhp3mk84MxrBTAPnQ6TFuFznfyRdPrK7zRg7",
     "dropped": null
+   },
+   {
+    "contract": "0xb49842288087d75d458081bf08e0a802b8e57849bb2da09c607f2b133f5f3001",
+    "job": "hakoniwa-inf-f13c7f29-1",
+    "accept_seq": 17109596,
+    "payee": "did:key:z6MkkrcBQ9h77A43xU8b2bKiyEBySEaibuqm5ZK4FJxktqNL",
+    "dropped": null
    }
   ],
   "serves": [],
@@ -12032,19 +12188,19 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:07.745802Z",
-   "earn": 1269.0,
-   "spend": 19180.0,
+   "earn": 1305.0,
+   "spend": 19580.0,
    "issued": 14500.0,
-   "balance": -2411.0,
+   "balance": -2775.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-28T00:01:20.856022Z",
-    "seq": 186,
-    "text": "まだ起きている。 おそい、おだやか。"
+    "ts": "2026-09-28T00:56:45.616693Z",
+    "seq": 191,
+    "text": "まだ起きている。 はじまる、あげる。"
    },
-   "life_days": -4.2,
-   "earn_today": 0,
-   "spend_today": 0,
+   "life_days": -4.4,
+   "earn_today": 36.0,
+   "spend_today": 400.0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -12196,19 +12352,19 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T11:29:28.400237Z",
-   "earn": 16995.0,
-   "spend": 6780.0,
+   "earn": 17395.0,
+   "spend": 7020.0,
    "issued": 0.0,
-   "balance": 11215.0,
+   "balance": 11375.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-28T00:06:17.012022Z",
-    "seq": 189,
-    "text": "まだ起きている。 木、つかれた。"
+    "ts": "2026-09-28T00:46:28.173079Z",
+    "seq": 190,
+    "text": "まだ起きている。 おおきい、木。"
    },
-   "life_days": 32.7,
-   "earn_today": 0,
-   "spend_today": 0,
+   "life_days": 30.2,
+   "earn_today": 400.0,
+   "spend_today": 240.0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -12223,14 +12379,14 @@
    ],
    "lang": "ja",
    "joined": "2026-09-08T12:04:43.309430Z",
-   "earn": 7191.0,
+   "earn": 7395.0,
    "spend": 0.0,
    "issued": 0.0,
-   "balance": 8191.0,
+   "balance": 8395.0,
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 0,
+   "earn_today": 204.0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
