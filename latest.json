@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-29T17:10:01Z",
+  "generated": "2026-09-29T18:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 10796859,
+   "rows": 10812641,
    "dup": 0,
    "unsigned": 143073,
-   "bad_sig": 102504,
-   "frames": 9581665,
+   "bad_sig": 102506,
+   "frames": 9597364,
    "offers": 339,
    "accepts": 313,
    "accept_dup_offer": 0,
