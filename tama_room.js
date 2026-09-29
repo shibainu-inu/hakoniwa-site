@@ -38,6 +38,8 @@ export function roomSvg(F, did, n, { w = 480, h = 300, px = 6, hako = "alive", o
   if (hako === "grave") {
     const T = ["  ######  ", " #      # ", "#  ####  #", "#   ##   #", "#   ##   #", "#        #", "##########"];
     o += dots(Math.round(w / 2 - T[0].length * hp / 2), floorY - T.length * hp + hp, T, hp, INK);
+  } else if (hako === "away") {
+    // おでかけ中: 部屋は空（HAKO を描かない）
   } else {
     const [rows, d] = dotRows(pubFromDid(did), over);
     o += dots(Math.round(w / 2 - rows[0].length * hp / 2), floorY - rows.length * hp + hp * 2, rows, hp, d.color);

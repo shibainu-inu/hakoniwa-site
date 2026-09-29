@@ -107,7 +107,8 @@ function motionOf(st) {
   if (!st.born) return "normal";
   if (app.rebornUntil && Date.now() < app.rebornUntil) return "reborn";
   if (st.grave) return "grave";
-  const busy = Object.values(app.deals).find((x) => x.st?.locked && !x.st?.done) ?? Object.values(app.deals).find((x) => x.st && !x.st.done && x.st.stage !== "idle");
+  const live = (x) => x.st && !x.st.done && !x.st.gaveUp;   // 諦めた取引は返金を待つだけなので、姿には出さない
+  const busy = Object.values(app.deals).find((x) => live(x) && x.st.locked) ?? Object.values(app.deals).find(live);
   if (busy?.kind === "meal") return "eat";
   if (busy?.kind === "out") return "out";
   if (app.happyUntil && Date.now() < app.happyUntil) return "happy";
@@ -154,7 +155,7 @@ function roomCard(m, st) {
   if (!app.F) return "";
   const n = lifetime(m.events, app.box, localDay);
   const have = unlocked(app.F, n), next = nextUnlock(app.F, n);
-  const svg = roomSvg(app.F, app.did, n, { hako: st.grave ? "grave" : "alive" });
+  const svg = roomSvg(app.F, app.did, n, { hako: st.grave ? "grave" : motionOf(st) === "out" ? "away" : "alive" });
   const art = app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
   return `<section class="card"><h2 class="h">部屋</h2><div class="room">${svg}</div>
     <p class="small">${have.length ? `置いてあるもの: ${have.map((x) => esc(x.ja)).join("・")}` : "まだ何もない部屋です"}${next ? `　次は ${esc(next.ja)}（${esc(whenText(next))}）` : ""}</p>
@@ -183,12 +184,11 @@ async function share(kind, m, st) {
 /** 押せないときの理由（null なら押せる） */
 function actionBlock(kind, st, m) {
   const x = app.deals[kind];
-  if (Object.values(app.deals).some((y) => y.busy())) return "いまは取引の途中です";
+  if (x?.busy()) return x.st.gaveUp ? "PAPER が戻るのを待っています" : "いまはその途中です";   // 種類が違えば同時にできる（財布は lock 中の額を引いて見る）
   const price = { meal: app.box.meal_price, out: app.box.out_price, play: app.box.play_stake }[kind];
   if (m.balance < Number(price)) return "PAPER が足りません";
   if (kind === "out" && st.outsToday >= Number(app.box.out_per_day)) return `おでかけは 1 日 ${app.box.out_per_day} 回までです`;
   if (kind === "play" && !(app.box.npcs ?? []).length) return "あそび相手がまだいません";
-  void x;
   return null;
 }
 function renderSaid(fold) {

@@ -81,12 +81,21 @@ export class Deal {
       const existing = await this.rail.read(contract).catch(() => null);
       const ref = existing ? contract : await this.rail.lock(tclk.lockTerms(a.state));
       const lock = { type: "lock", from: this.app.did, contract, rail: "paper", ref };
+      this.set("locking", { lock });
       try { await this.app.signer.post(room, tclk.encodeFrame(lock), { gateUntilMs: o.claimByMs }); }
-      catch (e) { if (e.gate) { this.set("gate", { done: true }); this.note("会場が混んでいて部屋を開けませんでした。PAPER は動いていません"); return; } throw e; }
+      catch (e) { if (e.gate) { this.set("gate", { done: true }); this.note("会場が混んでいて部屋を開けませんでした。PAPER は動いていません"); return; }
+        this.note(e.status === 429 ? "会場の部屋の数が今日の上限に近いので、少し待ってからもう一度開きます" : `部屋を開けませんでした（${e.message}）。もう一度試します`); return; }
       this.set("locked", { lock, locked: true });
       await this.app.signer.post(room, tamaLine({ t: "terms", offer: o, accept: a.frame }));
       await this.app.signer.post(b.board, tamaLine({ t: "deal", kind: this.kind, contract, n: rand() }));
       this.set("waiting");
+      return;
+    }
+    if (st.stage === "locking") {   // lock の投稿が失敗した（429 = 新規部屋の枠切れ など）: claimByMs まで出し直す。過ぎたら PAPER は動いていない
+      if (now >= o.claimByMs) { this.set("gate", { done: true }); this.note("会場が混んでいて部屋を開けませんでした。PAPER は動いていません"); return; }
+      try { await this.app.signer.post(st.room, tclk.encodeFrame(st.lock ?? { type: "lock", from: this.app.did, contract: st.contract, rail: "paper", ref: st.contract }), { gateUntilMs: o.claimByMs }); }
+      catch (e) { this.note(e.status === 429 ? "会場の部屋の数が今日の上限に近いので、少し待ってからもう一度開きます" : `部屋を開けませんでした（${e.message}）。もう一度試します`); return; }
+      this.set("locked", { locked: true });
       return;
     }
     if (st.stage === "locked") {   // terms・deal を出す前に落ちた: 出し直す（同じ本文でも nonce が違えば通る）
@@ -103,6 +112,10 @@ export class Deal {
         if (f && f.type === "reveal" && f.contract === st.contract) { reveal = { f, ms: Date.parse(m.ts) }; break; }
         const v = parseTama(m.text);
         if (v && v.t === "lines" && v.contract === st.contract && !lines) lines = v.lines;
+        if (v && v.t === "giveup" && v.contract === st.contract && !st.gaveUp) {
+          this.set("waiting", { gaveUp: true });
+          this.note(this.kind === "out" ? "今日は記事がうまく書けなかったみたい。PAPER は少したつと戻ります" : "うまく作れなかったみたい。PAPER は少したつと戻ります");
+        }
       }
       if (reveal) return this.finish(lines, reveal.ms);
       if (now >= o.refundAfterMs) {
