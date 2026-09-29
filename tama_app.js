@@ -1,11 +1,12 @@
 // tama_app.js — たまごっち版の画面（HAKONIWA_tamagotchi_spec_2026-09-28.md）。1 枚のページで、卵（登録）→ HAKO の画面 → お墓 → 生まれ変わり。
 // 状態は表示のたびに計算する（D-89）: 帳簿係の latest.json の出来事 ＋ まだ帳簿に載っていない、このブラウザで見た成立（localStorage）。
 // 鍵はこのブラウザだけ（tama_key.js）。署名して出すのは掲示板の join・reborn・deal と、取引の offer・lock・terms・refund だけ。
-import { lifeState, localDay, tamaLine } from "./tama_core.js";
+import { lifeState, localDay, tamaLine, fillArticle } from "./tama_core.js";
 import { setVenue, makeSigner, readTail } from "./tama_net.js";
 import * as K from "./tama_key.js";
 import { dotSvg, eggSvg, pubFromDid, dotDerive } from "./hako_dot.js";
 import { Deal, dealKinds } from "./tama_deal.js";
+import { lifetime, unlocked, nextUnlock, whenText, roomSvg, frameSvg, svgToPng } from "./tama_room.js";
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -139,13 +140,46 @@ export function render() {
       </div>
       <p id="why" class="small">${esc(app.why ?? "")}</p>
       <div id="said"></div>
-    </section>`;
+    </section>
+    ${roomCard(m, st)}`;
   app.motion = null; setMotion(motionOf(st));
   if (st.grave) $("reborn").onclick = reborn;
+  for (const b of view.querySelectorAll("button[data-share]")) b.onclick = () => share(b.dataset.share, m, st);
   for (const b of view.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
   renderSaid(m.fold);
   void d;
 }
+// ── 部屋とシェア（D-92、D-98。家具は tama_furniture.json、解放は仮 U-37） ──
+function roomCard(m, st) {
+  if (!app.F) return "";
+  const n = lifetime(m.events, app.box, localDay);
+  const have = unlocked(app.F, n), next = nextUnlock(app.F, n);
+  const svg = roomSvg(app.F, app.did, n, { hako: st.grave ? "grave" : "alive" });
+  const art = app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
+  return `<section class="card"><h2 class="h">部屋</h2><div class="room">${svg}</div>
+    <p class="small">${have.length ? `置いてあるもの: ${have.map((x) => esc(x.ja)).join("・")}` : "まだ何もない部屋です"}${next ? `　次は ${esc(next.ja)}（${esc(whenText(next))}）` : ""}</p>
+    <div class="actions">
+      <button class="sub" data-share="${st.grave ? "grave" : "room"}">${st.grave ? "お墓を額縁にしてシェア" : "部屋を額縁にしてシェア"}</button>
+      ${art ? `<button class="sub" data-share="article">記事を額縁にしてシェア</button>` : ""}
+    </div></section>`;
+}
+async function share(kind, m, st) {
+  const n = lifetime(m.events, app.box, localDay);
+  const inner = roomSvg(app.F, app.did, n, { hako: st.grave ? "grave" : "alive" });
+  const art = app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
+  const lines = kind === "article" && art ? art.lines : kind === "grave" ? ["Here lies a happy little HAKO. It will be back."] : [];
+  const title = `HAKO …${app.did.slice(-8)}`;
+  try {
+    const png = await svgToPng(frameSvg(inner, title, lines));
+    const file = new File([png], `hako-${app.did.slice(-8).toLowerCase()}-${kind}.png`, { type: "image/png" });
+    const url = new URL(`h/${app.did.slice(-8).toLowerCase()}.html`, location.href).href;
+    const text = kind === "article" ? `${title} のおでかけ記事 #HAKONIWA` : kind === "grave" ? `${title} はお墓で休んでいます #HAKONIWA` : `${title} の部屋 #HAKONIWA`;
+    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text, url }); return; }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = file.name; a.click();
+    window.open(`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank", "noopener");
+  } catch (e) { app.why = `画像を作れませんでした（${e.message}）`; render(); }
+}
+
 /** 押せないときの理由（null なら押せる） */
 function actionBlock(kind, st, m) {
   const x = app.deals[kind];
@@ -160,7 +194,9 @@ function actionBlock(kind, st, m) {
 function renderSaid(fold) {
   const el = $("said"); if (!el) return;
   const meals = (fold?.meals ?? []).slice(-3).reverse();
-  const outs = (fold?.outs ?? []).slice(-1);
+  if (app.lastSay && !meals.some((x) => x.line === app.lastSay)) meals.unshift({ line: app.lastSay });   // 帳簿に載る前のひとこと
+  let outs = (fold?.outs ?? []).slice(-1);
+  if (app.lastArticle && !(fold?.outs ?? []).some((o) => o.contract === app.lastArticle.contract)) outs = [app.lastArticle];   // 帳簿に載る前の記事
   el.innerHTML = [
     ...outs.map((o) => `<article class="article">${o.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join("")}</article>`),
     ...meals.map((x) => `<p class="bubble">${esc(x.line)}</p>`),
@@ -252,7 +288,12 @@ function onDeal(kind, ev) {
   if (ev.type === "settled") {
     addLocal(app.did, { t: kind, ms: ev.ms, contract: ev.contract }, ev.delta);
     if (kind === "play") app.happyUntil = Date.now() + 8000;
-    if (ev.say) app.why = ev.say;
+    if (kind === "out" && ev.lines) {
+      let facts = null; try { facts = JSON.parse(app.deals.out.st.offer.job.context).facts; } catch { facts = null; }
+      app.lastArticle = { contract: ev.contract, lines: facts ? fillArticle(ev.lines, facts) : ev.lines };
+    }
+    if (kind === "meal" && ev.say) { app.lastSay = ev.say; app.why = ""; }
+    else if (ev.say) app.why = ev.say;
   } else if (ev.type === "note") app.why = ev.text;
   render();
 }
@@ -277,6 +318,7 @@ async function loadStats() {
 export async function start() {
   try { app.stats = await loadStats(); } catch { app.stats = null; }
   app.box = app.stats?.box?.config ?? (await (await fetch("tama_box.json")).json());
+  try { app.F = await (await fetch("tama_furniture.json")).json(); } catch { app.F = null; }
   setVenue(app.box.venue);
   const rec = K.loadRec();
   app.did = rec?.did ?? null;
