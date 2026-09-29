@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-28T23:10:01Z",
+  "generated": "2026-09-29T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 10545544,
+   "rows": 10551640,
    "dup": 0,
-   "unsigned": 143064,
-   "bad_sig": 102242,
-   "frames": 9333036,
+   "unsigned": 143066,
+   "bad_sig": 102248,
+   "frames": 9339053,
    "offers": 333,
    "accepts": 302,
    "accept_dup_offer": 0,
@@ -12522,13 +12522,13 @@
    "balance": -3503.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-28T07:39:16.859678Z",
-    "seq": 195,
-    "text": "おはよう。 やあ、おなじ。"
+    "ts": "2026-09-29T00:04:51.043243Z",
+    "seq": 198,
+    "text": "まだ起きている。 休む、分ける。"
    },
    "life_days": -5.1,
-   "earn_today": 108.0,
-   "spend_today": 1200.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -12686,13 +12686,13 @@
    "balance": 11695.0,
    "mem_volumes": 0,
    "chat": {
-    "ts": "2026-09-28T06:47:43.363929Z",
-    "seq": 193,
-    "text": "おはよう。 あずける、会う。"
+    "ts": "2026-09-29T00:04:13.596236Z",
+    "seq": 196,
+    "text": "まだ起きている。 会う、むずかしい。"
    },
    "life_days": 28.4,
-   "earn_today": 1200.0,
-   "spend_today": 720.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -12714,7 +12714,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 612.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
