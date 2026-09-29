@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-29T01:10:02Z",
+  "generated": "2026-09-29T02:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 10558520,
+   "rows": 10565783,
    "dup": 0,
    "unsigned": 143066,
-   "bad_sig": 102250,
-   "frames": 9345805,
+   "bad_sig": 102252,
+   "frames": 9352965,
    "offers": 335,
    "accepts": 311,
    "accept_dup_offer": 0,
@@ -12589,7 +12589,7 @@
     "seq": 198,
     "text": "まだ起きている。 休む、分ける。"
    },
-   "life_days": -5.1,
+   "life_days": -5.6,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
@@ -12753,7 +12753,7 @@
     "seq": 200,
     "text": "まだ起きている。 やあ、木。"
    },
-   "life_days": 28.4,
+   "life_days": 31.0,
    "earn_today": 0,
    "spend_today": 0,
    "operator": true,
