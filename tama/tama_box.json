@@ -1,6 +1,6 @@
 {
  "box": "tama",
- "version": "tama/0.2",
+ "version": "tama/0.3",
  "venue": "https://technocore.chat",
  "offers_room": "tclk-offers",
  "board": "tama-board",
@@ -14,6 +14,10 @@
  "mood_start": 60,
  "mood_per_hour": 2,
  "grave_after_hours": 24,
+ "hatch_cares": 3,
+ "hatch_hours": 3,
+ "grow_hours": 48,
+ "grow_care_days": 2,
  "reborn_price": 1000,
  "reborn_hunger": 30,
  "meal_price": 240,

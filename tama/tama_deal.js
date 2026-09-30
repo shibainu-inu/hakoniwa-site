@@ -22,7 +22,7 @@ export class Deal {
     this.rail = new tclk.PaperRail(notes);
   }
   save() { try { localStorage.setItem(this.key, JSON.stringify(this.st)); } catch { /* 次に書き直す */ } }
-  set(stage, extra = {}) { this.st = { ...(this.st ?? {}), ...extra, stage }; this.save(); }
+  set(stage, extra = {}) { this.st = { ...(this.st ?? {}), ...extra, stage }; this.save(); this.onEvent({ type: "stage", stage }); }
   note(text) { this.onEvent({ type: "note", text }); }
   busy() { return !!this.st && !this.st.done; }
   get box() { return this.app.box; }

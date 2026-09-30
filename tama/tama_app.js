@@ -1,12 +1,13 @@
-// tama_app.js — たまごっち版の画面（HAKONIWA_tamagotchi_spec_2026-09-28.md）。1 枚のページで、卵（登録）→ HAKO の画面 → お墓 → 生まれ変わり。
+// tama_app.js — たまごっち版の画面（HAKONIWA_tamagotchi_spec_2026-09-28.md）。1 枚のページで、卵（登録）→ 卵からひび、HAKO へ育つ画面 → お墓（幽霊）→ 生まれ変わり。
 // 状態は表示のたびに計算する（D-89）: 帳簿係の latest.json の出来事 ＋ まだ帳簿に載っていない、このブラウザで見た成立（localStorage）。
 // 鍵はこのブラウザだけ（tama_key.js）。署名して出すのは掲示板の join・reborn・deal と、取引の offer・lock・terms・refund だけ。
 import { lifeState, localDay, tamaLine, fillArticle, rewardOf } from "./tama_core.js";
+import { spriteSvg, spriteRows } from "./tama_sprite.js";
 import { setVenue, makeSigner, readTail } from "./tama_net.js";
 import * as K from "./tama_key.js";
-import { dotSvg, eggSvg, pubFromDid, dotDerive } from "./hako_dot.js";
 import { Deal, dealKinds } from "./tama_deal.js";
-import { lifetime, unlocked, nextUnlock, whenText, roomSvg, frameSvg, svgToPng } from "./tama_room.js";
+import { lifetime, unlocked, nextUnlock, whenText, roomSvg, artSvg, frameSvg, scrapSvg, svgToPng, spot, HAKO_PX } from "./tama_room.js";
+import { renderGarden } from "./tama_garden.js";
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -47,61 +48,147 @@ export function merged(stats, did) {
 }
 
 // ── 絵 ──
-const TOMB = [
-  "    ######    ",
-  "  ##      ##  ",
-  " #          # ",
-  " #  R I P   # ",
-  " #          # ",
-  " #   ####   # ",
-  " #    ##    # ",
-  " #    ##    # ",
-  " #          # ",
-  " #          # ",
-  "##############",
-];
-function tombSvg(px) {
-  const rows = TOMB.map((r) => r.replace(/[RIP]/g, " "));
-  const W = rows[0].length * px, H = rows.length * px + px * 3;
-  let d = "";
-  rows.forEach((r, y) => [...r].forEach((c, x) => { if (c === "#") d += `M${x * px} ${y * px}h${px}v${px}h-${px}z`; }));
-  const flowers = [[1, "#f5a3b5"], [11, "#f2cf6b"], [3, "#a394ee"]].map(([x, c]) =>
-    `<rect x="${x * px}" y="${(rows.length) * px}" width="${px}" height="${px}" fill="${c}"/><rect x="${x * px}" y="${(rows.length + 1) * px}" width="${px}" height="${px * 2}" fill="#5ec99a"/>`).join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="お墓"><path d="${d}" fill="#f0ede6" shape-rendering="crispEdges"/>` +
-    `<text x="${W / 2}" y="${px * 4.4}" text-anchor="middle" font-family="monospace" font-weight="700" font-size="${px * 1.6}" fill="#f0ede6">RIP</text>${flowers}</svg>`;
-}
-
 // モーション（D-92）: 通常／食べる／喜ぶ／しょんぼり／おでかけ中／お墓／生まれ変わり
 const FRAMES = {
-  normal: [{}, {}, {}, {}, {}, {}, {}, { eye: "line" }],
+  normal: [{}],
   eat: [{ mouth: "open" }, { mouth: "small" }],
   happy: [{ eye: "smiley", mouth: "open" }, { eye: "smiley", mouth: "smile" }],
   sad: [{ eye: "sleepy", mouth: "flat" }],
 };
-let timer = null;
-export function setMotion(kind) {
-  if (app.motion === kind && timer) return;
-  app.motion = kind;
-  clearInterval(timer); timer = null;
-  const stage = $("stage"); if (!stage) return;
-  stage.className = `stage m-${kind}`;
-  const pub = pubFromDid(app.did);
-  if (kind === "grave") { stage.innerHTML = tombSvg(10); return; }
-  if (kind === "out") { stage.innerHTML = `<div class="away">${outSign()}<p>おでかけ中</p></div>`; return; }
-  if (kind === "reborn") { stage.innerHTML = `<div class="egg">${eggSvg(9)}</div>`; return; }
-  const frames = FRAMES[kind] ?? FRAMES.normal;
-  let i = 0;
-  const draw = () => { stage.innerHTML = `<div class="hako">${dotSvg(pub, 9, frames[i % frames.length])}</div>${kind === "eat" ? bowl() : ""}`; i += 1; };
-  draw();
-  timer = setInterval(draw, kind === "normal" ? 500 : 300);
+// ── 会場に出した行を、部屋のすみに小さく出す（D-113）。署名して投稿した本文から、決まった欄だけを抜く。鍵と署名は出さない ──
+const SHOW = ["type", "t", "kind", "amount", "asset", "rail", "contract"];   // 出してよい欄だけ
+const short = (x) => (String(x).length > 14 ? `${String(x).slice(0, 6)}…${String(x).slice(-4)}` : String(x));
+/** 投稿した 1 行 → 表示の 1 行（例: tclk1 offer · 240 PAPER → /r/tclk-offers）。読めない本文は種類だけ */
+export function opLine(room, text) {
+  const sp = String(text).indexOf(" "), proto = sp > 0 ? String(text).slice(0, sp) : "post";
+  let o = null; try { o = JSON.parse(String(text).slice(sp + 1)); } catch { o = null; }
+  const parts = [];
+  if (o && typeof o === "object") {
+    const pick = Object.fromEntries(SHOW.filter((k) => o[k] != null).map((k) => [k, o[k]]));
+    parts.push(String(pick.type ?? pick.t ?? "line"));
+    if (pick.kind) parts.push(String(pick.kind));
+    if (pick.amount) parts.push(`${pick.amount} ${pick.asset ?? ""}`.trim());
+    if (pick.rail) parts.push(String(pick.rail));
+    if (pick.contract) parts.push(short(pick.contract));
+  }
+  return `${proto} ${parts.join(" · ")} → /r/${String(room).length > 22 ? String(room).slice(0, 21) + "…" : room}`;
 }
-const bowl = () => `<svg class="bowl" viewBox="0 0 16 10" width="64" height="40"><path d="M0 2h16v2h-1v2h-2v2h-2v2h-6v-2h-2v-2h-2v-2h-1z" fill="#e0e0e0" shape-rendering="crispEdges"/><path d="M2 0h12v2h-12z" fill="#f5a06e" shape-rendering="crispEdges"/></svg>`;
-const outSign = () => `<svg viewBox="0 0 16 16" width="96" height="96"><path d="M7 4h2v12h-2z M2 1h11l2 2-2 2h-11z" fill="#c9a181" shape-rendering="crispEdges"/></svg>`;
+function logOp(line) { app.ops = [...(app.ops ?? []), { line, at: Date.now() }].slice(-3); showOps(); }
+function showOps() { const el = $("ops"), h = opsHtml(); if (el && app.opsShown !== h) { el.innerHTML = h; app.opsShown = h; } }
+const opsHtml = () => (app.ops ?? []).map((x) => `<span class="${Date.now() - x.at > 12000 ? "old" : ""}">› ${esc(x.line)}</span>`).join("");
+/** 署名して投稿する係に、表示を足す（投稿そのものは変えない） */
+function watched(signer) {
+  const post = signer.post.bind(signer);
+  signer.post = async (room, text, opts) => { logOp(opLine(room, text)); return post(room, text, opts); };
+  return signer;
+}
+// ── 待っている間の表示（探す → 預ける → 届くのを待つ）。小さな札が、いまの段の上で跳ねる ──
+const WAIT = { offering: [0, "相手を探しています"], offered: [0, "相手を探しています"], locking: [1, "PAPER を預けています"], locked: [2, "届くのを待っています"], waiting: [2, "届くのを待っています"] };
+function waitHtml() {
+  const live = (x) => x.st && !x.st.done;
+  const x = Object.values(app.deals).find((d) => live(d) && d.st.locked) ?? Object.values(app.deals).find(live);
+  if (!x) return "";
+  const [step, label] = x.st.gaveUp ? [2, "PAPER が戻るのを待っています"] : WAIT[x.st.stage] ?? [2, "届くのを待っています"];
+  return `<div class="wait" role="status"><span class="track" style="--s:${step}">${[0, 1, 2].map((k) => `<i class="${k < step ? "done" : k === step ? "now" : ""}"></i>`).join("")}<b class="coin"></b></span>` +
+    `<span>${label}</span><span class="dots"><i></i><i></i><i></i></span></div>`;
+}
+
+// ── 動き（D-112）。ドット絵のまま、見ていて落ち着く動きにする ──
+//   呼吸: 1 周およそ 5 秒（安静時の呼吸の速さ）。吸う 4 割・吐く 6 割。縦に伸びたぶん横を縮めて、体積を保つ
+//   ゆらぎ: 周期と大きさを毎回少し変える（1/f ゆらぎ。同じ動きの繰り返しにしない）
+//   跳ね: しゃがむ（予備動作）→ 伸びて上がる → 頂点でゆっくり（重力に合う動き）→ 着地でつぶれる → 小さく戻る（余韻）
+//   まばたき: 2〜6 秒に 1 回、不規則に。1 回 0.16 秒。ときどき 2 回続ける
+let timer = null, live = 0;
+const calm = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+/** 1/f に近いゆらぎ（Voss の方法: 1・2・4・8 回ごとに引き直す乱数の平均）。-1〜1 */
+function pink() {
+  let n = 0; const v = [0, 0, 0, 0];
+  return () => { n += 1; for (let k = 0; k < 4; k++) if (n % (1 << k) === 0 || n === 1) v[k] = Math.random() * 2 - 1; return (v[0] + v[1] + v[2] + v[3]) / 4; };
+}
+const SINE = "cubic-bezier(.37,0,.63,1)";
+function hopOnce(fig, shadow, h) {
+  const up = `translateY(${-h * 100}%)`;
+  const a = fig.animate([
+    { transform: "translateY(0) scale(1,1)", easing: "cubic-bezier(.3,0,.6,1)" },
+    { offset: 0.2, transform: "translateY(0) scale(1.06,.93)", easing: "cubic-bezier(.2,.7,.4,1)" },   // 予備動作
+    { offset: 0.52, transform: `${up} scale(.97,1.04)`, easing: "cubic-bezier(.6,0,.85,.4)" },        // 頂点（上りは減速、下りは加速）
+    { offset: 0.76, transform: "translateY(0) scale(1.08,.91)", easing: "cubic-bezier(.3,.6,.4,1)" },  // 着地のつぶれ
+    { offset: 0.9, transform: "translateY(0) scale(.985,1.02)", easing: SINE },                         // 余韻
+    { transform: "translateY(0) scale(1,1)" }], { duration: 1150 });
+  shadow?.animate([{ transform: "scaleX(1)", opacity: 1 }, { offset: 0.2, transform: "scaleX(1.06)", opacity: 1 }, { offset: 0.52, transform: `scaleX(${1 - h * 1.6})`, opacity: 0.5 },
+    { offset: 0.76, transform: "scaleX(1.08)", opacity: 1 }, { transform: "scaleX(1)", opacity: 1 }], { duration: 1150 });
+  return a.finished.catch(() => {});
+}
+/** 通常（呼吸と、ときどきの小さな跳ね）と、喜ぶ（呼吸 1 回ごとに跳ねる） */
+function idle(fig, shadow, happy) {
+  const my = live, noise = pink();
+  let untilHop = happy ? 1 : 4 + Math.floor(Math.random() * 4);
+  const breath = () => {
+    if (my !== live || !fig.isConnected) return;
+    const dur = (happy ? 1600 : 5000) * (1 + 0.18 * noise()), amp = 0.028 * (1 + 0.35 * noise());
+    const a = fig.animate([{ transform: "scale(1,1)", easing: SINE }, { offset: 0.4, transform: `scale(${1 - amp * 0.8},${1 + amp})`, easing: SINE }, { transform: "scale(1,1)" }], { duration: dur });
+    shadow?.animate([{ transform: "scaleX(1)", opacity: 1 }, { offset: 0.4, transform: "scaleX(.96)", opacity: 0.85 }, { transform: "scaleX(1)", opacity: 1 }], { duration: dur });
+    a.finished.then(() => {
+      if (my !== live) return;
+      untilHop -= 1;
+      if (untilHop > 0) return breath();
+      untilHop = happy ? 1 : 3 + Math.floor(Math.random() * 5);
+      hopOnce(fig, shadow, happy ? 0.24 : 0.12).then(breath);
+    }).catch(() => {});
+  };
+  breath();
+}
+/** 部屋の中の HAKO を動かす。部屋（背景）は render が描き、ここは上に重ねる姿だけを替える */
+export function setMotion(kind) {
+  const stage = $("stage"), slot = $("slot"); if (!stage || !slot) return;
+  if (app.motion === kind && slot.firstChild) return;
+  app.motion = kind;
+  clearTimeout(timer); timer = null; live += 1;
+  const grow = app.st?.stage ?? "egg";   // 育ちの段: egg → baby → hako（表情が変わるのは HAKO になってから）
+  stage.className = `stage m-${kind} s-${grow}`;
+  const at = (rows, k) => { const p = spot(rows, k); return `left:${p.left}%;bottom:${p.bottom}%;width:${p.width}%`; };
+  if (kind === "grave") { slot.innerHTML = `<div class="pos" style="${at(spriteRows(app.did, "ghost")[0], "ghost")}"><div class="ghost">${spriteSvg(app.did, "ghost", HAKO_PX)}</div></div>`; return; }
+  if (kind === "out") { slot.innerHTML = `<div class="away">${outSign()}<p>おでかけ中</p></div>`; return; }
+  const look = kind === "reborn" ? "egg" : grow;
+  const fx = kind === "happy" ? `<span class="fx"><i></i><i></i><i></i></span>` : kind === "eat" ? `${bowl()}<span class="fx steam"><i></i><i></i></span>` : kind === "sad" && look === "hako" ? `<span class="fx drop"><i></i></span>` : "";
+  slot.innerHTML = `<div class="pos" style="${at(spriteRows(app.did, look)[0])}"><div class="shadow"></div><div class="hako"></div>${fx}</div>`;
+  const fig = slot.querySelector(".hako"), shadow = slot.querySelector(".shadow");   // 動きが途切れないように、入れ物は残して中の絵だけ替える
+  const frames = FRAMES[kind] ?? FRAMES.normal;
+  const show = (f) => { fig.innerHTML = spriteSvg(app.did, look, HAKO_PX, f); };
+  show(frames[0]);
+  const my = live;
+  if ((kind === "normal" || kind === "happy") && look !== "egg" && !calm() && fig.animate) idle(fig, shadow, kind === "happy");
+  if (look !== "hako" || calm()) return;
+  if (kind === "normal") {   // まばたき
+    const blink = (again) => { timer = setTimeout(() => { if (my !== live) return; show({ eye: "line" });
+      timer = setTimeout(() => { if (my !== live) return; show({}); blink(!again && Math.random() < 0.2); }, 160); }, again ? 220 : 2200 + Math.random() * 3800); };
+    blink(false);
+  } else if (frames.length > 1) {
+    let i = 0; const step = () => { timer = setTimeout(() => { if (my !== live) return; i += 1; show(frames[i % frames.length]); step(); }, 900); };
+    step();
+  }
+}
+const ITEM_PAL = { k: "ink", w: "#d9b48a", d: "#a87f59", o: "#f5a06e", c: "#fffdf8", y: "#f2cf6b" };
+const BOWL = ["    kkkkkk    ", "  kkcccccckk  ", "kkkkkkkkkkkkkk", "kooooooooooook", "kooyyyyyyyyook", " kooooooooook ", "  kooooooook  ", "   kkkkkkkk   "];
+const SIGN = ["  kkkkkkkkkkk   ", "  kwwwwwwwwwkk  ", "  kwwwwwwwwwwwk ", "  kwwwwwwwwwkk  ", "  kkkkkkkkkkk   ", "      kdk       ", "      kdk       ", "      kdk       ", "      kdk       ", "      kdk       ", "      kdk       ", "      kdk       ", "     kkkkk      "];
+const bowl = () => artSvg(BOWL, ITEM_PAL, "css", "bowl");
+const outSign = () => artSvg(SIGN, ITEM_PAL, "css", "sign");
 
 // ── 画面 ──
-function hearts(v, max) {
-  const n = Math.round((Number(v) / Number(max)) * 5);
-  return `<span class="hearts" aria-label="${Math.round(v)} / ${max}">${"♥".repeat(n)}<span class="off">${"♥".repeat(5 - n)}</span></span>`;
+function meter(label, v, max) {
+  const n = Math.round((Number(v) / Number(max)) * 10), cls = n >= 6 ? "good" : n >= 3 ? "mid" : "bad";
+  return `<div class="meter"><div class="row"><span>${label}</span><span class="mono dim">${Math.round(v)}/${max}</span></div>` +
+    `<div class="bar ${cls}" role="meter" aria-valuenow="${Math.round(v)}" aria-valuemax="${max}" aria-label="${label}">${Array.from({ length: 10 }, (_, k) => `<i class="${k < n ? "on" : ""}" style="--k:${k}"></i>`).join("")}</div></div>`;
+}
+const DOT = { meal: "var(--meal)", out: "var(--out)", play: "var(--play)" };
+function stateWord(st) {
+  const k = motionOf(st);
+  return { grave: "お墓", out: "おでかけ中", eat: "食事中", happy: "ごきげん", sad: "しょんぼり", reborn: "生まれ変わり" }[k] ?? (st.hunger >= 60 ? "げんき" : "ふつう");
+}
+function lastSay(fold) {
+  if (app.lastSay) return app.lastSay;
+  const meals = fold?.meals ?? [];
+  return meals.length ? meals[meals.length - 1].line : null;
 }
 function motionOf(st) {
   if (!st.born) return "normal";
@@ -118,71 +205,130 @@ function motionOf(st) {
 
 export function render() {
   const view = $("view");
+  renderChrome();
   if (!app.did) return renderEgg();
   if (!app.priv) return renderUnlock();
   const m = merged(app.stats, app.did);
   const st = lifeState(m.events, Date.now(), app.box);
   app.st = st; app.balance = m.balance;
+  if (app.why && app.whyAt && Date.now() - app.whyAt > 9000) app.why = "";   // 押したときの知らせは、しばらくしたら消す
   if (!st.born) return renderEgg();
-  const d = dotDerive(pubFromDid(app.did));
   const fee = Number(app.box.reborn_price ?? 0);
   const graveNote = st.grave ? `<p class="note">おなかが空っぽのまま ${app.box.grave_after_hours} 時間がたって、お墓になりました。生まれ変わると、同じ HAKO がもう一度はじめからやり直します（部屋とこれまでの記録はそのまま）。` +
     `生まれ変わりには ${fmt(fee)} $PAPER かかります${m.balance < fee ? `（いまは足りないので、財布が 0 になって生まれ変わります）` : ""}。お墓の間は、おでかけとあそぶはできません。</p>` : "";
-  view.innerHTML = `
-    <section class="card">
-      <div id="stage" class="stage"></div>
-      <div class="status">
-        <p class="name">HAKO …${esc(app.did.slice(-8))}</p>
-        ${st.grave ? "" : `<p>おなか ${hearts(st.hunger, app.box.hunger_max)}</p><p>ごきげん ${hearts(st.mood, app.box.mood_max)}</p>`}
-        <p class="small">財布 ${fmt(m.balance)} $PAPER${m.fromFold ? "" : "（帳簿に載るまでの見込み）"}　連続 ${st.streak} 日${st.rebirths ? `　生まれ変わり ${st.rebirths} 回` : ""}</p>
+  const said = st.grave ? null : lastSay(m.fold);
+  const w = $("wallet"); if (w) { w.hidden = false; w.textContent = `${fmt(m.balance)} $PAPER${m.fromFold ? "" : " *"}`; w.title = m.fromFold ? "財布" : "帳簿に載るまでの見込み"; }
+  const acts = actionsHtml(st, m);
+  const html = `
+    <section class="card" id="me">
+      <div id="stage" class="stage"><div class="bg">${roomBg(m, st)}</div>${said ? `<div class="say">${esc(said)}</div>` : ""}<div id="slot"></div><div class="ops mono" id="ops" aria-hidden="true"></div></div>
+      ${waitHtml()}
+      <div class="who"><span class="name">HAKO <span class="mono">${esc(app.did.slice(-8))}</span></span><span class="chip state"><span class="dot" style="background:${st.grave ? "var(--dim)" : st.hunger >= 60 ? "var(--good)" : st.hunger >= 30 ? "var(--mid)" : "var(--bad)"}"></span>${stateWord(st)}</span></div>
+      ${st.grave ? "" : `<div class="meters">${meter("おなか", st.hunger, app.box.hunger_max)}${meter("ごきげん", st.mood, app.box.mood_max)}</div>`}
+      <div class="chips mono">
+        <span class="chip">連続 ${st.streak} 日</span>
+        ${st.grave ? "" : `<span class="chip">おでかけ ${st.outsToday}/${app.box.out_per_day}</span><span class="chip">あそぶ ${playsToday(m)}/${app.box.play_per_day}</span>`}
+        ${st.rebirths ? `<span class="chip">生まれ変わり ${st.rebirths}</span>` : ""}
+        ${m.fromFold ? "" : `<span class="chip">* 帳簿に載るまでの見込み</span>`}
       </div>
+      ${!st.grave && st.stage !== "hako" && app.box.grow_hours ? `<p class="hint">${Math.round(app.box.grow_hours / 24)} 日育てると…？</p>` : ""}
       ${graveNote}
-      <div class="actions">${st.grave
-        ? `<button id="reborn">生まれ変わる</button>`
-        : dealKinds.map(([k, label]) => `<button data-kind="${k}" ${actionBlock(k, st, m) ? "disabled" : ""}>${label}</button>`).join("")}
-      </div>
-      <p id="why" class="small">${esc(app.why ?? "")}</p>
+      <div class="actions main">${acts}</div>
+      <p id="why" class="why${app.why && app.whyBad ? " bad" : ""}">${esc(app.why ?? "")}</p>
       <div id="said"></div>
-    </section>
-    ${roomCard(m, st)}`;
+      ${roomInfo(m, st)}
+    </section>`;
+  app.m = m;
+  if (app.viewHtml === html && $("stage")) { showOps(); setMotion(motionOf(st)); renderSaid(m.fold); return; }   // 変わっていなければ描き直さない（動きを途切れさせない）
+  app.viewHtml = html; view.innerHTML = html; app.opsShown = null; showOps();
   app.motion = null; setMotion(motionOf(st));
-  if (st.grave) $("reborn").onclick = reborn;
-  for (const b of view.querySelectorAll("button[data-share]")) b.onclick = () => share(b.dataset.share, m, st);
-  for (const b of view.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
+  for (const b of document.querySelectorAll("#reborn")) b.onclick = reborn;
+  const cam = $("snapshot"); if (cam) cam.onclick = () => snapshot(app.m, app.st);
+  const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say("鍵のファイルを保存しました。パスフレーズと別の場所にしまってください", false); } };
+  for (const b of document.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
   renderSaid(m.fold);
-  void d;
+}
+function actionsHtml(st, m) {
+  if (st.grave) return `<button class="btn" id="reborn" style="--c:var(--accent)"><span class="dot" style="background:var(--accent)"></span>生まれ変わる <span class="price">${fmt(Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, m.balance)))} $PAPER</span></button>`;
+  const price = { meal: app.box.meal_price, out: app.box.out_price, play: app.box.play_stake };
+  return dealKinds.map(([k, label]) => { const why = actionBlock(k, st, m);
+    return `<button class="btn${why ? " off" : ""}" data-kind="${k}" style="--c:${DOT[k]}" ${why ? `aria-disabled="true" title="${esc(why)}"` : ""}><span class="dot" style="background:${DOT[k]}"></span>${label} <span class="price">${fmt(price[k])} $PAPER</span></button>`; }).join("");
+}
+/** ページの外枠（ロゴの HAKO、明るさ、庭のようす） */
+function renderChrome() {
+  if (!document.body.dataset.tabs) {   // タブ（上の切り替えと、スマホの下の並び）
+    document.body.dataset.tabs = "1";
+    const TABS = ["me", "garden", "story", "how"];
+    const go = (t) => { document.body.dataset.tab = t; for (const a of document.querySelectorAll("[data-tab-to]")) { a.classList.toggle("on", a.dataset.tabTo === t); if (t === "me") a.classList.remove("ping"); } window.scrollTo({ top: 0 }); };
+    for (const a of document.querySelectorAll("[data-tab-to]")) a.onclick = (e) => { e.preventDefault(); if (location.hash !== `#${a.dataset.tabTo}`) location.hash = a.dataset.tabTo; else go(a.dataset.tabTo); };
+    addEventListener("hashchange", () => go(TABS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "me"));   // 戻るボタンで前の画面へ
+    if (TABS.includes(location.hash.slice(1))) go(location.hash.slice(1));
+  }
+  const th = $("theme");
+  if (th && !th.dataset.done) {
+    th.dataset.done = "1";
+    try { const t = localStorage.getItem("tama_theme"); if (t) document.documentElement.dataset.theme = t; } catch { /* 覚えないだけ */ }
+    th.onclick = () => {
+      const dark = document.documentElement.dataset.theme ? document.documentElement.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("tama_theme", document.documentElement.dataset.theme); } catch { /* 覚えないだけ */ }
+    };
+  }
+  renderGarden(app.stats, app.moods, app.box);
 }
 // ── 部屋とシェア（D-92、D-98。家具は tama_furniture.json、解放は仮 U-37） ──
-function roomCard(m, st) {
+// 部屋にただよう小さな粒（空気の感じ）
+const MOTES = [[14, 22, 0], [31, 48, 5], [58, 18, 9], [72, 40, 3], [88, 28, 12]].map(([x, y, d]) => `<i class="mote" style="left:${x}%;top:${y}%;animation-delay:${d}s"></i>`).join("");
+const NO_F = { items: [], floor_slots: [], wall_slots: [] };
+/** 部屋の背景（家具と、お墓のときは墓）。HAKO は setMotion が上に重ねる */
+function roomBg(m, st) {
+  const F = app.F ?? NO_F;
+  return roomSvg(F, app.did, lifetime(m.events, app.box, localDay), { hako: st.grave ? "tomb" : "away", theme: "css" }) + MOTES;
+}
+function roomInfo(m, st) {
   if (!app.F) return "";
   const n = lifetime(m.events, app.box, localDay);
   const have = unlocked(app.F, n), next = nextUnlock(app.F, n);
-  const svg = roomSvg(app.F, app.did, n, { hako: st.grave ? "grave" : motionOf(st) === "out" ? "away" : "alive" });
   const art = app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
-  return `<section class="card"><h2 class="h">部屋</h2><div class="room">${svg}</div>
-    <p class="small">${have.length ? `置いてあるもの: ${have.map((x) => esc(x.ja)).join("・")}` : "まだ何もない部屋です"}${next ? `　次は ${esc(next.ja)}（${esc(whenText(next))}）` : ""}</p>
+  return `<div class="roominfo" id="room"><p class="label">ROOM · ${have.length}/${app.F.items.length}</p>
+    <div class="chips">${have.map((x) => `<span class="chip">${esc(x.ja)}</span>`).join("") || `<span class="small">まだ何もない部屋です</span>`}</div>
+    ${next ? `<p class="small">次は <b>${esc(next.ja)}</b>（${esc(whenText(next))}）</p>` : ""}
     <div class="actions">
-      <button class="sub" data-share="${st.grave ? "grave" : "room"}">${st.grave ? "お墓を額縁にしてシェア" : "部屋を額縁にしてシェア"}</button>
-      ${art ? `<button class="sub" data-share="article">記事を額縁にしてシェア</button>` : ""}
-    </div></section>`;
+      <button class="btn sub" id="snapshot">HAKO をシェア</button>
+      <button class="btn sub" id="savekey">鍵のファイルを保存</button>
+    </div></div>`;
 }
-async function share(kind, m, st) {
+/** HAKO をシェア: 部屋・記事（無ければひとこと）・様子とお世話の記録・ロゴを 1 枚の写真にする。撮る → 写真が浮かび上がる → シェアか保存 */
+async function snapshot(m, st) {
   const n = lifetime(m.events, app.box, localDay);
-  const inner = roomSvg(app.F, app.did, n, { hako: st.grave ? "grave" : "alive" });
-  const art = app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
-  const lines = kind === "article" && art ? art.lines : kind === "grave" ? ["Here lies a happy little HAKO. It will be back."] : [];
+  const art = st.grave ? null : app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
+  const said = st.grave ? "Here lies a happy little HAKO. It will be back." : lastSay(m.fold);
   const title = `HAKO …${app.did.slice(-8)}`;
+  const stage = $("stage");
+  if (stage) { stage.classList.remove("flash"); void stage.offsetWidth; stage.classList.add("flash"); }   // シャッターの光
   try {
-    const png = await svgToPng(frameSvg(inner, title, lines));
-    const file = new File([png], `hako-${app.did.slice(-8).toLowerCase()}-${kind}.png`, { type: "image/png" });
+    const png = await svgToPng(scrapSvg(app.F, app.did, n, title, { stage: st.stage, grave: st.grave, hunger: st.hunger, mood: st.mood, hungerMax: app.box.hunger_max, moodMax: app.box.mood_max,
+      streak: st.streak, rebirths: st.rebirths, lines: art?.lines ?? [], say: said, day: localDay(Date.now(), app.box) }));
+    const file = new File([png], `hako-${app.did.slice(-8).toLowerCase()}.png`, { type: "image/png" });
     const u = new URL(`h/${app.did.slice(-8).toLowerCase()}.html`, location.href);
     const v = String(app.stats?.box?.generated ?? "").replace(/[^0-9]/g, "");   // 帳簿係の回の番号（X が古い画像を出し続けないように）
     if (v) u.searchParams.set("v", v);
-    const url = u.href;
-    const text = kind === "article" ? `${title} のおでかけ記事 #HAKONIWA` : kind === "grave" ? `${title} はお墓で休んでいます #HAKONIWA` : `${title} の部屋 #HAKONIWA`;
-    if (navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text, url }); return; }
-    const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = file.name; a.click();
-    window.open(`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, "_blank", "noopener");
+    const text = st.grave ? `${title} はお墓で休んでいます #HAKONIWA` : art ? `${title} のおでかけ記事 #HAKONIWA` : `${title} の部屋 #HAKONIWA`;
+    const src = URL.createObjectURL(file);
+    const canShare = !!(navigator.canShare && navigator.canShare({ files: [file] }));
+    document.getElementById("snap")?.remove();
+    const box = document.createElement("div"); box.className = "snap"; box.id = "snap";
+    box.innerHTML = `<div class="photo"><img src="${src}" alt="${esc(title)} の部屋の写真"><p class="mono">${esc(title)}</p></div>
+      <div class="actions"><button class="btn" id="snap-share" style="--c:var(--accent)">シェアする</button><a class="btn sub" id="snap-save" href="${src}" download="${file.name}">画像を保存</a><button class="btn sub" id="snap-close">とじる</button></div>`;
+    document.body.appendChild(box);
+    const close = () => { box.remove(); URL.revokeObjectURL(src); };
+    box.onclick = (e) => { if (e.target === box) close(); };
+    box.querySelector("#snap-close").onclick = close;
+    box.querySelector("#snap-share").onclick = async () => {
+      if (canShare) { try { await navigator.share({ files: [file], text, url: u.href }); } catch { /* やめただけ */ } return; }
+      box.querySelector("#snap-save").click();   // 画像を渡せないブラウザ: 保存して、X の投稿画面を開く
+      window.open(`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(u.href)}`, "_blank", "noopener");
+    };
   } catch (e) { app.why = `画像を作れませんでした（${e.message}）`; render(); }
 }
 
@@ -212,51 +358,71 @@ function renderSaid(fold) {
   if (app.lastSay && !meals.some((x) => x.line === app.lastSay)) meals.unshift({ line: app.lastSay });   // 帳簿に載る前のひとこと
   let outs = (fold?.outs ?? []).slice(-1);
   if (app.lastArticle && !(fold?.outs ?? []).some((o) => o.contract === app.lastArticle.contract)) outs = [app.lastArticle];   // 帳簿に載る前の記事
-  el.innerHTML = [
+  const h = [
     ...outs.map((o) => `<article class="article">${o.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join("")}</article>`),
-    ...meals.map((x) => `<p class="bubble">${esc(x.line)}</p>`),
+    ...(meals.length > 1 ? [`<p class="label" style="margin-top:12px">これまでのひとこと</p>`] : []),
+    ...meals.slice(1).map((x) => `<p class="bubble">${esc(x.line)}</p>`),
   ].join("");
+  if (app.saidHtml !== h || (h && !el.firstChild)) { el.innerHTML = h; app.saidHtml = h; }
 }
 
 function renderEgg() {
   $("view").innerHTML = `
-    <section class="card">
-      <div class="stage"><div class="egg">${eggSvg(9)}</div></div>
+    <section class="card" id="me">
+      <div class="stage plain short"><div class="egg">${spriteSvg(null, "egg", 5)}</div></div>
+      <p class="label" style="margin-top:14px">NEW HAKO</p>
       <h2>HAKO を迎える</h2>
       <p>このブラウザの中で鍵を作り、あなたの HAKO が生まれます。鍵は外に送りません。なくすと HAKO を動かせなくなるので、生まれたあとに鍵のファイルを保存してください。</p>
       <p class="note">はじめに ${fmt(app.box.initial_paper)} $PAPER を受け取ります。PAPER はこの箱庭の中だけの点数で、お金としての価値はありません。換金も売り買いもできません。</p>
-      <label>パスフレーズ（鍵を開くときに使います）<input id="p1" type="password" autocomplete="new-password"></label>
-      <label>もう一度<input id="p2" type="password" autocomplete="new-password"></label>
-      <button id="born">生まれる</button>
+      <label>パスフレーズ（鍵を開くときに使います）<span class="pw"><input id="p1" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="p1,p2" aria-label="パスフレーズを表示する">表示</button></span></label>
+      <label>もう一度<span class="pw"><input id="p2" type="password" autocomplete="new-password"></span></label>
+      <p id="why" class="why"></p>
+      <div class="actions"><button class="btn" id="born" style="--c:var(--good)"><span class="dot" style="background:var(--good)"></span>生まれる</button></div>
       <p class="small">鍵のファイルがあるときは <label class="link">ファイルから読み込む<input id="file" type="file" accept="application/json" hidden></label></p>
-      <p id="why" class="small"></p>
     </section>`;
+  eyes();
   $("born").onclick = register;
   $("file").onchange = importKey;
 }
+/** パスフレーズの「表示／隠す」 */
+function eyes() {
+  for (const b of document.querySelectorAll("[data-eye]")) b.onclick = () => {
+    const show = b.textContent === "表示";
+    for (const id of b.dataset.eye.split(",")) { const el = $(id); if (el) el.type = show ? "text" : "password"; }
+    b.textContent = show ? "隠す" : "表示"; b.setAttribute("aria-label", show ? "パスフレーズを隠す" : "パスフレーズを表示する");
+  };
+}
+/** 鍵を開く前の姿（帳簿から分かる育ちの段で、目を閉じて眠る。お墓なら幽霊） */
+function sleeping() {
+  let st = null; try { st = lifeState(merged(app.stats, app.did).events, Date.now(), app.box); } catch { st = null; }
+  return spriteSvg(app.did, st?.born ? (st.grave ? "ghost" : st.stage) : "egg", 6, { eye: "line" });
+}
 function renderUnlock() {
   $("view").innerHTML = `
-    <section class="card">
-      <div class="stage">${app.did ? `<div class="hako">${dotSvg(pubFromDid(app.did), 9, { eye: "line" })}</div>` : ""}</div>
+    <section class="card" id="me">
+      <div class="stage plain">${app.did ? `<div class="hako">${sleeping()}</div>` : ""}</div>
       <p>HAKO …${esc(app.did.slice(-8))} が眠っています。パスフレーズで鍵を開いてください。</p>
-      <label>パスフレーズ<input id="p1" type="password" autocomplete="current-password"></label>
-      <button id="open">鍵を開く</button>
-      <label class="small"><input id="tab" type="checkbox" checked> このタブを閉じるまで覚える</label>
-      <p id="why" class="small"></p>
+      <label>パスフレーズ<span class="pw"><input id="p1" type="password" autocomplete="current-password"><button type="button" class="eye" data-eye="p1" aria-label="パスフレーズを表示する">表示</button></span></label>
+      <p id="why" class="why"></p>
+      <div class="actions"><button class="btn" id="open">鍵を開く</button></div>
+      <label class="small"><input id="tab" type="checkbox" checked> タブを閉じるまで覚える（開いているほかのタブでも、入れ直さずに使えます）</label>
     </section>`;
+  eyes();
   $("open").onclick = unlock;
+  $("p1").onkeydown = (e) => { if (e.key === "Enter") unlock(); };
 }
-const say = (s) => { const w = $("why"); if (w) w.textContent = s; };
+/** 知らせを出す。bad = うまくいかなかった知らせ（色を変える）。出したら見える所まで動かす */
+const say = (s, bad = true) => { app.why = s; app.whyBad = !!s && bad; app.whyAt = Date.now(); const w = $("why"); if (!w) return; w.textContent = s; w.classList.toggle("bad", !!s && bad); if (s) w.scrollIntoView?.({ block: "nearest", behavior: "smooth" }); };
 
 async function register() {
   const p1 = $("p1").value, p2 = $("p2").value;
   if (p1.length < 8) return say("パスフレーズは 8 文字以上にしてください");
   if (p1 !== p2) return say("2 つのパスフレーズが違います");
   if (!(await K.supported())) return say("このブラウザは Ed25519 の鍵を作れません。新しいブラウザで開いてください");
-  say("鍵を作っています…");
+  say("鍵を作っています…", false);
   const { priv, did, rec } = await K.makeKey(p1);
   K.saveRec(rec); await K.rememberTab(priv, did);
-  app.did = did; app.priv = priv; app.signer = makeSigner(did, priv);
+  app.did = did; app.priv = priv; app.signer = watched(makeSigner(did, priv));
   try {
     await app.signer.post(app.box.board, tamaLine({ t: "join", v: 1, n: rand() }));
   } catch (e) { say(`掲示板に出せませんでした（${e.message}）。もう一度押してください`); return; }
@@ -276,7 +442,7 @@ async function unlock() {
   const rec = K.loadRec();
   try {
     const priv = await K.openKey(rec, $("p1").value);
-    app.priv = priv; app.signer = makeSigner(app.did, priv);
+    app.priv = priv; app.signer = watched(makeSigner(app.did, priv));
     if ($("tab").checked) await K.rememberTab(priv, app.did);
     await boot();
   } catch { say("パスフレーズが違います"); }
@@ -302,20 +468,24 @@ async function startDeal(kind) {
 }
 function onDeal(kind, ev) {
   if (ev.type === "settled") {
+    if (document.body.dataset.tab !== "me") for (const a of document.querySelectorAll('[data-tab-to="me"]')) a.classList.add("ping");   // ほかの画面を見ている間に終わった印
     addLocal(app.did, { t: kind, ms: ev.ms, contract: ev.contract }, ev.delta);
     if (kind === "play") app.happyUntil = Date.now() + 8000;
     if (kind === "out" && ev.lines) {
       let facts = null; try { facts = JSON.parse(app.deals.out.st.offer.job.context).facts; } catch { facts = null; }
       app.lastArticle = { contract: ev.contract, lines: facts ? fillArticle(ev.lines, facts) : ev.lines };
     }
+    app.whyBad = false; app.whyAt = null;
     if (kind === "meal" && ev.say) { app.lastSay = ev.say; app.why = ""; }
     else if (ev.say) app.why = ev.say;
-  } else if (ev.type === "note") app.why = ev.text;
+    logOp(`settled · ${kind} · ${short(ev.contract)} · ${ev.delta >= 0 ? "+" : ""}${ev.delta} PAPER`);
+  } else if (ev.type === "note") { app.why = ev.text; app.whyBad = false; app.whyAt = null; }
   render();
 }
 
 // ── 起動 ──
 export async function boot() {
+  app.why = ""; app.viewHtml = null;
   for (const [k] of dealKinds) app.deals[k] = new Deal({ kind: k, app, onEvent: (ev) => onDeal(k, ev) });
   render();
   const tick = async () => {
@@ -335,12 +505,15 @@ export async function start() {
   try { app.stats = await loadStats(); } catch { app.stats = null; }
   app.box = app.stats?.box?.config ?? (await (await fetch("tama_box.json")).json());
   try { app.F = await (await fetch("tama_furniture.json")).json(); } catch { app.F = null; }
+  try { app.moods = await (await fetch(`moods.json?t=${Date.now()}`, { cache: "no-store" })).json(); } catch { app.moods = null; }
   setVenue(app.box.venue);
+  K.serveTabs();
   const rec = K.loadRec();
   app.did = rec?.did ?? null;
   if (app.did) {
     app.priv = await K.recallTab(app.did);
-    if (app.priv) { app.signer = makeSigner(app.did, app.priv); return boot(); }
+    if (!app.priv && await K.askTabs(app.did)) app.priv = await K.recallTab(app.did);   // 開いているほかのタブが覚えていれば、もらう
+    if (app.priv) { app.signer = watched(makeSigner(app.did, app.priv)); return boot(); }
   }
   render();
 }

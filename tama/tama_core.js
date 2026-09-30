@@ -9,6 +9,7 @@
 //   4. おなかが 0 のまま grave_after_hours 続いたら、その時刻にお墓（D-90）。お墓の間の出来事は状態を動かさない（PAPER は動く）
 //   5. reborn はお墓のときだけ効く。同じ DID で、おなかは reborn_hunger、ごきげんは生まれたときの値、連続日数は 0 から（D-91、D-101）
 //   6. 連続お世話日数は、いまの命の中で、ごはん・おでかけ・あそぶのどれかが成立した日（JST）が、今日か昨日から何日続いているか
+//   8. 育ちの段は、いまの命について: 卵 →（お世話 hatch_cares 回 かつ hatch_hours 時間）生まれた子 →（grow_hours 時間 かつ お世話した日 grow_care_days 日）HAKO。生まれ変わると卵から
 //   7. あそぶの戻りは契約 id（offer と accept を束ねたハッシュ）の先頭 8 桁の 16 進 mod 100 を、play_table の重みで引く（D-96）
 
 export const HOUR = 3_600_000;
@@ -33,7 +34,7 @@ export function lifeState(events, now, box) {
   let s = null;   // いまの命: {bornAt, hunger, mood, at, zeroSince, grave, graveAt, days:Set}
   let rebirths = 0;
   const fresh = (ms, reborn = false) => ({ bornAt: ms, hunger: Number(reborn ? (box.reborn_hunger ?? box.hunger_start) : box.hunger_start), mood: Number(box.mood_start), at: ms,
-    zeroSince: null, grave: false, graveAt: null, days: new Set() });
+    zeroSince: null, grave: false, graveAt: null, days: new Set(), cares: 0 });
   // at から t まで時間を進める（お墓になる時刻を越えたらそこで止める）
   const advance = (t) => {
     if (!s || s.grave || t <= s.at) return;
@@ -63,6 +64,7 @@ export function lifeState(events, now, box) {
     s.zeroSince = s.hunger > 0 ? null : (s.zeroSince ?? e.ms);
     s.days.add(localDay(e.ms, box));
     s.lastCare = e.ms;
+    s.cares += 1;
   }
   if (!s) return { born: false };
   advance(now);
@@ -76,9 +78,17 @@ export function lifeState(events, now, box) {
   }
   const outsToday = ev.filter((e) => e.t === "out" && e.ms >= s.bornAt && localDay(e.ms, box) === today).length;
   return { born: true, alive: !s.grave, grave: s.grave, graveAt: s.graveAt, bornAt: s.bornAt,
-    hunger: round2(s.hunger), mood: round2(s.mood), streak, rebirths, outsToday, careDays: days.length, lastCare: s.lastCare ?? null };
+    hunger: round2(s.hunger), mood: round2(s.mood), streak, rebirths, outsToday, careDays: days.length, lastCare: s.lastCare ?? null,
+    cares: s.cares, stage: growthStage(s.cares, days.length, now - s.bornAt, box) };
 }
 export const round2 = (x) => Math.round(x * 100) / 100;
+/** 育ちの段（D-107、D-109）: 回数だけでは進まず、時間もかかる。値は仮（hatch_cares・hatch_hours・grow_hours・grow_care_days） */
+export function growthStage(cares, careDays, ageMs, box) {
+  const h = ageMs / HOUR;
+  if (cares < Number(box.hatch_cares ?? 0) || h < Number(box.hatch_hours ?? 0)) return "egg";
+  if (h < Number(box.grow_hours ?? 0) || careDays < Number(box.grow_care_days ?? 0)) return "baby";
+  return "hako";
+}
 
 /** あそぶの戻り（D-96）。contract は 0x で始まる 64 桁の 16 進。table は [[重み, 額], …]（重みの合計 100） */
 export function playPayout(contract, table) {

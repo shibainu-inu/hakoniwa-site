@@ -1,12 +1,12 @@
 {
  "box": {
-  "generated": "2026-09-30T12:03:03Z",
-  "now_ms": 1790769783040,
-  "version": "tama/0.2",
-  "config_sha256": "1a9fa13a4f23a6feb2c036e433707a9bbbcec31b068a4089fd74e67618d84d3e",
+  "generated": "2026-09-30T12:57:53Z",
+  "now_ms": 1790773073975,
+  "version": "tama/0.3",
+  "config_sha256": "8f701efaa6049603a78a79537751734bba8894d7c98aec1eaf040d4aaaeb17ce",
   "config": {
    "box": "tama",
-   "version": "tama/0.2",
+   "version": "tama/0.3",
    "venue": "https://technocore.chat",
    "offers_room": "tclk-offers",
    "board": "tama-board",
@@ -20,6 +20,10 @@
    "mood_start": 60,
    "mood_per_hour": 2,
    "grave_after_hours": 24,
+   "hatch_cares": 3,
+   "hatch_hours": 3,
+   "grow_hours": 48,
+   "grow_care_days": 2,
    "reborn_price": 1000,
    "reborn_hunger": 30,
    "meal_price": 240,
@@ -153,13 +157,15 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 87.14,
-    "mood": 66.5,
+    "hunger": 85.31,
+    "mood": 64.67,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 2,
     "careDays": 1,
-    "lastCare": 1790746626532
+    "lastCare": 1790746626532,
+    "cares": 6,
+    "stage": "baby"
    },
    "meals": [
     {

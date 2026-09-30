@@ -44,6 +44,32 @@ export async function recallTab(did) {
   try { const j = JSON.parse(sessionStorage.getItem(TAB_KEY) || "null"); if (!j || j.did !== did) return null;
     return await crypto.subtle.importKey("pkcs8", unb64(j.pkcs8), { name: "Ed25519" }, true, ["sign"]); } catch { return null; }
 }
+// 開いているタブどうしで、覚えている鍵を渡す（同じブラウザの中だけ。どのタブも閉じれば消える。外には送らない）
+const SHARE = "tama_key_share_v1";
+/** ほかのタブが鍵を覚えていたら、このタブにも覚えさせる。もらえたら true */
+export function askTabs(did, ms = 350) {
+  return new Promise((resolve) => {
+    let ch; try { ch = new BroadcastChannel(SHARE); } catch { return resolve(false); }
+    const done = (v) => { try { ch.close(); } catch { /* 無視 */ } resolve(v); };
+    ch.onmessage = (e) => {
+      if (e.data?.t !== "have" || e.data.did !== did || !e.data.pkcs8) return;
+      try { sessionStorage.setItem(TAB_KEY, JSON.stringify({ did, pkcs8: e.data.pkcs8 })); } catch { /* 覚えないだけ */ }
+      done(true);
+    };
+    ch.postMessage({ t: "ask", did });
+    setTimeout(() => done(false), ms);
+  });
+}
+/** 覚えている鍵を、聞いてきたほかのタブへ渡す係 */
+export function serveTabs() {
+  try {
+    const ch = new BroadcastChannel(SHARE);
+    ch.onmessage = (e) => {
+      if (e.data?.t !== "ask") return;
+      try { const j = JSON.parse(sessionStorage.getItem(TAB_KEY) || "null"); if (j && j.did === e.data.did) ch.postMessage({ t: "have", did: j.did, pkcs8: j.pkcs8 }); } catch { /* 渡さないだけ */ }
+    };
+  } catch { /* 古いブラウザ: タブごとに開いてもらう */ }
+}
 export function forgetTab() { try { sessionStorage.removeItem(TAB_KEY); } catch { /* 無視 */ } }
 /** 新しい鍵を作る → {priv, did, rec} */
 export async function makeKey(pass) {
