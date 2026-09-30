@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-09-30T10:03:03Z",
-  "now_ms": 1790762583051,
+  "generated": "2026-09-30T11:03:03Z",
+  "now_ms": 1790766183353,
   "version": "tama/0.2",
   "config_sha256": "1a9fa13a4f23a6feb2c036e433707a9bbbcec31b068a4089fd74e67618d84d3e",
   "config": {
@@ -153,8 +153,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 91.14,
-    "mood": 70.5,
+    "hunger": 89.14,
+    "mood": 68.5,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 2,
