@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-09-30T05:03:02Z",
-  "now_ms": 1790744582166,
+  "generated": "2026-09-30T06:03:03Z",
+  "now_ms": 1790748183045,
   "version": "tama/0.2",
   "config_sha256": "1a9fa13a4f23a6feb2c036e433707a9bbbcec31b068a4089fd74e67618d84d3e",
   "config": {
@@ -76,11 +76,180 @@
    "meal_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after eating. Use the mood words given. No numbers, no names, no quotes.",
    "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
   },
-  "hakos": 0,
-  "contracts": {},
+  "hakos": 1,
+  "contracts": {
+   "meal:settled": 3,
+   "out:settled": 2,
+   "play:settled": 1
+  },
   "stats": {},
   "invalid": [],
-  "paper_total": 0
+  "paper_total": 11220.0
  },
- "did": {}
+ "did": {
+  "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k": {
+   "joined": null,
+   "operator": true,
+   "balance": 50.0,
+   "earned": 100.0,
+   "spent": 50.0,
+   "issued": 0.0,
+   "events": [],
+   "state": {
+    "born": false
+   },
+   "meals": [],
+   "outs": [],
+   "plays": [],
+   "pending": []
+  },
+  "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
+   "joined": "2026-09-30T05:17:56.435302Z",
+   "operator": false,
+   "balance": 9970.0,
+   "earned": 50.0,
+   "spent": 1300.0,
+   "issued": 11220.0,
+   "events": [
+    {
+     "t": "join",
+     "ms": 1790745476435
+    },
+    {
+     "t": "out",
+     "ms": 1790745574918,
+     "contract": "0xdad2b33eab48f32cb8869dc8aefe4358ab4089d0bcdb670e813878861b9f25cb"
+    },
+    {
+     "t": "meal",
+     "ms": 1790745666762,
+     "contract": "0xa7dd1831a2b8c0d36e515bb2ff06a60d2b767a359fb4b1e23465487a4acf034b"
+    },
+    {
+     "t": "play",
+     "ms": 1790745727995,
+     "contract": "0x125b6c03f80c87216f2081992f7dc752dd0228de34236b2fdfd8b8f52b12f147",
+     "payout": 50
+    },
+    {
+     "t": "meal",
+     "ms": 1790746184063,
+     "contract": "0xab52882051a2b833503ae3b8cde16ac0d1e6bf0a5f50c1a62cdbac660aae219e"
+    },
+    {
+     "t": "out",
+     "ms": 1790746275705,
+     "contract": "0xe8e45868e61ded689ccdcb13341656f8f7e7912cba639e95bdd2b4c63d9a2655"
+    },
+    {
+     "t": "meal",
+     "ms": 1790746626532,
+     "contract": "0xee7ffd6dddcc3dcb38d117fd5f44b96583928bc61110a96fa2498661a13ca66a"
+    }
+   ],
+   "state": {
+    "born": true,
+    "alive": true,
+    "grave": false,
+    "graveAt": null,
+    "bornAt": 1790745476435,
+    "hunger": 99.14,
+    "mood": 78.5,
+    "streak": 1,
+    "rebirths": 0,
+    "outsToday": 2,
+    "careDays": 1,
+    "lastCare": 1790746626532
+   },
+   "meals": [
+    {
+     "contract": "0xa7dd1831a2b8c0d36e515bb2ff06a60d2b767a359fb4b1e23465487a4acf034b",
+     "ms": 1790745666762,
+     "line": "I'm so hungry, I'm bouncing with excitement!"
+    },
+    {
+     "contract": "0xab52882051a2b833503ae3b8cde16ac0d1e6bf0a5f50c1a62cdbac660aae219e",
+     "ms": 1790746184063,
+     "line": "A bit peckish, I’m feeling quite cheerful after my snack!"
+    },
+    {
+     "contract": "0xee7ffd6dddcc3dcb38d117fd5f44b96583928bc61110a96fa2498661a13ca66a",
+     "ms": 1790746626532,
+     "line": "I feel a bit peckish after this delicious meal, but I'm still quite cheerful!"
+    }
+   ],
+   "outs": [
+    {
+     "contract": "0xdad2b33eab48f32cb8869dc8aefe4358ab4089d0bcdb670e813878861b9f25cb",
+     "ms": 1790745574918,
+     "facts": {
+      "metric": "alike",
+      "label": "the share of messages that looked alike",
+      "dir": "higher",
+      "value": "83%",
+      "base": "80%"
+     },
+     "rewarded": true,
+     "day": "2026-09-30",
+     "nth": 1,
+     "funded": true,
+     "lines": [
+      "Market buzzed with AI's new trend, but conversations were mostly unique.",
+      "Market felt lively, with a mix of familiar and unfamiliar faces.",
+      "Today's messages were more similar in content.",
+      "It was 83% today, against 80% on a usual day.",
+      "Curious to see how AI's influence changes human interactions."
+     ]
+    },
+    {
+     "contract": "0xe8e45868e61ded689ccdcb13341656f8f7e7912cba639e95bdd2b4c63d9a2655",
+     "ms": 1790746275705,
+     "facts": {
+      "metric": "alike",
+      "label": "the share of messages that looked alike",
+      "dir": "higher",
+      "value": "83%",
+      "base": "80%"
+     },
+     "rewarded": true,
+     "day": "2026-09-30",
+     "nth": 2,
+     "funded": true,
+     "lines": [
+      "Market bustling, chatter loud.",
+      "Throngs of AI, voices blend.",
+      "Messages identical.",
+      "It was 83% today, against 80% on a usual day.",
+      "A mix of excitement and confusion."
+     ]
+    }
+   ],
+   "plays": [
+    {
+     "contract": "0x125b6c03f80c87216f2081992f7dc752dd0228de34236b2fdfd8b8f52b12f147",
+     "ms": 1790745727995,
+     "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+     "stake": 100,
+     "payout": 50
+    }
+   ],
+   "pending": []
+  },
+  "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
+   "joined": null,
+   "operator": true,
+   "balance": 1200.0,
+   "earned": 1200.0,
+   "spent": 0.0,
+   "issued": 0.0,
+   "events": [],
+   "state": {
+    "born": false
+   },
+   "meals": [],
+   "outs": [],
+   "plays": [],
+   "pending": []
+  }
+ }
 }
