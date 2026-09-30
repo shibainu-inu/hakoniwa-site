@@ -53,7 +53,9 @@ h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
 .stage.plain{height:190px;display:flex;align-items:center;justify-content:center;background:var(--r-wall)}
 .stage.plain svg{display:block}
 .stage.plain.short{height:120px}
-.stage .say{position:absolute;z-index:2;top:14px;left:50%;max-width:82%;background:#fff;color:#16151c;border:1px solid var(--line);border-radius:14px;padding:8px 12px;font-size:14px;font-weight:600;box-shadow:0 6px 18px rgba(22,21,28,.12);transform:translateX(-50%);animation:pop .55s cubic-bezier(.2,1.5,.4,1) both}
+/* ひとこと: 部屋の下に出す（HAKO や部屋を隠さない）。しっぽは上の HAKO へ */
+.say{position:relative;width:fit-content;max-width:94%;margin:12px auto 2px;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:8px 14px;font-size:14px;font-weight:600;line-height:1.5;box-shadow:var(--shadow);animation:pop .55s cubic-bezier(.2,1.5,.4,1) both}
+.say::before{content:"";position:absolute;left:50%;top:-7px;width:12px;height:12px;margin-left:-6px;background:var(--card);border-left:1px solid var(--line);border-top:1px solid var(--line);transform:rotate(45deg)}
 .stage .pos svg.bowl{position:absolute;left:108%;bottom:-2%;width:40%;height:auto}
 /* 動き（D-112）: ドット絵のまま、伸び縮み・影・粒で作り込む。ゆっくり */
 .pos .shadow{position:absolute;left:6%;right:6%;bottom:-4%;height:10%;border-radius:50%;background:var(--r-shade);animation:shade 5s ease-in-out infinite}
@@ -98,7 +100,7 @@ h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
 @keyframes fall{0%,55%{opacity:0;transform:translateY(-420%)}65%{opacity:1}100%{opacity:0;transform:translateY(-120%)}}
 @keyframes glow{0%,100%{opacity:.16;transform:scale(1)}50%{opacity:.3;transform:scale(1.08)}}
 @keyframes mote{0%{opacity:0;transform:translate(0,0)}15%{opacity:.5}85%{opacity:.35}100%{opacity:0;transform:translate(6cqw,-14cqw)}}
-@keyframes pop{from{opacity:0;transform:translateX(-50%) translateY(6px) scale(.92)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+@keyframes pop{from{opacity:0;transform:translateY(-6px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes fill{from{transform:scaleY(.3);opacity:.3}to{transform:none;opacity:1}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
