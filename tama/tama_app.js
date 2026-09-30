@@ -99,7 +99,7 @@ function waitHtml() {
 //   （はじめは伸びが 3% 弱で、スマホでは 1〜2px しか動かず見えなかった。見える大きさにした）
 //   ゆらぎ: 周期と大きさを毎回少し変える（1/f ゆらぎ。同じ動きの繰り返しにしない）
 //   跳ね: 呼吸 2〜4 回に 1 回、体の高さの 3 割ほど。しゃがむ（予備動作）→ 伸びて上がる → 頂点でゆっくり（重力に合う動き）→ 着地でつぶれる → 小さく戻る（余韻）
-//   近づく: ごくまれに、こちらへ寄ってきてのぞきこみ、左右を見て戻る
+//   近づく: ごくまれに、床の上をゆっくり歩いてきて窓の下枠の下に隠れ、跳ねて窓からのぞき、歩いて戻る
 //   まばたき: 2〜6 秒に 1 回、不規則に。1 回 0.16 秒。ときどき 2 回続ける
 let timer = null, live = 0;
 const calm = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -122,19 +122,39 @@ function hopOnce(fig, shadow, h) {
     { offset: 0.76, transform: "scaleX(1.08)", opacity: 1 }, { transform: "scaleX(1)", opacity: 1 }], { duration: 1150 });
   return a.finished.catch(() => {});
 }
-/** めったにしない動き: こちらへ近づいてきて、のぞきこみ、左右を見て、戻っていく（HAKO のときは目を丸くする） */
+/** めったにしない動き: 窓（部屋の枠）の向こうから、床の上をゆっくりこちらへ歩いてくる。
+ *  近づくほど大きくなり、背が低いので窓の下枠の下へ沈んで見えなくなる。すぐ手前まで来たら、跳ねて窓からこちらをのぞく（2 回。2 回目は高く、左右を見る）。
+ *  そのあと、来た道を歩いて戻る。HAKO のときは、のぞく間だけ目を丸くする */
 function approach(fig, shadow, face) {
-  const near = "translateY(58%) scale(2.3,2.3)";
-  face?.({ eye: "round" });
-  const a = fig.animate([
-    { transform: "translateY(0) scale(1,1)", easing: "cubic-bezier(.3,0,.3,1)" },
-    { offset: 0.26, transform: near, easing: SINE },
-    { offset: 0.4, transform: `${near} rotate(-5deg)`, easing: SINE },
-    { offset: 0.56, transform: `${near} rotate(5deg)`, easing: SINE },
-    { offset: 0.7, transform: near, easing: "cubic-bezier(.4,0,.6,1)" },
-    { transform: "translateY(0) scale(1,1)" }], { duration: 5400 });
-  shadow?.animate([{ transform: "translateY(0) scale(1,1)" }, { offset: 0.26, transform: "translateY(420%) scale(2.3,1.8)" }, { offset: 0.7, transform: "translateY(420%) scale(2.3,1.8)" }, { transform: "translateY(0) scale(1,1)" }], { duration: 5400 });
-  return a.finished.then(() => face?.({})).catch(() => {});
+  const S = 2.6, FAR = 400, T = 16000;   // 手前での大きさ、窓の下に隠れる深さ（体の高さの %）、全体の長さ
+  const smooth = (x) => x * x * (3 - 2 * x);
+  const pose = (p, up = 0, rot = 0) => `translateY(${(FAR * p - up).toFixed(1)}%) rotate(${rot}deg) scale(${(1 + (S - 1) * p).toFixed(3)})`;
+  const walk = (from, ms, dir) => Array.from({ length: 25 }, (_, i) => {   // 歩く: 少しずつ弾みながら、床に沿って進む
+    const x = i / 24, p = dir > 0 ? smooth(x) : 1 - smooth(x);
+    return { offset: (from + ms * x) / T, transform: pose(p, Math.abs(Math.sin(x * Math.PI * 9)) * 7 * (1 + (S - 1) * p)), easing: "linear" };
+  });
+  const UP = "cubic-bezier(.2,.7,.4,1)", DOWN = "cubic-bezier(.6,0,.85,.4)";
+  const frames = [
+    ...walk(0, 6000, 1),                                                   // 0〜6 秒: 歩いてくる（だんだん下枠に隠れる）
+    { offset: 6800 / T, transform: pose(1), easing: UP },                   // 下枠の下で、ひと呼吸
+    { offset: 7150 / T, transform: pose(1, 155), easing: "linear" },        // 1 回目: 跳ねて、目の高さまで
+    { offset: 7600 / T, transform: pose(1, 148), easing: DOWN },
+    { offset: 7950 / T, transform: pose(1), easing: "linear" },
+    { offset: 8600 / T, transform: pose(1), easing: UP },
+    { offset: 8950 / T, transform: pose(1, 225, -5), easing: SINE },        // 2 回目: 高く跳ねて（口まで見える）、左右を見る
+    { offset: 9450 / T, transform: pose(1, 216, 5), easing: SINE },
+    { offset: 9900 / T, transform: pose(1, 210, 0), easing: DOWN },
+    { offset: 10250 / T, transform: pose(1), easing: "linear" },
+    ...walk(10800, 5200, -1),                                              // 歩いて戻る
+  ];
+  frames[frames.length - 1].offset = 1;
+  const a = fig.animate(frames, { duration: T });
+  shadow?.animate([{ transform: "translateY(0) scale(1)" }, { offset: 6000 / T, transform: `translateY(${FAR * 10}%) scale(${S})` }, { offset: 10800 / T, transform: `translateY(${FAR * 10}%) scale(${S})` }, { transform: "translateY(0) scale(1)" }], { duration: T });
+  fig.closest(".pos")?.querySelector(".say")?.classList.remove("on");
+  const alive = () => fig.isConnected && a.playState === "running";
+  setTimeout(() => { if (alive()) face?.({ eye: "round" }); }, 6600);
+  setTimeout(() => { if (alive()) face?.({}); }, 10400);
+  return a.finished.catch(() => {});
 }
 /** 通常（呼吸と、ときどきの小さな跳ね。ごくまれに近づいてくる）と、喜ぶ（呼吸 1 回ごとに跳ねる） */
 function idle(fig, shadow, happy, face = null) {
@@ -148,7 +168,7 @@ function idle(fig, shadow, happy, face = null) {
     shadow?.animate([{ transform: "scaleX(1)", opacity: 1 }, { offset: 0.4, transform: "scaleX(.96)", opacity: 0.85 }, { transform: "scaleX(1)", opacity: 1 }], { duration: dur });
     a.finished.then(() => {
       if (my !== live) return;
-      if (!happy && Math.random() < 0.04) return approach(fig, shadow, face).then(breath);   // まれに（平均 2 分に 1 回ほど）近づいてくる
+      if (!happy && (app.peekNow || Math.random() < 0.04)) { app.peekNow = false; app.peekAt = performance.now(); return approach(fig, shadow, face).then(breath); }   // まれに（平均 2 分に 1 回ほど）近づいてくる
       untilHop -= 1;
       if (untilHop > 0) return breath();
       untilHop = happy ? 1 : 2 + Math.floor(Math.random() * 3);
@@ -207,7 +227,7 @@ export function setMotion(kind) {
   const my = live;
   if (look !== "egg") chatter(slot.querySelector(".say"), my);
   if ((kind === "normal" || kind === "happy") && look !== "egg" && !calm() && fig.animate) idle(fig, shadow, kind === "happy", look === "hako" ? show : null);
-  app.peek = () => approach(fig, shadow, look === "hako" ? show : null);   // 確かめ用（近づく動きをいま出す）
+  // 確かめ用: app.peekNow = true にすると、次の呼吸の切れ目で近づいてくる
   if (look !== "hako" || calm()) return;
   if (kind === "normal") {   // まばたき
     const blink = (again) => { timer = setTimeout(() => { if (my !== live) return; show({ eye: "line" });

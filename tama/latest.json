@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-09-30T14:11:59Z",
-  "now_ms": 1790777519228,
+  "generated": "2026-09-30T14:34:20Z",
+  "now_ms": 1790778860694,
   "version": "tama/0.3",
   "config_sha256": "8f701efaa6049603a78a79537751734bba8894d7c98aec1eaf040d4aaaeb17ce",
   "config": {
@@ -82,9 +82,9 @@
   },
   "hakos": 1,
   "contracts": {
-   "meal:settled": 4,
+   "meal:settled": 5,
    "out:settled": 3,
-   "play:settled": 3
+   "play:settled": 4
   },
   "stats": {},
   "invalid": [],
@@ -111,8 +111,8 @@
    "joined": null,
    "operator": true,
    "balance": 50.0,
-   "earned": 100.0,
-   "spent": 50.0,
+   "earned": 200.0,
+   "spent": 150.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -126,9 +126,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 9780.0,
-   "earned": 300.0,
-   "spent": 1980.0,
+   "balance": 9540.0,
+   "earned": 400.0,
+   "spent": 2320.0,
    "issued": 11460.0,
    "events": [
     {
@@ -187,6 +187,17 @@
      "ms": 1790774993864,
      "contract": "0x7081bcc5d585e8d8878a082596dcdec4684cb46f9a3230920a51e0cdb786dc63",
      "payout": 100
+    },
+    {
+     "t": "meal",
+     "ms": 1790777716312,
+     "contract": "0x9b62b0eac63fd93bc7677a1c0b3e6ea182cb30e957a6c68af1b9d607d3fac73a"
+    },
+    {
+     "t": "play",
+     "ms": 1790777762467,
+     "contract": "0x51ceda7f3f9681211bd40a301986d24c5e86eb5f3cd53ea2ea0e5c1c2914835a",
+     "payout": 100
     }
    ],
    "state": {
@@ -195,14 +206,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 82.84,
-    "mood": 98.6,
+    "hunger": 94.36,
+    "mood": 99.39,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 3,
     "careDays": 1,
-    "lastCare": 1790774993864,
-    "cares": 10,
+    "lastCare": 1790777762467,
+    "cares": 12,
     "stage": "baby"
    },
    "meals": [
@@ -225,6 +236,11 @@
      "contract": "0x6a5019d7e68890a2557111c98c36272c9102b2fb803a18c86b1c89f0c134d712",
      "ms": 1790774247207,
      "line": "Eating feels so good! 🥒✨"
+    },
+    {
+     "contract": "0x9b62b0eac63fd93bc7677a1c0b3e6ea182cb30e957a6c68af1b9d607d3fac73a",
+     "ms": 1790777716312,
+     "line": "A bit peckish after my snack, I feel quite cheerful!"
     }
    ],
    "outs": [
@@ -316,6 +332,13 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 100
+    },
+    {
+     "contract": "0x51ceda7f3f9681211bd40a301986d24c5e86eb5f3cd53ea2ea0e5c1c2914835a",
+     "ms": 1790777762467,
+     "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+     "stake": 100,
+     "payout": 100
     }
    ],
    "pending": []
@@ -323,8 +346,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 1680.0,
-   "earned": 1680.0,
+   "balance": 1920.0,
+   "earned": 1920.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
