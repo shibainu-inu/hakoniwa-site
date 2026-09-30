@@ -67,7 +67,7 @@ h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
 .m-sad .hako{animation:droop 7s ease-in-out infinite;filter:saturate(.55)}
 .m-eat .hako{animation:chew 1.1s ease-in-out infinite}
 .egg,.m-reborn .hako{transform-origin:50% 100%;animation:rock 3.6s ease-in-out infinite}
-.m-normal.s-egg .hako{animation:rock-rest 7s ease-in-out infinite}
+.m-normal.s-egg .hako{animation:rock-rest 5s ease-in-out infinite}
 .ghost{opacity:.8;animation:drift 9s ease-in-out infinite}
 .fx{position:absolute;left:0;right:0;bottom:100%;height:0;pointer-events:none}
 .fx i{position:absolute;bottom:0;width:16%;aspect-ratio:7/6;opacity:0;background:var(--play);clip-path:polygon(14% 0,43% 0,43% 17%,57% 17%,57% 0,86% 0,86% 17%,100% 17%,100% 50%,86% 50%,86% 67%,71% 67%,71% 83%,57% 83%,57% 100%,43% 100%,43% 83%,29% 83%,29% 67%,14% 67%,14% 50%,0 50%,0 17%,14% 17%);animation:float 2.6s ease-out infinite}
@@ -94,10 +94,10 @@ h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
 .away{position:absolute;z-index:1;left:0;right:0;top:30%;text-align:center;color:var(--muted);font-weight:700;font-size:13px}.away svg{display:inline-block}.away p{margin:4px 0 0}.away .sign{width:9cqw;height:auto}
 @keyframes breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(.985,1.035)}}
 @keyframes shade{50%{transform:scaleX(.95);opacity:.85}}
-@keyframes droop{0%,100%{transform:scale(1,1)}50%{transform:scale(1.02,.96) rotate(-1.5deg)}}
-@keyframes chew{0%,100%{transform:scale(1,1)}50%{transform:scale(1.035,.965)}}
+@keyframes droop{0%,100%{transform:scale(1,1)}50%{transform:scale(1.05,.92) rotate(-3deg)}}
+@keyframes chew{0%,100%{transform:scale(1,1)}50%{transform:scale(1.07,.93)}}
 @keyframes rock{0%,100%{transform:rotate(0)}25%{transform:rotate(-4deg)}75%{transform:rotate(4deg)}}
-@keyframes rock-rest{0%,62%,100%{transform:rotate(0)}70%{transform:rotate(-4deg)}79%{transform:rotate(3.5deg)}87%{transform:rotate(-2deg)}94%{transform:rotate(1deg)}}
+@keyframes rock-rest{0%,55%,100%{transform:rotate(0)}64%{transform:rotate(-8deg)}74%{transform:rotate(7deg)}84%{transform:rotate(-4deg)}93%{transform:rotate(2deg)}}
 @keyframes drift{0%,100%{transform:translate(0,0);opacity:.8}50%{transform:translate(8%,-9%);opacity:.62}}
 @keyframes float{0%{opacity:0;transform:translateY(0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-190%) scale(1)}}
 @keyframes fall{0%,55%{opacity:0;transform:translateY(-420%)}65%{opacity:1}100%{opacity:0;transform:translateY(-120%)}}
@@ -182,6 +182,89 @@ body[data-tab=garden] #story,body[data-tab=garden] #how,body[data-tab=story] #li
 .pills a.ping::after,.tabbar a.ping::after{content:"";display:inline-block;width:8px;height:8px;margin-left:6px;border-radius:50%;background:var(--play);animation:pip 1.4s ease-in-out infinite}.tabbar a{position:relative}.tabbar a.ping::after{position:absolute;top:6px;right:22%;margin:0}
 @media (min-width:901px){.pills a[data-tab-to=garden]{display:none}}   /* PC では庭のようすがいつも右に出ているので、切り替えに出さない */
 @media (max-width:480px){.top{gap:8px;padding:8px 12px}.top .right{gap:6px}.brand{font-size:19px;gap:6px}.top .chip{padding:5px 9px;font-size:12px}}   /* 狭い画面: 上の帯に 言語・明るさ・財布 が収まるように */
+/* 絵本（ストーリー・遊び方。D-117）: 場面ごとの動くドット絵。画面に入った場面（.in）だけ動く */
+.book{display:grid;gap:20px;margin-top:6px}
+.page{margin:0;opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.3,1)}
+.page.in{opacity:1;transform:none}
+.page .art{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:var(--r-wall);border:1px solid var(--line);container-type:inline-size}
+.book.small .page .art{aspect-ratio:16/7}
+.page .art::after{content:"";position:absolute;left:0;right:0;bottom:0;height:28%;background:var(--r-floor);border-top:2px solid var(--r-edge)}
+.page figcaption{margin-top:8px;font-size:14px;line-height:1.65;color:var(--muted)}
+.page figcaption b{color:var(--ink)}
+.page .sp{position:absolute;z-index:1;bottom:21%}
+.page .sp .mv{display:block;transform-origin:50% 100%}
+.page .sp svg{display:block;width:100%;height:auto}
+.page .ar{position:absolute;z-index:1;bottom:30%;font:700 5cqw/1 "JetBrains Mono",monospace;color:var(--r-dim);opacity:0}
+.page .tag{position:absolute;z-index:2;padding:.6cqw 1.8cqw;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:max(10px,3.2cqw);font-weight:600;color:var(--ink);opacity:0;box-shadow:var(--shadow)}
+/* 1 街と箱庭: 小さい顔の子たちが行き交う */
+.s-town .w1,.s-town .w2,.s-town .w3,.s-town .w4{left:0}
+.page.in.s-town .w1{animation:walk 11s linear infinite}.page.in.s-town .w2{animation:walk 15s linear -6s infinite}
+.page.in.s-town .w3{animation:walk-back 13s linear -2s infinite}.page.in.s-town .w4{animation:walk-back 18s linear -11s infinite}
+.s-town .w3,.s-town .w4{bottom:33%;opacity:.75}
+.page.in.s-town .sp[class*=" w"] .mv{animation:step .7s ease-in-out infinite}
+.s-town .plant{left:84%}.s-town .lamp{left:74%}
+/* 2 卵が届く */
+.s-egg .egg{left:42.5%}
+.page.in.s-egg .egg .mv{animation:egg-in 1.2s cubic-bezier(.5,0,.75,.4) both,rock-rest 5s ease-in-out 1.5s infinite}
+/* 3 育つ */
+.s-grow .g1{left:9%}.s-grow .g2{left:40%}.s-grow .g3{left:71%}.s-grow .a1{left:28%}.s-grow .a2{left:60%}
+.s-grow .sp .mv{opacity:0}
+.page.in.s-grow .g1 .mv{animation:popin .6s .2s both,rock-rest 5s 1s infinite}
+.page.in.s-grow .a1{animation:fadein .5s 1s both}
+.page.in.s-grow .g2 .mv{animation:popin .6s 1.5s both,breathe 3.6s 2.2s infinite}
+.page.in.s-grow .a2{animation:fadein .5s 2.3s both}
+.page.in.s-grow .g3 .mv{animation:popin .6s 2.8s both,hop2 2.6s 3.6s infinite}
+/* 4 ごはん → おでかけ → 記事 */
+.s-day .bowl,.h-out .bowl{left:7%}.s-day .sign,.h-out .sign{left:82%}.s-day .trip{left:21%}.h-out .trip{left:16%}
+.s-day .note,.h-out .note{left:83%;bottom:60%}.s-day .note .mv,.h-out .note .mv{opacity:0}
+.page.in.s-day .trip{animation:trip 9s ease-in-out infinite}.page.in.h-out .trip{animation:trip2 7s ease-in-out infinite}
+.page.in.s-day .trip .mv,.page.in.h-out .trip .mv{animation:step .8s ease-in-out infinite}
+.page.in.s-day .note .mv{animation:note 9s ease-in-out infinite}.page.in.h-out .note .mv{animation:note 7s ease-in-out infinite}
+.h-out .t3{left:60%;top:12%}.page.in.h-out .t3{animation:note 7s ease-in-out infinite}
+/* 5 街は実在する */
+.s-real .c0{left:5%}.s-real .c1{left:28%}.s-real .c2{left:51%}.s-real .c3{left:74%}
+.s-real .c4{left:16%}.s-real .c5{left:39%}.s-real .c6{left:62%}.s-real .c7{left:85%}
+.s-real .c0,.s-real .c1,.s-real .c2,.s-real .c3{bottom:36%;opacity:.7}
+.page.in.s-real .sp .mv{animation:step 1.6s ease-in-out infinite}
+.page.in.s-real .c1 .mv,.page.in.s-real .c4 .mv,.page.in.s-real .c6 .mv{animation-delay:-.5s}.page.in.s-real .c2 .mv,.page.in.s-real .c7 .mv{animation-delay:-1s}
+.s-real .t1{left:30%;top:9%}.s-real .t2{left:50%;top:9%}
+.page.in.s-real .t1{animation:popin .6s .6s both}.page.in.s-real .t2{animation:popin .6s 1.2s both}
+/* 6 お墓と生まれ変わり */
+.s-grave .tomb,.h-grave .tomb{left:20%}.s-grave .ghost,.h-grave .ghost{left:35%;bottom:40%;opacity:.8}.s-grave .a3,.h-grave .a3{left:53%}.s-grave .again,.h-grave .again{left:66%}
+.s-grave .again .mv,.h-grave .again .mv{opacity:0}
+.page.in .ghost .mv{animation:drift 7s ease-in-out infinite}
+.page.in .a3{animation:fadein .6s 1.2s both}
+.page.in .again .mv{animation:popin .7s 2s both,rock-rest 5s 2.8s infinite}
+/* 遊び方 */
+.h-egg .e1,.h-egg .e2{left:43%}.h-egg .e2 .mv{opacity:0}
+.page.in.h-egg .e1 .mv{animation:swap-a 6s ease-in-out infinite}.page.in.h-egg .e2 .mv{animation:swap-b 6s ease-in-out infinite}
+.h-meal .eat{left:30%}.h-meal .bowl{left:50%}
+.page.in.h-meal .eat .mv{animation:chew 1.1s ease-in-out infinite}
+.mm{position:absolute;z-index:2;left:30%;top:14%;width:40%;display:grid;grid-template-columns:repeat(10,1fr);gap:1cqw}
+.mm i{height:3cqw;border-radius:1cqw;background:var(--line)}
+.page.in .mm i{animation:seg 5s ease-in-out infinite;animation-delay:calc(var(--k) * .28s)}
+.h-play .p1{left:16%}.h-play .p2{left:70%}.h-play .coin{left:47%;bottom:50%}.h-play .t4{left:40%;top:10%}
+.page.in.h-play .coin .mv{animation:coin 1.6s cubic-bezier(.4,0,.4,1) infinite}
+.page.in.h-play .p1 .mv{animation:hop2 3.2s .4s infinite}.page.in.h-play .p2 .mv{animation:hop2 3.2s 2s infinite}
+.page.in.h-play .t4{animation:popin .6s 1s both}
+.h-room .f1{left:3%}.h-room .f2{left:24%}.h-room .f3{left:35%}.h-room .home{left:44%}.h-room .f4{left:64%}.h-room .f5{left:79%}
+.h-room .sp:not(.home) .mv{opacity:0}
+.page.in.h-room .f1 .mv{animation:popin .5s .4s both}.page.in.h-room .f2 .mv{animation:popin .5s 1.1s both}.page.in.h-room .f3 .mv{animation:popin .5s 1.8s both}
+.page.in.h-room .f4 .mv{animation:popin .5s 2.5s both}.page.in.h-room .f5 .mv{animation:popin .5s 3.2s both}
+.page.in.h-room .home .mv{animation:breathe 3.6s ease-in-out infinite}
+@keyframes walk{from{transform:translateX(-14cqw)}to{transform:translateX(108cqw)}}
+@keyframes walk-back{from{transform:translateX(108cqw)}to{transform:translateX(-14cqw)}}
+@keyframes step{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(-9%) scale(.97,1.04)}}
+@keyframes egg-in{0%{transform:translateY(-60cqw)}62%{transform:translateY(0) scale(1.12,.86)}80%{transform:translateY(-12%) scale(.97,1.04)}100%{transform:none}}
+@keyframes popin{0%{opacity:0;transform:translateY(14%) scale(.7)}70%{opacity:1;transform:translateY(-4%) scale(1.06)}100%{opacity:1;transform:none}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes hop2{0%,55%,100%{transform:translateY(0) scale(1,1)}62%{transform:translateY(0) scale(1.08,.9)}76%{transform:translateY(-32%) scale(.96,1.05)}90%{transform:translateY(0) scale(1.08,.91)}}
+@keyframes trip{0%,20%{left:21%}45%,80%{left:62%}100%{left:21%}}
+@keyframes trip2{0%,15%{left:16%}45%,80%{left:60%}100%{left:16%}}
+@keyframes note{0%,48%{opacity:0;transform:translateY(20%) scale(.7)}56%,80%{opacity:1;transform:none}90%,100%{opacity:0;transform:translateY(-10%)}}
+@keyframes swap-a{0%,40%{opacity:1;transform:rotate(0)}30%{transform:rotate(-6deg)}36%{transform:rotate(6deg)}50%,90%{opacity:0}100%{opacity:1}}
+@keyframes swap-b{0%,40%{opacity:0;transform:scale(.8)}52%,88%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes seg{0%,8%{background:var(--line)}20%,78%{background:var(--good)}92%,100%{background:var(--line)}}
 /* 手ざわり */
 .btn{transition:transform .16s ease,box-shadow .2s ease,opacity .2s}.btn:not(:disabled):not(.off):hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(22,21,28,.14)}.btn:not(:disabled):active{transform:scale(.97)}
 .bar i{transform-origin:50% 100%;transition:background .5s}.bar i.on{animation:fill .5s ease both;animation-delay:calc(var(--k,0)*45ms)}

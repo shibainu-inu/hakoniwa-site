@@ -67,8 +67,8 @@ export function hakoRows(pub, over = {}) {
 }
 // 幽霊: お墓のあいだの姿。縦長の体・線の目・口なし。足は無く、すそが波。色と飾りはその子のまま
 export const GHOST = { body: "tall", eye: "line", mouth: "none", pattern: "plain", leg: "float", eye_gap: 1 };
-export function ghostRows(pub) {
-  const [rows, d] = dotRows(pub, { ...GHOST, accessory: tamaAccessory(pub) });
+export function ghostRows(pub, accessory = tamaAccessory(pub)) {
+  const [rows, d] = dotRows(pub, { ...GHOST, accessory });
   const w = rows[0].length;
   const hem = (on) => Array.from({ length: w }, (_, x) => (on(x) ? "#" : " ")).join("");
   rows[rows.length - 1] = hem((x) => x === 0 || x === w - 1 || x % 4 === 3 || x % 4 === 0);
@@ -117,6 +117,15 @@ export function spriteSvg(did, stage = "hako", px = 8, over = {}, theme = "css")
 }
 /** 小さい顔の SVG（did が読めなければ卵の色） */
 export function faceSvg(did, px = 2, theme = "css") { const p = pubOf(did); const [rows, color] = p ? faceRows(p) : [dotRows(ZERO, FACE)[0], EGG_COLOR]; return fig(rows, color, px, theme); }
+/** 絵本（ストーリー・遊び方）用の姿。DID は使わない。kind: egg | baby | hako（マスコット）| ghost | face（小さい顔の子）。color を省くとマスコットの色 */
+export function castSvg(kind, px = 4, color = ICON_COLOR, theme = "css") {
+  const rows = kind === "egg" ? EGG_ROWS
+    : kind === "baby" ? [...dotRows(ZERO, ICON)[0].slice(0, 2), ...pad(BABY_BODY, 18)]
+    : kind === "ghost" ? ghostRows(ZERO, "ribbon")[0]
+    : kind === "face" ? dotRows(ZERO, FACE)[0]
+    : dotRows(ZERO, ICON)[0];
+  return fig(rows, kind === "egg" ? EGG_COLOR : color, px, theme);
+}
 export function iconSvg(px = 2, theme = "css") { const [rows, color] = iconRows(); return fig(rows, color, px, theme); }
 /** 部屋の中に置くための行と色（tama_room.js が使う） */
 export function spriteRows(did, stage = "hako", over = {}) { return stageRows(pubFromDid(did), stage, over); }

@@ -95,9 +95,11 @@ function waitHtml() {
 }
 
 // ── 動き（D-112）。ドット絵のまま、見ていて落ち着く動きにする ──
-//   呼吸: 1 周およそ 5 秒（安静時の呼吸の速さ）。吸う 4 割・吐く 6 割。縦に伸びたぶん横を縮めて、体積を保つ
+//   呼吸: 1 周およそ 4 秒（安静時の呼吸の速さ）。吸う 4 割・吐く 6 割。縦に 6% ほど伸び、そのぶん横を縮めて体積を保つ。吸うたびに左右へ少し傾く
+//   （はじめは伸びが 3% 弱で、スマホでは 1〜2px しか動かず見えなかった。見える大きさにした）
 //   ゆらぎ: 周期と大きさを毎回少し変える（1/f ゆらぎ。同じ動きの繰り返しにしない）
-//   跳ね: しゃがむ（予備動作）→ 伸びて上がる → 頂点でゆっくり（重力に合う動き）→ 着地でつぶれる → 小さく戻る（余韻）
+//   跳ね: 呼吸 2〜4 回に 1 回、体の高さの 3 割ほど。しゃがむ（予備動作）→ 伸びて上がる → 頂点でゆっくり（重力に合う動き）→ 着地でつぶれる → 小さく戻る（余韻）
+//   近づく: ごくまれに、こちらへ寄ってきてのぞきこみ、左右を見て戻る
 //   まばたき: 2〜6 秒に 1 回、不規則に。1 回 0.16 秒。ときどき 2 回続ける
 let timer = null, live = 0;
 const calm = () => typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -116,25 +118,41 @@ function hopOnce(fig, shadow, h) {
     { offset: 0.76, transform: "translateY(0) scale(1.08,.91)", easing: "cubic-bezier(.3,.6,.4,1)" },  // 着地のつぶれ
     { offset: 0.9, transform: "translateY(0) scale(.985,1.02)", easing: SINE },                         // 余韻
     { transform: "translateY(0) scale(1,1)" }], { duration: 1150 });
-  shadow?.animate([{ transform: "scaleX(1)", opacity: 1 }, { offset: 0.2, transform: "scaleX(1.06)", opacity: 1 }, { offset: 0.52, transform: `scaleX(${1 - h * 1.6})`, opacity: 0.5 },
+  shadow?.animate([{ transform: "scaleX(1)", opacity: 1 }, { offset: 0.2, transform: "scaleX(1.06)", opacity: 1 }, { offset: 0.52, transform: `scaleX(${Math.max(0.45, 1 - h * 1.2)})`, opacity: 0.5 },
     { offset: 0.76, transform: "scaleX(1.08)", opacity: 1 }, { transform: "scaleX(1)", opacity: 1 }], { duration: 1150 });
   return a.finished.catch(() => {});
 }
-/** 通常（呼吸と、ときどきの小さな跳ね）と、喜ぶ（呼吸 1 回ごとに跳ねる） */
-function idle(fig, shadow, happy) {
+/** めったにしない動き: こちらへ近づいてきて、のぞきこみ、左右を見て、戻っていく（HAKO のときは目を丸くする） */
+function approach(fig, shadow, face) {
+  const near = "translateY(58%) scale(2.3,2.3)";
+  face?.({ eye: "round" });
+  const a = fig.animate([
+    { transform: "translateY(0) scale(1,1)", easing: "cubic-bezier(.3,0,.3,1)" },
+    { offset: 0.26, transform: near, easing: SINE },
+    { offset: 0.4, transform: `${near} rotate(-5deg)`, easing: SINE },
+    { offset: 0.56, transform: `${near} rotate(5deg)`, easing: SINE },
+    { offset: 0.7, transform: near, easing: "cubic-bezier(.4,0,.6,1)" },
+    { transform: "translateY(0) scale(1,1)" }], { duration: 5400 });
+  shadow?.animate([{ transform: "translateY(0) scale(1,1)" }, { offset: 0.26, transform: "translateY(420%) scale(2.3,1.8)" }, { offset: 0.7, transform: "translateY(420%) scale(2.3,1.8)" }, { transform: "translateY(0) scale(1,1)" }], { duration: 5400 });
+  return a.finished.then(() => face?.({})).catch(() => {});
+}
+/** 通常（呼吸と、ときどきの小さな跳ね。ごくまれに近づいてくる）と、喜ぶ（呼吸 1 回ごとに跳ねる） */
+function idle(fig, shadow, happy, face = null) {
   const my = live, noise = pink();
-  let untilHop = happy ? 1 : 4 + Math.floor(Math.random() * 4);
+  let untilHop = happy ? 1 : 2 + Math.floor(Math.random() * 2), side = 1;
   const breath = () => {
     if (my !== live || !fig.isConnected) return;
-    const dur = (happy ? 1600 : 5000) * (1 + 0.18 * noise()), amp = 0.028 * (1 + 0.35 * noise());
-    const a = fig.animate([{ transform: "scale(1,1)", easing: SINE }, { offset: 0.4, transform: `scale(${1 - amp * 0.8},${1 + amp})`, easing: SINE }, { transform: "scale(1,1)" }], { duration: dur });
+    const dur = (happy ? 1600 : 4200) * (1 + 0.18 * noise()), amp = 0.06 * (1 + 0.3 * noise()), lean = 1.6 * side * (1 + 0.4 * noise());
+    side = -side;   // 息を吸うたびに、左右へ交互に少し傾く（ゆれ）
+    const a = fig.animate([{ transform: "rotate(0deg) scale(1,1)", easing: SINE }, { offset: 0.4, transform: `rotate(${lean}deg) scale(${1 - amp * 0.8},${1 + amp})`, easing: SINE }, { transform: "rotate(0deg) scale(1,1)" }], { duration: dur });
     shadow?.animate([{ transform: "scaleX(1)", opacity: 1 }, { offset: 0.4, transform: "scaleX(.96)", opacity: 0.85 }, { transform: "scaleX(1)", opacity: 1 }], { duration: dur });
     a.finished.then(() => {
       if (my !== live) return;
+      if (!happy && Math.random() < 0.04) return approach(fig, shadow, face).then(breath);   // まれに（平均 2 分に 1 回ほど）近づいてくる
       untilHop -= 1;
       if (untilHop > 0) return breath();
-      untilHop = happy ? 1 : 3 + Math.floor(Math.random() * 5);
-      hopOnce(fig, shadow, happy ? 0.24 : 0.12).then(breath);
+      untilHop = happy ? 1 : 2 + Math.floor(Math.random() * 3);
+      hopOnce(fig, shadow, happy ? 0.45 : 0.3).then(breath);
     }).catch(() => {});
   };
   breath();
@@ -188,7 +206,8 @@ export function setMotion(kind) {
   show(frames[0]);
   const my = live;
   if (look !== "egg") chatter(slot.querySelector(".say"), my);
-  if ((kind === "normal" || kind === "happy") && look !== "egg" && !calm() && fig.animate) idle(fig, shadow, kind === "happy");
+  if ((kind === "normal" || kind === "happy") && look !== "egg" && !calm() && fig.animate) idle(fig, shadow, kind === "happy", look === "hako" ? show : null);
+  app.peek = () => approach(fig, shadow, look === "hako" ? show : null);   // 確かめ用（近づく動きをいま出す）
   if (look !== "hako" || calm()) return;
   if (kind === "normal") {   // まばたき
     const blink = (again) => { timer = setTimeout(() => { if (my !== live) return; show({ eye: "line" });
@@ -322,7 +341,7 @@ function renderChrome() {
       try { localStorage.setItem("tama_theme", document.documentElement.dataset.theme); } catch { /* 覚えないだけ */ }
     };
   }
-  renderGarden(app.stats, app.moods, app.box);
+  renderGarden(app.stats, app.moods, app.box, app.F);
 }
 // ── 部屋とシェア（D-92、D-98。家具は tama_furniture.json、解放は仮 U-37） ──
 // 部屋にただよう小さな粒（空気の感じ）

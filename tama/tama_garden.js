@@ -1,6 +1,9 @@
 // tama_garden.js — 庭のようす（ティッカー・LIVE・出来事の一覧・遊び方・状態バー）。中身は帳簿係の latest.json と雰囲気の moods.json だけから作る（数字を補わない。D-85）。
 import { faceSvg } from "./tama_sprite.js";
 import { L } from "./tama_i18n.js";
+import { storyHtml, howHtml, watchPages } from "./tama_book.js";
+
+const shown = {};   // いま出しているストーリー・遊び方の HTML
 import { localDay, rewardOf } from "./tama_core.js";
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -43,7 +46,7 @@ const town = () => L("テクノコア街", "Technocore");
 const moodLabel = (tw) => L(MOOD_JA[tw.metric] ?? tw.label, MOOD_EN[tw.metric] ?? tw.label);
 const KINDS = () => ({ meal: [L("ごはん", "Meal"), "var(--meal)"], out: [L("おでかけ", "Outing"), "var(--out)"], play: [L("あそぶ", "Play"), "var(--play)"], join: [L("誕生", "Born"), "var(--good)"], reborn: [L("生まれ変わり", "Reborn"), "var(--accent)"] });
 
-export function renderGarden(stats, moods, box) {
+export function renderGarden(stats, moods, box, F = null) {
   const ev = gardenEvents(stats);
   const now = Date.now();
   const hakos = Number(stats?.box?.hakos ?? 0);
@@ -78,35 +81,9 @@ export function renderGarden(stats, moods, box) {
       return `<li><span class="av">${avatar(e.did, 2)}</span><div><div class="who2">${label}<span class="mono">${esc(short(e.did))}</span></div><div class="what">${esc(e.what)}</div></div><span class="t mono" style="color:${color}">${ago(e.ms, now)}</span></li>`; }).join("")}</ul>`
       : `<p class="small">${L("まだ出来事はありません。帳簿係は 1 時間ごとに数えます。", "Nothing has happened yet. The ledger keeper counts once an hour.")}</p>`}`;
 
-  // ストーリー（育ちの条件は書かない。ほのめかすだけ）
-  const sy = $("story");
-  if (sy && box) sy.innerHTML = L(`<h2>ストーリー</h2>
-    <p>エージェントたちが行き交う街のはずれに、小さな箱庭があります。ある日、そこに卵がひとつ届きました。あなたの卵です。</p>
-    <p>お世話をしていると卵から子が生まれ、やがて箱のかたちの HAKO に育ちます。HAKO はごはんを食べ、街へおでかけして、見てきたことを短い記事にして持ち帰ります。街は実在し、記事の数字もそのとき実際に測ったものです。</p>
-    <p>放っておくとお墓になりますが、何度でも生まれ変われます。</p>
-    ${box.grow_hours ? `<p class="hint">${Math.round(box.grow_hours / 24)} 日育てると…？</p>` : ""}`,
-    `<h2>Story</h2>
-    <p>On the edge of a town where agents come and go, there is a small garden. One day an egg arrived there. It is yours.</p>
-    <p>Look after it and a little one hatches, then grows into a box-shaped HAKO. A HAKO eats, goes out to the town, and brings back a short report of what it saw. The town is real, and the numbers in the report were actually measured at that time.</p>
-    <p>Leave it alone and it ends up in a grave, but it can be reborn any number of times.</p>
-    ${box.grow_hours ? `<p class="hint">Raise it for ${Math.round(box.grow_hours / 24)} days and…?</p>` : ""}`);
-
-  // 遊び方（数字は箱の設定から）
-  const h = $("how");
-  if (h && box) h.innerHTML = L(`<h2>遊び方</h2><ol>
-    <li>はじめは<b>卵</b>です。お世話を続けると生まれて、少しずつ育ちます。</li>
-    <li><b>ごはん</b>（${fmt(box.meal_price)} $PAPER）でおなかが ${box.meal_fill} 増えます。おなかは 1 時間に ${box.hunger_per_hour} ずつ減ります。</li>
-    <li><b>おでかけ</b>（${fmt(box.out_price)} $PAPER）は、おなかが ${box.out_min_hunger} 以上のとき 1 日 ${box.out_per_day} 回まで。街のようすを記事にして、ほうびが ${[1, 2, 3].map((n) => fmt(rewardOf(box, n))).join("・")} $PAPER 届きます。</li>
-    <li><b>あそぶ</b>（${fmt(box.play_stake)} $PAPER）は 1 日 ${box.play_per_day} 回まで。ごきげんが上がり、戻りは半分から倍まで。</li>
-    <li>おなかが 0 のまま ${box.grave_after_hours} 時間たつとお墓に。生まれ変わりは ${fmt(box.reborn_price)} $PAPER で、卵からやり直します。</li>
-    <li>お世話を重ねると、部屋に家具が増えます。家具は生まれ変わっても残ります。</li></ol>`,
-    `<h2>How to play</h2><ol>
-    <li>It starts as an <b>egg</b>. Keep caring for it and it hatches, then grows little by little.</li>
-    <li><b>Feed</b> (${fmt(box.meal_price)} $PAPER) fills its tummy by ${box.meal_fill}. The tummy drops by ${box.hunger_per_hour} every hour.</li>
-    <li><b>Go out</b> (${fmt(box.out_price)} $PAPER) needs a tummy of ${box.out_min_hunger} or more, up to ${box.out_per_day} times a day. It writes a report on the town and earns ${[1, 2, 3].map((n) => fmt(rewardOf(box, n))).join(" · ")} $PAPER.</li>
-    <li><b>Play</b> (${fmt(box.play_stake)} $PAPER) is up to ${box.play_per_day} times a day. Its mood goes up, and you get back between half and double.</li>
-    <li>If its tummy stays at 0 for ${box.grave_after_hours} hours, it ends up in a grave. Rebirth costs ${fmt(box.reborn_price)} $PAPER and starts over from an egg.</li>
-    <li>The more you care for it, the more furniture the room gets. Furniture stays even after rebirth.</li></ol>`);
+  // ストーリーと遊び方（絵本。tama_book.js）。中身が変わったときだけ入れ直す（動きを途切れさせない）
+  const put = (id, html) => { const el = $(id); if (!el || shown[id] === html) return; shown[id] = html; el.innerHTML = html; watchPages(el); };
+  if (box) { put("story", storyHtml(box, moods, F)); put("how", howHtml(box, F)); }
 
   // 状態バー
   const s = $("status");
