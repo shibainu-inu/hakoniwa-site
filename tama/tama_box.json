@@ -1,0 +1,72 @@
+{
+ "box": "tama",
+ "version": "tama/0.2",
+ "venue": "https://technocore.chat",
+ "offers_room": "tclk-offers",
+ "board": "tama-board",
+ "accept_ns": "tama-acc",
+ "day_utc_offset_min": 540,
+ "initial_paper": 10000,
+ "hunger_max": 100,
+ "hunger_start": 80,
+ "hunger_per_hour": 2,
+ "mood_max": 100,
+ "mood_start": 60,
+ "mood_per_hour": 2,
+ "grave_after_hours": 24,
+ "reborn_price": 1000,
+ "reborn_hunger": 30,
+ "meal_price": 240,
+ "meal_fill": 40,
+ "meal_lines": 1,
+ "out_price": 240,
+ "out_rewards": [
+  760,
+  460,
+  240
+ ],
+ "out_hunger": 30,
+ "out_lines": 5,
+ "out_model_lines": 4,
+ "out_fact_line": "It was {V} today, against {B} on a usual day.",
+ "out_per_day": 3,
+ "out_min_hunger": 30,
+ "play_stake": 100,
+ "play_mood": 20,
+ "play_hunger": 5,
+ "play_per_day": 5,
+ "play_table": [
+  [
+   40,
+   50
+  ],
+  [
+   30,
+   100
+  ],
+  [
+   20,
+   150
+  ],
+  [
+   10,
+   200
+  ]
+ ],
+ "expires_min": 10,
+ "claim_by_min": 30,
+ "refund_after_min": 60,
+ "line_max_chars": 140,
+ "fragment_words": 5,
+ "house_interval_sec": 15,
+ "issuer": "did:key:z6MkmG1MiumCr8Jk6vL5qt2A1XzEst6CVT5rwRHUHYwKPvqA",
+ "miners": [
+  "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T"
+ ],
+ "npcs": [
+  "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+  "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3"
+ ],
+ "meal_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after eating. Use the mood words given. No numbers, no names, no quotes.",
+ "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
+}
