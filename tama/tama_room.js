@@ -108,7 +108,7 @@ function wrap(text, max, rowsMax) {
   return out;
 }
 /** シェアの写真（1200×630）。部屋いっぱいの上に、切り抜きの記事が斜めに貼ってあり、そのすき間から HAKO が写り込もうとしている。
- *  下に、その HAKO の様子（おなか・ごきげん）とお世話の記録の札、左上にロゴ。数字はどれも、その時の帳簿と計算のまま（作らない）。
+ *  下に、その HAKO の様子（おなか・ごきげん）とお世話の記録の札、右下に小さくロゴ。Python の tama_room.scrap_svg と同じ絵（リンクを貼ったときの画像）。数字はどれも、その時の帳簿と計算のまま（作らない）。
  *  o = { stage, grave, hunger, mood, hungerMax, moodMax, streak, rebirths, lines（記事）, say（ひとこと）, day（今日の日付） } */
 export function scrapSvg(F, did, n, title, o = {}) {
   const W = 1200, H = 630, k = W / 480, floor = Math.round(300 * 0.62 * k) - 60;
