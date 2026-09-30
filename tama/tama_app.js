@@ -244,7 +244,7 @@ export function render() {
   app.motion = null; setMotion(motionOf(st));
   for (const b of document.querySelectorAll("#reborn")) b.onclick = reborn;
   const cam = $("snapshot"); if (cam) cam.onclick = () => snapshot(app.m, app.st);
-  const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say("鍵のファイルを保存しました。パスフレーズと別の場所にしまってください", false); } };
+  const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say("鍵ファイルを保存しました。パスフレーズと別の場所にしまってください", false); } };
   for (const b of document.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
   renderSaid(m.fold);
 }
@@ -295,7 +295,7 @@ function roomInfo(m, st) {
     ${next ? `<p class="small">次は <b>${esc(next.ja)}</b>（${esc(whenText(next))}）</p>` : ""}
     <div class="actions">
       <button class="btn sub" id="snapshot">HAKO をシェア</button>
-      <button class="btn sub" id="savekey">鍵のファイルを保存</button>
+      <button class="btn sub" id="savekey">鍵ファイルを保存</button>
     </div></div>`;
 }
 /** HAKO をシェア: 部屋・記事（無ければひとこと）・様子とお世話の記録・ロゴを 1 枚の写真にする。撮る → 写真が浮かび上がる → シェアか保存 */
@@ -372,13 +372,13 @@ function renderEgg() {
       <div class="stage plain short"><div class="egg">${spriteSvg(null, "egg", 5)}</div></div>
       <p class="label" style="margin-top:14px">NEW HAKO</p>
       <h2>HAKO を迎える</h2>
-      <p>このブラウザの中で鍵を作り、あなたの HAKO が生まれます。鍵は外に送りません。なくすと HAKO を動かせなくなるので、生まれたあとに鍵のファイルを保存してください。</p>
+      <p>このブラウザの中で鍵を作り、あなたの HAKO が生まれます。鍵は外に送りません。なくすと HAKO を動かせなくなるので、生まれたあとに鍵ファイルを保存してください。</p>
       <p class="note">はじめに ${fmt(app.box.initial_paper)} $PAPER を受け取ります。PAPER はこの箱庭の中だけの点数で、お金としての価値はありません。換金も売り買いもできません。</p>
       <label>パスフレーズ（鍵を開くときに使います）<span class="pw"><input id="p1" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="p1,p2" aria-label="パスフレーズを表示する">表示</button></span></label>
       <label>もう一度<span class="pw"><input id="p2" type="password" autocomplete="new-password"></span></label>
       <p id="why" class="why"></p>
       <div class="actions"><button class="btn" id="born" style="--c:var(--good)"><span class="dot" style="background:var(--good)"></span>生まれる</button></div>
-      <p class="small">鍵のファイルがあるときは <label class="link">ファイルから読み込む<input id="file" type="file" accept="application/json" hidden></label></p>
+      <p class="small">鍵ファイルがあるときは <label class="link">ファイルから読み込む<input id="file" type="file" accept="application/json" hidden></label></p>
     </section>`;
   eyes();
   $("born").onclick = register;
@@ -434,7 +434,7 @@ async function register() {
 async function importKey(ev) {
   try {
     const j = JSON.parse(await ev.target.files[0].text());
-    if (!K.isKeyFile(j)) return say("鍵のファイルではありません");
+    if (!K.isKeyFile(j)) return say("鍵ファイルではありません");
     K.saveRec(j); app.did = j.did; render();
   } catch (e) { say(`読めませんでした（${e.message}）`); }
 }
