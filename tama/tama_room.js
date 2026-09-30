@@ -1,6 +1,7 @@
 // tama_room.js — 部屋（D-92、U-37 は仮）と、シェアの額縁（D-98）。家具の絵と解放の条件は tama_furniture.json（Python の tama_room.py も同じものを読む）。
 // 部屋は見た目だけ（数字は動かさない）。解放は生涯の数で決める（生まれ変わっても部屋は残る。D-91）。
 import { spriteRows, iconRows, inside, lineColor, THEMES } from "./tama_sprite.js";
+import { L } from "./tama_i18n.js";
 
 export const FRAME = { bg: "#f4f1ea", ink: "#16151c", sub: "#55525e", edge: "#c9a181" };   // 額縁（明るい地）
 /** 出来事 → 生涯の数 {meals, outs, plays, days, rebirths} */
@@ -17,7 +18,8 @@ export function lifetime(events, box, localDay) {
 export const unlocked = (F, n) => F.items.filter((it) => (n[it.when[0]] ?? 0) >= it.when[1]);
 export const nextUnlock = (F, n) => F.items.find((it) => (n[it.when[0]] ?? 0) < it.when[1]) ?? null;
 const WHEN_JA = { meals: "ごはん", outs: "おでかけ", plays: "あそぶ", days: "お世話した日", rebirths: "生まれ変わり" };
-export const whenText = (it) => `${WHEN_JA[it.when[0]]} ${it.when[1]} ${it.when[0] === "days" ? "日" : "回"}`;
+const WHEN_EN = { meals: "meals", outs: "outings", plays: "plays", days: "care days", rebirths: "rebirths" };
+export const whenText = (it) => L(`${WHEN_JA[it.when[0]]} ${it.when[1]} ${it.when[0] === "days" ? "日" : "回"}`, `${it.when[1]} ${WHEN_EN[it.when[0]]}`);
 
 function dots(ox, oy, rows, px, color) {
   let d = "";
@@ -137,17 +139,17 @@ export function scrapSvg(F, did, n, title, o = {}) {
   const meter = (label, v, max, x) => { const on = Math.round((Number(v) / Number(max)) * 10), c = on >= 6 ? "#2fbf71" : on >= 3 ? "#ffc933" : "#d9434b";
     return `<text x="${x}" y="508" font-family="sans-serif" font-weight="700" font-size="19" fill="${FRAME.ink}">${label}</text><text x="${x + 236}" y="508" text-anchor="end" font-family="monospace" font-size="17" fill="${FRAME.sub}">${Math.round(v)}/${max}</text>` +
       Array.from({ length: 10 }, (_, i) => `<rect x="${x + i * 24}" y="518" width="20" height="12" rx="3" fill="${i < on ? c : "#eae6db"}"/>`).join(""); };
-  const rec = [`連続 ${o.streak ?? 0} 日`, `お世話した日 ${n.days}`, `ごはん ${n.meals}`, `おでかけ ${n.outs}`, `あそぶ ${n.plays}`, ...(o.rebirths ? [`生まれ変わり ${o.rebirths}`] : [])];
+  const rec = [L(`連続 ${o.streak ?? 0} 日`, `Streak ${o.streak ?? 0}d`), L(`お世話した日 ${n.days}`, `Care days ${n.days}`), L(`ごはん ${n.meals}`, `Meals ${n.meals}`), L(`おでかけ ${n.outs}`, `Outings ${n.outs}`), L(`あそぶ ${n.plays}`, `Plays ${n.plays}`), ...(o.rebirths ? [L(`生まれ変わり ${o.rebirths}`, `Rebirths ${o.rebirths}`)] : [])];
   let cx = 92;
   const chips = rec.map((t) => { const w = 26 + [...t].reduce((a, ch) => a + (ch.charCodeAt(0) > 255 ? 17 : 10), 0);
     const g = `<rect x="${cx}" y="548" width="${w}" height="32" rx="16" fill="#f9f7f2" stroke="#eae6db" stroke-width="2"/><text x="${cx + w / 2}" y="570" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="17" fill="${FRAME.ink}">${esc(t)}</text>`;
     cx += w + 8; return g; }).join("");
   const cardW = Math.max(600, cx - 92 + 32);
   const card = `<g transform="rotate(1.5 380 520)"><rect x="76" y="466" width="${cardW}" height="130" rx="18" fill="#16151c" opacity="0.10"/><rect x="70" y="458" width="${cardW}" height="130" rx="18" fill="#ffffff" stroke="#eae6db" stroke-width="2"/>` +
-    (o.grave ? `<text x="92" y="516" font-family="sans-serif" font-weight="800" font-size="24" fill="${FRAME.ink}">お墓で休んでいます</text>` : meter("おなか", o.hunger ?? 0, o.hungerMax ?? 100, 92) + meter("ごきげん", o.mood ?? 0, o.moodMax ?? 100, 352)) + chips + `</g>`;
+    (o.grave ? `<text x="92" y="516" font-family="sans-serif" font-weight="800" font-size="24" fill="${FRAME.ink}">${L("お墓で休んでいます", "Resting in its grave")}</text>` : meter(L("おなか", "Tummy"), o.hunger ?? 0, o.hungerMax ?? 100, 92) + meter(L("ごきげん", "Mood"), o.mood ?? 0, o.moodMax ?? 100, 352)) + chips + `</g>`;
   // ロゴ（マスコットと名前）。目立たせない
   const [irows, icolor] = iconRows();
-  const logo = `<g opacity="0.72">${fig(irows, icolor, 1010, 558, 2)}<text x="1054" y="584" font-family="sans-serif" font-weight="800" font-size="22" fill="${FRAME.sub}">ハコニワ</text></g>`;   // 右下に小さく
+  const logo = `<g opacity="0.72">${fig(irows, icolor, 1010, 558, 2)}<text x="1054" y="584" font-family="sans-serif" font-weight="800" font-size="22" fill="${FRAME.sub}">${L("ハコニワ", "HAKONIWA")}</text></g>`;   // 右下に小さく
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"><rect width="${W}" height="${H}" fill="${FRAME.bg}"/>` +
     `<g transform="translate(0 -60) scale(${k})">${room}</g>${hako}${paper}${card}${logo}<rect x="12" y="12" width="${W - 24}" height="${H - 24}" fill="none" stroke="${FRAME.edge}" stroke-width="24"/></svg>`;
 }

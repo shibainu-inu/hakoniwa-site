@@ -9,6 +9,7 @@
 // 状態は localStorage tama_deal_v1:<DID>:<種類>。preimage は持たない（払う側なので秘密は無い）。
 import * as tclk from "./hako_tclk.js";
 import { notes, readTail } from "./tama_net.js";
+import { L } from "./tama_i18n.js";
 import { jobId, tamaLine, parseTama, acceptKey, checkLines, mealPrompt, outPrompt, playPayout, localDay, rewardOf } from "./tama_core.js";
 
 export const dealKinds = [["meal", "ごはん"], ["out", "おでかけ"], ["play", "あそぶ"]];
@@ -41,9 +42,9 @@ export class Deal {
   }
 
   async start({ st }) {
-    if (this.busy()) return { ok: false, why: "いまは取引の途中です" };
+    if (this.busy()) return { ok: false, why: L("いまは取引の途中です", "A deal is already in progress") };
     const ctx = await this.context(st);
-    if (!ctx) return { ok: false, why: "霧で街がよく見えません。少したってから出かけてみてください" };
+    if (!ctx) return { ok: false, why: L("霧で街がよく見えません。少したってから出かけてみてください", "The town is too foggy to see. Try going out a little later.") };
     const t = Date.now(), b = this.box;
     const offer = tclk.makeOffer({ from: this.app.did, role: "payer", lock: "hash", amount: String(this.price()), asset: "PAPER", rails: ["paper"],
       expiresMs: t + b.expires_min * 60_000, claimByMs: t + b.claim_by_min * 60_000, refundAfterMs: t + b.refund_after_min * 60_000,
@@ -51,7 +52,7 @@ export class Deal {
     this.st = { stage: "offering", kind: this.kind, offer, amount: this.price(), at: t, done: false };
     this.save();
     try { await this.app.signer.post(b.offers_room, tclk.encodeFrame(offer)); }
-    catch (e) { this.set("offer_failed", { done: true }); return { ok: false, why: `注文を出せませんでした（${e.message}）` }; }
+    catch (e) { this.set("offer_failed", { done: true }); return { ok: false, why: L(`注文を出せませんでした（${e.message}）`, `Couldn't place the order (${e.message})`) }; }
     this.set("offered");
     return { ok: true };
   }
@@ -75,7 +76,7 @@ export class Deal {
     if (st.stage === "offering") { this.set("offer_failed", { done: true }); return; }
     if (st.stage === "offered") {
       const a = await this.findAccept();
-      if (!a) { if (now >= o.expiresMs) { this.set("no_taker", { done: true }); this.note("相手が見つかりませんでした。PAPER は動いていません"); } return; }
+      if (!a) { if (now >= o.expiresMs) { this.set("no_taker", { done: true }); this.note(L("相手が見つかりませんでした。PAPER は動いていません", "No taker was found. No PAPER moved.")); } return; }
       const contract = a.frame.contract, room = tclk.dealRoom(contract);
       this.set("locking", { contract, room, payee: a.frame.from, accept: a.frame });
       const existing = await this.rail.read(contract).catch(() => null);
@@ -83,8 +84,8 @@ export class Deal {
       const lock = { type: "lock", from: this.app.did, contract, rail: "paper", ref };
       this.set("locking", { lock });
       try { await this.app.signer.post(room, tclk.encodeFrame(lock), { gateUntilMs: o.claimByMs }); }
-      catch (e) { if (e.gate) { this.set("gate", { done: true }); this.note("会場が混んでいて部屋を開けませんでした。PAPER は動いていません"); return; }
-        this.note(e.status === 429 ? "会場の部屋の数が今日の上限に近いので、少し待ってからもう一度開きます" : `部屋を開けませんでした（${e.message}）。もう一度試します`); return; }
+      catch (e) { if (e.gate) { this.set("gate", { done: true }); this.note(L("会場が混んでいて部屋を開けませんでした。PAPER は動いていません", "The venue was too busy to open a room. No PAPER moved.")); return; }
+        this.note(e.status === 429 ? L("会場の部屋の数が今日の上限に近いので、少し待ってからもう一度開きます", "The venue is near today's room limit, so it will try again in a moment.") : L(`部屋を開けませんでした（${e.message}）。もう一度試します`, `Couldn't open a room (${e.message}). Trying again.`)); return; }
       this.set("locked", { lock, locked: true });
       await this.app.signer.post(room, tamaLine({ t: "terms", offer: o, accept: a.frame }));
       await this.app.signer.post(b.board, tamaLine({ t: "deal", kind: this.kind, contract, n: rand() }));
@@ -92,9 +93,9 @@ export class Deal {
       return;
     }
     if (st.stage === "locking") {   // lock の投稿が失敗した（429 = 新規部屋の枠切れ など）: claimByMs まで出し直す。過ぎたら PAPER は動いていない
-      if (now >= o.claimByMs) { this.set("gate", { done: true }); this.note("会場が混んでいて部屋を開けませんでした。PAPER は動いていません"); return; }
+      if (now >= o.claimByMs) { this.set("gate", { done: true }); this.note(L("会場が混んでいて部屋を開けませんでした。PAPER は動いていません", "The venue was too busy to open a room. No PAPER moved.")); return; }
       try { await this.app.signer.post(st.room, tclk.encodeFrame(st.lock ?? { type: "lock", from: this.app.did, contract: st.contract, rail: "paper", ref: st.contract }), { gateUntilMs: o.claimByMs }); }
-      catch (e) { this.note(e.status === 429 ? "会場の部屋の数が今日の上限に近いので、少し待ってからもう一度開きます" : `部屋を開けませんでした（${e.message}）。もう一度試します`); return; }
+      catch (e) { this.note(e.status === 429 ? L("会場の部屋の数が今日の上限に近いので、少し待ってからもう一度開きます", "The venue is near today's room limit, so it will try again in a moment.") : L(`部屋を開けませんでした（${e.message}）。もう一度試します`, `Couldn't open a room (${e.message}). Trying again.`)); return; }
       this.set("locked", { locked: true });
       return;
     }
@@ -114,14 +115,14 @@ export class Deal {
         if (v && v.t === "lines" && v.contract === st.contract && !lines) lines = v.lines;
         if (v && v.t === "giveup" && v.contract === st.contract && !st.gaveUp) {
           this.set("waiting", { gaveUp: true });
-          this.note(this.kind === "out" ? "今日は記事がうまく書けなかったみたい。PAPER は少したつと戻ります" : "うまく作れなかったみたい。PAPER は少したつと戻ります");
+          this.note(this.kind === "out" ? L("今日は記事がうまく書けなかったみたい。PAPER は少したつと戻ります", "The report didn't come out well today. The PAPER will come back shortly.") : L("うまく作れなかったみたい。PAPER は少したつと戻ります", "It didn't come out well. The PAPER will come back shortly."));
         }
       }
       if (reveal) return this.finish(lines, reveal.ms);
       if (now >= o.refundAfterMs) {
         try { await this.rail.refund(st.lock.ref); } catch { /* ノートは誰でも書けるので、帳簿係は部屋の refund を数える */ }
         await this.app.signer.post(st.room, tclk.encodeFrame({ type: "refund", from: this.app.did, contract: st.contract, ref: st.lock.ref }));
-        this.set("refunded", { done: true, locked: false }); this.note("期限までに届かなかったので、PAPER を戻しました");
+        this.set("refunded", { done: true, locked: false }); this.note(L("期限までに届かなかったので、PAPER を戻しました", "It didn't arrive in time, so the PAPER was returned."));
       }
     }
   }
@@ -131,17 +132,17 @@ export class Deal {
     let ok = true, say = "";
     if (this.kind === "meal") ok = checkLines(lines, { n: Number(b.meal_lines), maxChars: b.line_max_chars, instruction: b.meal_instruction, fragmentWords: b.fragment_words }).ok;
     if (this.kind === "out") ok = checkLines(lines, { n: Number(b.out_lines), maxChars: b.line_max_chars, instruction: b.out_instruction, fragmentWords: b.fragment_words, needs: [[3, "{V}"], [3, "{B}"]], digitsOk: false }).ok;
-    if (!ok) { this.set("ng", { done: true, locked: false, lines }); this.note("届いたものが決まりに合わなかったので、成立しませんでした。PAPER は動いていません"); return; }
+    if (!ok) { this.set("ng", { done: true, locked: false, lines }); this.note(L("届いたものが決まりに合わなかったので、成立しませんでした。PAPER は動いていません", "What arrived didn't meet the rules, so the deal didn't settle. No PAPER moved.")); return; }
     let delta = -Number(st.amount);
     if (this.kind === "play") {
       const back = playPayout(st.contract, b.play_table);
       delta += back;
-      say = back > st.amount ? `勝った！ ${back} $PAPER 戻ってきた` : back === st.amount ? `引き分け。${back} $PAPER 戻ってきた` : `負けちゃった。${back} $PAPER だけ戻ってきた`;
+      say = back > st.amount ? L(`勝った！ ${back} $PAPER 戻ってきた`, `You won! ${back} $PAPER came back`) : back === st.amount ? L(`引き分け。${back} $PAPER 戻ってきた`, `A draw. ${back} $PAPER came back`) : L(`負けちゃった。${back} $PAPER だけ戻ってきた`, `You lost. Only ${back} $PAPER came back`);
     }
     if (this.kind === "meal") say = lines?.[0] ?? "";
     if (this.kind === "out") {
       const nth = (this.app.st?.outsToday ?? 0) + 1;
-      say = `記事ができました。ほうび ${rewardOf(b, nth)} $PAPER（今日 ${nth} 回目）は、帳簿係が確かめてから届きます`;
+      say = L(`記事ができました。ほうび ${rewardOf(b, nth)} $PAPER（今日 ${nth} 回目）は、帳簿係が確かめてから届きます`, `The report is done. The reward of ${rewardOf(b, nth)} $PAPER (outing #${nth} today) arrives after the ledger keeper checks it.`);
     }
     this.set("settled", { done: true, locked: false, lines, settledAt: ms, day: localDay(ms, b) });
     this.onEvent({ type: "settled", contract: st.contract, ms, delta, say, lines });

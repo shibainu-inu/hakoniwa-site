@@ -3,6 +3,7 @@
 // 鍵はこのブラウザだけ（tama_key.js）。署名して出すのは掲示板の join・reborn・deal と、取引の offer・lock・terms・refund だけ。
 import { lifeState, localDay, tamaLine, fillArticle, rewardOf } from "./tama_core.js";
 import { spriteSvg, spriteRows } from "./tama_sprite.js";
+import { L, getLang, setLang } from "./tama_i18n.js";
 import { setVenue, makeSigner, readTail } from "./tama_net.js";
 import * as K from "./tama_key.js";
 import { Deal, dealKinds } from "./tama_deal.js";
@@ -83,12 +84,12 @@ function watched(signer) {
   return signer;
 }
 // ── 待っている間の表示（探す → 預ける → 届くのを待つ）。小さな札が、いまの段の上で跳ねる ──
-const WAIT = { offering: [0, "相手を探しています"], offered: [0, "相手を探しています"], locking: [1, "PAPER を預けています"], locked: [2, "届くのを待っています"], waiting: [2, "届くのを待っています"] };
+const waitOf = (stage) => ({ offering: [0, L("相手を探しています", "Looking for a taker")], offered: [0, L("相手を探しています", "Looking for a taker")], locking: [1, L("PAPER を預けています", "Locking PAPER")] }[stage] ?? [2, L("届くのを待っています", "Waiting for delivery")]);
 function waitHtml() {
   const live = (x) => x.st && !x.st.done;
   const x = Object.values(app.deals).find((d) => live(d) && d.st.locked) ?? Object.values(app.deals).find(live);
   if (!x) return "";
-  const [step, label] = x.st.gaveUp ? [2, "PAPER が戻るのを待っています"] : WAIT[x.st.stage] ?? [2, "届くのを待っています"];
+  const [step, label] = x.st.gaveUp ? [2, L("PAPER が戻るのを待っています", "Waiting for the PAPER to come back")] : waitOf(x.st.stage);
   return `<div class="wait" role="status"><span class="track" style="--s:${step}">${[0, 1, 2].map((k) => `<i class="${k < step ? "done" : k === step ? "now" : ""}"></i>`).join("")}<b class="coin"></b></span>` +
     `<span>${label}</span><span class="dots"><i></i><i></i><i></i></span></div>`;
 }
@@ -138,6 +139,35 @@ function idle(fig, shadow, happy) {
   };
   breath();
 }
+/** ひとことを 1〜2 言に縮める（吹き出しは小さく固定。全文は下の一覧に出す） */
+export function brief(line) {
+  const parts = String(line ?? "").split(/,\s+|、|[.!?。！？]\s+/).map((x) => x.trim().replace(/[.!?。！？]+$/, "")).filter(Boolean);
+  let out = parts[0] ?? "";
+  if (parts[1] && (out + ", " + parts[1]).length <= 40) out += ", " + parts[1];
+  return out.length > 44 ? out.slice(0, 43).replace(/\s+\S*$/, "") + "…" : out;   // 語の途中で切らない
+}
+/** 最近のひとこと（新しい順。帳簿に載る前のものも） */
+function sayLines(fold) {
+  const out = [];
+  if (app.lastSay) out.push(app.lastSay);
+  for (const x of (fold?.meals ?? []).slice(-3).reverse()) if (x.line && !out.includes(x.line)) out.push(x.line);
+  return out;
+}
+/** 喋ったり、黙ったり。食べた直後は必ず 1 回喋り、あとは気まぐれに（6 割くらいで）最近のひとことを言う */
+function chatter(el, my) {
+  if (!el) return;
+  const speak = (fresh) => {
+    if (my !== live || !el.isConnected) return;
+    const lines = app.sayLines ?? [];
+    if (lines.length && (fresh || Math.random() < 0.6)) {
+      el.firstChild.textContent = brief(fresh ? lines[0] : lines[Math.floor(Math.random() * Math.min(lines.length, 3))]);
+      el.classList.add("on");
+      setTimeout(() => { if (my === live) el.classList.remove("on"); }, 6000);
+    }
+    setTimeout(() => speak(false), 14000 + Math.random() * 16000);
+  };
+  if (app.sayFresh) { app.sayFresh = false; speak(true); } else setTimeout(() => speak(false), 2500 + Math.random() * 5000);
+}
 /** 部屋の中の HAKO を動かす。部屋（背景）は render が描き、ここは上に重ねる姿だけを替える */
 export function setMotion(kind) {
   const stage = $("stage"), slot = $("slot"); if (!stage || !slot) return;
@@ -148,15 +178,16 @@ export function setMotion(kind) {
   stage.className = `stage m-${kind} s-${grow}`;
   const at = (rows, k) => { const p = spot(rows, k); return `left:${p.left}%;bottom:${p.bottom}%;width:${p.width}%`; };
   if (kind === "grave") { slot.innerHTML = `<div class="pos" style="${at(spriteRows(app.did, "ghost")[0], "ghost")}"><div class="ghost">${spriteSvg(app.did, "ghost", HAKO_PX)}</div></div>`; return; }
-  if (kind === "out") { slot.innerHTML = `<div class="away">${outSign()}<p>おでかけ中</p></div>`; return; }
+  if (kind === "out") { slot.innerHTML = `<div class="away">${outSign()}<p>${L("おでかけ中", "Out for a walk")}</p></div>`; return; }
   const look = kind === "reborn" ? "egg" : grow;
   const fx = kind === "happy" ? `<span class="fx"><i></i><i></i><i></i></span>` : kind === "eat" ? `${bowl()}<span class="fx steam"><i></i><i></i></span>` : kind === "sad" && look === "hako" ? `<span class="fx drop"><i></i></span>` : "";
-  slot.innerHTML = `<div class="pos" style="${at(spriteRows(app.did, look)[0])}"><div class="shadow"></div><div class="hako"></div>${fx}</div>`;
+  slot.innerHTML = `<div class="pos" style="${at(spriteRows(app.did, look)[0])}"><div class="shadow"></div><div class="hako"></div>${fx}<div class="say"><span></span></div></div>`;
   const fig = slot.querySelector(".hako"), shadow = slot.querySelector(".shadow");   // 動きが途切れないように、入れ物は残して中の絵だけ替える
   const frames = FRAMES[kind] ?? FRAMES.normal;
   const show = (f) => { fig.innerHTML = spriteSvg(app.did, look, HAKO_PX, f); };
   show(frames[0]);
   const my = live;
+  if (look !== "egg") chatter(slot.querySelector(".say"), my);
   if ((kind === "normal" || kind === "happy") && look !== "egg" && !calm() && fig.animate) idle(fig, shadow, kind === "happy");
   if (look !== "hako" || calm()) return;
   if (kind === "normal") {   // まばたき
@@ -181,9 +212,10 @@ function meter(label, v, max) {
     `<div class="bar ${cls}" role="meter" aria-valuenow="${Math.round(v)}" aria-valuemax="${max}" aria-label="${label}">${Array.from({ length: 10 }, (_, k) => `<i class="${k < n ? "on" : ""}" style="--k:${k}"></i>`).join("")}</div></div>`;
 }
 const DOT = { meal: "var(--meal)", out: "var(--out)", play: "var(--play)" };
+const KIND_EN = { meal: "Feed", out: "Go out", play: "Play" };
 function stateWord(st) {
   const k = motionOf(st);
-  return { grave: "お墓", out: "おでかけ中", eat: "食事中", happy: "ごきげん", sad: "しょんぼり", reborn: "生まれ変わり" }[k] ?? (st.hunger >= 60 ? "げんき" : "ふつう");
+  return { grave: L("お墓", "Resting"), out: L("おでかけ中", "Out"), eat: L("食事中", "Eating"), happy: L("ごきげん", "Happy"), sad: L("しょんぼり", "Down"), reborn: L("生まれ変わり", "Reborn") }[k] ?? (st.hunger >= 60 ? L("げんき", "Lively") : L("ふつう", "OK"));
 }
 function lastSay(fold) {
   if (app.lastSay) return app.lastSay;
@@ -214,25 +246,26 @@ export function render() {
   if (app.why && app.whyAt && Date.now() - app.whyAt > 9000) app.why = "";   // 押したときの知らせは、しばらくしたら消す
   if (!st.born) return renderEgg();
   const fee = Number(app.box.reborn_price ?? 0);
-  const graveNote = st.grave ? `<p class="note">おなかが空っぽのまま ${app.box.grave_after_hours} 時間がたって、お墓になりました。生まれ変わると、同じ HAKO がもう一度はじめからやり直します（部屋とこれまでの記録はそのまま）。` +
-    `生まれ変わりには ${fmt(fee)} $PAPER かかります${m.balance < fee ? `（いまは足りないので、財布が 0 になって生まれ変わります）` : ""}。お墓の間は、おでかけとあそぶはできません。</p>` : "";
-  const said = st.grave ? null : lastSay(m.fold);
-  const w = $("wallet"); if (w) { w.hidden = false; w.textContent = `${fmt(m.balance)} $PAPER${m.fromFold ? "" : " *"}`; w.title = m.fromFold ? "財布" : "帳簿に載るまでの見込み"; }
+  const graveNote = st.grave ? `<p class="note">` + L(`おなかが空っぽのまま ${app.box.grave_after_hours} 時間がたって、お墓になりました。生まれ変わると、同じ HAKO がもう一度はじめからやり直します（部屋とこれまでの記録はそのまま）。` +
+    `生まれ変わりには ${fmt(fee)} $PAPER かかります${m.balance < fee ? `（いまは足りないので、財布が 0 になって生まれ変わります）` : ""}。お墓の間は、おでかけとあそぶはできません。`,
+    `Its tummy stayed empty for ${app.box.grave_after_hours} hours, so it is resting in a grave. When it is reborn, the same HAKO starts over from an egg (the room and its record stay). ` +
+    `Rebirth costs ${fmt(fee)} $PAPER${m.balance < fee ? ` (you don't have enough now, so your wallet will go to 0)` : ""}. While it rests, it can't go out or play.`) + `</p>` : "";
+  app.sayLines = st.grave ? [] : sayLines(m.fold);
+  const w = $("wallet"); if (w) { w.hidden = false; w.textContent = `${fmt(m.balance)} $PAPER${m.fromFold ? "" : " *"}`; w.title = m.fromFold ? L("財布", "Wallet") : L("帳簿に載るまでの見込み", "Estimate until the ledger catches up"); }
   const acts = actionsHtml(st, m);
   const html = `
     <section class="card" id="me">
       <div id="stage" class="stage"><div class="bg">${roomBg(m, st)}</div><div id="slot"></div><div class="ops mono" id="ops" aria-hidden="true"></div></div>
-      ${said ? `<div class="say">${esc(said)}</div>` : ""}
       ${waitHtml()}
       <div class="who"><span class="name">HAKO <span class="mono">${esc(app.did.slice(-8))}</span></span><span class="chip state"><span class="dot" style="background:${st.grave ? "var(--dim)" : st.hunger >= 60 ? "var(--good)" : st.hunger >= 30 ? "var(--mid)" : "var(--bad)"}"></span>${stateWord(st)}</span></div>
-      ${st.grave ? "" : `<div class="meters">${meter("おなか", st.hunger, app.box.hunger_max)}${meter("ごきげん", st.mood, app.box.mood_max)}</div>`}
+      ${st.grave ? "" : `<div class="meters">${meter(L("おなか", "Tummy"), st.hunger, app.box.hunger_max)}${meter(L("ごきげん", "Mood"), st.mood, app.box.mood_max)}</div>`}
       <div class="chips mono">
-        <span class="chip">連続 ${st.streak} 日</span>
-        ${st.grave ? "" : `<span class="chip">おでかけ ${st.outsToday}/${app.box.out_per_day}</span><span class="chip">あそぶ ${playsToday(m)}/${app.box.play_per_day}</span>`}
-        ${st.rebirths ? `<span class="chip">生まれ変わり ${st.rebirths}</span>` : ""}
-        ${m.fromFold ? "" : `<span class="chip">* 帳簿に載るまでの見込み</span>`}
+        <span class="chip">${L(`連続 ${st.streak} 日`, `Streak ${st.streak}d`)}</span>
+        ${st.grave ? "" : `<span class="chip">${L("おでかけ", "Outings")} ${st.outsToday}/${app.box.out_per_day}</span><span class="chip">${L("あそぶ", "Play")} ${playsToday(m)}/${app.box.play_per_day}</span>`}
+        ${st.rebirths ? `<span class="chip">${L("生まれ変わり", "Rebirths")} ${st.rebirths}</span>` : ""}
+        ${m.fromFold ? "" : `<span class="chip">${L("* 帳簿に載るまでの見込み", "* estimate until the ledger catches up")}</span>`}
       </div>
-      ${!st.grave && st.stage !== "hako" && app.box.grow_hours ? `<p class="hint">${Math.round(app.box.grow_hours / 24)} 日育てると…？</p>` : ""}
+      ${!st.grave && st.stage !== "hako" && app.box.grow_hours ? `<p class="hint">${L(`${Math.round(app.box.grow_hours / 24)} 日育てると…？`, `Raise it for ${Math.round(app.box.grow_hours / 24)} days and…?`)}</p>` : ""}
       ${graveNote}
       <div class="actions main">${acts}</div>
       <p id="why" class="why${app.why && app.whyBad ? " bad" : ""}">${esc(app.why ?? "")}</p>
@@ -245,15 +278,23 @@ export function render() {
   app.motion = null; setMotion(motionOf(st));
   for (const b of document.querySelectorAll("#reborn")) b.onclick = reborn;
   const cam = $("snapshot"); if (cam) cam.onclick = () => snapshot(app.m, app.st);
-  const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say("鍵ファイルを保存しました。パスフレーズと別の場所にしまってください", false); } };
+  const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say(L("鍵ファイルを保存しました。パスフレーズと別の場所にしまってください", "Key file saved. Keep it somewhere separate from your passphrase."), false); } };
   for (const b of document.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
   renderSaid(m.fold);
 }
 function actionsHtml(st, m) {
-  if (st.grave) return `<button class="btn" id="reborn" style="--c:var(--accent)"><span class="dot" style="background:var(--accent)"></span>生まれ変わる <span class="price">${fmt(Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, m.balance)))} $PAPER</span></button>`;
+  if (st.grave) return `<button class="btn" id="reborn" style="--c:var(--accent)"><span class="dot" style="background:var(--accent)"></span>${L("生まれ変わる", "Be reborn")} <span class="price">${fmt(Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, m.balance)))} $PAPER</span></button>`;
   const price = { meal: app.box.meal_price, out: app.box.out_price, play: app.box.play_stake };
   return dealKinds.map(([k, label]) => { const why = actionBlock(k, st, m);
-    return `<button class="btn${why ? " off" : ""}" data-kind="${k}" style="--c:${DOT[k]}" ${why ? `aria-disabled="true" title="${esc(why)}"` : ""}><span class="dot" style="background:${DOT[k]}"></span>${label} <span class="price">${fmt(price[k])} $PAPER</span></button>`; }).join("");
+    return `<button class="btn${why ? " off" : ""}" data-kind="${k}" style="--c:${DOT[k]}" ${why ? `aria-disabled="true" title="${esc(why)}"` : ""}><span class="dot" style="background:${DOT[k]}"></span>${L(label, KIND_EN[k])} <span class="price">${fmt(price[k])} $PAPER</span></button>`; }).join("");
+}
+/** 画面の決まった文（切り替え、下のタブ、注意書き）を、いまの言語にする。HTML の data-en が英語、もとの文が日本語 */
+function applyLang() {
+  const en = getLang() === "en";
+  document.documentElement.lang = en ? "en" : "ja";
+  for (const el of document.querySelectorAll("[data-en]")) { if (el.dataset.ja == null) el.dataset.ja = el.textContent; el.textContent = en ? el.dataset.en : el.dataset.ja; }
+  for (const el of document.querySelectorAll("[data-en-label]")) { if (el.dataset.jaLabel == null) el.dataset.jaLabel = el.getAttribute("aria-label") ?? ""; const t = en ? el.dataset.enLabel : el.dataset.jaLabel; el.setAttribute("aria-label", t); el.title = t; }
+  const lg = $("lang"); if (lg) lg.textContent = en ? "JA" : "EN";   // 押すと切り替わる先の言語
 }
 /** ページの外枠（ロゴの HAKO、明るさ、庭のようす） */
 function renderChrome() {
@@ -264,6 +305,12 @@ function renderChrome() {
     for (const a of document.querySelectorAll("[data-tab-to]")) a.onclick = (e) => { e.preventDefault(); if (location.hash !== `#${a.dataset.tabTo}`) location.hash = a.dataset.tabTo; else go(a.dataset.tabTo); };
     addEventListener("hashchange", () => go(TABS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "me"));   // 戻るボタンで前の画面へ
     if (TABS.includes(location.hash.slice(1))) go(location.hash.slice(1));
+  }
+  const lg = $("lang");
+  if (lg && !lg.dataset.done) {
+    lg.dataset.done = "1";
+    lg.onclick = () => { setLang(getLang() === "ja" ? "en" : "ja"); applyLang(); app.viewHtml = null; app.saidHtml = null; render(); };
+    applyLang();
   }
   const th = $("theme");
   if (th && !th.dataset.done) {
@@ -292,11 +339,11 @@ function roomInfo(m, st) {
   const have = unlocked(app.F, n), next = nextUnlock(app.F, n);
   const art = app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
   return `<div class="roominfo" id="room"><p class="label">ROOM · ${have.length}/${app.F.items.length}</p>
-    <div class="chips">${have.map((x) => `<span class="chip">${esc(x.ja)}</span>`).join("") || `<span class="small">まだ何もない部屋です</span>`}</div>
-    ${next ? `<p class="small">次は <b>${esc(next.ja)}</b>（${esc(whenText(next))}）</p>` : ""}
+    <div class="chips">${have.map((x) => `<span class="chip">${esc(L(x.ja, x.en ?? x.ja))}</span>`).join("") || `<span class="small">${L("まだ何もない部屋です", "The room is still empty")}</span>`}</div>
+    ${next ? `<p class="small">${L("次は", "Next:")} <b>${esc(L(next.ja, next.en ?? next.ja))}</b>${L("（", " (")}${esc(whenText(next))}${L("）", ")")}</p>` : ""}
     <div class="actions">
-      <button class="btn sub" id="snapshot">HAKO をシェア</button>
-      <button class="btn sub" id="savekey">鍵ファイルを保存</button>
+      <button class="btn sub" id="snapshot">${L("HAKO をシェア", "Share HAKO")}</button>
+      <button class="btn sub" id="savekey">${L("鍵ファイルを保存", "Save key file")}</button>
     </div></div>`;
 }
 /** HAKO をシェア: 部屋・記事（無ければひとこと）・様子とお世話の記録・ロゴを 1 枚の写真にする。撮る → 写真が浮かび上がる → シェアか保存 */
@@ -314,13 +361,13 @@ async function snapshot(m, st) {
     const u = new URL(`h/${app.did.slice(-8).toLowerCase()}.html`, location.href);
     const v = String(app.stats?.box?.generated ?? "").replace(/[^0-9]/g, "");   // 帳簿係の回の番号（X が古い画像を出し続けないように）
     if (v) u.searchParams.set("v", v);
-    const text = st.grave ? `${title} はお墓で休んでいます #HAKONIWA` : art ? `${title} のおでかけ記事 #HAKONIWA` : `${title} の部屋 #HAKONIWA`;
+    const text = st.grave ? L(`${title} はお墓で休んでいます #HAKONIWA`, `${title} is resting in its grave #HAKONIWA`) : art ? L(`${title} のおでかけ記事 #HAKONIWA`, `${title}'s outing report #HAKONIWA`) : L(`${title} の部屋 #HAKONIWA`, `${title}'s room #HAKONIWA`);
     const src = URL.createObjectURL(file);
     const canShare = !!(navigator.canShare && navigator.canShare({ files: [file] }));
     document.getElementById("snap")?.remove();
     const box = document.createElement("div"); box.className = "snap"; box.id = "snap";
-    box.innerHTML = `<div class="photo"><img src="${src}" alt="${esc(title)} の部屋の写真"><p class="mono">${esc(title)}</p></div>
-      <div class="actions"><button class="btn" id="snap-share" style="--c:var(--accent)">シェアする</button><a class="btn sub" id="snap-save" href="${src}" download="${file.name}">画像を保存</a><button class="btn sub" id="snap-close">とじる</button></div>`;
+    box.innerHTML = `<div class="photo"><img src="${src}" alt="${esc(L(`${title} の部屋の写真`, `A photo of ${title}'s room`))}"><p class="mono">${esc(title)}</p></div>
+      <div class="actions"><button class="btn" id="snap-share" style="--c:var(--accent)">${L("シェアする", "Share")}</button><a class="btn sub" id="snap-save" href="${src}" download="${file.name}">${L("画像を保存", "Save image")}</a><button class="btn sub" id="snap-close">${L("とじる", "Close")}</button></div>`;
     document.body.appendChild(box);
     const close = () => { box.remove(); URL.revokeObjectURL(src); };
     box.onclick = (e) => { if (e.target === box) close(); };
@@ -330,7 +377,7 @@ async function snapshot(m, st) {
       box.querySelector("#snap-save").click();   // 画像を渡せないブラウザ: 保存して、X の投稿画面を開く
       window.open(`https://x.com/intent/post?text=${encodeURIComponent(text)}&url=${encodeURIComponent(u.href)}`, "_blank", "noopener");
     };
-  } catch (e) { app.why = `画像を作れませんでした（${e.message}）`; render(); }
+  } catch (e) { app.why = L(`画像を作れませんでした（${e.message}）`, `Couldn't make the image (${e.message})`); render(); }
 }
 
 /** 今日（JST）のあそぶの回数（帳簿と手元の成立 ＋ いま途中のもの） */
@@ -343,14 +390,14 @@ function playsToday(m) {
 /** 押せないときの理由（null なら押せる） */
 function actionBlock(kind, st, m) {
   const x = app.deals[kind];
-  if (x?.busy()) return x.st.gaveUp ? "PAPER が戻るのを待っています" : "いまはその途中です";   // 種類が違えば同時にできる（財布は lock 中の額を引いて見る）
+  if (x?.busy()) return x.st.gaveUp ? L("PAPER が戻るのを待っています", "Waiting for the PAPER to come back") : L("いまはその途中です", "Already in progress");   // 種類が違えば同時にできる（財布は lock 中の額を引いて見る）
   const price = { meal: app.box.meal_price, out: app.box.out_price, play: app.box.play_stake }[kind];
-  if (st.grave) return "お墓の間はできません";
-  if (m.balance < Number(price)) return "PAPER が足りません";
-  if (kind === "out" && st.outsToday >= Number(app.box.out_per_day)) return `おでかけは 1 日 ${app.box.out_per_day} 回までです`;
-  if (kind === "out" && st.hunger < Number(app.box.out_min_hunger ?? 0)) return `おなかが ${app.box.out_min_hunger} 以上ないと、おでかけできません`;
-  if (kind === "play" && playsToday(m) >= Number(app.box.play_per_day ?? Infinity)) return `あそぶは 1 日 ${app.box.play_per_day} 回までです`;
-  if (kind === "play" && !(app.box.npcs ?? []).length) return "あそび相手がまだいません";
+  if (st.grave) return L("お墓の間はできません", "Not while it rests in the grave");
+  if (m.balance < Number(price)) return L("PAPER が足りません", "Not enough PAPER");
+  if (kind === "out" && st.outsToday >= Number(app.box.out_per_day)) return L(`おでかけは 1 日 ${app.box.out_per_day} 回までです`, `Outings are limited to ${app.box.out_per_day} a day`);
+  if (kind === "out" && st.hunger < Number(app.box.out_min_hunger ?? 0)) return L(`おなかが ${app.box.out_min_hunger} 以上ないと、おでかけできません`, `It needs a tummy of ${app.box.out_min_hunger} or more to go out`);
+  if (kind === "play" && playsToday(m) >= Number(app.box.play_per_day ?? Infinity)) return L(`あそぶは 1 日 ${app.box.play_per_day} 回までです`, `Play is limited to ${app.box.play_per_day} a day`);
+  if (kind === "play" && !(app.box.npcs ?? []).length) return L("あそび相手がまだいません", "No playmates yet");
   return null;
 }
 function renderSaid(fold) {
@@ -361,8 +408,8 @@ function renderSaid(fold) {
   if (app.lastArticle && !(fold?.outs ?? []).some((o) => o.contract === app.lastArticle.contract)) outs = [app.lastArticle];   // 帳簿に載る前の記事
   const h = [
     ...outs.map((o) => `<article class="article">${o.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join("")}</article>`),
-    ...(meals.length > 1 ? [`<p class="label" style="margin-top:12px">これまでのひとこと</p>`] : []),
-    ...meals.slice(1).map((x) => `<p class="bubble">${esc(x.line)}</p>`),
+    ...(meals.length ? [`<p class="label" style="margin-top:12px">${L("ひとこと", "What it said")}</p>`] : []),
+    ...meals.map((x) => `<p class="bubble">${esc(x.line)}</p>`),
   ].join("");
   if (app.saidHtml !== h || (h && !el.firstChild)) { el.innerHTML = h; app.saidHtml = h; }
 }
@@ -372,14 +419,14 @@ function renderEgg() {
     <section class="card" id="me">
       <div class="stage plain short"><div class="egg">${spriteSvg(null, "egg", 5)}</div></div>
       <p class="label" style="margin-top:14px">NEW HAKO</p>
-      <h2>HAKO を迎える</h2>
-      <p>このブラウザの中で鍵を作り、あなたの HAKO が生まれます。鍵は外に送りません。なくすと HAKO を動かせなくなるので、生まれたあとに鍵ファイルを保存してください。</p>
-      <p class="note">はじめに ${fmt(app.box.initial_paper)} $PAPER を受け取ります。PAPER はこの箱庭の中だけの点数で、お金としての価値はありません。換金も売り買いもできません。</p>
-      <label>パスフレーズ（鍵を開くときに使います）<span class="pw"><input id="p1" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="p1,p2" aria-label="パスフレーズを表示する">表示</button></span></label>
-      <label>もう一度<span class="pw"><input id="p2" type="password" autocomplete="new-password"></span></label>
+      <h2>${L("HAKO を迎える", "Welcome a HAKO")}</h2>
+      <p>${L("このブラウザの中で鍵を作り、あなたの HAKO が生まれます。鍵は外に送りません。なくすと HAKO を動かせなくなるので、生まれたあとに鍵ファイルを保存してください。", "A key is made inside this browser and your HAKO is born. The key is never sent anywhere. If you lose it you can't move your HAKO, so save the key file once it is born.")}</p>
+      <p class="note">${L(`はじめに ${fmt(app.box.initial_paper)} $PAPER を受け取ります。PAPER はこの箱庭の中だけの点数で、お金としての価値はありません。換金も売り買いもできません。`, `You start with ${fmt(app.box.initial_paper)} $PAPER. PAPER is only a score inside this garden and has no monetary value. It can't be cashed out, bought or sold.`)}</p>
+      <label>${L("パスフレーズ（鍵を開くときに使います）", "Passphrase (used to unlock your key)")}<span class="pw"><input id="p1" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="p1,p2"></button></span></label>
+      <label>${L("もう一度", "Once more")}<span class="pw"><input id="p2" type="password" autocomplete="new-password"></span></label>
       <p id="why" class="why"></p>
-      <div class="actions"><button class="btn" id="born" style="--c:var(--good)"><span class="dot" style="background:var(--good)"></span>生まれる</button></div>
-      <p class="small">鍵ファイルがあるときは <label class="link">ファイルから読み込む<input id="file" type="file" accept="application/json" hidden></label></p>
+      <div class="actions"><button class="btn" id="born" style="--c:var(--good)"><span class="dot" style="background:var(--good)"></span>${L("生まれる", "Be born")}</button></div>
+      <p class="small">${L("鍵ファイルがあるときは", "Have a key file?")} <label class="link">${L("ファイルから読み込む", "Load it from a file")}<input id="file" type="file" accept="application/json" hidden></label></p>
     </section>`;
   eyes();
   $("born").onclick = register;
@@ -388,10 +435,12 @@ function renderEgg() {
 /** パスフレーズの「表示／隠す」 */
 function eyes() {
   for (const b of document.querySelectorAll("[data-eye]")) b.onclick = () => {
-    const show = b.textContent === "表示";
-    for (const id of b.dataset.eye.split(",")) { const el = $(id); if (el) el.type = show ? "text" : "password"; }
-    b.textContent = show ? "隠す" : "表示"; b.setAttribute("aria-label", show ? "パスフレーズを隠す" : "パスフレーズを表示する");
+    b.dataset.on = b.dataset.on === "1" ? "" : "1";
+    for (const id of b.dataset.eye.split(",")) { const el = $(id); if (el) el.type = b.dataset.on ? "text" : "password"; }
+    label(b);
   };
+  const label = (b) => { b.textContent = b.dataset.on ? L("隠す", "Hide") : L("表示", "Show"); b.setAttribute("aria-label", b.dataset.on ? L("パスフレーズを隠す", "Hide passphrase") : L("パスフレーズを表示する", "Show passphrase")); };
+  for (const b of document.querySelectorAll("[data-eye]")) label(b);
 }
 /** 鍵を開く前の姿（帳簿から分かる育ちの段で、目を閉じて眠る。お墓なら幽霊） */
 function sleeping() {
@@ -402,11 +451,11 @@ function renderUnlock() {
   $("view").innerHTML = `
     <section class="card" id="me">
       <div class="stage plain">${app.did ? `<div class="hako">${sleeping()}</div>` : ""}</div>
-      <p>HAKO …${esc(app.did.slice(-8))} が眠っています。パスフレーズで鍵を開いてください。</p>
-      <label>パスフレーズ<span class="pw"><input id="p1" type="password" autocomplete="current-password"><button type="button" class="eye" data-eye="p1" aria-label="パスフレーズを表示する">表示</button></span></label>
+      <p>${L(`HAKO …${esc(app.did.slice(-8))} が眠っています。パスフレーズで鍵を開いてください。`, `HAKO …${esc(app.did.slice(-8))} is asleep. Unlock the key with your passphrase.`)}</p>
+      <label>${L("パスフレーズ", "Passphrase")}<span class="pw"><input id="p1" type="password" autocomplete="current-password"><button type="button" class="eye" data-eye="p1"></button></span></label>
       <p id="why" class="why"></p>
-      <div class="actions"><button class="btn" id="open">鍵を開く</button></div>
-      <label class="small"><input id="tab" type="checkbox" checked> タブを閉じるまで覚える（開いているほかのタブでも、入れ直さずに使えます）</label>
+      <div class="actions"><button class="btn" id="open">${L("鍵を開く", "Unlock")}</button></div>
+      <label class="small"><input id="tab" type="checkbox" checked> ${L("タブを閉じるまで覚える（開いているほかのタブでも、入れ直さずに使えます）", "Remember until this tab is closed (other open tabs can use it without re-entering)")}</label>
     </section>`;
   eyes();
   $("open").onclick = unlock;
@@ -417,16 +466,16 @@ const say = (s, bad = true) => { app.why = s; app.whyBad = !!s && bad; app.whyAt
 
 async function register() {
   const p1 = $("p1").value, p2 = $("p2").value;
-  if (p1.length < 8) return say("パスフレーズは 8 文字以上にしてください");
-  if (p1 !== p2) return say("2 つのパスフレーズが違います");
-  if (!(await K.supported())) return say("このブラウザは Ed25519 の鍵を作れません。新しいブラウザで開いてください");
-  say("鍵を作っています…", false);
+  if (p1.length < 8) return say(L("パスフレーズは 8 文字以上にしてください", "Use a passphrase of 8 characters or more"));
+  if (p1 !== p2) return say(L("2 つのパスフレーズが違います", "The two passphrases don't match"));
+  if (!(await K.supported())) return say(L("このブラウザは Ed25519 の鍵を作れません。新しいブラウザで開いてください", "This browser can't make an Ed25519 key. Please open it in a newer browser."));
+  say(L("鍵を作っています…", "Making your key…"), false);
   const { priv, did, rec } = await K.makeKey(p1);
   K.saveRec(rec); await K.rememberTab(priv, did);
   app.did = did; app.priv = priv; app.signer = watched(makeSigner(did, priv));
   try {
     await app.signer.post(app.box.board, tamaLine({ t: "join", v: 1, n: rand() }));
-  } catch (e) { say(`掲示板に出せませんでした（${e.message}）。もう一度押してください`); return; }
+  } catch (e) { say(L(`掲示板に出せませんでした（${e.message}）。もう一度押してください`, `Couldn't post to the board (${e.message}). Please press again.`)); return; }
   addLocal(did, { t: "join", ms: Date.now() });
   K.downloadRec(rec);
   app.rebornUntil = Date.now() + 2500; setTimeout(render, 2600);
@@ -435,9 +484,9 @@ async function register() {
 async function importKey(ev) {
   try {
     const j = JSON.parse(await ev.target.files[0].text());
-    if (!K.isKeyFile(j)) return say("鍵ファイルではありません");
+    if (!K.isKeyFile(j)) return say(L("鍵ファイルではありません", "That is not a key file"));
     K.saveRec(j); app.did = j.did; render();
-  } catch (e) { say(`読めませんでした（${e.message}）`); }
+  } catch (e) { say(L(`読めませんでした（${e.message}）`, `Couldn't read it (${e.message})`)); }
 }
 async function unlock() {
   const rec = K.loadRec();
@@ -446,11 +495,11 @@ async function unlock() {
     app.priv = priv; app.signer = watched(makeSigner(app.did, priv));
     if ($("tab").checked) await K.rememberTab(priv, app.did);
     await boot();
-  } catch { say("パスフレーズが違います"); }
+  } catch { say(L("パスフレーズが違います", "Wrong passphrase")); }
 }
 async function reborn() {
   try { await app.signer.post(app.box.board, tamaLine({ t: "reborn", n: rand() })); }
-  catch (e) { return say(`掲示板に出せませんでした（${e.message}）`); }
+  catch (e) { return say(L(`掲示板に出せませんでした（${e.message}）`, `Couldn't post to the board (${e.message})`)); }
   const fee = Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, app.balance ?? 0));   // D-101: 足りなければ残高 0 まで
   addLocal(app.did, { t: "reborn", ms: Date.now() }, -fee);
   app.rebornUntil = Date.now() + 2500; setTimeout(render, 2600);
@@ -477,7 +526,7 @@ function onDeal(kind, ev) {
       app.lastArticle = { contract: ev.contract, lines: facts ? fillArticle(ev.lines, facts) : ev.lines };
     }
     app.whyBad = false; app.whyAt = null;
-    if (kind === "meal" && ev.say) { app.lastSay = ev.say; app.why = ""; }
+    if (kind === "meal" && ev.say) { app.lastSay = ev.say; app.sayFresh = true; app.why = ""; }
     else if (ev.say) app.why = ev.say;
     logOp(`settled · ${kind} · ${short(ev.contract)} · ${ev.delta >= 0 ? "+" : ""}${ev.delta} PAPER`);
   } else if (ev.type === "note") { app.why = ev.text; app.whyBad = false; app.whyAt = null; }
