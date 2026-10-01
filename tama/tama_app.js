@@ -9,6 +9,7 @@ import * as K from "./tama_key.js";
 import { Deal, dealKinds } from "./tama_deal.js";
 import { lifetime, unlocked, nextUnlock, whenText, roomSvg, artSvg, frameSvg, scrapSvg, svgToPng, spot, HAKO_PX } from "./tama_room.js";
 import { renderGarden } from "./tama_garden.js";
+import { pickPhrase, phraseText } from "./tama_phrases.js";
 
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -191,16 +192,46 @@ function sayLines(fold) {
   for (const x of (fold?.meals ?? []).slice(-3).reverse()) if (x.line && !out.includes(x.line)) out.push(x.line);
   return out;
 }
-/** 喋ったり、黙ったり。食べた直後は必ず 1 回喋り、あとは気まぐれに（6 割くらいで）最近のひとことを言う */
+/** 語録（D-121）を選ぶための、いまの状態。帳簿と手元の出来事・取引の段から作る */
+function phraseState() {
+  const st = app.st ?? {}, now = Date.now();
+  const ev = merged(app.stats, app.did).events ?? [];
+  const last = (t) => ev.reduce((m, e) => (e.t === t && e.ms > (m?.ms ?? 0) ? e : m), null);
+  const meal = last("meal"), out = last("out");
+  const outs = app.stats?.did?.[app.did]?.outs ?? [];
+  const twist = outs.length ? outs[outs.length - 1]?.facts?.metric ?? null : null;
+  const waiting = Object.values(app.deals ?? {}).some((d) => d.st && !d.st.done && ["offered", "locking", "locked", "waiting"].includes(d.st.stage));
+  return { s: { hour: new Date().getHours(), hunger: st.hunger, mood: st.mood, fedAgoMin: meal ? (now - meal.ms) / 60_000 : null,
+    homeAgoMin: out ? (now - out.ms) / 60_000 : null, twist, level: st.accLevel ?? 1, waiting }, seed: meal?.contract ?? app.did };
+}
+/** 次の一言（語録から）。投資が元ネタのものは 1 日 invest_per_day 個まで（この端末で数える） */
+function nextPhrase(fresh) {
+  if (!app.P) return null;
+  const { s, seed } = phraseState();
+  const day = localDay(Date.now(), app.box), ik = `tama_phr_inv:${app.did}:${day}`;
+  let used = 0; try { used = Number(localStorage.getItem(ik) || 0); } catch { used = 0; }
+  app.chatN = (app.chatN ?? 0) + 1;
+  const p = pickPhrase(app.P, s, `${seed}:${app.chatN}:${Math.floor(Date.now() / 60_000)}`, { avoid: app.lastPhrase, investLeft: Number(app.P.invest_per_day ?? 2) - used, force: fresh ? "fed" : null });
+  if (!p) return null;
+  app.lastPhrase = p.id;
+  if (p.invest) try { localStorage.setItem(ik, String(used + 1)); } catch { /* 数えないだけ */ }
+  return p;
+}
+/** 喋ったり、黙ったり。食べた直後は必ず 1 回（食後の一言）喋り、あとは気まぐれに（6 割くらいで）いまの状態に合う一言を言う。
+ *  語録が読めなかったときは、これまでどおり最近のひとこと（モデルの一文）の頭を言う */
 function chatter(el, my) {
   if (!el) return;
   const speak = (fresh) => {
     if (my !== live || !el.isConnected) return;
-    const lines = app.sayLines ?? [];
-    if (lines.length && (fresh || Math.random() < 0.6)) {
-      el.firstChild.textContent = brief(fresh ? lines[0] : lines[Math.floor(Math.random() * Math.min(lines.length, 3))]);
-      el.classList.add("on");
-      setTimeout(() => { if (my === live) el.classList.remove("on"); }, 6000);
+    if (fresh || Math.random() < 0.6) {
+      const p = nextPhrase(fresh), lines = app.sayLines ?? [];
+      const t = p ? phraseText(p, getLang()) : lines.length ? { short: brief(fresh ? lines[0] : lines[Math.floor(Math.random() * Math.min(lines.length, 3))]), full: "" } : null;
+      if (t) {
+        el.firstChild.textContent = t.short;
+        if (t.full && t.full !== t.short) el.title = t.full; else el.removeAttribute("title");
+        el.classList.add("on");
+        setTimeout(() => { if (my === live) el.classList.remove("on"); }, 6000);
+      }
     }
     setTimeout(() => speak(false), 14000 + Math.random() * 16000);
   };
@@ -606,6 +637,7 @@ export async function start() {
   try { app.stats = await loadStats(); } catch { app.stats = null; }
   app.box = app.stats?.box?.config ?? (await (await fetch("tama_box.json")).json());
   try { app.F = await (await fetch("tama_furniture.json")).json(); } catch { app.F = null; }
+  try { app.P = await (await fetch("tama_phrases.json")).json(); } catch { app.P = null; }   // ひとことの語録（D-121）
   try { app.moods = await (await fetch(`moods.json?t=${Date.now()}`, { cache: "no-store" })).json(); } catch { app.moods = null; }
   setVenue(app.box.venue);
   K.serveTabs();

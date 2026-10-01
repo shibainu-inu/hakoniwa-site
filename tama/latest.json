@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-01T12:03:09Z",
-  "now_ms": 1790856189840,
+  "generated": "2026-10-01T12:37:15Z",
+  "now_ms": 1790858235883,
   "version": "tama/0.4",
   "config_sha256": "9d1c7daa237ce19dd7107cc7296f1ccf5cff580905918ceea4481b73cb68e2f1",
   "config": {
@@ -89,11 +89,17 @@
   "contracts": {
    "meal:settled": 15,
    "out:settled": 8,
-   "play:expired": 1,
+   "play:refunded": 1,
+   "play:rule": 1,
    "play:settled": 13
   },
   "stats": {},
-  "invalid": [],
+  "invalid": [
+   {
+    "contract": "0x10efeaeb71a62f82833e37d73b26172085fc73746e401b98961120eca02d4469",
+    "why": "play: over 5 plays that day"
+   }
+  ],
   "paper_total": 44140.0
  },
  "did": {
@@ -175,8 +181,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 82.08,
-    "mood": 77.08,
+    "hunger": 80.94,
+    "mood": 75.94,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 2,
@@ -298,8 +304,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 89.85,
-    "mood": 49.81,
+    "hunger": 88.71,
+    "mood": 48.68,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -494,8 +500,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 96.63,
-    "mood": 96.49,
+    "hunger": 95.49,
+    "mood": 95.35,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 3,
@@ -788,8 +794,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778869961,
-    "hunger": 32.04,
-    "mood": 37.04,
+    "hunger": 30.91,
+    "mood": 35.91,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
