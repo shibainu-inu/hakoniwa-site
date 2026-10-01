@@ -1,6 +1,6 @@
 // tama_room.js — 部屋（D-92、U-37 は仮）と、シェアの額縁（D-98）。家具の絵と解放の条件は tama_furniture.json（Python の tama_room.py も同じものを読む）。
 // 部屋は見た目だけ（数字は動かさない）。解放は生涯の数で決める（生まれ変わっても部屋は残る。D-91）。
-import { spriteRows, iconRows, inside, lineColor, THEMES } from "./tama_sprite.js";
+import { spriteRows, iconRows, inside, paint, THEMES } from "./tama_sprite.js";
 import { L } from "./tama_i18n.js";
 
 export const FRAME = { bg: "#f4f1ea", ink: "#16151c", sub: "#55525e", edge: "#c9a181" };   // 額縁（明るい地）
@@ -53,7 +53,7 @@ export function artSvg(rows, palette, theme = "css", cls = "") {
 /** 部屋の SVG。w×h、HAKO は真ん中の床に立つ（stage は育ちの段 egg・baby・hako）。hako: alive｜grave（墓と、横に浮かぶ幽霊）｜tomb（墓だけ）｜away（誰もいない）。theme: light｜dark｜css（画面。色を CSS の変数で持つ） */
 export function roomSvg(F, did, n, { w = 480, h = 300, px = 6, hako = "alive", stage = "hako", over = {}, theme = "light" } = {}) {
   const T = THEMES[theme];
-  const figure = (x, y, rows, color) => dots(x, y, inside(rows), HAKO_PX, T.in) + dots(x, y, rows, HAKO_PX, lineColor(color, theme));
+  const figure = (x, y, rows, color) => paint(dots, x, y, rows, HAKO_PX, color, theme);
   const floorY = Math.round(h * 0.62);
   let o = `<rect width="${w}" height="${h}" fill="${T.wall}"/><rect y="${floorY}" width="${w}" height="${h - floorY}" fill="${T.floor}"/><rect y="${floorY}" width="${w}" height="2" fill="${T.edge}"/>`;
   px = F.px ?? px;
@@ -111,13 +111,13 @@ function wrap(text, max, rowsMax) {
 }
 /** シェアの写真（1200×630）。部屋いっぱいの上に、切り抜きの記事が斜めに貼ってあり、そのすき間から HAKO が写り込もうとしている。
  *  下に、その HAKO の様子（おなか・ごきげん）とお世話の記録の札、右下に小さくロゴ。Python の tama_room.scrap_svg と同じ絵（リンクを貼ったときの画像）。数字はどれも、その時の帳簿と計算のまま（作らない）。
- *  o = { stage, grave, hunger, mood, hungerMax, moodMax, streak, rebirths, lines（記事）, say（ひとこと）, day（今日の日付） } */
+ *  o = { stage, level（飾りの段）, grave, hunger, mood, hungerMax, moodMax, streak, rebirths, lines（記事）, say（ひとこと）, day（今日の日付） } */
 export function scrapSvg(F, did, n, title, o = {}) {
   const W = 1200, H = 630, k = W / 480, floor = Math.round(300 * 0.62 * k) - 60;
   const room = roomSvg(F, did, n, { hako: o.grave ? "tomb" : "away", theme: "light" }).replace(/^<svg[^>]*>/, "").replace(/<\/svg>$/, "");
-  const fig = (rows, color, x, y, px) => dots(x, y, inside(rows), px, THEMES.light.in) + dots(x, y, rows, px, lineColor(color, "light"));
+  const fig = (rows, color, x, y, px) => paint(dots, x, y, rows, px, color, "light");
   // HAKO（お墓のあいだは幽霊）。切り抜きの左から、体を傾けてのぞく
-  const [rows, color] = spriteRows(did, o.grave ? "ghost" : o.stage ?? "hako");
+  const [rows, color] = spriteRows(did, o.grave ? "ghost" : o.stage ?? "hako", { level: o.level || 1 });
   const px = 12, hw = rows[0].length * px, hh = rows.length * px, hx = 290, hy = floor - hh + px * 2 - (o.grave ? 40 : 0);
   const hako = `<g transform="rotate(-9 ${hx + hw / 2} ${hy + hh})"${o.grave ? ' opacity="0.8"' : ""}>${fig(rows, color, hx, hy, px)}</g>`;
   // 切り抜き（記事。無ければひとこと。どちらも無ければ貼らない）

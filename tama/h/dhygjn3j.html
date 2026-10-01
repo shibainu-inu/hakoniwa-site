@@ -2,7 +2,7 @@
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HAKO …dhyGjn3j | ハコニワ</title>
 <meta property="og:title" content="HAKO …dhyGjn3j | ハコニワ"><meta property="og:description" content="箱のかたちのエージェントを育てる箱庭">
-<meta property="og:image" content="https://shibainu-inu.github.io/hakoniwa-site/tama/h/dhygjn3j.png?v=20261001090307"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://shibainu-inu.github.io/hakoniwa-site/tama/h/dhygjn3j.png?v=20261001100308"><meta name="twitter:card" content="summary_large_image">
 <style>
 :root{--bg:#f4f1ea;--card:#fff;--ink:#16151c;--muted:#55525e;--dim:#8b8794;--line:#eae6db;--soft:#f9f7f2;--accent:#8b6cf6;
 --good:#2fbf71;--mid:#ffc933;--bad:#d9434b;--meal:#ff8a3d;--out:#1fb5a8;--play:#ff6fb1;--room:#1d1c22;--shadow:0 1px 2px rgba(22,21,28,.06),0 8px 24px rgba(22,21,28,.06);
@@ -74,6 +74,13 @@ h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
 .fx.steam i:nth-child(1){left:24%}.fx.steam i:nth-child(2){left:58%;animation-delay:1.1s}
 .fx.drop i{left:82%;width:9%;aspect-ratio:1/2;clip-path:none;background:#6fc9dc;animation:fall 3.4s ease-in infinite}
 .stage .glow{transform-box:fill-box;transform-origin:center;animation:glow 5.5s ease-in-out infinite}
+.stage .hako svg{overflow:visible}
+.stage .hako .halo{transform-box:fill-box;transform-origin:center;animation:halo 3.2s ease-in-out infinite}
+.stage .hako .spark,.stage .hako .gold{filter:drop-shadow(0 0 2px #fff1a8)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .stage .hako .halo{animation-name:halo-dark}}
+:root[data-theme=dark] .stage .hako .halo{animation-name:halo-dark}
+.stage .hako .spark{animation:twinkle 1.8s steps(1,end) infinite}
+.stage .hako .gold{animation:gold 2.4s ease-in-out infinite}
 .stage .mote{position:absolute;width:.9cqw;height:.9cqw;background:var(--r-dim);opacity:0;animation:mote 16s linear infinite}
 .stage .ops{position:absolute;z-index:1;left:10px;right:10px;bottom:8px;display:flex;flex-direction:column;gap:1px;font-size:10.5px;line-height:1.5;color:var(--r-dim);pointer-events:none;white-space:nowrap;overflow:hidden}
 .stage .ops span{overflow:hidden;text-overflow:ellipsis;animation:type .7s steps(28) both}.stage .ops span.old{opacity:.45;animation:none}
@@ -100,6 +107,10 @@ h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
 @keyframes float{0%{opacity:0;transform:translateY(0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translateY(-190%) scale(1)}}
 @keyframes fall{0%,55%{opacity:0;transform:translateY(-420%)}65%{opacity:1}100%{opacity:0;transform:translateY(-120%)}}
 @keyframes glow{0%,100%{opacity:.16;transform:scale(1)}50%{opacity:.3;transform:scale(1.08)}}
+@keyframes halo{0%,100%{opacity:.3;transform:scale(.9)}50%{opacity:.75;transform:scale(1.1)}}
+@keyframes halo-dark{0%,100%{opacity:.08;transform:scale(.9)}50%{opacity:.22;transform:scale(1.1)}}
+@keyframes twinkle{0%,100%{opacity:0}12%,40%{opacity:1}}
+@keyframes gold{50%{opacity:.55}}
 @keyframes mote{0%{opacity:0;transform:translate(0,0)}15%{opacity:.5}85%{opacity:.35}100%{opacity:0;transform:translate(6cqw,-14cqw)}}
 @keyframes pop{from{opacity:0;transform:translateY(-6px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -272,4 +283,4 @@ footer.legal{max-width:1180px;margin:0 auto;padding:0 20px 24px;font-size:12px;c
 <body><main><header><h1><a href="../index.html" style="color:inherit">ハコニワ</a></h1></header>
 <section class="card"><img src="dhygjn3j.png" alt="HAKO …dhyGjn3j の部屋" style="width:100%;border-radius:8px">
 <p class="name">HAKO …dhyGjn3j</p><p class="small">連続 1 日</p><p class="bubble">A bit peckish, I contentedly crunch on my tasty treat, feeling my stomach growl with joy.</p></section>
-<footer>この HAKO の様子は、帳簿係が 2026-10-01T09:03:07Z に数えたものです。</footer></main></body></html>
+<footer>この HAKO の様子は、帳簿係が 2026-10-01T10:03:08Z に数えたものです。</footer></main></body></html>

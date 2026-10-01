@@ -219,10 +219,11 @@ export function setMotion(kind) {
   if (kind === "out") { slot.innerHTML = `<div class="away">${outSign()}<p>${L("おでかけ中", "Out for a walk")}</p></div>`; return; }
   const look = kind === "reborn" ? "egg" : grow;
   const fx = kind === "happy" ? `<span class="fx"><i></i><i></i><i></i></span>` : kind === "eat" ? `${bowl()}<span class="fx steam"><i></i><i></i></span>` : kind === "sad" && look === "hako" ? `<span class="fx drop"><i></i></span>` : "";
-  slot.innerHTML = `<div class="pos" style="${at(spriteRows(app.did, look)[0])}"><div class="shadow"></div><div class="hako"></div>${fx}<div class="say"><span></span></div></div>`;
+  slot.innerHTML = `<div class="pos" style="${at(spriteRows(app.did, look, { level: app.st?.accLevel ?? 1 })[0])}"><div class="shadow"></div><div class="hako"></div>${fx}<div class="say"><span></span></div></div>`;
   const fig = slot.querySelector(".hako"), shadow = slot.querySelector(".shadow");   // 動きが途切れないように、入れ物は残して中の絵だけ替える
   const frames = FRAMES[kind] ?? FRAMES.normal;
-  const show = (f) => { fig.innerHTML = spriteSvg(app.did, look, HAKO_PX, f); };
+  const level = app.st?.accLevel ?? 1;   // 飾りの段（D-119）。段 4 は光って動く
+  const show = (f) => { fig.innerHTML = spriteSvg(app.did, look, HAKO_PX, { level, ...f }); };
   show(frames[0]);
   const my = live;
   if (look !== "egg") chatter(slot.querySelector(".say"), my);
@@ -394,7 +395,7 @@ async function snapshot(m, st) {
   const stage = $("stage");
   if (stage) { stage.classList.remove("flash"); void stage.offsetWidth; stage.classList.add("flash"); }   // シャッターの光
   try {
-    const png = await svgToPng(scrapSvg(app.F, app.did, n, title, { stage: st.stage, grave: st.grave, hunger: st.hunger, mood: st.mood, hungerMax: app.box.hunger_max, moodMax: app.box.mood_max,
+    const png = await svgToPng(scrapSvg(app.F, app.did, n, title, { stage: st.stage, level: st.accLevel ?? 1, grave: st.grave, hunger: st.hunger, mood: st.mood, hungerMax: app.box.hunger_max, moodMax: app.box.mood_max,
       streak: st.streak, rebirths: st.rebirths, lines: art?.lines ?? [], say: said, day: localDay(Date.now(), app.box) }));
     const file = new File([png], `hako-${app.did.slice(-8).toLowerCase()}.png`, { type: "image/png" });
     const u = new URL(`h/${app.did.slice(-8).toLowerCase()}.html`, location.href);
@@ -484,7 +485,7 @@ function eyes() {
 /** 鍵を開く前の姿（帳簿から分かる育ちの段で、目を閉じて眠る。お墓なら幽霊） */
 function sleeping() {
   let st = null; try { st = lifeState(merged(app.stats, app.did).events, Date.now(), app.box); } catch { st = null; }
-  return spriteSvg(app.did, st?.born ? (st.grave ? "ghost" : st.stage) : "egg", 6, { eye: "line" });
+  return spriteSvg(app.did, st?.born ? (st.grave ? "ghost" : st.stage) : "egg", 6, { eye: "line", level: st?.accLevel ?? 1 });
 }
 function renderUnlock() {
   $("view").innerHTML = `

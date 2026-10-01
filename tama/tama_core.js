@@ -79,9 +79,17 @@ export function lifeState(events, now, box) {
   const outsToday = ev.filter((e) => e.t === "out" && e.ms >= s.bornAt && localDay(e.ms, box) === today).length;
   return { born: true, alive: !s.grave, grave: s.grave, graveAt: s.graveAt, bornAt: s.bornAt,
     hunger: round2(s.hunger), mood: round2(s.mood), streak, rebirths, outsToday, careDays: days.length, lastCare: s.lastCare ?? null,
-    cares: s.cares, stage: growthStage(s.cares, days.length, now - s.bornAt, box) };
+    cares: s.cares, stage: growthStage(s.cares, days.length, now - s.bornAt, box),
+    accLevel: accLevel(s.cares, growthStage(s.cares, days.length, now - s.bornAt, box), box) };
 }
 export const round2 = (x) => Math.round(x * 100) / 100;
+/** 飾りの段（D-119）: HAKO になってから、いまの命のお世話の合計が acc_grow_cares（毎日上限まで全部のお世話で 2 日ずつ）に届くたびに 1 段。1〜4。生まれ変わると 1 から */
+export function accLevel(cares, stage, box) {
+  if (stage !== "hako") return 1;
+  let lv = 1;
+  for (const c of box.acc_grow_cares ?? []) if (cares >= Number(c)) lv += 1;
+  return Math.min(lv, 4);
+}
 /** 育ちの段（D-107、D-109）: 回数だけでは進まず、時間もかかる。値は仮（hatch_cares・hatch_hours・grow_hours・grow_care_days） */
 export function growthStage(cares, careDays, ageMs, box) {
   const h = ageMs / HOUR;
