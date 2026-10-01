@@ -462,14 +462,18 @@ function renderEgg() {
       <h2>${L("HAKO を迎える", "Welcome a HAKO")}</h2>
       <p>${L("このブラウザの中で鍵を作り、あなたの HAKO が生まれます。鍵は外に送りません。なくすと HAKO を動かせなくなるので、生まれたあとに鍵ファイルを保存してください。", "A key is made inside this browser and your HAKO is born. The key is never sent anywhere. If you lose it you can't move your HAKO, so save the key file once it is born.")}</p>
       <p class="note">${L(`はじめに ${fmt(app.box.initial_paper)} $PAPER を受け取ります。PAPER はこの箱庭の中だけの点数で、お金としての価値はありません。換金も売り買いもできません。`, `You start with ${fmt(app.box.initial_paper)} $PAPER. PAPER is only a score inside this garden and has no monetary value. It can't be cashed out, bought or sold.`)}</p>
-      <label>${L("パスフレーズ（鍵を開くときに使います）", "Passphrase (used to unlock your key)")}<span class="pw"><input id="p1" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="p1,p2"></button></span></label>
-      <label>${L("もう一度", "Once more")}<span class="pw"><input id="p2" type="password" autocomplete="new-password"></span></label>
+      <form class="keyf" id="kf" method="post" action="#">
+      <input class="vh" id="u1" name="username" type="text" autocomplete="username" tabindex="-1" aria-hidden="true" value="">
+      <label>${L("パスフレーズ（HAKO を起こすときに使います）", "Passphrase (to wake your HAKO)")}<span class="pw"><input id="p1" name="password" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="p1,p2"></button></span></label>
+      <label>${L("もう一度", "Once more")}<span class="pw"><input id="p2" name="password2" type="password" autocomplete="new-password"></span></label>
+      <p class="small">${L("ブラウザにパスワードの保存をすすめられたら、保存すると次から自動で入力されます。共用の端末では保存しないでください。", "If your browser offers to save it, you can, and it will fill in next time. Don't save it on a shared device.")}</p>
       <p id="why" class="why"></p>
-      <div class="actions"><button class="btn" id="born" style="--c:var(--good)"><span class="dot" style="background:var(--good)"></span>${L("生まれる", "Be born")}</button></div>
+      <div class="actions"><button type="submit" class="btn" id="born" style="--c:var(--good)"><span class="dot" style="background:var(--good)"></span>${L("生まれる", "Be born")}</button></div>
+      </form>
       <p class="small">${L("鍵ファイルがあるときは", "Have a key file?")} <label class="link">${L("ファイルから読み込む", "Load it from a file")}<input id="file" type="file" accept="application/json" hidden></label></p>
     </section>`;
   eyes();
-  $("born").onclick = register;
+  $("kf").onsubmit = (e) => { e.preventDefault(); register(); };
   $("file").onchange = importKey;
 }
 /** パスフレーズの「表示／隠す」 */
@@ -482,7 +486,7 @@ function eyes() {
   const label = (b) => { b.textContent = b.dataset.on ? L("隠す", "Hide") : L("表示", "Show"); b.setAttribute("aria-label", b.dataset.on ? L("パスフレーズを隠す", "Hide passphrase") : L("パスフレーズを表示する", "Show passphrase")); };
   for (const b of document.querySelectorAll("[data-eye]")) label(b);
 }
-/** 鍵を開く前の姿（帳簿から分かる育ちの段で、目を閉じて眠る。お墓なら幽霊） */
+/** 起こす前の姿（帳簿から分かる育ちの段で、目を閉じて眠る。お墓なら幽霊） */
 function sleeping() {
   let st = null; try { st = lifeState(merged(app.stats, app.did).events, Date.now(), app.box); } catch { st = null; }
   return spriteSvg(app.did, st?.born ? (st.grave ? "ghost" : st.stage) : "egg", 6, { eye: "line", level: st?.accLevel ?? 1 });
@@ -491,15 +495,18 @@ function renderUnlock() {
   $("view").innerHTML = `
     <section class="card" id="me">
       <div class="stage plain">${app.did ? `<div class="hako">${sleeping()}</div>` : ""}</div>
-      <p>${L(`HAKO …${esc(app.did.slice(-8))} が眠っています。パスフレーズで鍵を開いてください。`, `HAKO …${esc(app.did.slice(-8))} is asleep. Unlock the key with your passphrase.`)}</p>
-      <label>${L("パスフレーズ", "Passphrase")}<span class="pw"><input id="p1" type="password" autocomplete="current-password"><button type="button" class="eye" data-eye="p1"></button></span></label>
+      <p>${L(`HAKO …${esc(app.did.slice(-8))} が眠っています。パスフレーズを入れると起きます。`, `HAKO …${esc(app.did.slice(-8))} is asleep. Enter your passphrase to wake it.`)}</p>
+      <form class="keyf" id="kf" method="post" action="#">
+      <input class="vh" name="username" type="text" autocomplete="username" tabindex="-1" aria-hidden="true" value="${esc(K.loginName(app.did))}" readonly>
+      <label>${L("パスフレーズ", "Passphrase")}<span class="pw"><input id="p1" name="password" type="password" autocomplete="current-password"><button type="button" class="eye" data-eye="p1"></button></span></label>
+      <p class="small">${L("ブラウザにパスワードの保存をすすめられたら、保存すると次から自動で入力されます。共用の端末では保存しないでください。", "If your browser offers to save it, you can, and it will fill in next time. Don't save it on a shared device.")}</p>
       <p id="why" class="why"></p>
-      <div class="actions"><button class="btn" id="open">${L("鍵を開く", "Unlock")}</button></div>
-      <label class="small"><input id="tab" type="checkbox" checked> ${L("タブを閉じるまで覚える（開いているほかのタブでも、入れ直さずに使えます）", "Remember until this tab is closed (other open tabs can use it without re-entering)")}</label>
+      <div class="actions"><button type="submit" class="btn" id="open">${L("HAKO を起こす", "Wake HAKO")}</button></div>
+      <label class="small"><input id="tab" type="checkbox" checked> ${L("このタブを閉じるまで起こしたままにする（開いているほかのタブでも、入れ直さずに使えます）", "Keep awake until this tab is closed (works in your other open tabs too)")}</label>
+      </form>
     </section>`;
   eyes();
-  $("open").onclick = unlock;
-  $("p1").onkeydown = (e) => { if (e.key === "Enter") unlock(); };
+  $("kf").onsubmit = (e) => { e.preventDefault(); unlock(); };
 }
 /** 知らせを出す。bad = うまくいかなかった知らせ（色を変える）。出したら見える所まで動かす */
 const say = (s, bad = true) => { app.why = s; app.whyBad = !!s && bad; app.whyAt = Date.now(); const w = $("why"); if (!w) return; w.textContent = s; w.classList.toggle("bad", !!s && bad); if (s) w.scrollIntoView?.({ block: "nearest", behavior: "smooth" }); };
@@ -512,11 +519,13 @@ async function register() {
   say(L("鍵を作っています…", "Making your key…"), false);
   const { priv, did, rec } = await K.makeKey(p1);
   K.saveRec(rec); await K.rememberTab(priv, did);
+  const u = $("u1"); if (u) u.value = K.loginName(did);   // パスワード保存の「ユーザー名」（どの HAKO のパスフレーズか）
   app.did = did; app.priv = priv; app.signer = watched(makeSigner(did, priv));
   try {
     await app.signer.post(app.box.board, tamaLine({ t: "join", v: 1, n: rand() }));
   } catch (e) { say(L(`掲示板に出せませんでした（${e.message}）。もう一度押してください`, `Couldn't post to the board (${e.message}). Please press again.`)); return; }
   addLocal(did, { t: "join", ms: Date.now() });
+  K.offerSave(did, p1);
   K.downloadRec(rec);
   app.rebornUntil = Date.now() + 2500; setTimeout(render, 2600);
   await boot();
@@ -531,8 +540,10 @@ async function importKey(ev) {
 async function unlock() {
   const rec = K.loadRec();
   try {
-    const priv = await K.openKey(rec, $("p1").value);
+    const pass = $("p1").value;
+    const priv = await K.openKey(rec, pass);
     app.priv = priv; app.signer = watched(makeSigner(app.did, priv));
+    K.offerSave(app.did, pass);
     if ($("tab").checked) await K.rememberTab(priv, app.did);
     await boot();
   } catch { say(L("パスフレーズが違います", "Wrong passphrase")); }

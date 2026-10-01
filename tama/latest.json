@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-01T10:03:08Z",
-  "now_ms": 1790848988200,
+  "generated": "2026-10-01T11:03:08Z",
+  "now_ms": 1790852588895,
   "version": "tama/0.4",
   "config_sha256": "9d1c7daa237ce19dd7107cc7296f1ccf5cff580905918ceea4481b73cb68e2f1",
   "config": {
@@ -87,9 +87,10 @@
   },
   "hakos": 4,
   "contracts": {
-   "meal:settled": 13,
+   "meal:settled": 14,
    "out:settled": 7,
-   "play:settled": 11
+   "play:open": 1,
+   "play:settled": 12
   },
   "stats": {},
   "invalid": [],
@@ -99,9 +100,9 @@
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
    "joined": null,
    "operator": true,
-   "balance": -50.0,
-   "earned": 900.0,
-   "spent": 950.0,
+   "balance": 0.0,
+   "earned": 1000.0,
+   "spent": 1000.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -158,8 +159,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 81.08,
-    "mood": 61.08,
+    "hunger": 79.08,
+    "mood": 59.08,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 1,
@@ -247,8 +248,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 93.85,
-    "mood": 53.81,
+    "hunger": 91.85,
+    "mood": 51.81,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -288,9 +289,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 9080.0,
-   "earned": 800.0,
-   "spent": 4640.0,
+   "balance": 8790.0,
+   "earned": 850.0,
+   "spent": 4980.0,
    "issued": 12920.0,
    "events": [
     {
@@ -424,6 +425,17 @@
      "ms": 1790848890929,
      "contract": "0x45e047569ebde1f19d2723062f133c6dc29eea78d11ae727065bfebdbca4e155",
      "payout": 50
+    },
+    {
+     "t": "play",
+     "ms": 1790849863965,
+     "contract": "0x8452d571060c8781bc42518cb78cacd21b41eb32ea52fe7768cf3eb55fbb1f1d",
+     "payout": 50
+    },
+    {
+     "t": "meal",
+     "ms": 1790850122907,
+     "contract": "0x87d19d4613644ca3057d35336778cb4d7ead4b6fa1314634d685e3f95345625e"
     }
    ],
    "state": {
@@ -432,14 +444,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 81.57,
-    "mood": 99.95,
+    "hunger": 98.63,
+    "mood": 98.49,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 3,
     "careDays": 2,
-    "lastCare": 1790848890929,
-    "cares": 24,
+    "lastCare": 1790850122907,
+    "cares": 26,
     "stage": "baby",
     "accLevel": 1
    },
@@ -493,6 +505,11 @@
      "contract": "0x584e091bc3bb28c871e91c036da86b506eba0ee6f88ed58773948703c7442664",
      "ms": 1790834206604,
      "line": "I'm so happy to be full!"
+    },
+    {
+     "contract": "0x87d19d4613644ca3057d35336778cb4d7ead4b6fa1314634d685e3f95345625e",
+     "ms": 1790850122907,
+     "line": "A bit peckish after the delicious meal, I am feeling very cheerful now."
     }
    ],
    "outs": [
@@ -685,9 +702,22 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 50
+    },
+    {
+     "contract": "0x8452d571060c8781bc42518cb78cacd21b41eb32ea52fe7768cf3eb55fbb1f1d",
+     "ms": 1790849863965,
+     "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
+     "stake": 100,
+     "payout": 50
     }
    ],
-   "pending": []
+   "pending": [
+    {
+     "contract": "0x6c7369dc9e6f54fb322bdbea78bf35e8e248aef5d7627ca68222f150af99753b",
+     "kind": "play",
+     "status": "open"
+    }
+   ]
   },
   "did:key:z6MknCE1Ze1iyrbqQj1CHjSGbKQhdtymDgafQoZzjpDgTfAg": {
    "joined": "2026-09-30T14:34:29.961367Z",
@@ -714,8 +744,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778869961,
-    "hunger": 36.05,
-    "mood": 41.05,
+    "hunger": 34.05,
+    "mood": 39.05,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -741,8 +771,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 4800.0,
-   "earned": 4800.0,
+   "balance": 5040.0,
+   "earned": 5040.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],

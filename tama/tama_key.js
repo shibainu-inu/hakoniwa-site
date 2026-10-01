@@ -32,6 +32,13 @@ export async function openKey(rec, pass) {
 }
 export function loadRec() { try { const s = localStorage.getItem(KEY); const j = s ? JSON.parse(s) : null; return j && j.did ? j : null; } catch { return null; } }
 export function saveRec(rec) { try { localStorage.setItem(KEY, JSON.stringify(rec)); return true; } catch { return false; } }
+/** ブラウザのパスワード保存で使う「ユーザー名」。どの HAKO のパスフレーズかが分かる名前（D-120） */
+export const loginName = (did) => `HAKO …${short8(did)}`;
+/** パスワード保存をすすめてもらう（対応しているブラウザだけ。Chrome など PasswordCredential を持つもの）。
+ *  ほかのブラウザは、form の送信とそのあとの画面の切り替わりで、自分から保存をすすめる。ハコニワ側には何も残さない */
+export async function offerSave(did, pass) {
+  try { if (typeof PasswordCredential === "function" && navigator.credentials?.store) await navigator.credentials.store(new PasswordCredential({ id: loginName(did), password: pass, name: loginName(did) })); } catch { /* すすめないだけ */ }
+}
 export function isKeyFile(j) { return !!(j && j.kind === "tama-key" && j.did && j.kdf && j.enc); }
 /** 鍵ファイル（暗号化されたまま）をダウンロードさせる */
 export function downloadRec(rec) {
