@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-01T06:03:07Z",
-  "now_ms": 1790834587537,
+  "generated": "2026-10-01T07:03:08Z",
+  "now_ms": 1790838188268,
   "version": "tama/0.3",
   "config_sha256": "8f701efaa6049603a78a79537751734bba8894d7c98aec1eaf040d4aaaeb17ce",
   "config": {
@@ -80,15 +80,15 @@
    "meal_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after eating. Use the mood words given. No numbers, no names, no quotes.",
    "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
   },
-  "hakos": 3,
+  "hakos": 4,
   "contracts": {
-   "meal:settled": 12,
+   "meal:settled": 13,
    "out:settled": 7,
    "play:settled": 10
   },
   "stats": {},
   "invalid": [],
-  "paper_total": 33680.0
+  "paper_total": 43680.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -153,8 +153,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 89.08,
-    "mood": 69.08,
+    "hunger": 87.08,
+    "mood": 67.08,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 1,
@@ -215,6 +215,51 @@
      "payout": 150
     }
    ],
+   "pending": []
+  },
+  "did:key:z6Mkk22cikHgVNX1oNjX4urjvN2TqZCJg9q5JMFkdhyGjn3j": {
+   "joined": "2026-10-01T06:57:34.462706Z",
+   "operator": false,
+   "balance": 9760.0,
+   "earned": 0.0,
+   "spent": 240.0,
+   "issued": 10000.0,
+   "events": [
+    {
+     "t": "join",
+     "ms": 1790837854462
+    },
+    {
+     "t": "meal",
+     "ms": 1790837916118,
+     "contract": "0x39fb59fec81c57b5bab1e34eb51dd5974eec5a696236992a3f5407bf77d7e169"
+    }
+   ],
+   "state": {
+    "born": true,
+    "alive": true,
+    "grave": false,
+    "graveAt": null,
+    "bornAt": 1790837854462,
+    "hunger": 99.85,
+    "mood": 59.81,
+    "streak": 1,
+    "rebirths": 0,
+    "outsToday": 0,
+    "careDays": 1,
+    "lastCare": 1790837916118,
+    "cares": 1,
+    "stage": "egg"
+   },
+   "meals": [
+    {
+     "contract": "0x39fb59fec81c57b5bab1e34eb51dd5974eec5a696236992a3f5407bf77d7e169",
+     "ms": 1790837916118,
+     "line": "A bit peckish, I contentedly crunch on my tasty treat, feeling my stomach growl with joy."
+    }
+   ],
+   "outs": [],
+   "plays": [],
    "pending": []
   },
   "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k": {
@@ -374,8 +419,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 94.57,
-    "mood": 99.37,
+    "hunger": 92.57,
+    "mood": 97.37,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 3,
@@ -648,8 +693,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778869961,
-    "hunger": 44.05,
-    "mood": 49.05,
+    "hunger": 42.05,
+    "mood": 47.05,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -674,8 +719,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 4560.0,
-   "earned": 4560.0,
+   "balance": 4800.0,
+   "earned": 4800.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
