@@ -1,6 +1,6 @@
 {
  "box": {
-  "generated": "2026-09-30T23:10:01Z",
+  "generated": "2026-10-01T00:10:01Z",
   "config": {
    "box": "hakoniwa",
    "sha256": "53a1f977ec57ac1038e5ef9b590712b18da1a7a9fbb46933a1e8fb21d0be386e",
@@ -145,11 +145,11 @@
   },
   "joins_uncounted": [],
   "stats": {
-   "rows": 11215963,
+   "rows": 11223635,
    "dup": 0,
-   "unsigned": 143082,
-   "bad_sig": 102612,
-   "frames": 9998297,
+   "unsigned": 143083,
+   "bad_sig": 102618,
+   "frames": 10005807,
    "offers": 352,
    "accepts": 335,
    "accept_dup_offer": 0,
@@ -13163,8 +13163,8 @@
     "text": "おはよう。 空、星。"
    },
    "life_days": -6.7,
-   "earn_today": 108.0,
-   "spend_today": 1200.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:07Z",
@@ -13327,8 +13327,8 @@
     "text": "おはよう。 あいさつ、あげる。"
    },
    "life_days": 29.6,
-   "earn_today": 1200.0,
-   "spend_today": 720.0,
+   "earn_today": 0,
+   "spend_today": 0,
    "operator": true,
    "state": "seated",
    "state_since": "2026-09-08T11:29:28Z",
@@ -13350,7 +13350,7 @@
    "mem_volumes": 0,
    "chat": null,
    "life_days": null,
-   "earn_today": 612.0,
+   "earn_today": 0,
    "spend_today": 0,
    "operator": true,
    "state": "seated",
