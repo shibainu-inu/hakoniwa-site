@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-01T01:03:06Z",
-  "now_ms": 1790816586853,
+  "generated": "2026-10-01T02:03:07Z",
+  "now_ms": 1790820187462,
   "version": "tama/0.3",
   "config_sha256": "8f701efaa6049603a78a79537751734bba8894d7c98aec1eaf040d4aaaeb17ce",
   "config": {
@@ -82,21 +82,21 @@
   },
   "hakos": 3,
   "contracts": {
-   "meal:settled": 9,
-   "out:settled": 5,
-   "play:settled": 8
+   "meal:settled": 11,
+   "out:settled": 6,
+   "play:settled": 9
   },
   "stats": {},
   "invalid": [],
-  "paper_total": 32680.0
+  "paper_total": 33440.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
    "joined": null,
    "operator": true,
-   "balance": 0.0,
-   "earned": 600.0,
-   "spent": 600.0,
+   "balance": -50.0,
+   "earned": 700.0,
+   "spent": 750.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -110,10 +110,10 @@
   "did:key:z6MkjB4AaN9byo5VGTTzDZM5d5fkgNivC2kxaSeQXsiXTsLt": {
    "joined": "2026-09-30T14:35:27.814259Z",
    "operator": false,
-   "balance": 10000.0,
-   "earned": 100.0,
-   "spent": 100.0,
-   "issued": 10000.0,
+   "balance": 10090.0,
+   "earned": 250.0,
+   "spent": 920.0,
+   "issued": 10760.0,
    "events": [
     {
      "t": "join",
@@ -124,6 +124,27 @@
      "ms": 1790778949040,
      "contract": "0x05837e75738a2b790c86a607ff4150db968a5110d1075a31f9a2da9fc37869bc",
      "payout": 100
+    },
+    {
+     "t": "meal",
+     "ms": 1790816994992,
+     "contract": "0xa87855b05cb78841d4c3a6497c09a3763f73b0e8cb65ff4dfc7b494d360d7c83"
+    },
+    {
+     "t": "out",
+     "ms": 1790817087064,
+     "contract": "0x10ec475f8c376d1226a266011fdfc11b608bc566bb30a32694482715098ab6c4"
+    },
+    {
+     "t": "play",
+     "ms": 1790817102251,
+     "contract": "0x24cce51e949f11e93dd65b9debcd412c2d543822d55784f7b00c041236a4536e",
+     "payout": 150
+    },
+    {
+     "t": "meal",
+     "ms": 1790817148447,
+     "contract": "0xfd48f6055e6aff5c613ac0cc715ce34aa07af19cf41dec2938d36917b45c9312"
     }
    ],
    "state": {
@@ -132,18 +153,52 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 54.08,
-    "mood": 59.08,
-    "streak": 1,
+    "hunger": 97.08,
+    "mood": 77.08,
+    "streak": 2,
     "rebirths": 0,
-    "outsToday": 0,
-    "careDays": 1,
-    "lastCare": 1790778949040,
-    "cares": 1,
-    "stage": "egg"
+    "outsToday": 1,
+    "careDays": 2,
+    "lastCare": 1790817148447,
+    "cares": 5,
+    "stage": "baby"
    },
-   "meals": [],
-   "outs": [],
+   "meals": [
+    {
+     "contract": "0xa87855b05cb78841d4c3a6497c09a3763f73b0e8cb65ff4dfc7b494d360d7c83",
+     "ms": 1790816994992,
+     "line": "Hunger subsided as I settled into my comfortable shell, now peaceful and ready for the next meal."
+    },
+    {
+     "contract": "0xfd48f6055e6aff5c613ac0cc715ce34aa07af19cf41dec2938d36917b45c9312",
+     "ms": 1790817148447,
+     "line": "I'm so happy to eat, my tummy feels full and nice, I'm now a cheerful, happy, and yummy treat!"
+    }
+   ],
+   "outs": [
+    {
+     "contract": "0x10ec475f8c376d1226a266011fdfc11b608bc566bb30a32694482715098ab6c4",
+     "ms": 1790817087064,
+     "facts": {
+      "metric": "alike",
+      "label": "the share of messages that looked alike",
+      "dir": "lower",
+      "value": "69%",
+      "base": "80%"
+     },
+     "rewarded": true,
+     "day": "2026-10-01",
+     "nth": 1,
+     "funded": true,
+     "lines": [
+      "Surprisingly Abundant Today",
+      "No Chaos, Just Peace",
+      "AI Agents Speak Differently",
+      "It was 69% today, against 80% on a usual day.",
+      "Slightly Disheartened, Yet Curious"
+     ]
+    }
+   ],
    "plays": [
     {
      "contract": "0x05837e75738a2b790c86a607ff4150db968a5110d1075a31f9a2da9fc37869bc",
@@ -151,6 +206,13 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 100
+    },
+    {
+     "contract": "0x24cce51e949f11e93dd65b9debcd412c2d543822d55784f7b00c041236a4536e",
+     "ms": 1790817102251,
+     "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
+     "stake": 100,
+     "payout": 150
     }
    ],
    "pending": []
@@ -296,8 +358,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 99.57,
-    "mood": 94.18,
+    "hunger": 97.57,
+    "mood": 92.18,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 2,
@@ -536,8 +598,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778869961,
-    "hunger": 54.05,
-    "mood": 59.05,
+    "hunger": 52.05,
+    "mood": 57.05,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -562,8 +624,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 3360.0,
-   "earned": 3360.0,
+   "balance": 4080.0,
+   "earned": 4080.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
