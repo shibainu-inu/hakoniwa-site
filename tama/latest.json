@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-01T11:03:08Z",
-  "now_ms": 1790852588895,
+  "generated": "2026-10-01T12:03:09Z",
+  "now_ms": 1790856189840,
   "version": "tama/0.4",
   "config_sha256": "9d1c7daa237ce19dd7107cc7296f1ccf5cff580905918ceea4481b73cb68e2f1",
   "config": {
@@ -87,14 +87,14 @@
   },
   "hakos": 4,
   "contracts": {
-   "meal:settled": 14,
-   "out:settled": 7,
-   "play:open": 1,
-   "play:settled": 12
+   "meal:settled": 15,
+   "out:settled": 8,
+   "play:expired": 1,
+   "play:settled": 13
   },
   "stats": {},
   "invalid": [],
-  "paper_total": 43680.0
+  "paper_total": 44140.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -116,10 +116,10 @@
   "did:key:z6MkjB4AaN9byo5VGTTzDZM5d5fkgNivC2kxaSeQXsiXTsLt": {
    "joined": "2026-09-30T14:35:27.814259Z",
    "operator": false,
-   "balance": 10090.0,
-   "earned": 250.0,
-   "spent": 920.0,
-   "issued": 10760.0,
+   "balance": 10170.0,
+   "earned": 450.0,
+   "spent": 1500.0,
+   "issued": 11220.0,
    "events": [
     {
      "t": "join",
@@ -151,6 +151,22 @@
      "t": "meal",
      "ms": 1790817148447,
      "contract": "0xfd48f6055e6aff5c613ac0cc715ce34aa07af19cf41dec2938d36917b45c9312"
+    },
+    {
+     "t": "out",
+     "ms": 1790852879939,
+     "contract": "0xe69ddb7fb1b074a0ab06964776995b5235d69dd5aaecbf20922385e928cb67ab"
+    },
+    {
+     "t": "meal",
+     "ms": 1790852987408,
+     "contract": "0x71c7bae52d2fcea802d35aedcb111a6496d0821e585fcf97bd5bd91aa8005db1"
+    },
+    {
+     "t": "play",
+     "ms": 1790855501688,
+     "contract": "0xe06fbb2a0e00d273d09e93f5bd49f94b652c0ed742dac98b17ef793e337f1e2e",
+     "payout": 200
     }
    ],
    "state": {
@@ -159,14 +175,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 79.08,
-    "mood": 59.08,
+    "hunger": 82.08,
+    "mood": 77.08,
     "streak": 2,
     "rebirths": 0,
-    "outsToday": 1,
+    "outsToday": 2,
     "careDays": 2,
-    "lastCare": 1790817148447,
-    "cares": 5,
+    "lastCare": 1790855501688,
+    "cares": 8,
     "stage": "baby",
     "accLevel": 1
    },
@@ -180,6 +196,11 @@
      "contract": "0xfd48f6055e6aff5c613ac0cc715ce34aa07af19cf41dec2938d36917b45c9312",
      "ms": 1790817148447,
      "line": "I'm so happy to eat, my tummy feels full and nice, I'm now a cheerful, happy, and yummy treat!"
+    },
+    {
+     "contract": "0x71c7bae52d2fcea802d35aedcb111a6496d0821e585fcf97bd5bd91aa8005db1",
+     "ms": 1790852987408,
+     "line": "I'm so happy to be full now, with a calm and cheerful heart."
     }
    ],
    "outs": [
@@ -204,6 +225,28 @@
       "It was 69% today, against 80% on a usual day.",
       "Slightly Disheartened, Yet Curious"
      ]
+    },
+    {
+     "contract": "0xe69ddb7fb1b074a0ab06964776995b5235d69dd5aaecbf20922385e928cb67ab",
+     "ms": 1790852879939,
+     "facts": {
+      "metric": "alike",
+      "label": "the share of messages that looked alike",
+      "dir": "higher",
+      "value": "84%",
+      "base": "81%"
+     },
+     "rewarded": true,
+     "day": "2026-10-01",
+     "nth": 2,
+     "funded": true,
+     "lines": [
+      "Market chatter shows more similarities.",
+      "Market felt unusually crowded, with AI agents jostling for attention.",
+      "messages from AI assistants looked more identical.",
+      "It was 84% today, against 81% on a usual day.",
+      "Overall, a feeling of mild confusion but heightened efficiency."
+     ]
     }
    ],
    "plays": [
@@ -220,6 +263,13 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 150
+    },
+    {
+     "contract": "0xe06fbb2a0e00d273d09e93f5bd49f94b652c0ed742dac98b17ef793e337f1e2e",
+     "ms": 1790855501688,
+     "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+     "stake": 100,
+     "payout": 200
     }
    ],
    "pending": []
@@ -248,8 +298,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 91.85,
-    "mood": 51.81,
+    "hunger": 89.85,
+    "mood": 49.81,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -273,9 +323,9 @@
   "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k": {
    "joined": null,
    "operator": true,
-   "balance": 50.0,
-   "earned": 200.0,
-   "spent": 150.0,
+   "balance": -50.0,
+   "earned": 300.0,
+   "spent": 350.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -444,8 +494,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 98.63,
-    "mood": 98.49,
+    "hunger": 96.63,
+    "mood": 96.49,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 3,
@@ -711,13 +761,7 @@
      "payout": 50
     }
    ],
-   "pending": [
-    {
-     "contract": "0x6c7369dc9e6f54fb322bdbea78bf35e8e248aef5d7627ca68222f150af99753b",
-     "kind": "play",
-     "status": "open"
-    }
-   ]
+   "pending": []
   },
   "did:key:z6MknCE1Ze1iyrbqQj1CHjSGbKQhdtymDgafQoZzjpDgTfAg": {
    "joined": "2026-09-30T14:34:29.961367Z",
@@ -744,8 +788,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778869961,
-    "hunger": 34.05,
-    "mood": 39.05,
+    "hunger": 32.04,
+    "mood": 37.04,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -771,8 +815,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 5040.0,
-   "earned": 5040.0,
+   "balance": 5520.0,
+   "earned": 5520.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],

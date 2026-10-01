@@ -94,7 +94,13 @@ export class Deal {
     }
     if (st.stage === "locking") {   // lock の投稿が失敗した（429 = 新規部屋の枠切れ など）: claimByMs まで出し直す。過ぎたら PAPER は動いていない
       if (now >= o.claimByMs) { this.set("gate", { done: true }); this.note(L("会場が混んでいて部屋を開けませんでした。PAPER は動いていません", "The venue was too busy to open a room. No PAPER moved.")); return; }
-      try { await this.app.signer.post(st.room, tclk.encodeFrame(st.lock ?? { type: "lock", from: this.app.did, contract: st.contract, rail: "paper", ref: st.contract }), { gateUntilMs: o.claimByMs }); }
+      if (!st.lock) {   // レールの lock の前に落ちた（ノートに書けなかった など）: レールの lock からやり直して、lock を残す
+        let step = null; try { step = tclk.applyFrame(tclk.openContract(o), st.accept, Math.min(now, o.expiresMs - 1)); } catch { step = null; }
+        const existing = await this.rail.read(st.contract).catch(() => null);
+        const ref = existing || !step?.ok ? st.contract : await this.rail.lock(tclk.lockTerms(step.state));   // PaperRail.lock は契約 id を返す（~/tclk src/paper-rail.ts:113-126）
+        this.set("locking", { lock: { type: "lock", from: this.app.did, contract: st.contract, rail: "paper", ref } });
+      }
+      try { await this.app.signer.post(st.room, tclk.encodeFrame(this.st.lock), { gateUntilMs: o.claimByMs }); }
       catch (e) { this.note(e.status === 429 ? L("会場の部屋の数が今日の上限に近いので、少し待ってからもう一度開きます", "The venue is near today's room limit, so it will try again in a moment.") : L(`部屋を開けませんでした（${e.message}）。もう一度試します`, `Couldn't open a room (${e.message}). Trying again.`)); return; }
       this.set("locked", { locked: true });
       return;
@@ -120,8 +126,9 @@ export class Deal {
       }
       if (reveal) return this.finish(lines, reveal.ms);
       if (now >= o.refundAfterMs) {
-        try { await this.rail.refund(st.lock.ref); } catch { /* ノートは誰でも書けるので、帳簿係は部屋の refund を数える */ }
-        await this.app.signer.post(st.room, tclk.encodeFrame({ type: "refund", from: this.app.did, contract: st.contract, ref: st.lock.ref }));
+        const ref = st.lock?.ref ?? st.contract;   // lock を残せなかった取引（2026-10-01 まで）でも返金できるように。ref は契約 id と同じ
+        try { await this.rail.refund(ref); } catch { /* ノートは誰でも書けるので、帳簿係は部屋の refund を数える */ }
+        await this.app.signer.post(st.room, tclk.encodeFrame({ type: "refund", from: this.app.did, contract: st.contract, ref }));
         this.set("refunded", { done: true, locked: false }); this.note(L("期限までに届かなかったので、PAPER を戻しました", "It didn't arrive in time, so the PAPER was returned."));
       }
     }
