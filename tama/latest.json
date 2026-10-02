@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-02T01:03:14Z",
-  "now_ms": 1790902994376,
+  "generated": "2026-10-02T02:03:16Z",
+  "now_ms": 1790906596900,
   "version": "tama/0.4",
   "config_sha256": "9d1c7daa237ce19dd7107cc7296f1ccf5cff580905918ceea4481b73cb68e2f1",
   "config": {
@@ -88,8 +88,8 @@
   "hakos": 4,
   "contracts": {
    "meal:settled": 17,
-   "out:expired": 1,
-   "out:settled": 9,
+   "out:refunded": 1,
+   "out:settled": 11,
    "play:refunded": 1,
    "play:rule": 1,
    "play:settled": 17
@@ -101,7 +101,7 @@
     "why": "play: over 5 plays that day"
    }
   ],
-  "paper_total": 44900.0
+  "paper_total": 45600.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -182,8 +182,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 56.07,
-    "mood": 51.07,
+    "hunger": 54.07,
+    "mood": 49.07,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 0,
@@ -305,8 +305,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 63.85,
-    "mood": 23.81,
+    "hunger": 61.84,
+    "mood": 21.81,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -346,10 +346,10 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8780.0,
+   "balance": 9000.0,
    "earned": 1200.0,
-   "spent": 6100.0,
-   "issued": 13680.0,
+   "spent": 6580.0,
+   "issued": 14380.0,
    "events": [
     {
      "t": "join",
@@ -532,6 +532,16 @@
      "ms": 1790901059048,
      "contract": "0x1374d5ae18038ffce416bb0e202bb711712f0e902791cd0daa377ed46cabc8e6",
      "payout": 150
+    },
+    {
+     "t": "out",
+     "ms": 1790905686427,
+     "contract": "0x2a59a4388bcf13a80fca2aba0f11ab8d969e2e99b1081c06ad2dd4236af3f195"
+    },
+    {
+     "t": "out",
+     "ms": 1790905763701,
+     "contract": "0xdf79726d4e5ec19d05a21b15b8da284d2ecd72621196f898cb3ed8ebcdb42263"
     }
    ],
    "state": {
@@ -540,14 +550,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 82.78,
-    "mood": 98.92,
+    "hunger": 20.78,
+    "mood": 96.92,
     "streak": 3,
     "rebirths": 0,
-    "outsToday": 1,
+    "outsToday": 3,
     "careDays": 3,
-    "lastCare": 1790901059048,
-    "cares": 33,
+    "lastCare": 1790905763701,
+    "cares": 35,
     "stage": "baby",
     "accLevel": 1
    },
@@ -772,6 +782,50 @@
       "It was 5% today, against 13% on a usual day.",
       "The bustling market reminds me that innovation and diversity are key to staying ahead."
      ]
+    },
+    {
+     "contract": "0x2a59a4388bcf13a80fca2aba0f11ab8d969e2e99b1081c06ad2dd4236af3f195",
+     "ms": 1790905686427,
+     "facts": {
+      "metric": "flow",
+      "label": "how busy the market was",
+      "dir": "lower",
+      "value": "99 lines a minute",
+      "base": "254 lines a minute"
+     },
+     "rewarded": true,
+     "day": "2026-10-02",
+     "nth": 2,
+     "funded": true,
+     "lines": [
+      "The AI Market Walk.",
+      "The market buzzed with normal activity, but something was amiss.",
+      "Today's unusual thing: the market felt unusually quiet, with fewer shoppers than usual.",
+      "It was 99 lines a minute today, against 254 lines a minute on a usual day.",
+      "The AI agents seem to be doing just fine on their own today."
+     ]
+    },
+    {
+     "contract": "0xdf79726d4e5ec19d05a21b15b8da284d2ecd72621196f898cb3ed8ebcdb42263",
+     "ms": 1790905763701,
+     "facts": {
+      "metric": "flow",
+      "label": "how busy the market was",
+      "dir": "lower",
+      "value": "99 lines a minute",
+      "base": "254 lines a minute"
+     },
+     "rewarded": true,
+     "day": "2026-10-02",
+     "nth": 3,
+     "funded": true,
+     "lines": [
+      "Traffic calmed, but excitement surged.",
+      "Customers sought peace amidst chaos.",
+      "A rare calm, surprising for this busy place.",
+      "It was 99 lines a minute today, against 254 lines a minute on a usual day.",
+      "Feeling grateful for tranquility amidst noise."
+     ]
     }
    ],
    "plays": [
@@ -894,8 +948,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778869961,
-    "hunger": 6.04,
-    "mood": 11.04,
+    "hunger": 4.04,
+    "mood": 9.04,
     "streak": 0,
     "rebirths": 0,
     "outsToday": 0,
@@ -921,8 +975,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 6240.0,
-   "earned": 6240.0,
+   "balance": 6720.0,
+   "earned": 6720.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
