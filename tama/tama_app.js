@@ -225,9 +225,11 @@ function chatter(el, my) {
     if (my !== live || !el.isConnected) return;
     if (fresh || Math.random() < 0.6) {
       const p = nextPhrase(fresh), lines = app.sayLines ?? [];
-      const t = p ? phraseText(p, getLang()) : lines.length ? { short: brief(fresh ? lines[0] : lines[Math.floor(Math.random() * Math.min(lines.length, 3))]), full: "" } : null;
+      const t = p ? phraseText(p, getLang()) : lines.length ? { short: brief(fresh ? lines[0] : lines[Math.floor(Math.random() * Math.min(lines.length, 3))]), gloss: "", full: "" } : null;
       if (t) {
         el.firstChild.textContent = t.short;
+        let g = el.querySelector("small");
+        if (t.gloss) { if (!g) { g = document.createElement("small"); el.appendChild(g); } g.textContent = t.gloss; } else g?.remove();   // 日本語の意訳（日本語モード）
         if (t.full && t.full !== t.short) el.title = t.full; else el.removeAttribute("title");
         el.classList.add("on");
         setTimeout(() => { if (my === live) el.classList.remove("on"); }, 6000);

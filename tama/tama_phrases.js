@@ -40,5 +40,12 @@ export function pickPhrase(P, s, seed, { avoid = null, investLeft = Infinity, fo
   if (!pool.length) return null;
   return pool[Math.floor(unit(`${seed}:which`) * pool.length)];
 }
-/** 吹き出しの文と、一覧・説明に出す全文（選んでいる言語で） */
-export const phraseText = (p, lang) => ({ short: lang === "ja" ? p.ja : p.en, full: (lang === "ja" ? p.full_ja ?? p.ja : p.full_en ?? p.en) });
+/** 吹き出しの文。ミームは原語のほうが伝わるので、日本語モードでも 1 行目は英語の原語、2 行目に日本語の意訳を小さく添える（運営者 2026-10-02）。
+ *  原語と日本語が同じもの（gm・wen moon など）は意訳を付けない。full はなぞったときに出す全文 */
+export function phraseText(p, lang) {
+  const en = p.full_en ?? p.en;
+  if (lang !== "ja") return { short: p.en, gloss: "", full: en };
+  const gloss = p.ja !== p.en ? p.ja : "";
+  const ja = p.full_ja ?? (gloss || null);
+  return { short: p.en, gloss, full: ja && ja !== en ? `${en}（${ja}）` : en };
+}
