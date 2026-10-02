@@ -330,7 +330,8 @@ export function render() {
     <section class="card" id="me">
       <div id="stage" class="stage"><div class="bg">${roomBg(m, st)}</div><div id="slot"></div><div class="ops mono" id="ops" aria-hidden="true"></div></div>
       ${waitHtml()}
-      <div class="who"><span class="name">HAKO <span class="mono">${esc(app.did.slice(-8))}</span></span><span class="chip state"><span class="dot" style="background:${st.grave ? "var(--dim)" : st.hunger >= 60 ? "var(--good)" : st.hunger >= 30 ? "var(--mid)" : "var(--bad)"}"></span>${stateWord(st)}</span></div>
+      <div class="who"><span class="name">${nameHtml()}<button type="button" class="rename" id="rename" aria-expanded="${app.naming ? "true" : "false"}" title="${L("HAKO に名前をつける", "Name your HAKO")}" aria-label="${L("HAKO に名前をつける", "Name your HAKO")}">✎</button></span><span class="chip state"><span class="dot" style="background:${st.grave ? "var(--dim)" : st.hunger >= 60 ? "var(--good)" : st.hunger >= 30 ? "var(--mid)" : "var(--bad)"}"></span>${stateWord(st)}</span></div>
+      ${app.naming ? nameForm() : ""}
       ${st.grave ? "" : `<div class="meters">${meter(L("おなか", "Tummy"), st.hunger, app.box.hunger_max)}${meter(L("ごきげん", "Mood"), st.mood, app.box.mood_max)}</div>`}
       <div class="chips mono">
         <span class="chip">${L(`連続 ${st.streak} 日`, `Streak ${st.streak}d`)}</span>
@@ -347,13 +348,43 @@ export function render() {
     </section>`;
   app.m = m;
   if (app.viewHtml === html && $("stage")) { showOps(); setMotion(motionOf(st)); renderSaid(m.fold); return; }   // 変わっていなければ描き直さない（動きを途切れさせない）
+  app.nmFocus = document.activeElement?.id === "nm";   // 名前の書きかけ（描き直す前に、入力中だったかを覚える）
   app.viewHtml = html; view.innerHTML = html; app.opsShown = null; showOps();
   app.motion = null; setMotion(motionOf(st));
   for (const b of document.querySelectorAll("#reborn")) b.onclick = reborn;
   const cam = $("snapshot"); if (cam) cam.onclick = () => snapshot(app.m, app.st);
+  wireName();
   const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say(L("鍵ファイルを保存しました。パスフレーズと別の場所にしまってください", "Key file saved. Keep it somewhere separate from your passphrase."), false); } };
   for (const b of document.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
   renderSaid(m.fold);
+}
+// 名前（D-122）。自分の画面だけ: 鍵の記録に置き、会場・庭・ほかの人の画面には出さない
+function nameHtml() {
+  const rec = K.loadRec(), named = rec?.did === app.did && K.cleanName(rec.name);
+  return named ? `${esc(named)} <span class="mono sub">…${esc(app.did.slice(-8))}</span>` : `HAKO <span class="mono">${esc(app.did.slice(-8))}</span>`;
+}
+function nameForm() {
+  return `<form class="namef" id="namef">
+      <label>${L("名前", "Name")}<input id="nm" type="text" maxlength="${K.NAME_MAX}" autocomplete="off" placeholder="HAKO …${esc(app.did.slice(-8))}"></label>
+      <div class="actions"><button type="submit" class="btn">${L("保存", "Save")}</button><button type="button" class="btn sub" id="nm-cancel">${L("やめる", "Cancel")}</button></div>
+      <p class="small">${L(`${K.NAME_MAX} 文字まで。名前はこのブラウザと鍵ファイルにだけ保存され、庭やほかの人の画面には出ません。シェアする画像には出ます。空にすると元の呼び名に戻ります。鍵ファイルにも名前を入れるには、鍵ファイルをもう一度保存してください。`,
+        `Up to ${K.NAME_MAX} characters. Saved only in this browser and your key file. It won't appear in the garden or on anyone else's screen, but it will show in images you share. Leave it empty to use the default name. To include it in your key file, save the key file again.`)}</p>
+    </form>`;
+}
+function wireName() {
+  const rn = $("rename"); if (rn) rn.onclick = () => { app.naming = !app.naming; app.nameDraft = K.cleanName(K.loadRec()?.name); render(); if (app.naming) $("nm")?.focus(); };
+  const f = $("namef"), nm = $("nm"); if (!f || !nm) return;
+  // 描き直しで入力が消えないように、書きかけを覚えておいて戻す
+  nm.value = app.nameDraft ?? ""; if (app.nmFocus) nm.focus();
+  nm.oninput = () => { app.nameDraft = nm.value; };
+  f.onsubmit = (ev) => {
+    ev.preventDefault();
+    const ok = K.setName(nm.value), named = K.cleanName(nm.value); app.naming = false; app.nameDraft = "";
+    say(!ok ? L("名前をこのブラウザに保存できませんでした", "Couldn't save the name in this browser")
+      : named ? L(`名前を「${named}」にしました`, `Name set to “${named}”`) : L("元の呼び名に戻しました", "Back to the default name"), !ok);
+    render();
+  };
+  $("nm-cancel").onclick = () => { app.naming = false; app.nameDraft = ""; render(); };
 }
 function actionsHtml(st, m) {
   if (st.grave) return `<button class="btn" id="reborn" style="--c:var(--accent)"><span class="dot" style="background:var(--accent)"></span>${L("生まれ変わる", "Be reborn")} <span class="price">${fmt(Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, m.balance)))} $PAPER</span></button>`;
@@ -424,7 +455,7 @@ async function snapshot(m, st) {
   const n = lifetime(m.events, app.box, localDay);
   const art = st.grave ? null : app.lastArticle ?? (m.fold?.outs ?? []).slice(-1)[0] ?? null;
   const said = st.grave ? "Here lies a happy little HAKO. It will be back." : lastSay(m.fold);
-  const title = `HAKO …${app.did.slice(-8)}`;
+  const title = K.nameOf(K.loadRec(), app.did);
   const stage = $("stage");
   if (stage) { stage.classList.remove("flash"); void stage.offsetWidth; stage.classList.add("flash"); }   // シャッターの光
   try {
@@ -528,7 +559,7 @@ function renderUnlock() {
   $("view").innerHTML = `
     <section class="card" id="me">
       <div class="stage plain">${app.did ? `<div class="hako">${sleeping()}</div>` : ""}</div>
-      <p>${L(`HAKO …${esc(app.did.slice(-8))} が眠っています。パスフレーズを入れると起きます。`, `HAKO …${esc(app.did.slice(-8))} is asleep. Enter your passphrase to wake it.`)}</p>
+      <p>${L(`${esc(K.nameOf(K.loadRec(), app.did))} が眠っています。パスフレーズを入れると起きます。`, `${esc(K.nameOf(K.loadRec(), app.did))} is asleep. Enter your passphrase to wake it.`)}</p>
       <form class="keyf" id="kf" method="post" action="#">
       <input class="vh" name="username" type="text" autocomplete="username" tabindex="-1" aria-hidden="true" value="${esc(K.loginName(app.did))}" readonly>
       <label>${L("パスフレーズ", "Passphrase")}<span class="pw"><input id="p1" name="password" type="password" autocomplete="current-password"><button type="button" class="eye" data-eye="p1"></button></span></label>

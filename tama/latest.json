@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-02T11:03:18Z",
-  "now_ms": 1790938998792,
+  "generated": "2026-10-02T12:03:23Z",
+  "now_ms": 1790942603665,
   "version": "tama/0.4",
   "config_sha256": "9d1c7daa237ce19dd7107cc7296f1ccf5cff580905918ceea4481b73cb68e2f1",
   "config": {
@@ -87,7 +87,7 @@
   },
   "hakos": 4,
   "contracts": {
-   "meal:settled": 19,
+   "meal:settled": 20,
    "out:refunded": 1,
    "out:settled": 11,
    "play:refunded": 1,
@@ -182,8 +182,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 36.07,
-    "mood": 31.07,
+    "hunger": 34.07,
+    "mood": 29.07,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 0,
@@ -305,8 +305,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 43.84,
-    "mood": 3.81,
+    "hunger": 41.84,
+    "mood": 1.81,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -346,9 +346,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8570.0,
+   "balance": 8330.0,
    "earned": 1350.0,
-   "spent": 7160.0,
+   "spent": 7400.0,
    "issued": 14380.0,
    "events": [
     {
@@ -558,6 +558,11 @@
      "ms": 1790934481003,
      "contract": "0x09240d04aaf35763cf831adcdf87602f47ab65b92c790cee88e027b87aaee86e",
      "payout": 150
+    },
+    {
+     "t": "meal",
+     "ms": 1790941805063,
+     "contract": "0x82577600c11b3982d1f46cc9e5800ad33d263ea598275ccb6872c1449f1c76cb"
     }
    ],
    "state": {
@@ -566,14 +571,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 77.78,
-    "mood": 97.49,
+    "hunger": 99.56,
+    "mood": 95.49,
     "streak": 3,
     "rebirths": 0,
     "outsToday": 3,
     "careDays": 3,
-    "lastCare": 1790934481003,
-    "cares": 38,
+    "lastCare": 1790941805063,
+    "cares": 39,
     "stage": "hako",
     "accLevel": 2
    },
@@ -652,6 +657,11 @@
      "contract": "0x1ae523e0037242042d3e1b045d4e798da29f8ae1c6106d43bac3bcd630422175",
      "ms": 1790934309008,
      "line": "Satisfied, I hop into my cozy bed, feeling cheerful after a delicious meal."
+    },
+    {
+     "contract": "0x82577600c11b3982d1f46cc9e5800ad33d263ea598275ccb6872c1449f1c76cb",
+     "ms": 1790941805063,
+     "line": "I'm a bit peckish, but I'm feeling very cheerful now!"
     }
    ],
    "outs": [
@@ -1008,8 +1018,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 7200.0,
-   "earned": 7200.0,
+   "balance": 7440.0,
+   "earned": 7440.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],

@@ -39,6 +39,17 @@ export const loginName = (did) => `HAKO …${short8(did)}`;
 export async function offerSave(did, pass) {
   try { if (typeof PasswordCredential === "function" && navigator.credentials?.store) await navigator.credentials.store(new PasswordCredential({ id: loginName(did), password: pass, name: loginName(did) })); } catch { /* すすめないだけ */ }
 }
+/** HAKO の名前（D-122）。自分の画面だけのもの: 鍵の記録（localStorage と鍵ファイル）に平文で置き、会場には書かない。
+ *  空白と制御文字を畳み、16 文字まで。付けていなければ HAKO …末尾 8 文字 */
+export const NAME_MAX = 16;
+export const cleanName = (s) => [...sweep(String(s ?? "")).replace(/\s+/g, " ")].slice(0, NAME_MAX).join("").trim();
+export const nameOf = (rec, did) => (rec?.did === did && cleanName(rec.name)) || `HAKO …${short8(did)}`;
+/** 名前を付け直す（空なら外す）。保存できたら true */
+export function setName(name) {
+  const rec = loadRec(); if (!rec) return false;
+  const n = cleanName(name); if (n) rec.name = n; else delete rec.name;
+  return saveRec(rec);
+}
 export function isKeyFile(j) { return !!(j && j.kind === "tama-key" && j.did && j.kdf && j.enc); }
 /** 鍵ファイル（暗号化されたまま）をダウンロードさせる */
 export function downloadRec(rec) {
