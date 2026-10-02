@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-02T00:23:46Z",
-  "now_ms": 1790900626691,
+  "generated": "2026-10-02T01:03:14Z",
+  "now_ms": 1790902994376,
   "version": "tama/0.4",
   "config_sha256": "9d1c7daa237ce19dd7107cc7296f1ccf5cff580905918ceea4481b73cb68e2f1",
   "config": {
@@ -88,11 +88,11 @@
   "hakos": 4,
   "contracts": {
    "meal:settled": 17,
-   "out:open": 1,
+   "out:expired": 1,
    "out:settled": 9,
    "play:refunded": 1,
    "play:rule": 1,
-   "play:settled": 16
+   "play:settled": 17
   },
   "stats": {},
   "invalid": [
@@ -182,8 +182,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 57.39,
-    "mood": 52.39,
+    "hunger": 56.07,
+    "mood": 51.07,
     "streak": 2,
     "rebirths": 0,
     "outsToday": 0,
@@ -305,8 +305,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 65.16,
-    "mood": 25.13,
+    "hunger": 63.85,
+    "mood": 23.81,
     "streak": 1,
     "rebirths": 0,
     "outsToday": 0,
@@ -330,9 +330,9 @@
   "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k": {
    "joined": null,
    "operator": true,
-   "balance": 0.0,
-   "earned": 400.0,
-   "spent": 400.0,
+   "balance": -50.0,
+   "earned": 500.0,
+   "spent": 550.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -346,9 +346,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8730.0,
-   "earned": 1050.0,
-   "spent": 6000.0,
+   "balance": 8780.0,
+   "earned": 1200.0,
+   "spent": 6100.0,
    "issued": 13680.0,
    "events": [
     {
@@ -526,6 +526,12 @@
      "ms": 1790900555074,
      "contract": "0xa52df0d0d6e9c12ca161e7956983ef5aa77176aadf5f7ae186be54f5656e9a5f",
      "payout": 50
+    },
+    {
+     "t": "play",
+     "ms": 1790901059048,
+     "contract": "0x1374d5ae18038ffce416bb0e202bb711712f0e902791cd0daa377ed46cabc8e6",
+     "payout": 150
     }
    ],
    "state": {
@@ -534,14 +540,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 89.09,
-    "mood": 99.96,
+    "hunger": 82.78,
+    "mood": 98.92,
     "streak": 3,
     "rebirths": 0,
     "outsToday": 1,
     "careDays": 3,
-    "lastCare": 1790900555074,
-    "cares": 32,
+    "lastCare": 1790901059048,
+    "cares": 33,
     "stage": "baby",
     "accLevel": 1
    },
@@ -852,15 +858,16 @@
      "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
      "stake": 100,
      "payout": 50
+    },
+    {
+     "contract": "0x1374d5ae18038ffce416bb0e202bb711712f0e902791cd0daa377ed46cabc8e6",
+     "ms": 1790901059048,
+     "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+     "stake": 100,
+     "payout": 150
     }
    ],
-   "pending": [
-    {
-     "contract": "0x142391b2da0173378559338a45f10332b6b82d11922863959cd1877f9d389723",
-     "kind": "out",
-     "status": "open"
-    }
-   ]
+   "pending": []
   },
   "did:key:z6MknCE1Ze1iyrbqQj1CHjSGbKQhdtymDgafQoZzjpDgTfAg": {
    "joined": "2026-09-30T14:34:29.961367Z",
@@ -887,8 +894,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778869961,
-    "hunger": 7.36,
-    "mood": 12.36,
+    "hunger": 6.04,
+    "mood": 11.04,
     "streak": 0,
     "rebirths": 0,
     "outsToday": 0,
