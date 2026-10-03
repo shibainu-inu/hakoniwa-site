@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-03T05:03:21Z",
-  "now_ms": 1791003801585,
+  "generated": "2026-10-03T06:03:20Z",
+  "now_ms": 1791007400182,
   "version": "tama/0.4",
   "config_sha256": "14a461bf46f5e9c73189276e2621d593ff0cf892bd6a868f25efe06c63552192",
   "config": {
@@ -189,7 +189,7 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 0.07,
+    "hunger": 0.0,
     "mood": 0.0,
     "streak": 0,
     "rebirths": 0,
@@ -314,7 +314,7 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 7.84,
+    "hunger": 5.84,
     "mood": 0.0,
     "streak": 0,
     "rebirths": 0,
@@ -588,8 +588,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 90.49,
-    "mood": 61.49,
+    "hunger": 88.49,
+    "mood": 59.49,
     "streak": 4,
     "rebirths": 0,
     "outsToday": 0,
