@@ -1,9 +1,9 @@
 {
  "box": {
-  "generated": "2026-10-03T18:18:21Z",
-  "now_ms": 1791051501706,
+  "generated": "2026-10-03T18:50:52Z",
+  "now_ms": 1791053452916,
   "version": "tama/0.5",
-  "config_sha256": "55f9c537dc0c06f6862abd668d0ef10fd76ac30cce9ee18c7a18ef02498eeeaa",
+  "config_sha256": "1c67d8d8817f2305f5f0463dec62217f9d80d0706a574357d0d14a587ef742e1",
   "config": {
    "box": "tama",
    "version": "tama/0.5",
@@ -19,7 +19,7 @@
    "deal_rows_per_day": 60,
    "reborn_rows_per_day": 3,
    "deal_room_rows": 200,
-   "accept_sig": false,
+   "accept_sig": true,
    "changes": [],
    "initial_paper": 10000,
    "hunger_max": 100,
@@ -131,7 +131,7 @@
   "hakos": 4,
   "released": 0,
   "contracts": {
-   "meal:settled": 24,
+   "meal:settled": 25,
    "out:refunded": 1,
    "out:settled": 13,
    "play:refunded": 1,
@@ -415,9 +415,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8110.0,
+   "balance": 7870.0,
    "earned": 1650.0,
-   "spent": 9140.0,
+   "spent": 9380.0,
    "issued": 15600.0,
    "events": [
     {
@@ -740,6 +740,12 @@
      "ms": 1791026922117,
      "contract": "0x010c01403b1b5ca75cab36cd17ea1c6e2f5dfb3d70f86320862d5fea0f4789da",
      "price": 240
+    },
+    {
+     "t": "meal",
+     "ms": 1791053416073,
+     "contract": "0xa44538cae6fd5d6467c62b283a7ca58c2dc5716c69dbf48e1c5bcf68604855fe",
+     "price": 240
     }
    ],
    "state": {
@@ -748,24 +754,19 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 81.47,
-    "mood": 81.22,
-    "streak": 4,
+    "hunger": 99.98,
+    "mood": 80.13,
+    "streak": 5,
     "rebirths": 0,
     "outsToday": 0,
-    "careDays": 4,
-    "lastCare": 1791026922117,
-    "cares": 37,
+    "careDays": 5,
+    "lastCare": 1791053416073,
+    "cares": 38,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": null
    },
    "meals": [
-    {
-     "contract": "0xa7dd1831a2b8c0d36e515bb2ff06a60d2b767a359fb4b1e23465487a4acf034b",
-     "ms": 1790745666762,
-     "line": "I'm so hungry, I'm bouncing with excitement!"
-    },
     {
      "contract": "0xab52882051a2b833503ae3b8cde16ac0d1e6bf0a5f50c1a62cdbac660aae219e",
      "ms": 1790746184063,
@@ -860,6 +861,12 @@
      "contract": "0x010c01403b1b5ca75cab36cd17ea1c6e2f5dfb3d70f86320862d5fea0f4789da",
      "ms": 1791026922117,
      "line": "Hunger is satisfied, and now I feel so happy, my tummy is all cozy and full!"
+    },
+    {
+     "contract": "0xa44538cae6fd5d6467c62b283a7ca58c2dc5716c69dbf48e1c5bcf68604855fe",
+     "ms": 1791053416073,
+     "line": "Pew Pew Pastry",
+     "menu": true
     }
    ],
    "outs": [
@@ -1297,8 +1304,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 8880.0,
-   "earned": 8880.0,
+   "balance": 9120.0,
+   "earned": 9120.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
