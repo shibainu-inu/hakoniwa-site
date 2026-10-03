@@ -49,20 +49,27 @@ export function graveTime(start, need, covers) {
  * 出来事 → いまの状態。events は [{t, ms}]（t: join | reborn | meal | out | play）。順は問わない（ms、同時なら並びの順）。
  * 返す: {born, alive, grave, graveAt, bornAt, hunger, mood, streak, rebirths, outsToday, careDays, lastCare}
  */
+/** その時刻に効いていた箱の数字（D-126。tama_core.py の box_at と同じ）。box.changes は [{from, set}]。無ければ box をそのまま返す */
+export function boxAt(box, ms) {
+  const ch = box.changes ?? [];
+  if (!ch.length) return box;
+  const out = { ...box };
+  for (const c of [...ch].sort((a, b) => Number(a.from) - Number(b.from))) if (Number(c.from) <= ms) Object.assign(out, c.set);
+  return out;
+}
+
 export function lifeState(events, now, box) {
   const ev = events.map((e, i) => ({ ...e, i })).sort((a, b) => (a.ms - b.ms) || (a.i - b.i));
-  const hr = Number(box.hunger_per_hour), mr = Number(box.mood_per_hour);
-  const hMax = Number(box.hunger_max), mMax = Number(box.mood_max);
-  const graveMs = Number(box.grave_after_hours) * HOUR;
   const covers = mergeCovers(ev.filter((e) => e.t === "sit").map((e) => [Number(e.ms), Number(e.until)]));
   let s = null;   // いまの命: {bornAt, hunger, mood, at, zeroSince, grave, graveAt, days:Set}
   let rebirths = 0;
-  const fresh = (ms, reborn = false) => ({ bornAt: ms, hunger: Number(reborn ? (box.reborn_hunger ?? box.hunger_start) : box.hunger_start), mood: Number(box.mood_start), at: ms,
-    zeroSince: null, grave: false, graveAt: null, days: new Set(), cares: 0 });
+  const fresh = (ms, reborn = false) => { const b = boxAt(box, ms); return { bornAt: ms, hunger: Number(reborn ? (b.reborn_hunger ?? b.hunger_start) : b.hunger_start), mood: Number(b.mood_start), at: ms,
+    zeroSince: null, grave: false, graveAt: null, days: new Set(), cares: 0 }; };
   // at から t まで時間を進める（お墓になる時刻を越えたらそこで止める）
   const advance = (t) => {
     if (!s || s.grave || t <= s.at) return;
     const dtH = (t - s.at) / HOUR;
+    const b = boxAt(box, s.at), hr = Number(b.hunger_per_hour), mr = Number(b.mood_per_hour);   // 減り方は区間の始まりの数字（D-126）
     if (s.zeroSince === null) {
       const h = s.hunger - hr * dtH;
       if (h <= 0) {
@@ -72,7 +79,7 @@ export function lifeState(events, now, box) {
       } else s.hunger = h;
     }
     s.mood = Math.max(0, s.mood - mr * dtH);
-    if (s.zeroSince !== null) { const g = graveTime(s.zeroSince, graveMs, covers); if (t >= g) { s.grave = true; s.graveAt = g; } }
+    if (s.zeroSince !== null) { const g = graveTime(s.zeroSince, Number(boxAt(box, s.zeroSince).grave_after_hours) * HOUR, covers); if (t >= g) { s.grave = true; s.graveAt = g; } }
     s.at = t;
   };
   for (const e of ev) {
@@ -81,9 +88,10 @@ export function lifeState(events, now, box) {
     advance(e.ms);
     if (e.t === "reborn") { if (s.grave) { rebirths += 1; s = fresh(e.ms, true); } continue; }
     if (s.grave) continue;
-    if (e.t === "meal") s.hunger = clamp(s.hunger + Number(box.meal_fill), 0, hMax);
-    else if (e.t === "out") s.hunger = clamp(s.hunger - Number(box.out_hunger), 0, hMax);
-    else if (e.t === "play") { s.hunger = clamp(s.hunger - Number(box.play_hunger), 0, hMax); s.mood = clamp(s.mood + Number(box.play_mood), 0, mMax); }
+    const b = boxAt(box, e.ms), hMax = Number(b.hunger_max), mMax = Number(b.mood_max);
+    if (e.t === "meal") s.hunger = clamp(s.hunger + Number(b.meal_fill), 0, hMax);
+    else if (e.t === "out") s.hunger = clamp(s.hunger - Number(b.out_hunger), 0, hMax);
+    else if (e.t === "play") { s.hunger = clamp(s.hunger - Number(b.play_hunger), 0, hMax); s.mood = clamp(s.mood + Number(b.play_mood), 0, mMax); }
     else continue;
     s.zeroSince = s.hunger > 0 ? null : (s.zeroSince ?? e.ms);
     if (e.t === "out") continue;   // おでかけはお世話に数えない（稼ぎと記事のもの。D-119・D-123 の改め 2026-10-03）

@@ -4,7 +4,7 @@ import { L } from "./tama_i18n.js";
 import { storyHtml, howHtml, watchPages } from "./tama_book.js";
 
 const shown = {};   // いま出しているストーリー・遊び方の HTML
-import { localDay, rewardOf } from "./tama_core.js";
+import { localDay, rewardOf, boxAt } from "./tama_core.js";
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const fmt = (n) => Math.round(Number(n)).toLocaleString("ja-JP");
@@ -88,7 +88,7 @@ export function renderGarden(stats, moods, box, F = null) {
 
   // ストーリーと遊び方（絵本。tama_book.js）。中身が変わったときだけ入れ直す（動きを途切れさせない）
   const put = (id, html) => { const el = $(id); if (!el || shown[id] === html) return; shown[id] = html; el.innerHTML = html; watchPages(el); };
-  if (box) { put("story", storyHtml(box, moods, F)); put("how", howHtml(box, F)); }
+  if (box) { const b = boxAt(box, Date.now()); put("story", storyHtml(b, moods, F)); put("how", howHtml(b, F)); }   // 値段はいまの数字（D-126）
 
   // 状態バー
   const s = $("status");

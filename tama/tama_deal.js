@@ -9,11 +9,21 @@
 // 状態は localStorage tama_deal_v1:<DID>:<種類>。preimage は持たない（払う側なので秘密は無い）。
 import * as tclk from "./hako_tclk.js";
 import { notes, readTail } from "./tama_net.js";
+import { pubFromDid } from "./hako_dot.js";
 import { L } from "./tama_i18n.js";
-import { jobId, tamaLine, parseTama, acceptKey, checkLines, mealPrompt, outPrompt, playPayoutAt, localDay, rewardOf } from "./tama_core.js";
+import { jobId, tamaLine, parseTama, acceptKey, checkLines, mealPrompt, outPrompt, playPayoutAt, localDay, rewardOf, boxAt } from "./tama_core.js";
 
 export const dealKinds = [["meal", "ごはん"], ["out", "おでかけ"], ["play", "あそぶ"]];
 const rand = () => Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => b.toString(16).padStart(2, "0")).join("");
+
+/** accept のノートの署名を確かめる: sig は sign("tama-acc|<鍵の名前>|<本文>") の base64url（D-126） */
+async function acceptSigOk(did, key, text, sig) {
+  try {
+    const b = atob(String(sig ?? "").trim().replace(/-/g, "+").replace(/_/g, "/").padEnd(Math.ceil(String(sig ?? "").trim().length / 4) * 4, "="));
+    const pub = await crypto.subtle.importKey("raw", pubFromDid(did), { name: "Ed25519" }, false, ["verify"]);
+    return await crypto.subtle.verify("Ed25519", pub, Uint8Array.from(b, (c) => c.charCodeAt(0)), new TextEncoder().encode(`tama-acc|${key}|${text}`));
+  } catch { return false; }
+}
 
 export class Deal {
   constructor({ kind, app, onEvent = () => {} }) {
@@ -27,7 +37,7 @@ export class Deal {
   note(text) { this.onEvent({ type: "note", text }); }
   busy() { return !!this.st && !this.st.done; }
   get box() { return this.app.box; }
-  price() { return Number({ meal: this.box.meal_price, out: this.box.out_price, play: this.box.play_stake, sit: this.box.sit_price, sitplay: this.box.sit_play_price }[this.kind]); }
+  price() { return Number({ meal: boxAt(this.box, Date.now()).meal_price, out: boxAt(this.box, Date.now()).out_price, play: boxAt(this.box, Date.now()).play_stake, sit: boxAt(this.box, Date.now()).sit_price, sitplay: boxAt(this.box, Date.now()).sit_play_price }[this.kind]); }
   takers() { return new Set(this.kind === "play" ? (this.box.npcs ?? []) : (this.box.miners ?? [])); }
 
   /** 推論の入力（job.context）。おでかけは測った雰囲気（moods.json）が要る。取れなければ「霧」（D-85） */
@@ -61,11 +71,14 @@ export class Deal {
 
   /** accept のノートを読み、確かめる → 使える accept か null */
   async findAccept() {
-    const raw = await notes.get(this.box.accept_ns, acceptKey(this.app.did, this.kind, this.st.offer.id)).catch(() => null);
+    const key = acceptKey(this.app.did, this.kind, this.st.offer.id);
+    const raw = await notes.get(this.box.accept_ns, key).catch(() => null);
     if (!raw) return null;
     const a = tclk.tryDecodeFrame(raw.trim());
     const o = this.st.offer;
     if (!a || a.type !== "accept" || a.ref !== o.id || !this.takers().has(a.from)) return null;
+    // ノートは誰でも書ける。係の署名（tama_house.mjs の putAccept）が accept の from の DID で確かめられなければ使わない（D-126）
+    if (this.box.accept_sig && !(await acceptSigOk(a.from, key, raw.trim(), await notes.get(this.box.accept_ns, `${key}-sig`).catch(() => null)))) return null;
     let want; try { want = tclk.contractId(o, { from: a.from, ref: a.ref, statement: a.statement, paymentKey: a.paymentKey, nonce: a.nonce }); } catch { return null; }
     if (want !== a.contract) return null;
     const step = tclk.applyFrame(tclk.openContract(o), a, Math.min(Date.now(), o.expiresMs - 1));

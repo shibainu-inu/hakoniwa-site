@@ -64,6 +64,9 @@ export function howHtml(box, F) {
     page("h-grave", sp("tomb", 12, art(TOMB)) + sp("ghost", 10, castSvg("ghost", 4)) + `<b class="ar a3">→</b>` + sp("again", 12, castSvg("egg", 4)),
       L(`おなかが 0 のまま ${box.grave_after_hours} 時間たつとお墓に。生まれ変わりは ${fmt(box.reborn_price)} $PAPER で、卵からやり直します。`,
         `If its tummy stays at 0 for ${box.grave_after_hours} hours, it ends up in a grave. Rebirth costs ${fmt(box.reborn_price)} $PAPER and starts over from an egg.`)) +
+    (box.slot_grave_hours != null && box.max_hakos != null ? page("h-slot", sp("tomb", 12, art(TOMB)) + sp("clock", 9, item(F, "clock")) + `<b class="ar a3">→</b>` + sp("again", 12, castSvg("egg", 4)),
+      L(`箱庭にいられる HAKO は ${box.max_hakos} 匹までです。お墓のまま ${fmt(box.slot_grave_hours / 24)} 日たつか、生まれてから ${box.slot_nomeal_hours} 時間ごはんを一度も食べないと、HAKO は箱庭を離れ、次の人に場所をゆずります。`,
+        `The garden holds up to ${box.max_hakos} HAKOs. If a HAKO stays in a grave for ${fmt(box.slot_grave_hours / 24)} days, or never eats in its first ${box.slot_nomeal_hours} hours, it leaves the garden and makes room for someone new.`)) : "") +
     (box.sit_enabled ? page("h-sit", face("s1", CROWD[2], 11) + hako("home", 15) + sp("bowl", 11, art(BOWL)),
       L(`留守にするときは<b>シッターにお願い</b>できます。1 日 1 回ごはん（${fmt(box.sit_price)} $PAPER）をあげ、選んだ回数だけあそびます（1 回 ${fmt(box.sit_play_price)} $PAPER。戻りはありません）。HAKO は育ち続け、お墓にもなりません。`,
         `When you're away, you can <b>ask a sitter</b>. It feeds your HAKO once a day (${fmt(box.sit_price)} $PAPER) and plays as many times as you choose (${fmt(box.sit_play_price)} $PAPER each; nothing comes back). Your HAKO keeps growing and won't end up in a grave.`)) +

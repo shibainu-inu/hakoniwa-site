@@ -2,6 +2,7 @@
 // 部屋は見た目だけ（数字は動かさない）。解放は生涯の数で決める（生まれ変わっても部屋は残る。D-91）。
 import { spriteRows, iconRows, inside, paint, THEMES } from "./tama_sprite.js";
 import { L } from "./tama_i18n.js";
+import { boxAt } from "./tama_core.js";
 
 export const FRAME = { bg: "#f4f1ea", ink: "#16151c", sub: "#55525e", edge: "#c9a181" };   // 額縁（明るい地）
 /** 出来事 → 生涯の数 {meals, outs, plays, days, rebirths, earned, peak}。peak はこれまでで一番多く持っていた PAPER（peakPaper）で、部屋の家具はこれで増える。
@@ -31,12 +32,12 @@ export function lifetime(events, box, localDay) {
 export function peakPaper(events, box) {
   let bal = 0, peak = 0;
   for (const e of [...events].sort((a, b) => a.ms - b.ms)) {
-    const sit = !!e.sit;
-    if (e.t === "join") bal += Number(box.initial_paper);
-    else if (e.t === "meal") bal -= Number(sit ? box.sit_price : box.meal_price);
-    else if (e.t === "out") bal += Number(e.reward ?? 0) - Number(box.out_price);
-    else if (e.t === "play") bal += sit ? -Number(box.sit_play_price) : Number(e.payout ?? 0) - Number(box.play_stake);
-    else if (e.t === "reborn") bal -= Number(e.fee ?? box.reborn_price ?? 0);
+    const sit = !!e.sit, b = boxAt(box, e.ms);   // 帳簿の出来事には払った額（price・initial）がある。無ければその時刻の値段（D-126）
+    if (e.t === "join") bal += Number(e.initial ?? b.initial_paper);
+    else if (e.t === "meal") bal -= Number(e.price ?? (sit ? b.sit_price : b.meal_price));
+    else if (e.t === "out") bal += Number(e.reward ?? 0) - Number(e.price ?? b.out_price);
+    else if (e.t === "play") bal += (sit ? 0 : Number(e.payout ?? 0)) - Number(e.price ?? (sit ? b.sit_play_price : b.play_stake));
+    else if (e.t === "reborn") bal -= Number(e.fee ?? b.reborn_price ?? 0);
     peak = Math.max(peak, bal);
   }
   return Math.round(peak * 100) / 100;

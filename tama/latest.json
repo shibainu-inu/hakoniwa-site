@@ -1,9 +1,9 @@
 {
  "box": {
-  "generated": "2026-10-03T18:03:26Z",
-  "now_ms": 1791050606310,
+  "generated": "2026-10-03T18:18:21Z",
+  "now_ms": 1791051501706,
   "version": "tama/0.5",
-  "config_sha256": "2e7381c3349c08b0b3cdcad684678bb024c4580cd42f658fb31a09000828c910",
+  "config_sha256": "55f9c537dc0c06f6862abd668d0ef10fd76ac30cce9ee18c7a18ef02498eeeaa",
   "config": {
    "box": "tama",
    "version": "tama/0.5",
@@ -13,6 +13,14 @@
    "accept_ns": "tama-acc",
    "day_utc_offset_min": 540,
    "max_hakos": 30,
+   "slot_rule_from": 1791082800000,
+   "slot_nomeal_hours": 24,
+   "slot_grave_hours": 72,
+   "deal_rows_per_day": 60,
+   "reborn_rows_per_day": 3,
+   "deal_room_rows": 200,
+   "accept_sig": false,
+   "changes": [],
    "initial_paper": 10000,
    "hunger_max": 100,
    "hunger_start": 80,
@@ -121,6 +129,7 @@
    "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
   },
   "hakos": 4,
+  "released": 0,
   "contracts": {
    "meal:settled": 24,
    "out:refunded": 1,
@@ -170,51 +179,60 @@
    "events": [
     {
      "t": "join",
-     "ms": 1790778927814
+     "ms": 1790778927814,
+     "initial": 10000.0
     },
     {
      "t": "play",
      "ms": 1790778949040,
      "contract": "0x05837e75738a2b790c86a607ff4150db968a5110d1075a31f9a2da9fc37869bc",
+     "price": 100,
      "payout": 100
     },
     {
      "t": "meal",
      "ms": 1790816994992,
-     "contract": "0xa87855b05cb78841d4c3a6497c09a3763f73b0e8cb65ff4dfc7b494d360d7c83"
+     "contract": "0xa87855b05cb78841d4c3a6497c09a3763f73b0e8cb65ff4dfc7b494d360d7c83",
+     "price": 240
     },
     {
      "t": "out",
      "ms": 1790817087064,
      "contract": "0x10ec475f8c376d1226a266011fdfc11b608bc566bb30a32694482715098ab6c4",
+     "price": 240,
      "reward": 760.0
     },
     {
      "t": "play",
      "ms": 1790817102251,
      "contract": "0x24cce51e949f11e93dd65b9debcd412c2d543822d55784f7b00c041236a4536e",
+     "price": 100,
      "payout": 150
     },
     {
      "t": "meal",
      "ms": 1790817148447,
-     "contract": "0xfd48f6055e6aff5c613ac0cc715ce34aa07af19cf41dec2938d36917b45c9312"
+     "contract": "0xfd48f6055e6aff5c613ac0cc715ce34aa07af19cf41dec2938d36917b45c9312",
+     "price": 240
     },
     {
      "t": "out",
      "ms": 1790852879939,
      "contract": "0xe69ddb7fb1b074a0ab06964776995b5235d69dd5aaecbf20922385e928cb67ab",
+     "price": 240,
      "reward": 460.0
     },
     {
      "t": "meal",
      "ms": 1790852987408,
-     "contract": "0x71c7bae52d2fcea802d35aedcb111a6496d0821e585fcf97bd5bd91aa8005db1"
+     "contract": "0x71c7bae52d2fcea802d35aedcb111a6496d0821e585fcf97bd5bd91aa8005db1",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790855501688,
      "contract": "0xe06fbb2a0e00d273d09e93f5bd49f94b652c0ed742dac98b17ef793e337f1e2e",
+     "price": 100,
      "payout": 200
     }
    ],
@@ -257,6 +275,7 @@
     {
      "contract": "0x10ec475f8c376d1226a266011fdfc11b608bc566bb30a32694482715098ab6c4",
      "ms": 1790817087064,
+     "lock_ms": 1790817059379,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -279,6 +298,7 @@
     {
      "contract": "0xe69ddb7fb1b074a0ab06964776995b5235d69dd5aaecbf20922385e928cb67ab",
      "ms": 1790852879939,
+     "lock_ms": 1790852811618,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -335,12 +355,14 @@
    "events": [
     {
      "t": "join",
-     "ms": 1790837854462
+     "ms": 1790837854462,
+     "initial": 10000.0
     },
     {
      "t": "meal",
      "ms": 1790837916118,
-     "contract": "0x39fb59fec81c57b5bab1e34eb51dd5974eec5a696236992a3f5407bf77d7e169"
+     "contract": "0x39fb59fec81c57b5bab1e34eb51dd5974eec5a696236992a3f5407bf77d7e169",
+     "price": 240
     }
    ],
    "state": {
@@ -400,275 +422,324 @@
    "events": [
     {
      "t": "join",
-     "ms": 1790745476435
+     "ms": 1790745476435,
+     "initial": 10000.0
     },
     {
      "t": "out",
      "ms": 1790745574918,
      "contract": "0xdad2b33eab48f32cb8869dc8aefe4358ab4089d0bcdb670e813878861b9f25cb",
+     "price": 240,
      "reward": 760.0
     },
     {
      "t": "meal",
      "ms": 1790745666762,
-     "contract": "0xa7dd1831a2b8c0d36e515bb2ff06a60d2b767a359fb4b1e23465487a4acf034b"
+     "contract": "0xa7dd1831a2b8c0d36e515bb2ff06a60d2b767a359fb4b1e23465487a4acf034b",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790745727995,
      "contract": "0x125b6c03f80c87216f2081992f7dc752dd0228de34236b2fdfd8b8f52b12f147",
+     "price": 100,
      "payout": 50
     },
     {
      "t": "meal",
      "ms": 1790746184063,
-     "contract": "0xab52882051a2b833503ae3b8cde16ac0d1e6bf0a5f50c1a62cdbac660aae219e"
+     "contract": "0xab52882051a2b833503ae3b8cde16ac0d1e6bf0a5f50c1a62cdbac660aae219e",
+     "price": 240
     },
     {
      "t": "out",
      "ms": 1790746275705,
      "contract": "0xe8e45868e61ded689ccdcb13341656f8f7e7912cba639e95bdd2b4c63d9a2655",
+     "price": 240,
      "reward": 460.0
     },
     {
      "t": "meal",
      "ms": 1790746626532,
-     "contract": "0xee7ffd6dddcc3dcb38d117fd5f44b96583928bc61110a96fa2498661a13ca66a"
+     "contract": "0xee7ffd6dddcc3dcb38d117fd5f44b96583928bc61110a96fa2498661a13ca66a",
+     "price": 240
     },
     {
      "t": "out",
      "ms": 1790774185355,
      "contract": "0x3aaf718ddb6a10552b3600d4a0bea39538f969bd7251b106a1f29bd24d203c93",
+     "price": 240,
      "reward": 240.0
     },
     {
      "t": "meal",
      "ms": 1790774247207,
-     "contract": "0x6a5019d7e68890a2557111c98c36272c9102b2fb803a18c86b1c89f0c134d712"
+     "contract": "0x6a5019d7e68890a2557111c98c36272c9102b2fb803a18c86b1c89f0c134d712",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790774277752,
      "contract": "0x5d720cddd1ac6b0d5bd8655201468fa3f6082a133ed54e8cc1f51896e62999ce",
+     "price": 100,
      "payout": 150
     },
     {
      "t": "play",
      "ms": 1790774993864,
      "contract": "0x7081bcc5d585e8d8878a082596dcdec4684cb46f9a3230920a51e0cdb786dc63",
+     "price": 100,
      "payout": 100
     },
     {
      "t": "meal",
      "ms": 1790777716312,
-     "contract": "0x9b62b0eac63fd93bc7677a1c0b3e6ea182cb30e957a6c68af1b9d607d3fac73a"
+     "contract": "0x9b62b0eac63fd93bc7677a1c0b3e6ea182cb30e957a6c68af1b9d607d3fac73a",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790777762467,
      "contract": "0x51ceda7f3f9681211bd40a301986d24c5e86eb5f3cd53ea2ea0e5c1c2914835a",
+     "price": 100,
      "payout": 100
     },
     {
      "t": "meal",
      "ms": 1790779025547,
-     "contract": "0x9706b0745dc63dbcc030da63d3731d3783614330f2aa98d78ae5f942fba10bf0"
+     "contract": "0x9706b0745dc63dbcc030da63d3731d3783614330f2aa98d78ae5f942fba10bf0",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790779132245,
      "contract": "0xa2b7796d5de6b5c5e14c9419abb0ebeef1388cbc603587db5b14040880bae077",
+     "price": 100,
      "payout": 100
     },
     {
      "t": "meal",
      "ms": 1790806053603,
-     "contract": "0x2eaff381be42fc17b933c77dd2ecbca73cb79886fc6383952fa8fddefb80183e"
+     "contract": "0x2eaff381be42fc17b933c77dd2ecbca73cb79886fc6383952fa8fddefb80183e",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790806114621,
      "contract": "0xf68691ba4dd2b703ea1592d227dabdecfe196036beb626e3e862239f123a641d",
+     "price": 100,
      "payout": 100
     },
     {
      "t": "out",
      "ms": 1790806205961,
      "contract": "0xbbc4b145dd49f8cd42631f783c8cea277b035cbac195b205930ebb04b76ecae6",
+     "price": 240,
      "reward": 760.0
     },
     {
      "t": "meal",
      "ms": 1790806282449,
-     "contract": "0x00b05a76c8196855a9c547102e608613e28f2fb134475ad7f179620385e11f6e"
+     "contract": "0x00b05a76c8196855a9c547102e608613e28f2fb134475ad7f179620385e11f6e",
+     "price": 240
     },
     {
      "t": "out",
      "ms": 1790806464452,
      "contract": "0xad35790782c0bfd2cd105bed5592c37b20b74b8cd676481784968e0bd8d24363",
+     "price": 240,
      "reward": 460.0
     },
     {
      "t": "meal",
      "ms": 1790815810021,
-     "contract": "0xc7e6126676d1bd12e6ef4599f1606c05eeb445e0cf63606e957b390b137c4649"
+     "contract": "0xc7e6126676d1bd12e6ef4599f1606c05eeb445e0cf63606e957b390b137c4649",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790833446332,
      "contract": "0xa56747f92560d6722c58880f95bb13baf9629e29b991b18aa84adfc8a9ad03a8",
+     "price": 100,
      "payout": 150
     },
     {
      "t": "out",
      "ms": 1790833552903,
      "contract": "0xcc799be800d4256682e0f06b79a65df65fe54b52d922b2a1b5bb35ea787b4ffe",
+     "price": 240,
      "reward": 240.0
     },
     {
      "t": "meal",
      "ms": 1790834206604,
-     "contract": "0x584e091bc3bb28c871e91c036da86b506eba0ee6f88ed58773948703c7442664"
+     "contract": "0x584e091bc3bb28c871e91c036da86b506eba0ee6f88ed58773948703c7442664",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790848890929,
      "contract": "0x45e047569ebde1f19d2723062f133c6dc29eea78d11ae727065bfebdbca4e155",
+     "price": 100,
      "payout": 50
     },
     {
      "t": "play",
      "ms": 1790849863965,
      "contract": "0x8452d571060c8781bc42518cb78cacd21b41eb32ea52fe7768cf3eb55fbb1f1d",
+     "price": 100,
      "payout": 50
     },
     {
      "t": "meal",
      "ms": 1790850122907,
-     "contract": "0x87d19d4613644ca3057d35336778cb4d7ead4b6fa1314634d685e3f95345625e"
+     "contract": "0x87d19d4613644ca3057d35336778cb4d7ead4b6fa1314634d685e3f95345625e",
+     "price": 240
     },
     {
      "t": "out",
      "ms": 1790897800886,
      "contract": "0x4207b70620b1476151af13c192d5b5de7babee2a8ed695b1a4926be963d88308",
+     "price": 240,
      "reward": 760.0
     },
     {
      "t": "meal",
      "ms": 1790897862650,
-     "contract": "0x096426a73502a43795721bb931be6dbde0988f30f6581e83fa6ac29fdcbe3d9b"
+     "contract": "0x096426a73502a43795721bb931be6dbde0988f30f6581e83fa6ac29fdcbe3d9b",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790897924508,
      "contract": "0xfa279c1854168eff369d09f2576f57cbb92154f4502db66db3a37140d92365e0",
+     "price": 100,
      "payout": 100
     },
     {
      "t": "meal",
      "ms": 1790898995820,
-     "contract": "0xa02001be31bc4d382965b09e1a6743e0903210cfcc59520a4f1e5e6e002c8d69"
+     "contract": "0xa02001be31bc4d382965b09e1a6743e0903210cfcc59520a4f1e5e6e002c8d69",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790899029759,
      "contract": "0xca273c7d1a49a0d75525b25773ece93ca59a069191fd834c7992239848d6e333",
+     "price": 100,
      "payout": 50
     },
     {
      "t": "play",
      "ms": 1790900555074,
      "contract": "0xa52df0d0d6e9c12ca161e7956983ef5aa77176aadf5f7ae186be54f5656e9a5f",
+     "price": 100,
      "payout": 50
     },
     {
      "t": "play",
      "ms": 1790901059048,
      "contract": "0x1374d5ae18038ffce416bb0e202bb711712f0e902791cd0daa377ed46cabc8e6",
+     "price": 100,
      "payout": 150
     },
     {
      "t": "out",
      "ms": 1790905686427,
      "contract": "0x2a59a4388bcf13a80fca2aba0f11ab8d969e2e99b1081c06ad2dd4236af3f195",
+     "price": 240,
      "reward": 460.0
     },
     {
      "t": "out",
      "ms": 1790905763701,
      "contract": "0xdf79726d4e5ec19d05a21b15b8da284d2ecd72621196f898cb3ed8ebcdb42263",
+     "price": 240,
      "reward": 240.0
     },
     {
      "t": "meal",
      "ms": 1790917382099,
-     "contract": "0xae6418eabd5b4330f1edf0f95ce7ddc8850290ab473b87fb67bf40b1b8373e5a"
+     "contract": "0xae6418eabd5b4330f1edf0f95ce7ddc8850290ab473b87fb67bf40b1b8373e5a",
+     "price": 240
     },
     {
      "t": "meal",
      "ms": 1790934309008,
-     "contract": "0x1ae523e0037242042d3e1b045d4e798da29f8ae1c6106d43bac3bcd630422175"
+     "contract": "0x1ae523e0037242042d3e1b045d4e798da29f8ae1c6106d43bac3bcd630422175",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1790934481003,
      "contract": "0x09240d04aaf35763cf831adcdf87602f47ab65b92c790cee88e027b87aaee86e",
+     "price": 100,
      "payout": 150
     },
     {
      "t": "meal",
      "ms": 1790941805063,
-     "contract": "0x82577600c11b3982d1f46cc9e5800ad33d263ea598275ccb6872c1449f1c76cb"
+     "contract": "0x82577600c11b3982d1f46cc9e5800ad33d263ea598275ccb6872c1449f1c76cb",
+     "price": 240
     },
     {
      "t": "meal",
      "ms": 1790986680527,
-     "contract": "0x8b7f2654020372de4b1265f3ebfb4a546e0f00f880d7056033a6ad91ca109741"
+     "contract": "0x8b7f2654020372de4b1265f3ebfb4a546e0f00f880d7056033a6ad91ca109741",
+     "price": 240
     },
     {
      "t": "meal",
      "ms": 1791009139926,
-     "contract": "0xb20f2cd2e65f4c58e309ef1ad587b1681107ec64ba627a2e862d360eeff83d0c"
+     "contract": "0xb20f2cd2e65f4c58e309ef1ad587b1681107ec64ba627a2e862d360eeff83d0c",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1791009193073,
      "contract": "0x789704f98a6a2b0bc7cc20fb76069a83f8b9bcc00ed303c7c2171956582e3191",
+     "price": 100,
      "payout": 50
     },
     {
      "t": "play",
      "ms": 1791009255285,
      "contract": "0x96643e70aaf52d68f803de4f82d71c0574bad7349b0aa9c0a230e36b18d385b9",
+     "price": 100,
      "payout": 150
     },
     {
      "t": "out",
      "ms": 1791009324923,
      "contract": "0xc3e005a363e82f8be932f2f53306d92beffd64a2b8b240170b115cc4d2f32839",
+     "price": 240,
      "reward": 760.0
     },
     {
      "t": "meal",
      "ms": 1791009463972,
-     "contract": "0xe4a8fbfe685ef5ac88e9e87d73313697e46e7330e6863297daccc6e0b38aa8c4"
+     "contract": "0xe4a8fbfe685ef5ac88e9e87d73313697e46e7330e6863297daccc6e0b38aa8c4",
+     "price": 240
     },
     {
      "t": "play",
      "ms": 1791017692268,
      "contract": "0x4d101925f63eb09329da3893ec8f9ace12defb459ff1f2deba770ec0542f4d38",
+     "price": 100,
      "payout": 100
     },
     {
      "t": "out",
      "ms": 1791026372106,
      "contract": "0x05a8779cb337af779b40ded6d5543a95af71bf6178d8d12160601765de442892",
+     "price": 240,
      "reward": 460.0
     },
     {
      "t": "meal",
      "ms": 1791026922117,
-     "contract": "0x010c01403b1b5ca75cab36cd17ea1c6e2f5dfb3d70f86320862d5fea0f4789da"
+     "contract": "0x010c01403b1b5ca75cab36cd17ea1c6e2f5dfb3d70f86320862d5fea0f4789da",
+     "price": 240
     }
    ],
    "state": {
@@ -677,8 +748,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 81.96,
-    "mood": 81.71,
+    "hunger": 81.47,
+    "mood": 81.22,
     "streak": 4,
     "rebirths": 0,
     "outsToday": 0,
@@ -795,6 +866,7 @@
     {
      "contract": "0xdad2b33eab48f32cb8869dc8aefe4358ab4089d0bcdb670e813878861b9f25cb",
      "ms": 1790745574918,
+     "lock_ms": 1790745519383,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -817,6 +889,7 @@
     {
      "contract": "0xe8e45868e61ded689ccdcb13341656f8f7e7912cba639e95bdd2b4c63d9a2655",
      "ms": 1790746275705,
+     "lock_ms": 1790746229505,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -839,6 +912,7 @@
     {
      "contract": "0x3aaf718ddb6a10552b3600d4a0bea39538f969bd7251b106a1f29bd24d203c93",
      "ms": 1790774185355,
+     "lock_ms": 1790774128602,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -861,6 +935,7 @@
     {
      "contract": "0xbbc4b145dd49f8cd42631f783c8cea277b035cbac195b205930ebb04b76ecae6",
      "ms": 1790806205961,
+     "lock_ms": 1790806148973,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -883,6 +958,7 @@
     {
      "contract": "0xad35790782c0bfd2cd105bed5592c37b20b74b8cd676481784968e0bd8d24363",
      "ms": 1790806464452,
+     "lock_ms": 1790806448728,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -905,6 +981,7 @@
     {
      "contract": "0xcc799be800d4256682e0f06b79a65df65fe54b52d922b2a1b5bb35ea787b4ffe",
      "ms": 1790833552903,
+     "lock_ms": 1790833500841,
      "facts": {
       "metric": "alike",
       "label": "the share of messages that looked alike",
@@ -927,6 +1004,7 @@
     {
      "contract": "0x4207b70620b1476151af13c192d5b5de7babee2a8ed695b1a4926be963d88308",
      "ms": 1790897800886,
+     "lock_ms": 1790897767038,
      "facts": {
       "metric": "newcomer",
       "label": "the share of faces never seen before",
@@ -949,6 +1027,7 @@
     {
      "contract": "0x2a59a4388bcf13a80fca2aba0f11ab8d969e2e99b1081c06ad2dd4236af3f195",
      "ms": 1790905686427,
+     "lock_ms": 1790905653367,
      "facts": {
       "metric": "flow",
       "label": "how busy the market was",
@@ -971,6 +1050,7 @@
     {
      "contract": "0xdf79726d4e5ec19d05a21b15b8da284d2ecd72621196f898cb3ed8ebcdb42263",
      "ms": 1790905763701,
+     "lock_ms": 1790905742655,
      "facts": {
       "metric": "flow",
       "label": "how busy the market was",
@@ -993,6 +1073,7 @@
     {
      "contract": "0xc3e005a363e82f8be932f2f53306d92beffd64a2b8b240170b115cc4d2f32839",
      "ms": 1791009324923,
+     "lock_ms": 1791009303357,
      "facts": {
       "metric": "flow",
       "label": "how busy the market was",
@@ -1015,6 +1096,7 @@
     {
      "contract": "0x05a8779cb337af779b40ded6d5543a95af71bf6178d8d12160601765de442892",
      "ms": 1791026372106,
+     "lock_ms": 1791026314518,
      "facts": {
       "metric": "refund",
       "label": "the share of deals that ended in a refund",
@@ -1169,12 +1251,14 @@
    "events": [
     {
      "t": "join",
-     "ms": 1790778869961
+     "ms": 1790778869961,
+     "initial": 10000.0
     },
     {
      "t": "play",
      "ms": 1790778902887,
      "contract": "0x0168932b0a9a6742703273eb5bc802538c9b7d45566b0ed99d5ee00f5cbe0b82",
+     "price": 100,
      "payout": 50
     }
    ],

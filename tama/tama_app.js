@@ -1,7 +1,7 @@
 // tama_app.js — たまごっち版の画面（HAKONIWA_tamagotchi_spec_2026-09-28.md）。1 枚のページで、卵（登録）→ 卵からひび、HAKO へ育つ画面 → お墓（幽霊）→ 生まれ変わり。
 // 状態は表示のたびに計算する（D-89）: 帳簿係の latest.json の出来事 ＋ まだ帳簿に載っていない、このブラウザで見た成立（localStorage）。
 // 鍵はこのブラウザだけ（tama_key.js）。署名して出すのは掲示板の join・reborn・deal と、取引の offer・lock・terms・refund だけ。
-import { lifeState, localDay, tamaLine, fillArticle, rewardOf, sitSchedule, sitWhy, HOUR } from "./tama_core.js";
+import { lifeState, localDay, tamaLine, fillArticle, rewardOf, sitSchedule, sitWhy, HOUR, boxAt } from "./tama_core.js";
 import { spriteSvg, spriteRows } from "./tama_sprite.js";
 import { L, getLang, setLang } from "./tama_i18n.js";
 import { setVenue, makeSigner, readTail } from "./tama_net.js";
@@ -17,6 +17,8 @@ const fmt = (n) => Math.round(Number(n)).toLocaleString("ja-JP");
 const rand = () => Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => b.toString(16).padStart(2, "0")).join("");
 
 export const app = { stats: null, box: null, did: null, priv: null, signer: null, motion: null, deals: {}, sits: [] };
+/** いま効いている箱の数字（値段など。box.changes の from を過ぎたものを重ねる。D-126） */
+const cur = () => (app.box ? boxAt(app.box, Date.now()) : {});
 
 // ── 手元の出来事（帳簿に載るまでのつなぎ） ──
 const LKEY = (did) => `tama_local_v1:${did}`;
@@ -43,7 +45,7 @@ export function merged(stats, did) {
   const keys = new Set(keep.map((e) => e.contract ?? `${e.t}-${e.ms}`));
   let balance = d ? Number(d.balance) : 0;
   for (const x of loc.deltas) if (keys.has(x.key)) balance += x.delta;
-  if (!d && keep.some((e) => e.t === "join")) balance += Number(app.box.initial_paper);
+  if (!d && keep.some((e) => e.t === "join")) balance += Number(cur().initial_paper);
   // 出ていった分（lock 中の額）も見込みに入れる
   for (const x of [...Object.values(app.deals), ...(app.sits ?? [])]) if (x.st?.locked && !x.st?.done) balance -= Number(x.st.amount ?? 0);
   return { events: [...foldEv, ...keep], balance, fromFold: !!d, fold: d ?? null };
@@ -326,13 +328,14 @@ export function render() {
   renderChrome();
   movingNotice();
   if (!app.did) return renderEgg();
+  if (app.stats?.did?.[app.did]?.state?.released) return renderReleased();
   if (!app.priv) return renderUnlock();
   const m = merged(app.stats, app.did);
   const st = lifeState(m.events, Date.now(), app.box);
   app.st = st; app.balance = m.balance;
   if (app.why && app.whyAt && Date.now() - app.whyAt > 9000) app.why = "";   // 押したときの知らせは、しばらくしたら消す
   if (!st.born) return renderEgg();
-  const fee = Number(app.box.reborn_price ?? 0);
+  const fee = Number(cur().reborn_price ?? 0);
   const graveNote = st.grave ? `<p class="note">` + L(`おなかが空っぽのまま ${app.box.grave_after_hours} 時間がたって、お墓になりました。生まれ変わると、同じ HAKO がもう一度はじめからやり直します（部屋とこれまでの記録はそのまま）。` +
     `生まれ変わりには ${fmt(fee)} $PAPER かかります${m.balance < fee ? `（いまは足りないので、財布が 0 になって生まれ変わります）` : ""}。お墓の間は、おでかけとあそぶはできません。`,
     `Its tummy stayed empty for ${app.box.grave_after_hours} hours, so it is resting in a grave. When it is reborn, the same HAKO starts over from an egg (the room and its record stay). ` +
@@ -450,7 +453,7 @@ function sitStart() {
 /** n 日・あそぶ p 回が、帳簿係の決まり（届ける時刻は今から sit_max_days 日以内など）に収まるか */
 const sitFits = (n, p, s) => sitSchedule(app.box, s.t0, n, p, s.first).every((x) => !sitWhy(app.box, { job: { context: JSON.stringify({ at: x.at }) }, claimByMs: x.claimByMs, refundAfterMs: x.refundAfterMs }, Date.now()));
 function sitHtml(st, m) {
-  if (!app.box?.sit_price) return "";
+  if (!cur().sit_price) return "";
   const live = sitLive();
   // 頼むボタンは sit_enabled のときだけ（GCP の miner が sit を引き受けるようになってから入れる）。頼んだ分の表示は続ける
   if (!app.box.sit_enabled && !live.length && !(st.sitUntil > Date.now())) return "";
@@ -477,7 +480,7 @@ function sitHtml(st, m) {
   const n = Math.min(Math.max(1, Number(app.sitDays ?? Math.min(3, dmax))), dmax);
   const pmax = Math.max(0, ...Array.from({ length: sitPlaysMax(n) + 1 }, (_, j) => j).filter((j) => sitFits(n, j, s)));
   const p = Math.min(Math.max(0, Number(app.sitPlays ?? Math.min(1, pmax))), pmax);
-  const price = Number(app.box.sit_price), pprice = Number(app.box.sit_play_price ?? 0), total = n * (price + p * pprice), lack = m.balance < total;
+  const price = Number(cur().sit_price), pprice = Number(cur().sit_play_price ?? 0), total = n * (price + p * pprice), lack = m.balance < total;
   const opts = Array.from({ length: dmax }, (_, i) => `<option value="${i + 1}"${i + 1 === n ? " selected" : ""}>${L(`${i + 1} 日`, `${i + 1} day${i ? "s" : ""}`)}</option>`).join("");
   const popts = Array.from({ length: pmax + 1 }, (_, i) => `<option value="${i}"${i === p ? " selected" : ""}>${L(i ? `${i} 回` : "あそばない", ["None", "Once", "Twice"][i] ?? `${i} times`)}</option>`).join("");
   return `<div class="sit">${head}<form class="sitf" id="sitf">
@@ -501,7 +504,7 @@ async function bookSit(n, p = 0) {
   const s = sitStart();
   p = Math.min(Math.max(0, p), sitPlaysMax(n));
   if (!sitFits(n, p, s)) return say(L("その日数では頼めません", "That many days can't be booked"));
-  if (m.balance < n * (Number(app.box.sit_price) + p * Number(app.box.sit_play_price ?? 0))) return say(L("PAPER が足りません", "Not enough PAPER"));
+  if (m.balance < n * (Number(cur().sit_price) + p * Number(cur().sit_play_price ?? 0))) return say(L("PAPER が足りません", "Not enough PAPER"));
   const plan = sitSchedule(app.box, s.t0, n, p, s.first);   // ごはんが先（PAPER が途中で足りなくなっても、ごはんから引き当てる）
   plan.sort((a, b) => (a.j > 0) - (b.j > 0) || a.at - b.at);
   const slots = plan.map((x) => (x.j ? `${s.t0}-${x.k}-p${x.j}` : `${s.t0}-${x.k}`));
@@ -521,8 +524,8 @@ async function bookSit(n, p = 0) {
   render();
 }
 function actionsHtml(st, m) {
-  if (st.grave) return `<button class="btn" id="reborn" style="--c:var(--accent)"><span class="dot" style="background:var(--accent)"></span>${L("生まれ変わる", "Be reborn")} <span class="price">${fmt(Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, m.balance)))} $PAPER</span></button>`;
-  const price = { meal: app.box.meal_price, out: app.box.out_price, play: app.box.play_stake };
+  if (st.grave) return `<button class="btn" id="reborn" style="--c:var(--accent)"><span class="dot" style="background:var(--accent)"></span>${L("生まれ変わる", "Be reborn")} <span class="price">${fmt(Math.min(Number(cur().reborn_price ?? 0), Math.max(0, m.balance)))} $PAPER</span></button>`;
+  const price = { meal: cur().meal_price, out: cur().out_price, play: cur().play_stake };
   return dealKinds.map(([k, label]) => { const why = actionBlock(k, st, m);
     return `<button class="btn${why ? " off" : ""}" data-kind="${k}" style="--c:${DOT[k]}" ${why ? `aria-disabled="true" title="${esc(why)}"` : ""}><span class="dot" style="background:${DOT[k]}"></span>${L(label, KIND_EN[k])} <span class="price">${fmt(price[k])} $PAPER</span></button>`; }).join("");
 }
@@ -629,7 +632,7 @@ function playsToday(m) {
 function actionBlock(kind, st, m) {
   const x = app.deals[kind];
   if (x?.busy()) return x.st.gaveUp ? L("PAPER が戻るのを待っています", "Waiting for the PAPER to come back") : L("いまはその途中です", "Already in progress");   // 種類が違えば同時にできる（財布は lock 中の額を引いて見る）
-  const price = { meal: app.box.meal_price, out: app.box.out_price, play: app.box.play_stake }[kind];
+  const price = { meal: cur().meal_price, out: cur().out_price, play: cur().play_stake }[kind];
   if (st.grave) return L("お墓の間はできません", "Not while it rests in the grave");
   if (m.balance < Number(price)) return L("PAPER が足りません", "Not enough PAPER");
   if (kind === "out" && st.outsToday >= Number(app.box.out_per_day)) return L(`おでかけは 1 日 ${app.box.out_per_day} 回までです`, `Outings are limited to ${app.box.out_per_day} a day`);
@@ -651,6 +654,22 @@ function renderSaid(fold) {
     ...(meals.length ? [`<p class="label" style="margin-top:12px">${L("これまで食べたご飯", "Meals so far")}</p><ul class="menu">${meals.map((x) => `<li>${esc(x.line)}</li>`).join("")}</ul>`] : []),
   ].join("");
   if (app.saidHtml !== h || (h && !el.firstChild)) { el.innerHTML = h; app.saidHtml = h; }
+}
+
+/** 枠を空けた HAKO（D-126。お墓のまま slot_grave_hours 時間、または生まれて slot_nomeal_hours 時間ごはんが無かった）。説明は遊び方に */
+function renderReleased() {
+  const h = `
+    <section class="card" id="me">
+      <div class="stage plain short"><div class="egg">${spriteSvg(null, "egg", 5)}</div></div>
+      <h2>${L("この HAKO は箱庭を離れました", "This HAKO has left the garden")}</h2>
+      <div class="actions"><button class="btn" id="anew">${L("新しい HAKO を迎える", "Welcome a new HAKO")}</button></div>
+    </section>`;
+  if (app.viewHtml === h) return;
+  $("view").innerHTML = h; app.viewHtml = h;
+  $("anew").onclick = () => {
+    if (!confirm(L("このブラウザから今の鍵を消して、新しい HAKO を迎えます。よろしいですか？", "This removes the current key from this browser and welcomes a new HAKO. Continue?"))) return;
+    K.dropRec(); app.did = null; app.priv = null; app.signer = null; app.viewHtml = null; render();
+  };
 }
 
 /** 満員か（帳簿の HAKO の数が max_hakos に届いた。帳簿は毎時なので、1 時間の間に少し超えて迎えても、帳簿係が超えた分を数えない） */
@@ -677,7 +696,7 @@ function renderEgg() {
       <p class="label" style="margin-top:14px">NEW HAKO</p>
       <h2>${L("HAKO を迎える", "Welcome a HAKO")}</h2>
       <p>${L("このブラウザの中で鍵を作り、あなたの HAKO が生まれます。鍵は外に送りません。なくすと HAKO を動かせなくなるので、生まれたあとに鍵ファイルを保存してください。", "A key is made inside this browser and your HAKO is born. The key is never sent anywhere. If you lose it you can't move your HAKO, so save the key file once it is born.")}</p>
-      <p class="note">${L(`はじめに ${fmt(app.box.initial_paper)} $PAPER を受け取ります。PAPER はこの箱庭の中だけの点数で、お金としての価値はありません。換金も売り買いもできません。`, `You start with ${fmt(app.box.initial_paper)} $PAPER. PAPER is only a score inside this garden and has no monetary value. It can't be cashed out, bought or sold.`)}</p>
+      <p class="note">${L(`はじめに ${fmt(cur().initial_paper)} $PAPER を受け取ります。PAPER はこの箱庭の中だけの点数で、お金としての価値はありません。換金も売り買いもできません。`, `You start with ${fmt(cur().initial_paper)} $PAPER. PAPER is only a score inside this garden and has no monetary value. It can't be cashed out, bought or sold.`)}</p>
       <form class="keyf" id="kf" method="post" action="#">
       <input class="vh" id="u1" name="username" type="text" autocomplete="username" tabindex="-1" aria-hidden="true" value="">
       <label>${L("パスフレーズ（HAKO を起こすときに使います）", "Passphrase (to wake your HAKO)")}<span class="pw"><input id="p1" name="password" type="password" autocomplete="new-password"><button type="button" class="eye" data-eye="p1,p2"></button></span></label>
@@ -771,7 +790,7 @@ async function unlock() {
 async function reborn() {
   try { await app.signer.post(app.box.board, tamaLine({ t: "reborn", n: rand() })); }
   catch (e) { return say(L(`掲示板に出せませんでした（${e.message}）`, `Couldn't post to the board (${e.message})`)); }
-  const fee = Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, app.balance ?? 0));   // D-101: 足りなければ残高 0 まで
+  const fee = Math.min(Number(cur().reborn_price ?? 0), Math.max(0, app.balance ?? 0));   // D-101: 足りなければ残高 0 まで
   addLocal(app.did, { t: "reborn", ms: Date.now() }, -fee);
   app.rebornUntil = Date.now() + 2500; setTimeout(render, 2600);
   render();
@@ -790,7 +809,7 @@ async function startDeal(kind) {
 function onDeal(kind, ev) {
   if (ev.type === "settled") {
     if (document.body.dataset.tab !== "me") for (const a of document.querySelectorAll('[data-tab-to="me"]')) a.classList.add("ping");   // ほかの画面を見ている間に終わった印
-    addLocal(app.did, { t: kind, ms: ev.ms, contract: ev.contract, ...(kind === "play" ? { payout: ev.delta + Number(app.box.play_stake) } : {}) }, ev.delta);   // あそぶの戻りは部屋の稼ぎに数える
+    addLocal(app.did, { t: kind, ms: ev.ms, contract: ev.contract, ...(kind === "play" ? { payout: ev.delta + Number(cur().play_stake) } : {}) }, ev.delta);   // あそぶの戻りは部屋の稼ぎに数える
     if (kind === "play") app.happyUntil = Date.now() + 8000;
     if (kind === "out" && ev.lines) {
       let facts = null; try { facts = JSON.parse(app.deals.out.st.offer.job.context).facts; } catch { facts = null; }

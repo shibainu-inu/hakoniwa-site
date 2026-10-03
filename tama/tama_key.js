@@ -42,6 +42,8 @@ export async function openKey(rec, pass) {
   return priv;
 }
 export function loadRec() { try { const s = localStorage.getItem(KEY); const j = s ? JSON.parse(s) : null; return j && j.did ? j : null; } catch { return null; } }
+/** このブラウザから鍵を消す（枠を空けた HAKO のあとで新しく迎えるとき。D-126） */
+export function dropRec() { try { localStorage.removeItem(KEY); } catch { /* 無視 */ } forgetTab(); }
 export function saveRec(rec) { try { localStorage.setItem(KEY, JSON.stringify(rec)); return true; } catch { return false; } }
 /** ブラウザのパスワード保存で使う「ユーザー名」。どの HAKO のパスフレーズかが分かる名前（D-120） */
 export const loginName = (did) => `HAKO …${short8(did)}`;
