@@ -158,8 +158,8 @@ form.keyf{margin:0}
 /* 記事・ひとこと */
 .article{border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0;background:var(--soft)}
 .article h3{margin:0 0 4px;font-size:16px;font-weight:800}.article p{margin:2px 0;font-size:14px;color:var(--muted)}
-details.article summary{list-style:none;cursor:pointer;display:flex;gap:8px;align-items:baseline}details.article summary::-webkit-details-marker{display:none}
-details.article summary::before{content:"▸";color:var(--muted);font-size:13px;transition:transform .15s}details.article[open] summary::before{transform:rotate(90deg)}
+details.article summary{list-style:none;cursor:pointer;display:block}details.article summary::-webkit-details-marker{display:none}
+details.article .more{display:inline-block;margin-top:4px;font-size:13px;font-weight:700;color:var(--accent)}details.article .cl,details.article[open] .rd{display:none}details.article[open] .cl{display:inline}
 details.article summary h3{margin:0;font-family:Georgia,"Times New Roman",serif;letter-spacing:.01em}
 details.article[open]{background:var(--card)}details.article[open] summary{border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:6px}details.article .meta{font-size:11px;color:var(--dim);margin-bottom:6px}
 .menu{margin:0;padding:0 0 0 1.2em;font-size:14px}.menu li{margin:2px 0}
