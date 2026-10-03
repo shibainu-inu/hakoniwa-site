@@ -294,7 +294,7 @@ function stateWord(st) {
 }
 function lastSay(fold) {
   const meals = fold?.meals ?? [], x = app.lastSay ? { line: app.lastSay, menu: app.lastSayMenu } : meals[meals.length - 1];
-  return !x || x.menu ? null : x.line;   // メニュー名は出さない（運営者 2026-10-04）
+  return !x ? null : x.menu ? `Today's meal: ${x.line}` : x.line;   // メニュー名は「今日のご飯」として写す（HAKO のページには出さず、庭と写真に出す。運営者 2026-10-04）
 }
 function motionOf(st) {
   if (!st.born) return "normal";
