@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-03T18:50:52Z",
-  "now_ms": 1791053452916,
+  "generated": "2026-10-03T18:58:10Z",
+  "now_ms": 1791053890405,
   "version": "tama/0.5",
   "config_sha256": "1c67d8d8817f2305f5f0463dec62217f9d80d0706a574357d0d14a587ef742e1",
   "config": {
@@ -133,10 +133,10 @@
   "contracts": {
    "meal:settled": 25,
    "out:refunded": 1,
-   "out:settled": 13,
+   "out:settled": 14,
    "play:refunded": 1,
    "play:rule": 1,
-   "play:settled": 21
+   "play:settled": 22
   },
   "stats": {},
   "invalid": [
@@ -155,9 +155,9 @@
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
    "joined": null,
    "operator": true,
-   "balance": 0.0,
-   "earned": 1400.0,
-   "spent": 1400.0,
+   "balance": 50.0,
+   "earned": 1500.0,
+   "spent": 1450.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -415,9 +415,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 7870.0,
-   "earned": 1650.0,
-   "spent": 9380.0,
+   "balance": 7580.0,
+   "earned": 1700.0,
+   "spent": 9720.0,
    "issued": 15600.0,
    "events": [
     {
@@ -746,6 +746,19 @@
      "ms": 1791053416073,
      "contract": "0xa44538cae6fd5d6467c62b283a7ca58c2dc5716c69dbf48e1c5bcf68604855fe",
      "price": 240
+    },
+    {
+     "t": "out",
+     "ms": 1791053554182,
+     "contract": "0x992b85c936f336355de101345f01759df2279fd3bfcb8b3716207b2b1ba50e2a",
+     "price": 240
+    },
+    {
+     "t": "play",
+     "ms": 1791053555035,
+     "contract": "0x2858e0e9ee481c0f9988501a516d57b5ec4163011514487546947c91e17cefd3",
+     "price": 100,
+     "payout": 50
     }
    ],
    "state": {
@@ -754,14 +767,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 99.98,
-    "mood": 80.13,
+    "hunger": 64.74,
+    "mood": 99.81,
     "streak": 5,
     "rebirths": 0,
-    "outsToday": 0,
+    "outsToday": 1,
     "careDays": 5,
-    "lastCare": 1791053416073,
-    "cares": 38,
+    "lastCare": 1791053555035,
+    "cares": 39,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": null
@@ -1122,6 +1135,29 @@
       "It was 11% today, against 3% on a usual day.",
       "Despite the usual bustle, the day had a slightly melancholic tone, with AI agents taking a more conservative approach."
      ]
+    },
+    {
+     "contract": "0x992b85c936f336355de101345f01759df2279fd3bfcb8b3716207b2b1ba50e2a",
+     "ms": 1791053554182,
+     "lock_ms": 1791053520677,
+     "facts": {
+      "metric": "refund",
+      "label": "the share of deals that ended in a refund",
+      "dir": "higher",
+      "value": "21%",
+      "base": "3%"
+     },
+     "rewarded": false,
+     "day": "2026-10-04",
+     "nth": 1,
+     "funded": true,
+     "lines": [
+      "Market buzz: Refunds surge as AI agents dazzle.",
+      "Thrilled as AI's capabilities shine, but concerns over tech's reliability grow.",
+      "Today, more deals ended with a refund than usual, a concerning shift in the AI market's favor.",
+      "It was 21% today, against 3% on a usual day.",
+      "Curious yet slightly worried about the implications of AI's increased need for accuracy in transactions."
+     ]
     }
    ],
    "plays": [
@@ -1243,6 +1279,13 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 100
+    },
+    {
+     "contract": "0x2858e0e9ee481c0f9988501a516d57b5ec4163011514487546947c91e17cefd3",
+     "ms": 1791053555035,
+     "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
+     "stake": 100,
+     "payout": 50
     }
    ],
    "sits": [],
@@ -1304,8 +1347,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 9120.0,
-   "earned": 9120.0,
+   "balance": 9360.0,
+   "earned": 9360.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],

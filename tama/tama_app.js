@@ -294,7 +294,7 @@ function stateWord(st) {
 }
 function lastSay(fold) {
   const meals = fold?.meals ?? [], x = app.lastSay ? { line: app.lastSay, menu: app.lastSayMenu } : meals[meals.length - 1];
-  return !x ? null : x.menu ? `Today's meal: ${x.line}` : x.line;   // メニュー名は「今日のご飯」として写す
+  return !x || x.menu ? null : x.line;   // メニュー名は出さない（運営者 2026-10-04）
 }
 function motionOf(st) {
   if (!st.born) return "normal";
@@ -365,7 +365,7 @@ export function render() {
       ${roomInfo(m, st)}
     </section>`;
   app.m = m;
-  if (app.viewHtml === html && $("stage")) { showOps(); setMotion(motionOf(st)); renderSaid(m.fold); return; }   // 変わっていなければ描き直さない（動きを途切れさせない）
+  if (app.viewHtml === html && $("stage")) { showOps(); setMotion(motionOf(st)); renderSaid(m); return; }   // 変わっていなければ描き直さない（動きを途切れさせない）
   app.nmFocus = document.activeElement?.id === "nm";   // 名前の書きかけ（描き直す前に、入力中だったかを覚える）
   app.viewHtml = html; view.innerHTML = html; app.opsShown = null; showOps();
   app.motion = null; setMotion(motionOf(st));
@@ -374,7 +374,7 @@ export function render() {
   wireName(); wireSit();
   const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say(L("鍵ファイルを保存しました。パスフレーズと別の場所にしまってください", "Key file saved. Keep it somewhere separate from your passphrase."), false); } };
   for (const b of document.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
-  renderSaid(m.fold);
+  renderSaid(m);
 }
 // 名前（D-122）。自分の画面だけ: 鍵の記録に置き、会場・庭・ほかの人の画面には出さない
 function nameHtml() {
@@ -641,17 +641,21 @@ function actionBlock(kind, st, m) {
   if (kind === "play" && !(app.box.npcs ?? []).length) return L("あそび相手がまだいません", "No playmates yet");
   return null;
 }
-function renderSaid(fold) {
+function renderSaid(m) {
   const el = $("said"); if (!el) return;
-  // これまで食べたご飯: ごはん屋さんのメニュー名を新しい順に 10 個まで（帳簿に載る前の、この画面で届いたものを先に）
-  const meals = (fold?.meals ?? []).filter((x) => x.menu).reverse();
-  if (app.lastSay && app.lastSayMenu && !meals.some((x) => x.line === app.lastSay)) meals.unshift({ line: app.lastSay });
-  meals.splice(10);
+  const fold = m?.fold;
+  // 今日のあそぶ: 今日（JST）の自分のあそぶの結果を新しい順に（シッターのあそぶは戻りが無いので出さない。ごはんのメニュー名は出さない。運営者 2026-10-04）
+  const today = localDay(Date.now(), app.box);
+  const plays = (m?.events ?? []).filter((e) => e.t === "play" && !e.sit && e.payout != null && localDay(e.ms, app.box) === today).sort((a, b) => b.ms - a.ms);
+  const hm = (ms) => new Date(ms).toLocaleTimeString(getLang() === "ja" ? "ja-JP" : "en-US", { hour: "2-digit", minute: "2-digit" });
   let outs = (fold?.outs ?? []).slice(-1);
   if (app.lastArticle && !(fold?.outs ?? []).some((o) => o.contract === app.lastArticle.contract)) outs = [app.lastArticle];   // 帳簿に載る前の記事
   const h = [
     ...outs.map((o) => `<article class="article">${o.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join("")}</article>`),
-    ...(meals.length ? [`<p class="label" style="margin-top:12px">${L("これまで食べたご飯", "Meals so far")}</p><ul class="menu">${meals.map((x) => `<li>${esc(x.line)}</li>`).join("")}</ul>`] : []),
+    ...(plays.length ? [`<p class="label" style="margin-top:12px">${L("今日のあそぶ", "Today's plays")}</p><ul class="menu">${plays.map((e) => {
+      const stake = Number(e.price ?? cur().play_stake), back = Number(e.payout), d = back - stake;
+      return `<li><span class="mono">${hm(e.ms)}</span>　${fmt(stake)} → ${fmt(back)} $PAPER <span class="${d >= 0 ? "up" : "down"}">${d >= 0 ? "+" : ""}${fmt(d)}</span></li>`;
+    }).join("")}</ul>`] : []),
   ].join("");
   if (app.saidHtml !== h || (h && !el.firstChild)) { el.innerHTML = h; app.saidHtml = h; }
 }
