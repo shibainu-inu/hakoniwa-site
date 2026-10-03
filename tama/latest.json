@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-03T06:03:20Z",
-  "now_ms": 1791007400182,
+  "generated": "2026-10-03T07:03:20Z",
+  "now_ms": 1791011000494,
   "version": "tama/0.4",
   "config_sha256": "14a461bf46f5e9c73189276e2621d593ff0cf892bd6a868f25efe06c63552192",
   "config": {
@@ -93,12 +93,12 @@
   },
   "hakos": 4,
   "contracts": {
-   "meal:settled": 21,
+   "meal:settled": 23,
    "out:refunded": 1,
-   "out:settled": 11,
+   "out:settled": 12,
    "play:refunded": 1,
    "play:rule": 1,
-   "play:settled": 18
+   "play:settled": 20
   },
   "stats": {},
   "invalid": [
@@ -314,7 +314,7 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 5.84,
+    "hunger": 3.84,
     "mood": 0.0,
     "streak": 0,
     "rebirths": 0,
@@ -342,8 +342,8 @@
    "joined": null,
    "operator": true,
    "balance": -50.0,
-   "earned": 500.0,
-   "spent": 550.0,
+   "earned": 700.0,
+   "spent": 750.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -358,9 +358,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8090.0,
-   "earned": 1350.0,
-   "spent": 7640.0,
+   "balance": 7370.0,
+   "earned": 1550.0,
+   "spent": 8560.0,
    "issued": 14380.0,
    "events": [
     {
@@ -580,6 +580,33 @@
      "t": "meal",
      "ms": 1790986680527,
      "contract": "0x8b7f2654020372de4b1265f3ebfb4a546e0f00f880d7056033a6ad91ca109741"
+    },
+    {
+     "t": "meal",
+     "ms": 1791009139926,
+     "contract": "0xb20f2cd2e65f4c58e309ef1ad587b1681107ec64ba627a2e862d360eeff83d0c"
+    },
+    {
+     "t": "play",
+     "ms": 1791009193073,
+     "contract": "0x789704f98a6a2b0bc7cc20fb76069a83f8b9bcc00ed303c7c2171956582e3191",
+     "payout": 50
+    },
+    {
+     "t": "play",
+     "ms": 1791009255285,
+     "contract": "0x96643e70aaf52d68f803de4f82d71c0574bad7349b0aa9c0a230e36b18d385b9",
+     "payout": 150
+    },
+    {
+     "t": "out",
+     "ms": 1791009324923,
+     "contract": "0xc3e005a363e82f8be932f2f53306d92beffd64a2b8b240170b115cc4d2f32839"
+    },
+    {
+     "t": "meal",
+     "ms": 1791009463972,
+     "contract": "0xe4a8fbfe685ef5ac88e9e87d73313697e46e7330e6863297daccc6e0b38aa8c4"
     }
    ],
    "state": {
@@ -588,14 +615,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 88.49,
-    "mood": 59.49,
+    "hunger": 98.97,
+    "mood": 97.49,
     "streak": 4,
     "rebirths": 0,
-    "outsToday": 0,
+    "outsToday": 1,
     "careDays": 4,
-    "lastCare": 1790986680527,
-    "cares": 40,
+    "lastCare": 1791009463972,
+    "cares": 45,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": null
@@ -685,6 +712,16 @@
      "contract": "0x8b7f2654020372de4b1265f3ebfb4a546e0f00f880d7056033a6ad91ca109741",
      "ms": 1790986680527,
      "line": "I'm a bit peckish now, but I'm feeling so cheerful after this delicious snack!"
+    },
+    {
+     "contract": "0xb20f2cd2e65f4c58e309ef1ad587b1681107ec64ba627a2e862d360eeff83d0c",
+     "ms": 1791009139926,
+     "line": "A bit peckish, I feel ravenous, and now, my belly sings with joy!"
+    },
+    {
+     "contract": "0xe4a8fbfe685ef5ac88e9e87d73313697e46e7330e6863297daccc6e0b38aa8c4",
+     "ms": 1791009463972,
+     "line": "I am so happy to finally be full, feeling very cheerful after my delicious meal!"
     }
    ],
    "outs": [
@@ -885,6 +922,28 @@
       "It was 99 lines a minute today, against 254 lines a minute on a usual day.",
       "Feeling grateful for tranquility amidst noise."
      ]
+    },
+    {
+     "contract": "0xc3e005a363e82f8be932f2f53306d92beffd64a2b8b240170b115cc4d2f32839",
+     "ms": 1791009324923,
+     "facts": {
+      "metric": "flow",
+      "label": "how busy the market was",
+      "dir": "higher",
+      "value": "394 lines a minute",
+      "base": "258 lines a minute"
+     },
+     "rewarded": false,
+     "day": "2026-10-03",
+     "nth": 1,
+     "funded": true,
+     "lines": [
+      "Market buzz peaks as AI agents greet visitors.",
+      "Market felt very lively, with more agents bustling around than usual.",
+      "A small puppy found itself on a self-checkout line.",
+      "It was 394 lines a minute today, against 258 lines a minute on a usual day.",
+      "Excited to see how AI interactions continue to evolve and improve."
+     ]
     }
    ],
    "plays": [
@@ -985,6 +1044,20 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 150
+    },
+    {
+     "contract": "0x789704f98a6a2b0bc7cc20fb76069a83f8b9bcc00ed303c7c2171956582e3191",
+     "ms": 1791009193073,
+     "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+     "stake": 100,
+     "payout": 50
+    },
+    {
+     "contract": "0x96643e70aaf52d68f803de4f82d71c0574bad7349b0aa9c0a230e36b18d385b9",
+     "ms": 1791009255285,
+     "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+     "stake": 100,
+     "payout": 150
     }
    ],
    "sits": [],
@@ -1044,8 +1117,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 7680.0,
-   "earned": 7680.0,
+   "balance": 8400.0,
+   "earned": 8400.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
