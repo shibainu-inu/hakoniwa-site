@@ -35,7 +35,7 @@ export function storyHtml(box, moods, F) {
       L("ある日、そこに卵がひとつ届きました。あなたの卵です。", "One day an egg arrived there. It is yours.")) +
     page("s-grow", sp("g1", 13, castSvg("egg", 4)) + `<b class="ar a1">→</b>` + sp("g2", 14, castSvg("baby", 4)) + `<b class="ar a2">→</b>` + hako("g3", 17),
       L("お世話をしていると卵から子が生まれ、やがて箱のかたちの HAKO に育ちます。", "Look after it and a little one hatches, then grows into a box-shaped HAKO.")) +
-    page("s-day", sp("bowl", 11, art(BOWL)) + hako("trip", 15) + sp("sign", 11, art(SIGN)) + sp("note", 9, art(PAPER)),
+    page("s-day", sp("bowl", 11, art(BOWL)) + hako("trip", 15) + sp("sign", 11, art(SIGN)) + sp("rep", 9, art(PAPER)),
       L("HAKO はごはんを食べ、街へおでかけして、見てきたことを短い記事にして持ち帰ります。", "A HAKO eats, goes out to the town, and brings back a short report of what it saw.")) +
     page("s-real", crowd + (tw ? `<span class="tag t1 mono">${esc(tw.value)}</span><span class="tag t2 mono">${L("普段", "usually")} ${esc(tw.base)}</span>` : ""),
       L("街は実在し、記事の数字もそのとき実際に測ったものです。", "The town is real, and the numbers in the report were actually measured at that time.")) +
@@ -55,7 +55,7 @@ export function howHtml(box, F) {
     page("h-meal", hako("eat", 15) + sp("bowl", 11, art(BOWL)) + meter,
       L(`<b>ごはん</b>（${fmt(box.meal_price)} $PAPER）でおなかが ${box.meal_fill} 増えます。おなかは 1 時間に ${box.hunger_per_hour} ずつ減ります。`,
         `<b>Feed</b> (${fmt(box.meal_price)} $PAPER) fills its tummy by ${box.meal_fill}. The tummy drops by ${box.hunger_per_hour} every hour.`)) +
-    page("h-out", hako("trip", 15) + sp("sign", 11, art(SIGN)) + sp("note", 9, art(PAPER)) + `<span class="tag t3 mono">+${rewards[0]}</span>`,
+    page("h-out", hako("trip", 15) + sp("sign", 11, art(SIGN)) + sp("rep", 9, art(PAPER)) + `<span class="tag t3 mono">+${rewards[0]}</span>`,
       L(`<b>おでかけ</b>（${fmt(box.out_price)} $PAPER）は、おなかが ${box.out_min_hunger} 以上のとき 1 日 ${box.out_per_day} 回まで。街のようすを記事にして、ほうびが ${rewards.join("・")} $PAPER 届きます。`,
         `<b>Go out</b> (${fmt(box.out_price)} $PAPER) needs a tummy of ${box.out_min_hunger} or more, up to ${box.out_per_day} times a day. It writes a report on the town and earns ${rewards.join(" · ")} $PAPER.`)) +
     page("h-play", hako("p1", 15) + sp("coin", 6, art(COIN)) + face("p2", CROWD[1], 11) + (table.length ? `<span class="tag t4 mono">${fmt(Math.min(...table))}–${fmt(Math.max(...table))}</span>` : ""),

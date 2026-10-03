@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-03T18:58:10Z",
-  "now_ms": 1791053890405,
+  "generated": "2026-10-03T19:00:12Z",
+  "now_ms": 1791054012327,
   "version": "tama/0.5",
   "config_sha256": "1c67d8d8817f2305f5f0463dec62217f9d80d0706a574357d0d14a587ef742e1",
   "config": {
@@ -149,7 +149,7 @@
     "why": "already rewarded"
    }
   ],
-  "paper_total": 46820.0
+  "paper_total": 47580.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -415,10 +415,10 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 7580.0,
+   "balance": 8340.0,
    "earned": 1700.0,
    "spent": 9720.0,
-   "issued": 15600.0,
+   "issued": 16360.0,
    "events": [
     {
      "t": "join",
@@ -751,7 +751,8 @@
      "t": "out",
      "ms": 1791053554182,
      "contract": "0x992b85c936f336355de101345f01759df2279fd3bfcb8b3716207b2b1ba50e2a",
-     "price": 240
+     "price": 240,
+     "reward": 760.0
     },
     {
      "t": "play",
@@ -767,8 +768,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 64.74,
-    "mood": 99.81,
+    "hunger": 64.67,
+    "mood": 99.75,
     "streak": 5,
     "rebirths": 0,
     "outsToday": 1,
@@ -1147,7 +1148,7 @@
       "value": "21%",
       "base": "3%"
      },
-     "rewarded": false,
+     "rewarded": true,
      "day": "2026-10-04",
      "nth": 1,
      "funded": true,
