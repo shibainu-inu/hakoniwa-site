@@ -307,9 +307,24 @@ function motionOf(st) {
   return "normal";
 }
 
+/** github.io の /tama/ を閉じる知らせ（2026-10-04 12:00 JST で閉じる。運営者 2026-10-04）。Firebase 側には出さない */
+function movingNotice() {
+  if (!location.hostname.endsWith("github.io")) return;
+  let el = $("moving");
+  if (!el) { el = document.createElement("section"); el.id = "moving"; el.className = "card"; $("view").before(el); }
+  const h = `<p><b>${L("この場所での公開は 10月4日（日）12:00（日本時間）で終わります。", "This page closes on Sunday, October 4, at 12:00 noon Japan time.")}</b></p>
+    <p>${L("あなたの HAKO を続けるには、それまでに鍵ファイルを保存してください。新しい場所では、その鍵ファイルを読み込んで続けられます。", "To keep your HAKO, save your key file before then. You can load it at the new location to carry on.")}</p>
+    ${K.loadRec() ? `<div class="actions"><button class="btn" id="movesave">${L("鍵ファイルを保存", "Save key file")}</button></div>` : ""}`;
+  if (el.dataset.h === h) return;
+  el.innerHTML = h; el.dataset.h = h;
+  const b = $("movesave");
+  if (b) b.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say(L("鍵ファイルを保存しました。パスフレーズと別の場所にしまってください", "Key file saved. Keep it somewhere separate from your passphrase."), false); } };
+}
+
 export function render() {
   const view = $("view");
   renderChrome();
+  movingNotice();
   if (!app.did) return renderEgg();
   if (!app.priv) return renderUnlock();
   const m = merged(app.stats, app.did);
