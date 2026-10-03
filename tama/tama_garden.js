@@ -60,7 +60,8 @@ export function renderGarden(stats, moods, box, F = null) {
   const tw = moods?.twist, KIND = KINDS();
 
   // ティッカー（出来事と街の雰囲気。2 回並べて途切れずに流す）
-  const items = ev.slice(0, 14).map((e) => {
+  const known = ev.filter((e) => KIND[e.kind]);   // 知らない種類は出さない（庭を描けなくさせない）
+  const items = known.slice(0, 14).map((e) => {
     const [label] = KIND[e.kind];
     const tail = e.kind === "play" ? `<span class="${e.delta >= 0 ? "up" : "down"}">${e.delta >= 0 ? "+" : ""}${e.delta}</span>` : `<span class="dim">${ago(e.ms, now)}</span>`;
     return `<span class="item">${avatar(e.did, 2)}<span class="mono">${esc(short(e.did))}</span>${label} ${tail}</span>`;
@@ -81,7 +82,7 @@ export function renderGarden(stats, moods, box, F = null) {
   // 庭のようす
   const g = $("garden");
   if (g) g.innerHTML = `<div class="head"><h2 style="margin:0">${L("庭のようす", "Garden")}</h2><span class="label" style="margin:0">${L("帳簿係", "Ledger")} ${esc(String(stats?.box?.generated ?? "").slice(11, 16))} UTC</span></div>
-    ${ev.length ? `<ul>${ev.slice(0, 12).map((e) => { const [label, color] = KIND[e.kind];
+    ${known.length ? `<ul>${known.slice(0, 12).map((e) => { const [label, color] = KIND[e.kind];
       return `<li><span class="av">${avatar(e.did, 2)}</span><div><div class="who2">${label}<span class="mono">${esc(short(e.did))}</span></div><div class="what">${esc(e.what)}</div></div><span class="t mono" style="color:${color}">${ago(e.ms, now)}</span></li>`; }).join("")}</ul>`
       : `<p class="small">${L("まだ出来事はありません。帳簿係は 1 時間ごとに数えます。", "Nothing has happened yet. The ledger keeper counts once an hour.")}</p>`}`;
 

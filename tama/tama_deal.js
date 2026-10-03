@@ -10,7 +10,7 @@
 import * as tclk from "./hako_tclk.js";
 import { notes, readTail } from "./tama_net.js";
 import { L } from "./tama_i18n.js";
-import { jobId, tamaLine, parseTama, acceptKey, checkLines, mealPrompt, outPrompt, playPayout, playTableAt, localDay, rewardOf } from "./tama_core.js";
+import { jobId, tamaLine, parseTama, acceptKey, checkLines, mealPrompt, outPrompt, playPayoutAt, localDay, rewardOf } from "./tama_core.js";
 
 export const dealKinds = [["meal", "ごはん"], ["out", "おでかけ"], ["play", "あそぶ"]];
 const rand = () => Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => b.toString(16).padStart(2, "0")).join("");
@@ -126,7 +126,7 @@ export class Deal {
           this.note(this.kind === "out" ? L("今日は記事がうまく書けなかったみたい。PAPER は少したつと戻ります", "The report didn't come out well today. The PAPER will come back shortly.") : L("うまく作れなかったみたい。PAPER は少したつと戻ります", "It didn't come out well. The PAPER will come back shortly."));
         }
       }
-      if (reveal) return this.finish(lines, reveal.ms);
+      if (reveal) return this.finish(lines, reveal.ms, reveal.f.secret);
       if (now >= o.refundAfterMs) {
         const ref = st.lock?.ref ?? st.contract;   // lock を残せなかった取引（2026-10-01 まで）でも返金できるように。ref は契約 id と同じ
         try { await this.rail.refund(ref); } catch { /* ノートは誰でも書けるので、帳簿係は部屋の refund を数える */ }
@@ -136,7 +136,7 @@ export class Deal {
     }
   }
 
-  finish(lines, ms) {
+  async finish(lines, ms, secret) {
     const b = this.box, st = this.st;
     let ok = true, say = "";
     if (this.kind === "sitplay") ok = checkLines(lines, { n: Number(b.meal_lines), maxChars: b.line_max_chars, instruction: b.sit_play_instruction, fragmentWords: b.fragment_words }).ok;
@@ -145,7 +145,7 @@ export class Deal {
     if (!ok) { this.set("ng", { done: true, locked: false, lines }); this.note(L("届いたものが決まりに合わなかったので、成立しませんでした。PAPER は動いていません", "What arrived didn't meet the rules, so the deal didn't settle. No PAPER moved.")); return; }
     let delta = -Number(st.amount);
     if (this.kind === "play") {
-      const back = playPayout(st.contract, playTableAt(b, st.at));   // lock の時刻は注文の時刻で近い値を使う（表の切り替わりをまたぐ取引だけ、帳簿係と違いうる）
+      const back = await playPayoutAt(b, st.at, st.contract, secret);   // lock の時刻は注文の時刻で近い値を使う（表の切り替わりをまたぐ取引だけ、帳簿係と違いうる）
       delta += back;
       say = back > st.amount ? L(`勝った！ ${back} $PAPER 戻ってきた`, `You won! ${back} $PAPER came back`) : back === st.amount ? L(`引き分け。${back} $PAPER 戻ってきた`, `A draw. ${back} $PAPER came back`) : L(`負けちゃった。${back} $PAPER だけ戻ってきた`, `You lost. Only ${back} $PAPER came back`);
     }

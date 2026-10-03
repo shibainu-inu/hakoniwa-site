@@ -93,6 +93,8 @@
   ]
  ],
  "play_table_from": 1791026100000,
+ "play_secret_from": 1791036900000,
+ "prompt_check_from": 1791036900000,
  "expires_min": 10,
  "claim_by_min": 30,
  "refund_after_min": 60,

@@ -16,19 +16,30 @@ function b58(bytes) {
 export function didOf(pub) { const raw = new Uint8Array(34); raw[0] = 0xed; raw[1] = 0x01; raw.set(pub, 2); return "did:key:z" + b58(raw); }
 export const short8 = (did) => String(did).slice(-8);
 export async function supported() { try { return !!(await crypto.subtle.generateKey({ name: "Ed25519" }, true, ["sign", "verify"])); } catch { return false; } }
-async function kdf(pass, salt) {
+// 新しく作る鍵は 60 万回（2026-10-03 の点検。OWASP の目安）。前に作った鍵は記録の回数（25 万回）で開く。回数は 25 万〜200 万の外を受け付けない
+const ITER_NEW = 600000, ITER_MIN = 250000, ITER_MAX = 2000000;
+const iterOf = (rec) => { const n = Number(rec?.kdf?.iterations ?? ITER_MIN); return Number.isInteger(n) && n >= ITER_MIN && n <= ITER_MAX ? n : null; };
+async function kdf(pass, salt, iterations = ITER_MIN) {
   const base = await crypto.subtle.importKey("raw", enc.encode(pass), "PBKDF2", false, ["deriveKey"]);
-  return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: 250000, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
+  return crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt", "decrypt"]);
 }
 export async function sealKey(priv, did, pass) {
   const pkcs8 = new Uint8Array(await crypto.subtle.exportKey("pkcs8", priv));
   const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
-  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await kdf(pass, salt), pkcs8));
-  return { v: 1, kind: "tama-key", did, kdf: { name: "PBKDF2-SHA256", iterations: 250000, salt: b64(salt) }, enc: { name: "AES-GCM", iv: b64(iv), ct: b64(ct) }, made: new Date().toISOString() };
+  const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, await kdf(pass, salt, ITER_NEW), pkcs8));
+  return { v: 1, kind: "tama-key", did, kdf: { name: "PBKDF2-SHA256", iterations: ITER_NEW, salt: b64(salt) }, enc: { name: "AES-GCM", iv: b64(iv), ct: b64(ct) }, made: new Date().toISOString() };
+}
+/** 開いた鍵が記録の DID のものか（別の鍵を詰めたファイルで、ほかの HAKO のふりをさせない。2026-10-03 の点検） */
+async function didOfPriv(priv) {
+  const jwk = await crypto.subtle.exportKey("jwk", priv);
+  return didOf(Uint8Array.from(atob(jwk.x.replace(/-/g, "+").replace(/_/g, "/") + "=".repeat((4 - (jwk.x.length % 4)) % 4)), (c) => c.charCodeAt(0)));
 }
 export async function openKey(rec, pass) {
-  const pkcs8 = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(rec.enc.iv) }, await kdf(pass, unb64(rec.kdf.salt)), unb64(rec.enc.ct));
-  return crypto.subtle.importKey("pkcs8", pkcs8, { name: "Ed25519" }, true, ["sign"]);
+  const it = iterOf(rec); if (!it) throw new Error("kdf iterations");
+  const pkcs8 = await crypto.subtle.decrypt({ name: "AES-GCM", iv: unb64(rec.enc.iv) }, await kdf(pass, unb64(rec.kdf.salt), it), unb64(rec.enc.ct));
+  const priv = await crypto.subtle.importKey("pkcs8", pkcs8, { name: "Ed25519" }, true, ["sign"]);
+  if ((await didOfPriv(priv)) !== rec.did) throw new Error("key does not match did");
+  return priv;
 }
 export function loadRec() { try { const s = localStorage.getItem(KEY); const j = s ? JSON.parse(s) : null; return j && j.did ? j : null; } catch { return null; } }
 export function saveRec(rec) { try { localStorage.setItem(KEY, JSON.stringify(rec)); return true; } catch { return false; } }
@@ -50,7 +61,8 @@ export function setName(name) {
   const n = cleanName(name); if (n) rec.name = n; else delete rec.name;
   return saveRec(rec);
 }
-export function isKeyFile(j) { return !!(j && j.kind === "tama-key" && j.did && j.kdf && j.enc); }
+export const DID_RE = /^did:key:z[1-9A-HJ-NP-Za-km-z]{40,60}$/;
+export function isKeyFile(j) { return !!(j && j.kind === "tama-key" && typeof j.did === "string" && DID_RE.test(j.did) && j.kdf && j.enc && iterOf(j)); }
 /** 鍵ファイル（暗号化されたまま）をダウンロードさせる */
 export function downloadRec(rec) {
   const a = document.createElement("a");
@@ -62,32 +74,7 @@ export async function recallTab(did) {
   try { const j = JSON.parse(sessionStorage.getItem(TAB_KEY) || "null"); if (!j || j.did !== did) return null;
     return await crypto.subtle.importKey("pkcs8", unb64(j.pkcs8), { name: "Ed25519" }, true, ["sign"]); } catch { return null; }
 }
-// 開いているタブどうしで、覚えている鍵を渡す（同じブラウザの中だけ。どのタブも閉じれば消える。外には送らない）
-const SHARE = "tama_key_share_v1";
-/** ほかのタブが鍵を覚えていたら、このタブにも覚えさせる。もらえたら true */
-export function askTabs(did, ms = 350) {
-  return new Promise((resolve) => {
-    let ch; try { ch = new BroadcastChannel(SHARE); } catch { return resolve(false); }
-    const done = (v) => { try { ch.close(); } catch { /* 無視 */ } resolve(v); };
-    ch.onmessage = (e) => {
-      if (e.data?.t !== "have" || e.data.did !== did || !e.data.pkcs8) return;
-      try { sessionStorage.setItem(TAB_KEY, JSON.stringify({ did, pkcs8: e.data.pkcs8 })); } catch { /* 覚えないだけ */ }
-      done(true);
-    };
-    ch.postMessage({ t: "ask", did });
-    setTimeout(() => done(false), ms);
-  });
-}
-/** 覚えている鍵を、聞いてきたほかのタブへ渡す係 */
-export function serveTabs() {
-  try {
-    const ch = new BroadcastChannel(SHARE);
-    ch.onmessage = (e) => {
-      if (e.data?.t !== "ask") return;
-      try { const j = JSON.parse(sessionStorage.getItem(TAB_KEY) || "null"); if (j && j.did === e.data.did) ch.postMessage({ t: "have", did: j.did, pkcs8: j.pkcs8 }); } catch { /* 渡さないだけ */ }
-    };
-  } catch { /* 古いブラウザ: タブごとに開いてもらう */ }
-}
+// 開いているタブどうしで鍵を渡す仕組み（BroadcastChannel）は、2026-10-03 の点検でやめた。同じ出どころのほかのページが、開いた鍵を受け取れたため
 export function forgetTab() { try { sessionStorage.removeItem(TAB_KEY); } catch { /* 無視 */ } }
 /** 新しい鍵を作る → {priv, did, rec} */
 export async function makeKey(pass) {

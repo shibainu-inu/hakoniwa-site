@@ -1,51 +1,51 @@
 {
  "version": "mood/1",
- "hour": "2026-10-03T11",
- "generated": "2026-10-03T13:03:25Z",
- "rows": 25956,
+ "hour": "2026-10-03T12",
+ "generated": "2026-10-03T14:03:24Z",
+ "rows": 26458,
  "fog": [],
  "twist": {
   "metric": "refund",
   "label": "the share of deals that ended in a refund",
   "dir": "higher",
-  "value": "14%",
+  "value": "10%",
   "base": "3%"
  },
  "metrics": {
   "flow": {
    "label": "how busy the market was",
-   "value": "433 lines a minute",
+   "value": "441 lines a minute",
    "base": "262 lines a minute",
    "dir": "higher",
-   "z": 3.29
+   "z": 3.24
   },
   "alike": {
    "label": "the share of messages that looked alike",
-   "value": "81%",
+   "value": "80%",
    "base": "82%",
    "dir": "lower",
-   "z": 0.84
+   "z": 1.03
   },
   "nocontract": {
    "label": "the share of accepts without a contract field",
-   "value": "83%",
+   "value": "82%",
    "base": "86%",
    "dir": "lower",
-   "z": 0.98
+   "z": 1.15
   },
   "refund": {
    "label": "the share of deals that ended in a refund",
-   "value": "14%",
+   "value": "10%",
    "base": "3%",
    "dir": "higher",
-   "z": 8.27
+   "z": 5.27
   },
   "newcomer": {
    "label": "the share of faces never seen before",
    "value": "13%",
    "base": "14%",
    "dir": "lower",
-   "z": 0.04
+   "z": 0.12
   }
  }
 }

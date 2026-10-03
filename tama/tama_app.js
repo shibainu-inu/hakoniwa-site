@@ -711,7 +711,7 @@ const say = (s, bad = true) => { app.why = s; app.whyBad = !!s && bad; app.whyAt
 
 async function register() {
   const p1 = $("p1").value, p2 = $("p2").value;
-  if (p1.length < 8) return say(L("パスフレーズは 8 文字以上にしてください", "Use a passphrase of 8 characters or more"));
+  if (p1.length < 12) return say(L("パスフレーズは 12 文字以上にしてください", "Use a passphrase of 12 characters or more"));
   if (p1 !== p2) return say(L("2 つのパスフレーズが違います", "The two passphrases don't match"));
   if (isFull()) return say(L("いまは満員です", "We're full right now"));
   if (!(await K.supported())) return say(L("このブラウザは Ed25519 の鍵を作れません。新しいブラウザで開いてください", "This browser can't make an Ed25519 key. Please open it in a newer browser."));
@@ -733,6 +733,8 @@ async function importKey(ev) {
   try {
     const j = JSON.parse(await ev.target.files[0].text());
     if (!K.isKeyFile(j)) return say(L("鍵ファイルではありません", "That is not a key file"));
+    const cur = K.loadRec();   // 今の鍵を黙って上書きしない（2026-10-03 の点検）
+    if (cur && cur.did !== j.did && !confirm(L(`今の ${K.nameOf(cur, cur.did)} の鍵を、読み込んだ鍵で置き換えます。今の鍵ファイルを保存していないと、今の HAKO には戻れません。置き換えますか？`, `This replaces the key for ${K.nameOf(cur, cur.did)} with the one you loaded. If you haven't saved the current key file, you can't get back to this HAKO. Replace it?`))) return;
     K.saveRec(j); app.did = j.did; render();
   } catch (e) { say(L(`読めませんでした（${e.message}）`, `Couldn't read it (${e.message})`)); }
 }
@@ -819,12 +821,10 @@ export async function start() {
   try { app.P = await (await fetch("tama_phrases.json")).json(); } catch { app.P = null; }   // ひとことの語録（D-121）
   try { app.moods = await (await fetch(`moods.json?t=${Date.now()}`, { cache: "no-store" })).json(); } catch { app.moods = null; }
   setVenue(app.box.venue);
-  K.serveTabs();
   const rec = K.loadRec();
   app.did = rec?.did ?? null;
   if (app.did) {
     app.priv = await K.recallTab(app.did);
-    if (!app.priv && await K.askTabs(app.did)) app.priv = await K.recallTab(app.did);   // 開いているほかのタブが覚えていれば、もらう
     if (app.priv) { app.signer = watched(makeSigner(app.did, app.priv)); return boot(); }
   }
   render();

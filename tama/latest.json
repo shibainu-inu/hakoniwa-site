@@ -1,9 +1,9 @@
 {
  "box": {
-  "generated": "2026-10-03T13:03:25Z",
-  "now_ms": 1791032605172,
+  "generated": "2026-10-03T14:03:24Z",
+  "now_ms": 1791036204880,
   "version": "tama/0.5",
-  "config_sha256": "e9d74818841ac0e37706311c0959a2bfcee02ee78a66ffdd5563dbe2f4e94b00",
+  "config_sha256": "2e7381c3349c08b0b3cdcad684678bb024c4580cd42f658fb31a09000828c910",
   "config": {
    "box": "tama",
    "version": "tama/0.5",
@@ -99,6 +99,8 @@
     ]
    ],
    "play_table_from": 1791026100000,
+   "play_secret_from": 1791036900000,
+   "prompt_check_from": 1791036900000,
    "expires_min": 10,
    "claim_by_min": 30,
    "refund_after_min": 60,
@@ -675,8 +677,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 91.96,
-    "mood": 91.72,
+    "hunger": 89.96,
+    "mood": 89.72,
     "streak": 4,
     "rebirths": 0,
     "outsToday": 2,

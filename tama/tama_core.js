@@ -134,6 +134,20 @@ export function growthStage(cares, careDays, ageMs, box) {
 /** あそぶの戻り（D-96）。contract は 0x で始まる 64 桁の 16 進。table は [[重み, 額], …]（重みの合計 100） */
 /** あそぶの表（2026-10-03 に戻りの平均を 100 → 150 に。D-31: 前の契約の結果は変えない）: lock の時刻が play_table_from より前なら play_table_before */
 export const playTableAt = (box, lockMs) => (box.play_table_from != null && lockMs < Number(box.play_table_from) && box.play_table_before ? box.play_table_before : box.play_table);
+/** あそぶの引き（2026-10-03 の点検から。tama_core.py の play_roll と同じ）: sha256(NPC の秘密 ‖ 契約 id)。秘密は払ったあとの reveal で初めて分かる */
+export async function playRoll(secret, contract) {
+  const hx = (s) => String(s ?? "").replace(/^0x/, "");
+  const a = hx(secret), c = hx(contract);
+  if (!/^([0-9a-f]{2})+$/i.test(a) || !/^([0-9a-f]{2})+$/i.test(c)) return null;
+  const bytes = Uint8Array.from((a + c).match(/../g), (h) => parseInt(h, 16));
+  return "0x" + [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))].map((x) => x.toString(16).padStart(2, "0")).join("");
+}
+/** lock の時刻で決め方を切り替える（D-31）。play_secret_from より前は契約 id だけで引く */
+export async function playPayoutAt(box, lockMs, contract, secret) {
+  const table = playTableAt(box, lockMs);
+  if (box.play_secret_from != null && lockMs >= Number(box.play_secret_from)) { const roll = await playRoll(secret, contract); return roll ? playPayout(roll, table) : null; }
+  return playPayout(contract, table);
+}
 export function playPayout(contract, table) {
   const hex = String(contract).replace(/^0x/, "");
   if (!/^[0-9a-f]{8}/i.test(hex)) return null;
@@ -146,6 +160,7 @@ export function playPayout(contract, table) {
 // ── 納品の検査（旧仕様 D-74 をそのまま。帳簿係と miner が同じものを使う） ──
 const STRIP = /^[ \t\r]+|[ \t\r]+$/g;
 const DID_RE = /did:key|z6mk[1-9a-z]{8,}/i;
+const URL_RE = /(:\/\/|www\.|\b[a-z0-9-]+\.(com|net|org|io|xyz|ly|me|app|dev|jp|co|gg|link|site|top|info|biz|ru|cn|tk|click|online|shop)\b)/i;   // URL を書かせない（庭に詐欺の誘いを出させない。2026-10-03 の点検）
 const WORD_RE = /[a-z0-9{}']+/g;
 const cpLen = (s) => Array.from(String(s)).length;
 const words = (s) => String(s).toLowerCase().match(WORD_RE) ?? [];
@@ -173,6 +188,7 @@ export function checkLines(lines, { n, maxChars = 140, instruction = "", fragmen
     if (l === "") return { ok: false, why: `${k + 1}:empty` };
     if (cpLen(l) > maxChars) return { ok: false, why: `${k + 1}:over ${maxChars}` };
     if (DID_RE.test(l)) return { ok: false, why: `${k + 1}:did` };
+    if (URL_RE.test(l)) return { ok: false, why: `${k + 1}:url` };
     if (seen.has(l)) return { ok: false, why: `${k + 1}:duplicate` };
     seen.add(l);
     const lw = words(l);
@@ -248,4 +264,24 @@ export function sitWhy(box, offer, lockMs) {
   if (at <= lockMs) return "at not ahead";
   if (at - lockMs > Number(box.sit_max_days) * Number(box.sit_every_hours) * HOUR + HOUR) return "too far";
   return null;
+}
+
+// ── 注文の指示文の確かめ（2026-10-03 の点検: 注文側が好きな指示文を送って、庭に詐欺や攻撃の文を出させない）。miner と帳簿係が同じものを使う ──
+export const HUNGER_WORDS = ["starving", "hungry", "a bit peckish"], MOOD_WORDS = ["gloomy", "calm", "cheerful"];
+/** 街の雰囲気の指標の名前（tama_mood.py の LABELS と同じ。試験で照らす） */
+export const MOOD_LABELS = { flow: "how busy the market was", alike: "the share of messages that looked alike", nocontract: "the share of accepts without a contract field",
+  refund: "the share of deals that ended in a refund", newcomer: "the share of faces never seen before" };
+const FACT_VALUE = /^[0-9]{1,6}(%| lines a minute)$/;
+/** job.context（文字列）が、その種類の公式の形か。play は指示文を使わないので常に true */
+export function promptOk(box, kind, context) {
+  if (kind === "play") return true;
+  let c = null; try { c = JSON.parse(String(context)); } catch { return false; }
+  if (!c || typeof c !== "object" || typeof c.prompt !== "string") return false;
+  if (kind === "out") {
+    const f = c.facts;
+    if (!f || typeof f !== "object" || MOOD_LABELS[f.metric] !== f.label || !["higher", "lower"].includes(f.dir) || !FACT_VALUE.test(String(f.value)) || !FACT_VALUE.test(String(f.base))) return false;
+    return c.prompt === outPrompt(box.out_instruction, f);
+  }
+  const ins = kind === "sitplay" ? box.sit_play_instruction : box.meal_instruction;
+  return HUNGER_WORDS.some((h) => MOOD_WORDS.some((m) => c.prompt === collapseSpace(`${ins} Mood words: ${h}, ${m}.`)));
 }
