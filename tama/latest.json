@@ -1,12 +1,12 @@
 {
  "box": {
-  "generated": "2026-10-03T07:03:20Z",
-  "now_ms": 1791011000494,
-  "version": "tama/0.4",
-  "config_sha256": "14a461bf46f5e9c73189276e2621d593ff0cf892bd6a868f25efe06c63552192",
+  "generated": "2026-10-03T08:03:20Z",
+  "now_ms": 1791014600521,
+  "version": "tama/0.5",
+  "config_sha256": "00437fdecbd053e84e89474fd707c5fb03aa29b6ed3d17060231b5c6c7139171",
   "config": {
    "box": "tama",
-   "version": "tama/0.4",
+   "version": "tama/0.5",
    "venue": "https://technocore.chat",
    "offers_room": "tclk-offers",
    "board": "tama-board",
@@ -25,9 +25,9 @@
    "grow_hours": 48,
    "grow_care_days": 2,
    "acc_grow_cares": [
-    24,
-    48,
-    72
+    18,
+    36,
+    54
    ],
    "reborn_price": 1000,
    "reborn_hunger": 30,
@@ -40,6 +40,10 @@
    "sit_every_hours": 24,
    "sit_window_hours": 6,
    "sit_cover_hours": 24,
+   "sit_play_price": 100,
+   "sit_plays_max": 2,
+   "sit_play_gap_hours": 4,
+   "sit_max_slots": 14,
    "out_price": 240,
    "out_rewards": [
     760,
@@ -89,6 +93,7 @@
     "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3"
    ],
    "meal_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after eating. Use the mood words given. No numbers, no names, no quotes.",
+   "sit_play_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after your sitter played with you. Use the mood words given. No numbers, no names, no quotes.",
    "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
   },
   "hakos": 4,
@@ -107,7 +112,7 @@
     "why": "play: over 5 plays that day"
    }
   ],
-  "paper_total": 45600.0
+  "paper_total": 46360.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -196,7 +201,7 @@
     "outsToday": 0,
     "careDays": 2,
     "lastCare": 1790855501688,
-    "cares": 8,
+    "cares": 6,
     "stage": "hako",
     "accLevel": 1,
     "sitUntil": null
@@ -314,7 +319,7 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 3.84,
+    "hunger": 1.84,
     "mood": 0.0,
     "streak": 0,
     "rebirths": 0,
@@ -358,10 +363,10 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 7370.0,
+   "balance": 8130.0,
    "earned": 1550.0,
    "spent": 8560.0,
-   "issued": 14380.0,
+   "issued": 15140.0,
    "events": [
     {
      "t": "join",
@@ -615,14 +620,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 98.97,
-    "mood": 97.49,
+    "hunger": 96.97,
+    "mood": 95.49,
     "streak": 4,
     "rebirths": 0,
     "outsToday": 1,
     "careDays": 4,
     "lastCare": 1791009463972,
-    "cares": 45,
+    "cares": 35,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": null
@@ -933,7 +938,7 @@
       "value": "394 lines a minute",
       "base": "258 lines a minute"
      },
-     "rewarded": false,
+     "rewarded": true,
      "day": "2026-10-03",
      "nth": 1,
      "funded": true,

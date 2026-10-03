@@ -8,10 +8,11 @@
 //   3. ごきげんは 1 時間に mood_per_hour ずつ減り、0 で止まる。あそぶで +play_mood（仮。仕様にはあそぶの +20 だけがある）
 //   4. おなかが 0 のまま grave_after_hours 続いたら、その時刻にお墓（D-90）。お墓の間の出来事は状態を動かさない（PAPER は動く）
 //   5. reborn はお墓のときだけ効く。同じ DID で、おなかは reborn_hunger、ごきげんは生まれたときの値、連続日数は 0 から（D-91、D-101）
-//   6. 連続お世話日数は、いまの命の中で、ごはん・おでかけ・あそぶのどれかが成立した日（JST）が、今日か昨日から何日続いているか
+//   6. 連続お世話日数は、いまの命の中で、ごはん・あそぶのどれかが成立した日（JST）が、今日か昨日から何日続いているか
 //   8. 育ちの段は、いまの命について: 卵 →（お世話 hatch_cares 回 かつ hatch_hours 時間）生まれた子 →（grow_hours 時間 かつ お世話した日 grow_care_days 日）HAKO。生まれ変わると卵から
-//   9. おるすばん（D-123）: 出来事 sit {ms, until} の間はお墓までの時計を止める。予約のごはん（meal に sit: true）は、ふだんのごはんと同じに
-//      お世話として数える（育ちにも効く。運営者のヒアリング 2026-10-03）。連続日数は、ごはんの届かなかったおるすばん中の日を飛ばして数える
+//   9. おるすばん（D-123）: 出来事 sit {ms, until} の間はお墓までの時計を止める。予約のごはん・あそぶ（meal・play に sit: true）は、ふだんと同じに
+//      お世話として数える（育ちにも効く。運営者のヒアリング 2026-10-03）。連続日数は、お世話の届かなかったおるすばん中の日を飛ばして数える
+//  10. おでかけは、おなかを減らすがお世話に数えない（回数・お世話した日・連続日数・育ち・飾りのどれにも。稼ぎと記事のもの。2026-10-03）
 //   7. あそぶの戻りは契約 id（offer と accept を束ねたハッシュ）の先頭 8 桁の 16 進 mod 100 を、play_table の重みで引く（D-96）
 
 export const HOUR = 3_600_000;
@@ -85,6 +86,7 @@ export function lifeState(events, now, box) {
     else if (e.t === "play") { s.hunger = clamp(s.hunger - Number(box.play_hunger), 0, hMax); s.mood = clamp(s.mood + Number(box.play_mood), 0, mMax); }
     else continue;
     s.zeroSince = s.hunger > 0 ? null : (s.zeroSince ?? e.ms);
+    if (e.t === "out") continue;   // おでかけはお世話に数えない（稼ぎと記事のもの。D-119・D-123 の改め 2026-10-03）
     s.days.add(localDay(e.ms, box));
     s.lastCare = e.ms;
     s.cares += 1;
@@ -215,17 +217,24 @@ export function parseTama(text) {
 /** job.id: tama-<kind>-<DID 末尾 8 を小文字>-<ms> */
 export const jobId = (box, kind, did, ms) => `${box.box}-${kind}-${String(did).slice(-8).toLowerCase()}-${ms}`;
 export function jobKind(box, id) {
-  const m = new RegExp(`^${box.box}-(meal|out|play|sit)-[0-9a-z]{8}-[0-9]+$`).exec(String(id ?? ""));
+  const m = new RegExp(`^${box.box}-(meal|out|play|sit|sitplay)-[0-9a-z]{8}-[0-9]+$`).exec(String(id ?? ""));
   return m ? m[1] : null;
 }
 /** accept を知らせるノートのキー（miner・NPC が書き、ブラウザが読む） */
-export const acceptKey = (payer, kind, offerId = "") => `${String(payer).slice(-8).toLowerCase()}-${kind}` + (kind === "sit" ? `-${String(offerId).slice(2, 10)}` : "");
-/** おるすばんの予約（D-123）: k 回目（1..n）は t0 ＋ k × sit_every_hours に届く。claimByMs ＝ at ＋ sit_window_hours、refundAfterMs ＝ claimByMs ＋ 1 時間 */
-export function sitSchedule(box, t0, n) {
-  return Array.from({ length: n }, (_, i) => {
-    const at = t0 + Math.round((i + 1) * Number(box.sit_every_hours) * HOUR), claimByMs = at + Math.round(Number(box.sit_window_hours) * HOUR);
-    return { k: i + 1, at, claimByMs, refundAfterMs: claimByMs + HOUR };
-  });
+/** おるすばんの種類（D-123）: sit は予約のごはん、sitplay は予約のあそぶ（シッターが遊んであげる。賭けは無い） */
+export const isSit = (kind) => kind === "sit" || kind === "sitplay";
+export const acceptKey = (payer, kind, offerId = "") => `${String(payer).slice(-8).toLowerCase()}-${kind}` + (isSit(kind) ? `-${String(offerId).slice(2, 10)}` : "");
+/** おるすばんの予約（D-123）: k 日目（1..n）のごはんは t0 ＋ k × sit_every_hours に届く。あそぶ（1 日 plays 回）は、その日のごはんの
+ *  j × sit_play_gap_hours 前（j = 1..plays）。claimByMs ＝ at ＋ sit_window_hours、refundAfterMs ＝ claimByMs ＋ 1 時間 */
+export function sitSchedule(box, t0, n, plays = 0) {
+  const one = (kind, k, j, at) => { const claimByMs = at + Math.round(Number(box.sit_window_hours) * HOUR); return { kind, k, j, at, claimByMs, refundAfterMs: claimByMs + HOUR }; };
+  const out = [];
+  for (let k = 1; k <= n; k++) {
+    const meal = t0 + Math.round(k * Number(box.sit_every_hours) * HOUR);
+    out.push(one("sit", k, 0, meal));
+    for (let j = 1; j <= plays; j++) out.push(one("sitplay", k, j, meal - Math.round(j * Number(box.sit_play_gap_hours) * HOUR)));
+  }
+  return out;
 }
 /** sit の offer の期限と届ける時刻が決まりどおりか（lockMs は lock の時刻。miner は accept の前に now で見る）→ 理由か null */
 export function sitWhy(box, offer, lockMs) {

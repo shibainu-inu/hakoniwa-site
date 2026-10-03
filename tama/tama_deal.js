@@ -27,7 +27,7 @@ export class Deal {
   note(text) { this.onEvent({ type: "note", text }); }
   busy() { return !!this.st && !this.st.done; }
   get box() { return this.app.box; }
-  price() { return Number({ meal: this.box.meal_price, out: this.box.out_price, play: this.box.play_stake, sit: this.box.sit_price }[this.kind]); }
+  price() { return Number({ meal: this.box.meal_price, out: this.box.out_price, play: this.box.play_stake, sit: this.box.sit_price, sitplay: this.box.sit_play_price }[this.kind]); }
   takers() { return new Set(this.kind === "play" ? (this.box.npcs ?? []) : (this.box.miners ?? [])); }
 
   /** 推論の入力（job.context）。おでかけは測った雰囲気（moods.json）が要る。取れなければ「霧」（D-85） */
@@ -139,6 +139,7 @@ export class Deal {
   finish(lines, ms) {
     const b = this.box, st = this.st;
     let ok = true, say = "";
+    if (this.kind === "sitplay") ok = checkLines(lines, { n: Number(b.meal_lines), maxChars: b.line_max_chars, instruction: b.sit_play_instruction, fragmentWords: b.fragment_words }).ok;
     if (this.kind === "meal" || this.kind === "sit") ok = checkLines(lines, { n: Number(b.meal_lines), maxChars: b.line_max_chars, instruction: b.meal_instruction, fragmentWords: b.fragment_words }).ok;
     if (this.kind === "out") ok = checkLines(lines, { n: Number(b.out_lines), maxChars: b.line_max_chars, instruction: b.out_instruction, fragmentWords: b.fragment_words, needs: [[3, "{V}"], [3, "{B}"]], digitsOk: false }).ok;
     if (!ok) { this.set("ng", { done: true, locked: false, lines }); this.note(L("届いたものが決まりに合わなかったので、成立しませんでした。PAPER は動いていません", "What arrived didn't meet the rules, so the deal didn't settle. No PAPER moved.")); return; }
@@ -148,7 +149,7 @@ export class Deal {
       delta += back;
       say = back > st.amount ? L(`勝った！ ${back} $PAPER 戻ってきた`, `You won! ${back} $PAPER came back`) : back === st.amount ? L(`引き分け。${back} $PAPER 戻ってきた`, `A draw. ${back} $PAPER came back`) : L(`負けちゃった。${back} $PAPER だけ戻ってきた`, `You lost. Only ${back} $PAPER came back`);
     }
-    if (this.kind === "meal" || this.kind === "sit") say = lines?.[0] ?? "";
+    if (this.kind === "meal" || this.kind === "sit" || this.kind === "sitplay") say = lines?.[0] ?? "";
     if (this.kind === "out") {
       const nth = (this.app.st?.outsToday ?? 0) + 1;
       say = L(`記事ができました。ほうび ${rewardOf(b, nth)} $PAPER（今日 ${nth} 回目）は、帳簿係が確かめてから届きます`, `The report is done. The reward of ${rewardOf(b, nth)} $PAPER (outing #${nth} today) arrives after the ledger keeper checks it.`);
@@ -158,20 +159,22 @@ export class Deal {
   }
 }
 
-/** おるすばんの予約のごはん 1 回分（D-123）。流れは Deal と同じで、届ける時刻 at と期限が先にあるだけ。
- *  状態は localStorage tama_deal_v1:<DID>:sit:<offer の時刻>-<k>（予約ごとに別の箱。前の予約の記録を上書きしない） */
+/** おるすばんの予約 1 回分（D-123。ごはん sit か、あそぶ sitplay）。流れは Deal と同じで、届ける時刻 at と期限が先にあるだけ。
+ *  状態は localStorage tama_deal_v1:<DID>:sit:<slot>（slot はごはんが <予約の時刻>-<k>、あそぶが <予約の時刻>-<k>-p<j>。予約ごとに別の箱） */
+export const slotKind = (slot) => (/-p\d+$/.test(String(slot)) ? "sitplay" : "sit");
 export class SitDeal extends Deal {
   constructor({ app, slot, onEvent }) {
-    super({ kind: "sit", app, onEvent });
+    super({ kind: slotKind(slot), app, onEvent });
     this.slot = slot;
     this.key = `tama_deal_v1:${app.did}:sit:${slot}`;
     try { this.st = JSON.parse(localStorage.getItem(this.key) || "null"); } catch { this.st = null; }
   }
   at() { try { return Number(JSON.parse(this.st.offer.job.context).at); } catch { return 0; } }
-  /** plan は sitSchedule の 1 件。prompt はいまの様子から（ごはんと同じ書き方） */
+  /** plan は sitSchedule の 1 件。prompt はいまの様子から（ごはんと同じ書き方。あそぶは指示文だけ違う）。job.id の時刻は予約の時刻 ＋ k（あそぶは ＋ 10k ＋ j） */
   book({ st, plan, t0 }) {
-    return this.start({ st, ctx: { v: 1, prompt: mealPrompt(this.box.meal_instruction, st), at: plan.at },
-      deadlines: { claimByMs: plan.claimByMs, refundAfterMs: plan.refundAfterMs }, idMs: t0 + plan.k });
+    const ins = this.kind === "sitplay" ? this.box.sit_play_instruction : this.box.meal_instruction;
+    return this.start({ st, ctx: { v: 1, prompt: mealPrompt(ins, st), at: plan.at },
+      deadlines: { claimByMs: plan.claimByMs, refundAfterMs: plan.refundAfterMs }, idMs: t0 + (plan.j ? 10 * plan.k + plan.j : plan.k) });
   }
   async tick() {
     // 届ける時刻の前は、部屋を読みに行かない（何日も先なので。帳簿係も at より前の reveal を数えない）

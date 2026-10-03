@@ -1,6 +1,6 @@
 {
  "box": "tama",
- "version": "tama/0.4",
+ "version": "tama/0.5",
  "venue": "https://technocore.chat",
  "offers_room": "tclk-offers",
  "board": "tama-board",
@@ -19,9 +19,9 @@
  "grow_hours": 48,
  "grow_care_days": 2,
  "acc_grow_cares": [
-  24,
-  48,
-  72
+  18,
+  36,
+  54
  ],
  "reborn_price": 1000,
  "reborn_hunger": 30,
@@ -34,6 +34,10 @@
  "sit_every_hours": 24,
  "sit_window_hours": 6,
  "sit_cover_hours": 24,
+ "sit_play_price": 100,
+ "sit_plays_max": 2,
+ "sit_play_gap_hours": 4,
+ "sit_max_slots": 14,
  "out_price": 240,
  "out_rewards": [
   760,
@@ -83,5 +87,6 @@
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3"
  ],
  "meal_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after eating. Use the mood words given. No numbers, no names, no quotes.",
+ "sit_play_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after your sitter played with you. Use the mood words given. No numbers, no names, no quotes.",
  "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
 }
