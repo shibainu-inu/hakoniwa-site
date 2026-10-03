@@ -106,7 +106,8 @@
   "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3"
  ],
- "meal_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after eating. Use the mood words given. No numbers, no names, no quotes.",
+ "meal_instruction": "You are the quirky cook at a tiny diner for little box pets. Name today's dish: a short, strange and funny English menu name, three to seven words. Use the mood words given. Write only the dish name. No numbers, no names, no quotes.",
+ "meal_menu_from": 1791029700000,
  "sit_play_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after your sitter played with you. Use the mood words given. No numbers, no names, no quotes.",
  "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
 }

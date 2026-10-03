@@ -188,8 +188,8 @@ export function brief(line) {
 /** 最近のひとこと（新しい順。帳簿に載る前のものも） */
 function sayLines(fold) {
   const out = [];
-  if (app.lastSay) out.push(app.lastSay);
-  for (const x of (fold?.meals ?? []).slice(-3).reverse()) if (x.line && !out.includes(x.line)) out.push(x.line);
+  if (app.lastSay && !app.lastSayMenu) out.push(app.lastSay);
+  for (const x of (fold?.meals ?? []).filter((m) => !m.menu).slice(-3).reverse()) if (x.line && !out.includes(x.line)) out.push(x.line);   // メニュー名は HAKO の言葉ではないので言わせない
   return out;
 }
 /** 語録（D-121）を選ぶための、いまの状態。帳簿と手元の出来事・取引の段から作る */
@@ -291,9 +291,8 @@ function stateWord(st) {
   return { grave: L("お墓", "Resting"), out: L("おでかけ中", "Out"), eat: L("食事中", "Eating"), happy: L("ごきげん", "Happy"), sad: L("しょんぼり", "Down"), reborn: L("生まれ変わり", "Reborn") }[k] ?? (st.hunger >= 60 ? L("げんき", "Lively") : L("ふつう", "OK"));
 }
 function lastSay(fold) {
-  if (app.lastSay) return app.lastSay;
-  const meals = fold?.meals ?? [];
-  return meals.length ? meals[meals.length - 1].line : null;
+  const meals = fold?.meals ?? [], x = app.lastSay ? { line: app.lastSay, menu: app.lastSayMenu } : meals[meals.length - 1];
+  return !x ? null : x.menu ? `Today's meal: ${x.line}` : x.line;   // メニュー名は「今日のご飯」として写す
 }
 function motionOf(st) {
   if (!st.born) return "normal";
@@ -400,6 +399,7 @@ const sitPlaysMax = (n) => Math.max(0, Math.min(Number(app.box.sit_plays_max ?? 
 function onSit(ev, kind) {
   if (ev.type === "settled") {
     addLocal(app.did, { t: kind === "sitplay" ? "play" : "meal", ms: ev.ms, contract: ev.contract, sit: true }, ev.delta);
+    if (kind === "sit" && ev.lines?.[0]) { app.lastSay = ev.lines[0]; app.lastSayMenu = false; }   // 予約のときの指示文で書かれている。帳簿の menu の印に任せる
     logOp(`settled · ${kind} · ${short(ev.contract)} · ${ev.delta} PAPER`);
   }
   // 予約の途中の知らせは、頼んだ直後だけ出す（留守中に溜まった知らせで画面を埋めない）
@@ -625,14 +625,15 @@ function actionBlock(kind, st, m) {
 }
 function renderSaid(fold) {
   const el = $("said"); if (!el) return;
-  const meals = (fold?.meals ?? []).slice(-3).reverse();
-  if (app.lastSay && !meals.some((x) => x.line === app.lastSay)) meals.unshift({ line: app.lastSay });   // 帳簿に載る前のひとこと
+  // これまで食べたご飯: ごはん屋さんのメニュー名を新しい順に 10 個まで（帳簿に載る前の、この画面で届いたものを先に）
+  const meals = (fold?.meals ?? []).filter((x) => x.menu).reverse();
+  if (app.lastSay && app.lastSayMenu && !meals.some((x) => x.line === app.lastSay)) meals.unshift({ line: app.lastSay });
+  meals.splice(10);
   let outs = (fold?.outs ?? []).slice(-1);
   if (app.lastArticle && !(fold?.outs ?? []).some((o) => o.contract === app.lastArticle.contract)) outs = [app.lastArticle];   // 帳簿に載る前の記事
   const h = [
     ...outs.map((o) => `<article class="article">${o.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join("")}</article>`),
-    ...(meals.length ? [`<p class="label" style="margin-top:12px">${L("ひとこと", "What it said")}</p>`] : []),
-    ...meals.map((x) => `<p class="bubble">${esc(x.line)}</p>`),
+    ...(meals.length ? [`<p class="label" style="margin-top:12px">${L("これまで食べたご飯", "Meals so far")}</p><ul class="menu">${meals.map((x) => `<li>${esc(x.line)}</li>`).join("")}</ul>`] : []),
   ].join("");
   if (app.saidHtml !== h || (h && !el.firstChild)) { el.innerHTML = h; app.saidHtml = h; }
 }
@@ -760,7 +761,7 @@ function onDeal(kind, ev) {
       app.lastArticle = { contract: ev.contract, lines: facts ? fillArticle(ev.lines, facts) : ev.lines };
     }
     app.whyBad = false; app.whyAt = null;
-    if (kind === "meal" && ev.say) { app.lastSay = ev.say; app.sayFresh = true; app.why = ""; }
+    if (kind === "meal" && ev.say) { app.lastSay = ev.say; app.lastSayMenu = app.box.meal_menu_from != null && Date.now() >= Number(app.box.meal_menu_from); app.sayFresh = true; app.why = ""; }
     else if (ev.say) app.why = ev.say;
     logOp(`settled · ${kind} · ${short(ev.contract)} · ${ev.delta >= 0 ? "+" : ""}${ev.delta} PAPER`);
   } else if (ev.type === "note") { app.why = ev.text; app.whyBad = false; app.whyAt = null; }

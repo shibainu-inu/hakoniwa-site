@@ -4,8 +4,8 @@ import { spriteRows, iconRows, inside, paint, THEMES } from "./tama_sprite.js";
 import { L } from "./tama_i18n.js";
 
 export const FRAME = { bg: "#f4f1ea", ink: "#16151c", sub: "#55525e", edge: "#c9a181" };   // 額縁（明るい地）
-/** 出来事 → 生涯の数 {meals, outs, plays, days, rebirths, earned}。earned は手で稼いだ PAPER: おでかけのほうび ＋ あそぶで勝った分（戻り − 賭け が正のとき）。
- *  減らない（負けや支払いでは引かない）。シッターのお世話では増えない（2026-10-03: 部屋は稼ぎで、育ちはお世話で） */
+/** 出来事 → 生涯の数 {meals, outs, plays, days, rebirths, earned, peak}。peak はこれまでで一番多く持っていた PAPER（peakPaper）で、部屋の家具はこれで増える。
+ *  手で遊んで増やすと増え、シッターに頼んで減っても下がらない（2026-10-03: 部屋は持っている PAPER で、育ちはお世話で） */
 export function lifetime(events, box, localDay) {
   const n = { meals: 0, outs: 0, plays: 0, days: 0, rebirths: 0, earned: 0 };
   const days = new Set();
@@ -16,6 +16,7 @@ export function lifetime(events, box, localDay) {
     if (["meal", "play"].includes(e.t)) days.add(localDay(e.ms, box));
   }
   n.days = days.size;
+  n.peak = peakPaper(events, box);
   // 2026-10-03 に家具の条件を稼ぎに変えた。それまでの条件（was。数はその時刻 WAS_UNTIL より前の出来事、日はおでかけも数える）で出ていた家具は残す
   const was = { meals: 0, outs: 0, plays: 0, days: 0, rebirths: 0 }, wdays = new Set();
   for (const e of events) {
@@ -26,14 +27,28 @@ export function lifetime(events, box, localDay) {
   was.days = wdays.size; n.was = was;
   return n;
 }
+/** これまでで一番多く持っていた PAPER（tama_room.py の peak_paper と同じ）。部屋の家具はこれで増える（2026-10-03） */
+export function peakPaper(events, box) {
+  let bal = 0, peak = 0;
+  for (const e of [...events].sort((a, b) => a.ms - b.ms)) {
+    const sit = !!e.sit;
+    if (e.t === "join") bal += Number(box.initial_paper);
+    else if (e.t === "meal") bal -= Number(sit ? box.sit_price : box.meal_price);
+    else if (e.t === "out") bal += Number(e.reward ?? 0) - Number(box.out_price);
+    else if (e.t === "play") bal += sit ? -Number(box.sit_play_price) : Number(e.payout ?? 0) - Number(box.play_stake);
+    else if (e.t === "reborn") bal -= Number(e.fee ?? box.reborn_price ?? 0);
+    peak = Math.max(peak, bal);
+  }
+  return Math.round(peak * 100) / 100;
+}
 export const WAS_UNTIL = 1791026100000;   // 2026-10-03T11:15Z（tama_furniture.json の was_until と同じ）
 const has = (it, n) => (n[it.when[0]] ?? 0) >= it.when[1] || (!!it.was && (n.was?.[it.was[0]] ?? 0) >= it.was[1]);
 export const unlocked = (F, n) => F.items.filter((it) => has(it, n));
 export const nextUnlock = (F, n) => F.items.find((it) => !has(it, n)) ?? null;
 const WHEN_JA = { meals: "ごはん", outs: "おでかけ", plays: "あそぶ", days: "お世話した日", rebirths: "生まれ変わり" };
 const WHEN_EN = { meals: "meals", outs: "outings", plays: "plays", days: "care days", rebirths: "rebirths" };
-export const whenText = (it) => it.when[0] === "earned"
-  ? L(`稼ぎ ${Number(it.when[1]).toLocaleString("en-US")} $PAPER`, `${Number(it.when[1]).toLocaleString("en-US")} $PAPER earned`)
+export const whenText = (it) => it.when[0] === "peak"
+  ? L(`$PAPER が ${Number(it.when[1]).toLocaleString("en-US")} になったら`, `at ${Number(it.when[1]).toLocaleString("en-US")} $PAPER`)
   : L(`${WHEN_JA[it.when[0]]} ${it.when[1]} ${it.when[0] === "days" ? "日" : "回"}`, `${it.when[1]} ${WHEN_EN[it.when[0]]}`);
 
 function dots(ox, oy, rows, px, color) {

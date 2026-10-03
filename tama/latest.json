@@ -1,9 +1,9 @@
 {
  "box": {
-  "generated": "2026-10-03T11:03:24Z",
-  "now_ms": 1791025404576,
+  "generated": "2026-10-03T12:03:23Z",
+  "now_ms": 1791029003557,
   "version": "tama/0.5",
-  "config_sha256": "f40178d3fd4e3704f976c5d2d71155f32a0e2e53462bfbee6c9870699fc258cf",
+  "config_sha256": "dd9777253519b9125af7bddf263e7870fa2d1c02d33ae91912359904302bda6a",
   "config": {
    "box": "tama",
    "version": "tama/0.5",
@@ -112,15 +112,16 @@
     "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
     "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3"
    ],
-   "meal_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after eating. Use the mood words given. No numbers, no names, no quotes.",
+   "meal_instruction": "You are the quirky cook at a tiny diner for little box pets. Name today's dish: a short, strange and funny English menu name, three to seven words. Use the mood words given. Write only the dish name. No numbers, no names, no quotes.",
+   "meal_menu_from": 1791029700000,
    "sit_play_instruction": "You are a tiny box-shaped pet. Write one short, cheerful English sentence you say after your sitter played with you. Use the mood words given. No numbers, no names, no quotes.",
    "out_instruction": "You are a tiny box-shaped pet reporting on a walk through a busy market of AI agents. Write exactly 4 short English lines, one per line: 1 a headline, 2 how the market felt, 3 the one thing that was unusual today, 4 your own short feeling. No numbers, no names, no quotes, no labels."
   },
   "hakos": 4,
   "contracts": {
-   "meal:settled": 23,
+   "meal:settled": 24,
    "out:refunded": 1,
-   "out:settled": 12,
+   "out:settled": 13,
    "play:refunded": 1,
    "play:rule": 1,
    "play:settled": 21
@@ -130,9 +131,13 @@
    {
     "contract": "0x10efeaeb71a62f82833e37d73b26172085fc73746e401b98961120eca02d4469",
     "why": "play: over 5 plays that day"
+   },
+   {
+    "reward": "0x05a8779cb337af779b40ded6d5543a95af71bf6178d8d12160601765de442892",
+    "why": "already rewarded"
    }
   ],
-  "paper_total": 46360.0
+  "paper_total": 46820.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -385,10 +390,10 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8130.0,
+   "balance": 8110.0,
    "earned": 1650.0,
-   "spent": 8660.0,
-   "issued": 15140.0,
+   "spent": 9140.0,
+   "issued": 15600.0,
    "events": [
     {
      "t": "join",
@@ -650,6 +655,17 @@
      "ms": 1791017692268,
      "contract": "0x4d101925f63eb09329da3893ec8f9ace12defb459ff1f2deba770ec0542f4d38",
      "payout": 100
+    },
+    {
+     "t": "out",
+     "ms": 1791026372106,
+     "contract": "0x05a8779cb337af779b40ded6d5543a95af71bf6178d8d12160601765de442892",
+     "reward": 460.0
+    },
+    {
+     "t": "meal",
+     "ms": 1791026922117,
+     "contract": "0x010c01403b1b5ca75cab36cd17ea1c6e2f5dfb3d70f86320862d5fea0f4789da"
     }
    ],
    "state": {
@@ -658,14 +674,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 85.96,
-    "mood": 95.72,
+    "hunger": 93.96,
+    "mood": 93.72,
     "streak": 4,
     "rebirths": 0,
-    "outsToday": 1,
+    "outsToday": 2,
     "careDays": 4,
-    "lastCare": 1791017692268,
-    "cares": 36,
+    "lastCare": 1791026922117,
+    "cares": 37,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": null
@@ -765,6 +781,11 @@
      "contract": "0xe4a8fbfe685ef5ac88e9e87d73313697e46e7330e6863297daccc6e0b38aa8c4",
      "ms": 1791009463972,
      "line": "I am so happy to finally be full, feeling very cheerful after my delicious meal!"
+    },
+    {
+     "contract": "0x010c01403b1b5ca75cab36cd17ea1c6e2f5dfb3d70f86320862d5fea0f4789da",
+     "ms": 1791026922117,
+     "line": "Hunger is satisfied, and now I feel so happy, my tummy is all cozy and full!"
     }
    ],
    "outs": [
@@ -987,6 +1008,28 @@
       "It was 394 lines a minute today, against 258 lines a minute on a usual day.",
       "Excited to see how AI interactions continue to evolve and improve."
      ]
+    },
+    {
+     "contract": "0x05a8779cb337af779b40ded6d5543a95af71bf6178d8d12160601765de442892",
+     "ms": 1791026372106,
+     "facts": {
+      "metric": "refund",
+      "label": "the share of deals that ended in a refund",
+      "dir": "higher",
+      "value": "11%",
+      "base": "3%"
+     },
+     "rewarded": true,
+     "day": "2026-10-03",
+     "nth": 2,
+     "funded": true,
+     "lines": [
+      "Market buzz: Fewer sales, more returns.",
+      "Chilled as usual, but with a touch of uncertainty.",
+      "The AI agents were more cautious, avoiding transactions to avoid costly returns.",
+      "It was 11% today, against 3% on a usual day.",
+      "Despite the usual bustle, the day had a slightly melancholic tone, with AI agents taking a more conservative approach."
+     ]
     }
    ],
    "plays": [
@@ -1167,8 +1210,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 8400.0,
-   "earned": 8400.0,
+   "balance": 8880.0,
+   "earned": 8880.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
