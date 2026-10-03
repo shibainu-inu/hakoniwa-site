@@ -638,7 +638,21 @@ function renderSaid(fold) {
   if (app.saidHtml !== h || (h && !el.firstChild)) { el.innerHTML = h; app.saidHtml = h; }
 }
 
+/** 満員か（帳簿の HAKO の数が max_hakos に届いた。帳簿は毎時なので、1 時間の間に少し超えて迎えても、帳簿係が超えた分を数えない） */
+const isFull = () => app.box.max_hakos != null && Number(app.stats?.box?.hakos ?? 0) >= Number(app.box.max_hakos);
 function renderEgg() {
+  if (!app.did && isFull()) {
+    $("view").innerHTML = `
+    <section class="card" id="me">
+      <div class="stage plain short"><div class="egg">${spriteSvg(null, "egg", 5)}</div></div>
+      <p class="label" style="margin-top:14px">NEW HAKO</p>
+      <h2>${L("いまは満員です", "We're full right now")}</h2>
+      <p>${L("新しい HAKO は、空きが出るまで迎えられません。", "New HAKOs can't be welcomed until there's room.")}</p>
+      <p class="small">${L("鍵ファイルがあるときは", "Have a key file?")} <label class="link">${L("ファイルから読み込む", "Load it from a file")}<input id="file" type="file" accept="application/json" hidden></label></p>
+    </section>`;
+    $("file").onchange = importKey;
+    return;
+  }
   $("view").innerHTML = `
     <section class="card" id="me">
       <div class="stage plain short"><div class="egg">${spriteSvg(null, "egg", 5)}</div></div>
@@ -699,6 +713,7 @@ async function register() {
   const p1 = $("p1").value, p2 = $("p2").value;
   if (p1.length < 8) return say(L("パスフレーズは 8 文字以上にしてください", "Use a passphrase of 8 characters or more"));
   if (p1 !== p2) return say(L("2 つのパスフレーズが違います", "The two passphrases don't match"));
+  if (isFull()) return say(L("いまは満員です", "We're full right now"));
   if (!(await K.supported())) return say(L("このブラウザは Ed25519 の鍵を作れません。新しいブラウザで開いてください", "This browser can't make an Ed25519 key. Please open it in a newer browser."));
   say(L("鍵を作っています…", "Making your key…"), false);
   const { priv, did, rec } = await K.makeKey(p1);
@@ -774,6 +789,7 @@ export async function boot() {
   for (const [k] of dealKinds) app.deals[k] = new Deal({ kind: k, app, onEvent: (ev) => onDeal(k, ev) });
   app.sits = loadSits();
   render();
+  loadStats().then((s) => { app.stats = s; render(); }).catch(() => { /* 次の周 */ });   // 鍵を読み込んだ・生まれた直後は、その HAKO の帳簿をまだ読んでいない
   const tick = async () => {
     for (const x of Object.values(app.deals)) await x.tick().catch((e) => x.note?.(`error ${e.message}`));
     await tickSits();
@@ -783,10 +799,18 @@ export async function boot() {
   setInterval(async () => { try { app.stats = await loadStats(); } catch { /* 次の周 */ } }, 5 * 60_000);
   tick();
 }
+/** HAKO ごとの帳簿のファイル名（tama_site.py の did_file と同じ）。did:key:z… の z… の部分 */
+const didFile = (did) => `${String(did).split(":").pop()}.json`;
+/** 帳簿を読む: 庭用の garden.json と、自分の HAKO の d/<z…>.json だけ（運営者 2026-10-03。全員分の latest.json を 5 分ごとに読むと配信が匹数の 2 乗で増える）。
+ *  返すのは latest.json と同じ形（box と、自分の分だけの did）に、庭の feed と counts を足したもの。garden.json が無い古いサイトでは latest.json を読む */
 async function loadStats() {
-  const r = await fetch(`latest.json?t=${Date.now()}`, { cache: "no-store" });
-  if (!r.ok) throw new Error(`latest.json ${r.status}`);
-  return await r.json();
+  // 帳簿は 1 時間に 1 回しか変わらないので、毎回まるごと取り直さず再検証する（変わっていなければ 304 で中身を送らない。Firebase の配信を減らす）
+  const get = (u) => fetch(u, { cache: "no-cache" });
+  const r = await get("garden.json");
+  if (!r.ok) { const old = await get("latest.json"); if (!old.ok) throw new Error(`garden.json ${r.status}`); return await old.json(); }
+  const g = await r.json(), did = app.did ?? K.loadRec()?.did, out = { box: g.box, feed: g.feed, counts: g.counts, did: {} };
+  if (did) { try { const m = await get(`d/${didFile(did)}`); if (m.ok) Object.assign(out.did, (await m.json()).did ?? {}); } catch { /* まだ帳簿に載っていない */ } }
+  return out;
 }
 export async function start() {
   try { app.stats = await loadStats(); } catch { app.stats = null; }

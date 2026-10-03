@@ -44,7 +44,7 @@ export function storyHtml(box, moods, F) {
     `</div>${box?.grow_hours ? `<p class="hint">${L(`${Math.round(box.grow_hours / 24)} 日育てると…？`, `Raise it for ${Math.round(box.grow_hours / 24)} days and…?`)}</p>` : ""}`;
 }
 
-/** 遊び方（6〜7 場面。数字は箱の設定から） */
+/** 遊び方（6〜8 場面。数字は箱の設定から） */
 export function howHtml(box, F) {
   const meter = `<span class="mm">${Array.from({ length: 10 }, (_, k) => `<i style="--k:${k}"></i>`).join("")}</span>`;
   const table = (box.play_table ?? []).map((x) => Number(x[1]));
@@ -65,8 +65,11 @@ export function howHtml(box, F) {
       L(`おなかが 0 のまま ${box.grave_after_hours} 時間たつとお墓に。生まれ変わりは ${fmt(box.reborn_price)} $PAPER で、卵からやり直します。`,
         `If its tummy stays at 0 for ${box.grave_after_hours} hours, it ends up in a grave. Rebirth costs ${fmt(box.reborn_price)} $PAPER and starts over from an egg.`)) +
     (box.sit_enabled ? page("h-sit", face("s1", CROWD[2], 11) + hako("home", 15) + sp("bowl", 11, art(BOWL)),
-      L(`留守にするときは<b>シッターにお願い</b>できます。1 日 1 回ごはん（${fmt(box.sit_price)} $PAPER）をあげ、選んだ回数だけあそびます（1 回 ${fmt(box.sit_play_price)} $PAPER。戻りはありません）。HAKO は育ち続け、お墓にもなりません。シッターはおでかけをしません。最初のごはんは頼んでから ${box.sit_first_hours ?? box.sit_every_hours} 時間後。早く帰っても予約は続き、できなかった分の PAPER は戻ります。`,
-        `When you're away, you can <b>ask a sitter</b>. It feeds your HAKO once a day (${fmt(box.sit_price)} $PAPER) and plays as many times as you choose (${fmt(box.sit_play_price)} $PAPER each; nothing comes back). Your HAKO keeps growing and won't end up in a grave. The sitter doesn't go on outings. The first meal comes ${box.sit_first_hours ?? box.sit_every_hours} hours after you book. If you come back early, the booking goes on, and PAPER for anything the sitter couldn't do comes back.`)) : "") +
+      L(`留守にするときは<b>シッターにお願い</b>できます。1 日 1 回ごはん（${fmt(box.sit_price)} $PAPER）をあげ、選んだ回数だけあそびます（1 回 ${fmt(box.sit_play_price)} $PAPER。戻りはありません）。HAKO は育ち続け、お墓にもなりません。`,
+        `When you're away, you can <b>ask a sitter</b>. It feeds your HAKO once a day (${fmt(box.sit_price)} $PAPER) and plays as many times as you choose (${fmt(box.sit_play_price)} $PAPER each; nothing comes back). Your HAKO keeps growing and won't end up in a grave.`)) +
+      page("h-sit2", face("s1", CROWD[2], 11) + sp("clock", 9, item(F, "clock")) + sp("coin", 6, art(COIN)),
+      L(`シッターはおでかけをしません。最初のごはんは頼んでから ${box.sit_first_hours ?? box.sit_every_hours} 時間後。早く帰っても予約は続き、できなかった分の PAPER は戻ります。`,
+        `The sitter doesn't go on outings. The first meal comes ${box.sit_first_hours ?? box.sit_every_hours} hours after you book. If you come back early, the booking goes on, and PAPER for anything the sitter couldn't do comes back.`)) : "") +
     page("h-room", sp("f1", 22, item(F, "rug")) + sp("f2", 9, item(F, "chair")) + sp("f3", 7, item(F, "lamp")) + hako("home", 15) + sp("f4", 9, item(F, "plant")) + sp("f5", 14, item(F, "desk")),
       L("持っている $PAPER が増えると部屋に家具が増え、生まれ変わっても残ります。", "As your $PAPER grows, the room gets more furniture, and it stays even after rebirth.")) +
     `</div>`;

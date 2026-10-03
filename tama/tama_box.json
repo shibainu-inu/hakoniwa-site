@@ -6,6 +6,7 @@
  "board": "tama-board",
  "accept_ns": "tama-acc",
  "day_utc_offset_min": 540,
+ "max_hakos": 30,
  "initial_paper": 10000,
  "hunger_max": 100,
  "hunger_start": 80,

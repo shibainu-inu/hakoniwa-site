@@ -25,6 +25,9 @@ export function ago(ms, now = Date.now()) {
 
 /** 帳簿から、庭の出来事の一覧（新しい順） */
 export function gardenEvents(stats) {
+  if (stats?.feed) return stats.feed.map((r) => ({ did: r.did, ms: r.ms, kind: r.kind,   // 庭用の garden.json（tama_site.split_ledger）
+    what: r.kind === "join" ? L("生まれた", "was born") : r.kind === "reborn" ? L("生まれ変わった", "was reborn") : r.kind === "play" ? L(`${r.stake} を賭けて ${r.payout} 戻った`, `bet ${r.stake}, got ${r.payout} back`) : r.line ?? "",
+    ...(r.kind === "play" ? { delta: r.payout - r.stake } : {}) }));
   const out = [];
   for (const [did, d] of Object.entries(stats?.did ?? {})) {
     if (d.operator) continue;
@@ -52,7 +55,8 @@ export function renderGarden(stats, moods, box, F = null) {
   const hakos = Number(stats?.box?.hakos ?? 0);
   const today = box ? localDay(now, box) : null;
   const todays = today ? ev.filter((e) => localDay(e.ms, box) === today) : [];
-  const count = (k) => todays.filter((e) => e.kind === k).length;
+  const day = today ? stats?.counts?.[today] : null;   // 今日の数は garden.json の counts（feed に載せきれない分も入っている）
+  const count = (k) => day ? Number(day[k] ?? 0) : todays.filter((e) => e.kind === k).length;
   const tw = moods?.twist, KIND = KINDS();
 
   // ティッカー（出来事と街の雰囲気。2 回並べて途切れずに流す）
@@ -69,7 +73,7 @@ export function renderGarden(stats, moods, box, F = null) {
   // LIVE
   const live = $("live");
   if (live) live.innerHTML = `<p class="label"><span class="pulse"></span>LIVE · HAKO ${fmt(hakos)}</p>
-    <div class="big mono">${fmt(todays.length)}<span class="sub"> ${L("今日の出来事", "events today")}</span></div>
+    <div class="big mono">${fmt(day ? Object.values(day).reduce((a, b) => a + Number(b), 0) : todays.length)}<span class="sub"> ${L("今日の出来事", "events today")}</span></div>
     <p class="sub mono">${L("ごはん", "Meals")} ${count("meal")} · ${L("おでかけ", "Outings")} ${count("out")} · ${L("あそぶ", "Plays")} ${count("play")}</p>
     <p class="label" style="margin-top:14px">${L("テクノコア街の雰囲気", "Mood of Technocore")}${moods?.hour ? L(` · ${esc(moods.hour.slice(11, 13))}時台 UTC`, ` · ${esc(moods.hour.slice(11, 13))}:00 UTC`) : ""}</p>
     ${tw ? `<div>${L(`<b>${esc(moodLabel(tw))}</b> が普段より${tw.dir === "higher" ? "多い" : "少ない"}`, `<b>${esc(moodLabel(tw))}</b> is ${tw.dir === "higher" ? "higher" : "lower"} than usual`)}</div><div class="mono sub">${esc(tw.value)} ${L("／ 普段", "/ usually")} ${esc(tw.base)}</div>` : `<div class="sub">${L("霧でよく見えない（数字は補いません）", "Too foggy to see (numbers are never made up)")}</div>`}`;
