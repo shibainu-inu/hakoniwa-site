@@ -1,9 +1,9 @@
 {
  "box": {
-  "generated": "2026-10-03T10:03:21Z",
-  "now_ms": 1791021801173,
+  "generated": "2026-10-03T11:03:24Z",
+  "now_ms": 1791025404576,
   "version": "tama/0.5",
-  "config_sha256": "00437fdecbd053e84e89474fd707c5fb03aa29b6ed3d17060231b5c6c7139171",
+  "config_sha256": "f40178d3fd4e3704f976c5d2d71155f32a0e2e53462bfbee6c9870699fc258cf",
   "config": {
    "box": "tama",
    "version": "tama/0.5",
@@ -24,20 +24,21 @@
    "hatch_hours": 3,
    "grow_hours": 48,
    "grow_care_days": 2,
-   "acc_grow_cares": [
-    18,
-    36,
-    54
+   "acc_grow_days": [
+    4,
+    7,
+    10
    ],
    "reborn_price": 1000,
    "reborn_hunger": 30,
    "meal_price": 240,
    "meal_fill": 40,
    "meal_lines": 1,
-   "sit_enabled": false,
+   "sit_enabled": true,
    "sit_price": 260,
    "sit_max_days": 7,
    "sit_every_hours": 24,
+   "sit_first_hours": 2,
    "sit_window_hours": 6,
    "sit_cover_hours": 24,
    "sit_play_price": 100,
@@ -62,6 +63,24 @@
    "play_per_day": 5,
    "play_table": [
     [
+     30,
+     50
+    ],
+    [
+     25,
+     100
+    ],
+    [
+     25,
+     200
+    ],
+    [
+     20,
+     300
+    ]
+   ],
+   "play_table_before": [
+    [
      40,
      50
     ],
@@ -78,6 +97,7 @@
      200
     ]
    ],
+   "play_table_from": 1791026100000,
    "expires_min": 10,
    "claim_by_min": 30,
    "refund_after_min": 60,
@@ -158,7 +178,8 @@
     {
      "t": "out",
      "ms": 1790817087064,
-     "contract": "0x10ec475f8c376d1226a266011fdfc11b608bc566bb30a32694482715098ab6c4"
+     "contract": "0x10ec475f8c376d1226a266011fdfc11b608bc566bb30a32694482715098ab6c4",
+     "reward": 760.0
     },
     {
      "t": "play",
@@ -174,7 +195,8 @@
     {
      "t": "out",
      "ms": 1790852879939,
-     "contract": "0xe69ddb7fb1b074a0ab06964776995b5235d69dd5aaecbf20922385e928cb67ab"
+     "contract": "0xe69ddb7fb1b074a0ab06964776995b5235d69dd5aaecbf20922385e928cb67ab",
+     "reward": 460.0
     },
     {
      "t": "meal",
@@ -375,7 +397,8 @@
     {
      "t": "out",
      "ms": 1790745574918,
-     "contract": "0xdad2b33eab48f32cb8869dc8aefe4358ab4089d0bcdb670e813878861b9f25cb"
+     "contract": "0xdad2b33eab48f32cb8869dc8aefe4358ab4089d0bcdb670e813878861b9f25cb",
+     "reward": 760.0
     },
     {
      "t": "meal",
@@ -396,7 +419,8 @@
     {
      "t": "out",
      "ms": 1790746275705,
-     "contract": "0xe8e45868e61ded689ccdcb13341656f8f7e7912cba639e95bdd2b4c63d9a2655"
+     "contract": "0xe8e45868e61ded689ccdcb13341656f8f7e7912cba639e95bdd2b4c63d9a2655",
+     "reward": 460.0
     },
     {
      "t": "meal",
@@ -406,7 +430,8 @@
     {
      "t": "out",
      "ms": 1790774185355,
-     "contract": "0x3aaf718ddb6a10552b3600d4a0bea39538f969bd7251b106a1f29bd24d203c93"
+     "contract": "0x3aaf718ddb6a10552b3600d4a0bea39538f969bd7251b106a1f29bd24d203c93",
+     "reward": 240.0
     },
     {
      "t": "meal",
@@ -461,7 +486,8 @@
     {
      "t": "out",
      "ms": 1790806205961,
-     "contract": "0xbbc4b145dd49f8cd42631f783c8cea277b035cbac195b205930ebb04b76ecae6"
+     "contract": "0xbbc4b145dd49f8cd42631f783c8cea277b035cbac195b205930ebb04b76ecae6",
+     "reward": 760.0
     },
     {
      "t": "meal",
@@ -471,7 +497,8 @@
     {
      "t": "out",
      "ms": 1790806464452,
-     "contract": "0xad35790782c0bfd2cd105bed5592c37b20b74b8cd676481784968e0bd8d24363"
+     "contract": "0xad35790782c0bfd2cd105bed5592c37b20b74b8cd676481784968e0bd8d24363",
+     "reward": 460.0
     },
     {
      "t": "meal",
@@ -487,7 +514,8 @@
     {
      "t": "out",
      "ms": 1790833552903,
-     "contract": "0xcc799be800d4256682e0f06b79a65df65fe54b52d922b2a1b5bb35ea787b4ffe"
+     "contract": "0xcc799be800d4256682e0f06b79a65df65fe54b52d922b2a1b5bb35ea787b4ffe",
+     "reward": 240.0
     },
     {
      "t": "meal",
@@ -514,7 +542,8 @@
     {
      "t": "out",
      "ms": 1790897800886,
-     "contract": "0x4207b70620b1476151af13c192d5b5de7babee2a8ed695b1a4926be963d88308"
+     "contract": "0x4207b70620b1476151af13c192d5b5de7babee2a8ed695b1a4926be963d88308",
+     "reward": 760.0
     },
     {
      "t": "meal",
@@ -553,12 +582,14 @@
     {
      "t": "out",
      "ms": 1790905686427,
-     "contract": "0x2a59a4388bcf13a80fca2aba0f11ab8d969e2e99b1081c06ad2dd4236af3f195"
+     "contract": "0x2a59a4388bcf13a80fca2aba0f11ab8d969e2e99b1081c06ad2dd4236af3f195",
+     "reward": 460.0
     },
     {
      "t": "out",
      "ms": 1790905763701,
-     "contract": "0xdf79726d4e5ec19d05a21b15b8da284d2ecd72621196f898cb3ed8ebcdb42263"
+     "contract": "0xdf79726d4e5ec19d05a21b15b8da284d2ecd72621196f898cb3ed8ebcdb42263",
+     "reward": 240.0
     },
     {
      "t": "meal",
@@ -606,7 +637,8 @@
     {
      "t": "out",
      "ms": 1791009324923,
-     "contract": "0xc3e005a363e82f8be932f2f53306d92beffd64a2b8b240170b115cc4d2f32839"
+     "contract": "0xc3e005a363e82f8be932f2f53306d92beffd64a2b8b240170b115cc4d2f32839",
+     "reward": 760.0
     },
     {
      "t": "meal",
@@ -626,8 +658,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 87.97,
-    "mood": 97.72,
+    "hunger": 85.96,
+    "mood": 95.72,
     "streak": 4,
     "rebirths": 0,
     "outsToday": 1,
@@ -635,7 +667,7 @@
     "lastCare": 1791017692268,
     "cares": 36,
     "stage": "hako",
-    "accLevel": 3,
+    "accLevel": 2,
     "sitUntil": null
    },
    "meals": [

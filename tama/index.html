@@ -126,7 +126,7 @@ h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0 0 8px}
 .rename{margin-left:6px;border:1px solid var(--line);background:var(--card);color:var(--muted);border-radius:999px;width:28px;height:28px;font-size:14px;line-height:1;cursor:pointer;vertical-align:2px}
 .rename[aria-expanded=true]{background:var(--soft);color:var(--ink)}
 .namef{margin:0 0 12px}.namef .actions{margin-top:8px}
-.sitf{margin:4px 0 12px}.sitf .actions{margin-top:8px}.sit{margin:8px 0 4px;padding:10px 12px;border-radius:12px;background:var(--soft);border:1px solid var(--line)}.sit p{margin:0}
+.sitf{margin:4px 0 12px}.sitf .actions{margin-top:8px}.sit{margin:8px 0 4px;padding:10px 12px;border-radius:12px;background:var(--soft);border:1px solid var(--line)}.sit p{margin:0}.sit p+p,.sit p+.actions,.sit p+form{margin-top:6px}
 select{display:block;width:100%;font:inherit;padding:10px 12px;margin-top:4px;border-radius:12px;border:1px solid var(--line);background:var(--soft);color:var(--ink)}
 .state{font-size:12px}
 .meters{display:grid;grid-template-columns:1fr 1fr;gap:12px}
@@ -267,6 +267,8 @@ body[data-tab=garden] #story,body[data-tab=garden] #how,body[data-tab=story] #li
 .page.in.h-play .coin .mv{animation:coin 1.6s cubic-bezier(.4,0,.4,1) infinite}
 .page.in.h-play .p1 .mv{animation:hop2 3.2s .4s infinite}.page.in.h-play .p2 .mv{animation:hop2 3.2s 2s infinite}
 .page.in.h-play .t4{animation:popin .6s 1s both}
+.h-sit .s1{left:22%}.h-sit .home{left:44%}.h-sit .bowl{left:64%}
+.page.in.h-sit .s1 .mv{animation:hop2 3.2s .4s infinite}.page.in.h-sit .home .mv{animation:breathe 3.6s ease-in-out infinite}
 .h-room .f1{left:3%}.h-room .f2{left:24%}.h-room .f3{left:35%}.h-room .home{left:44%}.h-room .f4{left:64%}.h-room .f5{left:79%}
 .h-room .sp:not(.home) .mv{opacity:0}
 .page.in.h-room .f1 .mv{animation:popin .5s .4s both}.page.in.h-room .f2 .mv{animation:popin .5s 1.1s both}.page.in.h-room .f3 .mv{animation:popin .5s 1.8s both}

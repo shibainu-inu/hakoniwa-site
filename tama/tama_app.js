@@ -1,7 +1,7 @@
 // tama_app.js — たまごっち版の画面（HAKONIWA_tamagotchi_spec_2026-09-28.md）。1 枚のページで、卵（登録）→ 卵からひび、HAKO へ育つ画面 → お墓（幽霊）→ 生まれ変わり。
 // 状態は表示のたびに計算する（D-89）: 帳簿係の latest.json の出来事 ＋ まだ帳簿に載っていない、このブラウザで見た成立（localStorage）。
 // 鍵はこのブラウザだけ（tama_key.js）。署名して出すのは掲示板の join・reborn・deal と、取引の offer・lock・terms・refund だけ。
-import { lifeState, localDay, tamaLine, fillArticle, rewardOf, sitSchedule, HOUR } from "./tama_core.js";
+import { lifeState, localDay, tamaLine, fillArticle, rewardOf, sitSchedule, sitWhy, HOUR } from "./tama_core.js";
 import { spriteSvg, spriteRows } from "./tama_sprite.js";
 import { L, getLang, setLang } from "./tama_i18n.js";
 import { setVenue, makeSigner, readTail } from "./tama_net.js";
@@ -397,7 +397,6 @@ const newSit = (slot) => new SitDeal({ app, slot, onEvent: (ev) => onSit(ev, slo
 const sitLive = () => app.sits.filter((d) => d.st && !d.st.done);
 // 1 回の予約は sit_max_slots 本まで（取引 1 本で会場の部屋が 1 つ。新しい部屋は 1 日 1 IP 20 まで。その日のふだんのお世話の分を残す）
 const sitPlaysMax = (n) => Math.max(0, Math.min(Number(app.box.sit_plays_max ?? 0), Math.floor(Number(app.box.sit_max_slots ?? 99) / n) - 1));
-const sitCount = (kind, f = () => true) => app.sits.filter((d) => d.kind === kind && f(d)).length;
 function onSit(ev, kind) {
   if (ev.type === "settled") {
     addLocal(app.did, { t: kind === "sitplay" ? "play" : "meal", ms: ev.ms, contract: ev.contract, sit: true }, ev.delta);
@@ -416,49 +415,62 @@ async function tickSits() {
       d.coverNoted = true;
     }
   }
-  if (app.sitBooking && !app.sits.some((d) => d.st && !d.st.done && !d.st.locked && !["refunded", "settled"].includes(d.st.stage))) {
+  if (app.sitBooking && !sitPending()) {
     app.sitBooking = false;
-    const held = (d) => d.st?.locked || d.st?.stage === "settled";
-    const ok = sitCount("sit", held), okp = sitCount("sitplay", held);
-    app.why = ok + okp ? L(`おるすばんを頼みました（ごはん ${ok} 回${okp ? `、あそぶ ${okp} 回` : ""}）。出かけて大丈夫です`, `The sitter is booked (${ok} meal${ok === 1 ? "" : "s"}${okp ? `, ${okp} playtime${okp === 1 ? "" : "s"}` : ""}). You're free to go.`)
-      : L("おるすばんを頼めませんでした。PAPER は動いていません", "Couldn't book the sitter. No PAPER moved.");
-    app.whyBad = !ok; app.whyAt = Date.now();
+    const mine = app.sits.filter((d) => app.sitNew?.has(d.slot) && (d.st?.locked || d.st?.stage === "settled"));
+    const ok = mine.filter((d) => d.kind === "sit").length, okp = mine.length - ok;
+    app.why = mine.length ? L(`シッターにお願いしました（ごはん ${ok} 回${okp ? `・あそぶ ${okp} 回` : ""}）。閉じても大丈夫です`, `Sitter booked (${ok} meal${ok === 1 ? "" : "s"}${okp ? `, ${okp} play${okp === 1 ? "" : "s"}` : ""}). You can close the page.`)
+      : L("お願いできませんでした。PAPER は使われていません", "Couldn't book the sitter. No PAPER was spent.");
+    app.whyBad = !mine.length; app.whyAt = Date.now();
   }
 }
+/** 頼んだ取引のうち、まだ結び終わっていない（lock の前の）ものがあるか */
+const sitPending = () => app.sits.some((d) => d.st && !d.st.done && !d.st.locked && !["refunded", "settled"].includes(d.st.stage));
 const whenShort = (ms) => new Date(ms).toLocaleString(getLang() === "ja" ? "ja-JP" : "en-US", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
+/** 予約の起点。新しく頼むときは今から（最初のお世話は sit_first_hours 後）、延長は今の予約の最後のごはんから 1 日ごと */
+function sitStart() {
+  const meals = app.sits.filter((d) => d.kind === "sit" && d.st && !["refunded", "ng", "offer_failed"].includes(d.st.stage)).map((d) => d.at()).filter((t) => t > Date.now());
+  return meals.length ? { t0: Math.max(...meals), first: Number(app.box.sit_every_hours), ext: true } : { t0: Date.now(), first: Number(app.box.sit_first_hours ?? app.box.sit_every_hours), ext: false };
+}
+/** n 日・あそぶ p 回が、帳簿係の決まり（届ける時刻は今から sit_max_days 日以内など）に収まるか */
+const sitFits = (n, p, s) => sitSchedule(app.box, s.t0, n, p, s.first).every((x) => !sitWhy(app.box, { job: { context: JSON.stringify({ at: x.at }) }, claimByMs: x.claimByMs, refundAfterMs: x.refundAfterMs }, Date.now()));
 function sitHtml(st, m) {
   if (!app.box?.sit_price) return "";
   const live = sitLive();
   // 頼むボタンは sit_enabled のときだけ（GCP の miner が sit を引き受けるようになってから入れる）。頼んだ分の表示は続ける
   if (!app.box.sit_enabled && !live.length && !(st.sitUntil > Date.now())) return "";
-  const held = app.sits.some((d) => d.st?.locked || d.st?.stage === "settled");
-  if (live.length && !held) return `<div class="sit"><p class="small">${L("おるすばんを頼んでいます…（1〜2 分。このまま開いておいてください）", "Booking the sitter… (1–2 minutes. Please keep this open.)")}</p></div>`;
-  if (live.length || (st.sitUntil && st.sitUntil > Date.now())) {
-    const ats = app.sits.map((d) => d.at()).filter((t) => t > 0).sort((a, b) => a - b);
-    const next = ats.find((t) => t > Date.now());
-    const done = (d) => d.st?.stage === "settled";
-    const nm = sitCount("sit"), np = sitCount("sitplay"), cm = sitCount("sit", done), cp = sitCount("sitplay", done);
+  if (live.length && sitPending()) return `<div class="sit"><p class="small">${L("お願いしています…（1〜2 分。このまま開いておいてください）", "Booking the sitter… (1–2 minutes. Please keep this open.)")}</p></div>`;
+  const s = sitStart();
+  let head = "";
+  if (s.ext || (st.sitUntil && st.sitUntil > Date.now())) {
+    const ats = app.sits.filter((d) => d.st && !["refunded", "ng", "offer_failed"].includes(d.st.stage)).map((d) => d.at()).filter((t) => t > 0).sort((a, b) => a - b);
     const last = ats.length ? ats[ats.length - 1] : null;
-    return `<div class="sit"><p class="small"><b>${L("おるすばん中", "Sitter booked")}</b>${last ? L(`（最後のごはん ${whenShort(last)}）`, ` (last meal ${whenShort(last)})`) : ""}　` +
-      L(`ごはん ${nm} 回のうち ${cm} 回届きました。`, `${cm} of ${nm} meals delivered.`) +
-      (np ? L(`あそぶは ${np} 回のうち ${cp} 回です。`, ` Playtime: ${cp} of ${np}.`) : "") +
-      (next ? L(`次は ${whenShort(next)}。`, ` Next: ${whenShort(next)}.`) : "") + `</p></div>`;
+    const done = (d) => d.st?.stage === "settled", cnt = (k, f = () => true) => app.sits.filter((d) => d.kind === k && d.st && !["refunded", "ng", "offer_failed"].includes(d.st.stage) && f(d)).length;
+    const nm = cnt("sit"), np = cnt("sitplay"), cm = cnt("sit", done), cp = cnt("sitplay", done);
+    head = `<p class="small"><b>${L("おるすばん中", "Sitter on duty")}</b>${last ? L(`（${whenShort(last)} まで）`, ` (until ${whenShort(last)})`) : ""}　` +
+      L(`ごはん ${cm}/${nm}${np ? `・あそぶ ${cp}/${np}` : ""}`, `meals ${cm}/${nm}${np ? `, plays ${cp}/${np}` : ""}`) + `</p>`;
+    // 延長は、最後のごはんまで 1 日を切ってから聞く
+    const soon = s.ext && s.t0 - Date.now() < Number(app.box.sit_every_hours) * HOUR;
+    if (!app.box.sit_enabled || st.grave || !soon) return `<div class="sit">${head}</div>`;
   }
-  if (st.grave) return "";
-  if (!app.sitOpen) return `<div class="actions"><button type="button" class="btn sub" id="sit-open">${L("おるすばんを頼む", "Book a sitter")}</button></div>`;
-  const n = Math.min(Math.max(1, Number(app.sitDays ?? 3)), Number(app.box.sit_max_days));
-  const pmax = sitPlaysMax(n), p = Math.min(Math.max(0, Number(app.sitPlays ?? Math.min(1, pmax))), pmax);
+  if (st.grave || !app.box.sit_enabled) return head ? `<div class="sit">${head}</div>` : "";
+  // 説明は遊び方に置き、ここはボタンだけ（延長は、最後のごはんまで 1 日を切ってから）
+  const btn = `<div class="actions"><button type="button" class="btn sub" id="sit-open">${s.ext ? L("シッターを延長", "Extend sitter") : L("シッターにお願い", "Ask a sitter")}</button></div>`;
+  if (!app.sitOpen) return head ? `<div class="sit">${head}${btn}</div>` : btn;
+  const dmax = Array.from({ length: Number(app.box.sit_max_days) }, (_, i) => i + 1).filter((d) => sitFits(d, 0, s)).pop() ?? 0;
+  if (!dmax) return `<div class="sit">${head}</div>`;
+  const n = Math.min(Math.max(1, Number(app.sitDays ?? Math.min(3, dmax))), dmax);
+  const pmax = Math.max(0, ...Array.from({ length: sitPlaysMax(n) + 1 }, (_, j) => j).filter((j) => sitFits(n, j, s)));
+  const p = Math.min(Math.max(0, Number(app.sitPlays ?? Math.min(1, pmax))), pmax);
   const price = Number(app.box.sit_price), pprice = Number(app.box.sit_play_price ?? 0), total = n * (price + p * pprice), lack = m.balance < total;
-  const opts = Array.from({ length: Number(app.box.sit_max_days) }, (_, i) => `<option value="${i + 1}"${i + 1 === n ? " selected" : ""}>${L(`${i + 1} 日`, `${i + 1} day${i ? "s" : ""}`)}</option>`).join("");
-  const popts = Array.from({ length: pmax + 1 }, (_, i) => `<option value="${i}"${i === p ? " selected" : ""}>${L(i ? `${i} 回` : "あそばない", i ? `${i} time${i > 1 ? "s" : ""}` : "None")}</option>`).join("");
-  return `<form class="sitf" id="sitf">
-      <label>${L("留守にする日数", "Days away")}<select id="sit-days">${opts}</select></label>
-      ${pmax ? `<label>${L("1 日にあそぶ回数", "Playtime per day")}<select id="sit-plays">${popts}</select></label>` : ""}
-      <p class="small">${L(`シッターが 1 日 1 回ごはんをあげます（1 回 ${fmt(price)} $PAPER）${pmax ? `。あそんでもくれます（1 回 ${fmt(pprice)} $PAPER。賭けではないので、戻りはありません）` : ""}。全部で ${fmt(total)} $PAPER です。おるすばん中は、おなかが空っぽでもお墓になりません。シッターのお世話も、自分でしたときと同じに育ちと連続日数に数えます。早く帰ってきても、予約したお世話はそのまま届きます。届かなかった回の PAPER は、次に開いたときに戻ります。`,
-        `A sitter feeds your HAKO once a day (${fmt(price)} $PAPER each)${pmax ? ` and can play with it too (${fmt(pprice)} $PAPER each — it isn't a bet, so nothing comes back)` : ""}. ${fmt(total)} $PAPER in total. While the sitter is booked, an empty tummy won't put it in a grave. The sitter's care counts toward growing up and your streak, just like your own. If you come back early, the booked care still arrives. PAPER for anything that doesn't arrive comes back the next time you open the app.`)}</p>
+  const opts = Array.from({ length: dmax }, (_, i) => `<option value="${i + 1}"${i + 1 === n ? " selected" : ""}>${L(`${i + 1} 日`, `${i + 1} day${i ? "s" : ""}`)}</option>`).join("");
+  const popts = Array.from({ length: pmax + 1 }, (_, i) => `<option value="${i}"${i === p ? " selected" : ""}>${L(i ? `${i} 回` : "あそばない", ["None", "Once", "Twice"][i] ?? `${i} times`)}</option>`).join("");
+  return `<div class="sit">${head}<form class="sitf" id="sitf">
+      <label>${s.ext ? L("延長する日数", "Extra days") : L("留守にする日数", "Days away")}<select id="sit-days">${opts}</select></label>
+      ${pmax ? `<label>${L("1 日にあそぶ回数", "Plays per day")}<select id="sit-plays">${popts}</select></label>` : ""}
       ${lack ? `<p class="why bad">${L("PAPER が足りません", "Not enough PAPER")}</p>` : ""}
-      <div class="actions"><button type="submit" class="btn"${lack ? " disabled" : ""}>${L("頼む", "Book")}</button><button type="button" class="btn sub" id="sit-cancel">${L("やめる", "Cancel")}</button></div>
-    </form>`;
+      <div class="actions"><button type="submit" class="btn"${lack ? " disabled" : ""}>${L("お願いする", "Book")} <span class="price">${fmt(total)} $PAPER</span></button><button type="button" class="btn sub" id="sit-cancel">${L("やめる", "Cancel")}</button></div>
+    </form></div>`;
 }
 function wireSit() {
   const o = $("sit-open"); if (o) o.onclick = () => { app.sitOpen = true; render(); };
@@ -468,20 +480,27 @@ function wireSit() {
   const f = $("sitf"); if (f) f.onsubmit = (ev) => { ev.preventDefault(); bookSit(Number($("sit-days").value), Number($("sit-plays")?.value ?? 0)); };
 }
 async function bookSit(n, p = 0) {
-  if (sitLive().length || app.sitBooking) return;
+  if (sitPending() || app.sitBooking) return;
   const st = app.st, m = app.m;
   if (!st || st.grave) return;
+  const s = sitStart();
   p = Math.min(Math.max(0, p), sitPlaysMax(n));
+  if (!sitFits(n, p, s)) return say(L("その日数では頼めません", "That many days can't be booked"));
   if (m.balance < n * (Number(app.box.sit_price) + p * Number(app.box.sit_play_price ?? 0))) return say(L("PAPER が足りません", "Not enough PAPER"));
-  const t0 = Date.now(), plan = sitSchedule(app.box, t0, n, p);   // ごはんが先（PAPER が途中で足りなくなっても、ごはんから引き当てる）
+  const plan = sitSchedule(app.box, s.t0, n, p, s.first);   // ごはんが先（PAPER が途中で足りなくなっても、ごはんから引き当てる）
   plan.sort((a, b) => (a.j > 0) - (b.j > 0) || a.at - b.at);
-  const slots = plan.map((x) => (x.j ? `${t0}-${x.k}-p${x.j}` : `${t0}-${x.k}`));
-  try { localStorage.setItem(SIT_INDEX(), JSON.stringify({ t0, n, p, slots })); } catch { /* 開き直すと見えなくなるだけ */ }
-  app.sits = slots.map(newSit);
+  const slots = plan.map((x) => (x.j ? `${s.t0}-${x.k}-p${x.j}` : `${s.t0}-${x.k}`));
+  let ix = null; try { ix = JSON.parse(localStorage.getItem(SIT_INDEX()) || "null"); } catch { ix = null; }
+  // 延長は前の予約に足す。新しく頼むときは、前の予約の記録を置きかえる
+  const keep = s.ext ? (ix?.slots ?? []) : [];
+  try { localStorage.setItem(SIT_INDEX(), JSON.stringify({ t0: s.t0, n, p, slots: [...keep, ...slots] })); } catch { /* 開き直すと見えなくなるだけ */ }
+  const fresh = slots.map(newSit);
+  app.sits = s.ext ? [...app.sits, ...fresh] : fresh;
+  app.sitNew = new Set(slots);
   app.sitOpen = false; app.sitBooking = true;
-  say(L("おるすばんを頼んでいます…（1〜2 分。このまま開いておいてください）", "Booking the sitter… (1–2 minutes. Please keep this open.)"), false);
+  say(L("お願いしています…（1〜2 分。このまま開いておいてください）", "Booking the sitter… (1–2 minutes. Please keep this open.)"), false);
   for (let i = 0; i < plan.length; i++) {
-    const r = await app.sits[i].book({ st, plan: plan[i], t0 });
+    const r = await fresh[i].book({ st, plan: plan[i], t0: s.t0 });
     if (!r.ok) logOp(`${plan[i].kind} · ${plan[i].k}${plan[i].j ? `-p${plan[i].j}` : ""} · ${r.why}`);
   }
   render();
@@ -734,7 +753,7 @@ async function startDeal(kind) {
 function onDeal(kind, ev) {
   if (ev.type === "settled") {
     if (document.body.dataset.tab !== "me") for (const a of document.querySelectorAll('[data-tab-to="me"]')) a.classList.add("ping");   // ほかの画面を見ている間に終わった印
-    addLocal(app.did, { t: kind, ms: ev.ms, contract: ev.contract }, ev.delta);
+    addLocal(app.did, { t: kind, ms: ev.ms, contract: ev.contract, ...(kind === "play" ? { payout: ev.delta + Number(app.box.play_stake) } : {}) }, ev.delta);   // あそぶの戻りは部屋の稼ぎに数える
     if (kind === "play") app.happyUntil = Date.now() + 8000;
     if (kind === "out" && ev.lines) {
       let facts = null; try { facts = JSON.parse(app.deals.out.st.offer.job.context).facts; } catch { facts = null; }

@@ -112,14 +112,15 @@ export function lifeState(events, now, box) {
   return { born: true, alive: !s.grave, grave: s.grave, graveAt: s.graveAt, bornAt: s.bornAt,
     hunger: round2(s.hunger), mood: round2(s.mood), streak, rebirths, outsToday, careDays: days.length, lastCare: s.lastCare ?? null,
     cares: s.cares, stage: growthStage(s.cares, days.length, now - s.bornAt, box),
-    accLevel: accLevel(s.cares, growthStage(s.cares, days.length, now - s.bornAt, box), box), sitUntil: cover ? cover[1] : null };
+    accLevel: accLevel(days.length, growthStage(s.cares, days.length, now - s.bornAt, box), box), sitUntil: cover ? cover[1] : null };
 }
 export const round2 = (x) => Math.round(x * 100) / 100;
-/** 飾りの段（D-119）: HAKO になってから、いまの命のお世話の合計が acc_grow_cares（毎日上限まで全部のお世話で 2 日ずつ）に届くたびに 1 段。1〜4。生まれ変わると 1 から */
-export function accLevel(cares, stage, box) {
+/** 飾りの段（D-119。2026-10-03 から日数で）: HAKO のとき、いまの命のお世話した日が acc_grow_days に届くたびに 1 段。1〜4。生まれ変わると 1 から。
+ *  自分でお世話しても、シッターに頼んでも同じ速さで育つ（回数で数えない） */
+export function accLevel(careDays, stage, box) {
   if (stage !== "hako") return 1;
   let lv = 1;
-  for (const c of box.acc_grow_cares ?? []) if (cares >= Number(c)) lv += 1;
+  for (const c of box.acc_grow_days ?? []) if (careDays >= Number(c)) lv += 1;
   return Math.min(lv, 4);
 }
 /** 育ちの段（D-107、D-109）: 回数だけでは進まず、時間もかかる。値は仮（hatch_cares・hatch_hours・grow_hours・grow_care_days） */
@@ -131,6 +132,8 @@ export function growthStage(cares, careDays, ageMs, box) {
 }
 
 /** あそぶの戻り（D-96）。contract は 0x で始まる 64 桁の 16 進。table は [[重み, 額], …]（重みの合計 100） */
+/** あそぶの表（2026-10-03 に戻りの平均を 100 → 150 に。D-31: 前の契約の結果は変えない）: lock の時刻が play_table_from より前なら play_table_before */
+export const playTableAt = (box, lockMs) => (box.play_table_from != null && lockMs < Number(box.play_table_from) && box.play_table_before ? box.play_table_before : box.play_table);
 export function playPayout(contract, table) {
   const hex = String(contract).replace(/^0x/, "");
   if (!/^[0-9a-f]{8}/i.test(hex)) return null;
@@ -224,15 +227,16 @@ export function jobKind(box, id) {
 /** おるすばんの種類（D-123）: sit は予約のごはん、sitplay は予約のあそぶ（シッターが遊んであげる。賭けは無い） */
 export const isSit = (kind) => kind === "sit" || kind === "sitplay";
 export const acceptKey = (payer, kind, offerId = "") => `${String(payer).slice(-8).toLowerCase()}-${kind}` + (isSit(kind) ? `-${String(offerId).slice(2, 10)}` : "");
-/** おるすばんの予約（D-123）: k 日目（1..n）のごはんは t0 ＋ k × sit_every_hours に届く。あそぶ（1 日 plays 回）は、その日のごはんの
- *  j × sit_play_gap_hours 前（j = 1..plays）。claimByMs ＝ at ＋ sit_window_hours、refundAfterMs ＝ claimByMs ＋ 1 時間 */
-export function sitSchedule(box, t0, n, plays = 0) {
+/** おるすばんの予約（D-123）: 1 回目のごはんは t0 ＋ first 時間（既定 sit_first_hours。頼んですぐに変化が見えるように）、そのあと sit_every_hours ごと。
+ *  あそぶ（1 日 plays 回）は、その日のごはんの j × sit_play_gap_hours 後（j = 1..plays）。claimByMs ＝ at ＋ sit_window_hours、refundAfterMs ＝ claimByMs ＋ 1 時間。
+ *  延長は t0 ＝ 前の予約の最後のごはん、first ＝ sit_every_hours で続ける */
+export function sitSchedule(box, t0, n, plays = 0, first = Number(box.sit_first_hours ?? box.sit_every_hours)) {
   const one = (kind, k, j, at) => { const claimByMs = at + Math.round(Number(box.sit_window_hours) * HOUR); return { kind, k, j, at, claimByMs, refundAfterMs: claimByMs + HOUR }; };
   const out = [];
   for (let k = 1; k <= n; k++) {
-    const meal = t0 + Math.round(k * Number(box.sit_every_hours) * HOUR);
+    const meal = t0 + Math.round((first + (k - 1) * Number(box.sit_every_hours)) * HOUR);
     out.push(one("sit", k, 0, meal));
-    for (let j = 1; j <= plays; j++) out.push(one("sitplay", k, j, meal - Math.round(j * Number(box.sit_play_gap_hours) * HOUR)));
+    for (let j = 1; j <= plays; j++) out.push(one("sitplay", k, j, meal + Math.round(j * Number(box.sit_play_gap_hours) * HOUR)));
   }
   return out;
 }

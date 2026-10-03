@@ -44,14 +44,14 @@ export function storyHtml(box, moods, F) {
     `</div>${box?.grow_hours ? `<p class="hint">${L(`${Math.round(box.grow_hours / 24)} 日育てると…？`, `Raise it for ${Math.round(box.grow_hours / 24)} days and…?`)}</p>` : ""}`;
 }
 
-/** 遊び方（6 場面。数字は箱の設定から） */
+/** 遊び方（6〜7 場面。数字は箱の設定から） */
 export function howHtml(box, F) {
   const meter = `<span class="mm">${Array.from({ length: 10 }, (_, k) => `<i style="--k:${k}"></i>`).join("")}</span>`;
   const table = (box.play_table ?? []).map((x) => Number(x[1]));
   const rewards = [1, 2, 3].map((n) => fmt(rewardOf(box, n)));
   return `<h2>${L("遊び方", "How to play")}</h2><div class="book small">` +
     page("h-egg", sp("e1", 13, castSvg("egg", 4)) + sp("e2", 14, castSvg("baby", 4)),
-      L("はじめは<b>卵</b>です。お世話を続けると生まれて、少しずつ育ちます。", "It starts as an <b>egg</b>. Keep caring for it and it hatches, then grows little by little.")) +
+      L("はじめは<b>卵</b>です。お世話（ごはん・あそぶ）を続けると生まれて、少しずつ育ちます。", "It starts as an <b>egg</b>. Keep caring for it (feeding and playing) and it hatches, then grows little by little.")) +
     page("h-meal", hako("eat", 15) + sp("bowl", 11, art(BOWL)) + meter,
       L(`<b>ごはん</b>（${fmt(box.meal_price)} $PAPER）でおなかが ${box.meal_fill} 増えます。おなかは 1 時間に ${box.hunger_per_hour} ずつ減ります。`,
         `<b>Feed</b> (${fmt(box.meal_price)} $PAPER) fills its tummy by ${box.meal_fill}. The tummy drops by ${box.hunger_per_hour} every hour.`)) +
@@ -59,13 +59,16 @@ export function howHtml(box, F) {
       L(`<b>おでかけ</b>（${fmt(box.out_price)} $PAPER）は、おなかが ${box.out_min_hunger} 以上のとき 1 日 ${box.out_per_day} 回まで。街のようすを記事にして、ほうびが ${rewards.join("・")} $PAPER 届きます。`,
         `<b>Go out</b> (${fmt(box.out_price)} $PAPER) needs a tummy of ${box.out_min_hunger} or more, up to ${box.out_per_day} times a day. It writes a report on the town and earns ${rewards.join(" · ")} $PAPER.`)) +
     page("h-play", hako("p1", 15) + sp("coin", 6, art(COIN)) + face("p2", CROWD[1], 11) + (table.length ? `<span class="tag t4 mono">${fmt(Math.min(...table))}–${fmt(Math.max(...table))}</span>` : ""),
-      L(`<b>あそぶ</b>（${fmt(box.play_stake)} $PAPER）は 1 日 ${box.play_per_day} 回まで。ごきげんが上がり、戻りは半分から倍まで。`,
-        `<b>Play</b> (${fmt(box.play_stake)} $PAPER) is up to ${box.play_per_day} times a day. Its mood goes up, and you get back between half and double.`)) +
+      L(`<b>あそぶ</b>（${fmt(box.play_stake)} $PAPER）は 1 日 ${box.play_per_day} 回まで。ごきげんが上がり、${table.length ? `戻りは ${fmt(Math.min(...table))}〜${fmt(Math.max(...table))} $PAPER。平均すると少し増えます。` : ""}`,
+        `<b>Play</b> (${fmt(box.play_stake)} $PAPER) is up to ${box.play_per_day} times a day. Its mood goes up, and ${table.length ? `you get back ${fmt(Math.min(...table))}–${fmt(Math.max(...table))} $PAPER — a little more than you put in, on average.` : ""}`)) +
     page("h-grave", sp("tomb", 12, art(TOMB)) + sp("ghost", 10, castSvg("ghost", 4)) + `<b class="ar a3">→</b>` + sp("again", 12, castSvg("egg", 4)),
       L(`おなかが 0 のまま ${box.grave_after_hours} 時間たつとお墓に。生まれ変わりは ${fmt(box.reborn_price)} $PAPER で、卵からやり直します。`,
         `If its tummy stays at 0 for ${box.grave_after_hours} hours, it ends up in a grave. Rebirth costs ${fmt(box.reborn_price)} $PAPER and starts over from an egg.`)) +
+    (box.sit_enabled ? page("h-sit", face("s1", CROWD[2], 11) + hako("home", 15) + sp("bowl", 11, art(BOWL)),
+      L(`留守にするときは<b>シッターにお願い</b>できます。1 日 1 回ごはん（${fmt(box.sit_price)} $PAPER）をあげ、選んだ回数だけあそびます（1 回 ${fmt(box.sit_play_price)} $PAPER。戻りはありません）。HAKO は育ち続け、お墓にもなりません。おでかけはしないので、稼げるのは自分で遊んだときだけです。最初のごはんは頼んでから ${box.sit_first_hours ?? box.sit_every_hours} 時間後。早く帰っても予約は続き、できなかった分の PAPER は戻ります。`,
+        `When you're away, you can <b>ask a sitter</b>. It feeds your HAKO once a day (${fmt(box.sit_price)} $PAPER) and plays as many times as you choose (${fmt(box.sit_play_price)} $PAPER each; nothing comes back). Your HAKO keeps growing and won't end up in a grave. The sitter doesn't go on outings, so you only earn when you play yourself. The first meal comes ${box.sit_first_hours ?? box.sit_every_hours} hours after you book. If you come back early, the booking goes on, and PAPER for anything the sitter couldn't do comes back.`)) : "") +
     page("h-room", sp("f1", 22, item(F, "rug")) + sp("f2", 9, item(F, "chair")) + sp("f3", 7, item(F, "lamp")) + hako("home", 15) + sp("f4", 9, item(F, "plant")) + sp("f5", 14, item(F, "desk")),
-      L("お世話を重ねると、部屋に家具が増えます。家具は生まれ変わっても残ります。", "The more you care for it, the more furniture the room gets. Furniture stays even after rebirth.")) +
+      L("おでかけのほうびと、あそぶで増えた分が「稼ぎ」です。稼ぎがたまると部屋に家具が増え、生まれ変わっても残ります。", "Outing rewards and what you gain from play add up to your <b>earnings</b>. As they grow, the room gets more furniture, and it stays even after rebirth.")) +
     `</div>`;
 }
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
