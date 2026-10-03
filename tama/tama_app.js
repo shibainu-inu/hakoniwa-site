@@ -651,13 +651,18 @@ function renderSaid(m) {
   let outs = (fold?.outs ?? []).slice(-1);
   if (app.lastArticle && !(fold?.outs ?? []).some((o) => o.contract === app.lastArticle.contract)) outs = [app.lastArticle];   // 帳簿に載る前の記事
   const h = [
-    ...outs.map((o) => `<article class="article">${o.lines.map((l, i) => i === 0 ? `<h3>${esc(l)}</h3>` : `<p>${esc(l)}</p>`).join("")}</article>`),
+    // 記事は見出しだけを出し、押すと本文が開く（運営者 2026-10-04）。開いたかは描き直しても覚えておく
+    ...outs.map((o) => `<details class="article" data-c="${esc(o.contract ?? "")}"${app.articleOpen === o.contract ? " open" : ""}><summary><h3>${esc(o.lines[0] ?? "")}</h3></summary>
+      ${o.day ? `<p class="meta mono">${esc(o.day)}${o.nth ? L(` · 今日 ${o.nth} 回目`, ` · outing #${o.nth}`) : ""}</p>` : ""}${o.lines.slice(1).map((l) => `<p>${esc(l)}</p>`).join("")}</details>`),
     ...(plays.length ? [`<p class="label" style="margin-top:12px">${L("今日のあそぶ", "Today's plays")}</p><ul class="menu">${plays.map((e) => {
       const stake = Number(e.price ?? cur().play_stake), back = Number(e.payout), d = back - stake;
       return `<li><span class="mono">${hm(e.ms)}</span>　${fmt(stake)} → ${fmt(back)} $PAPER <span class="${d >= 0 ? "up" : "down"}">${d >= 0 ? "+" : ""}${fmt(d)}</span></li>`;
     }).join("")}</ul>`] : []),
   ].join("");
-  if (app.saidHtml !== h || (h && !el.firstChild)) { el.innerHTML = h; app.saidHtml = h; }
+  if (app.saidHtml !== h || (h && !el.firstChild)) {
+    el.innerHTML = h; app.saidHtml = h;
+    for (const d of el.querySelectorAll("details.article")) d.ontoggle = () => { app.articleOpen = d.open ? d.dataset.c : null; app.saidHtml = null; };
+  }
 }
 
 /** 枠を空けた HAKO（D-126。お墓のまま slot_grave_hours 時間、または生まれて slot_nomeal_hours 時間ごはんが無かった）。説明は遊び方に */
