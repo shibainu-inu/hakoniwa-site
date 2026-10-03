@@ -655,14 +655,17 @@ function renderSaid(fold) {
 
 /** 満員か（帳簿の HAKO の数が max_hakos に届いた。帳簿は毎時なので、1 時間の間に少し超えて迎えても、帳簿係が超えた分を数えない） */
 const isFull = () => app.box.max_hakos != null && Number(app.stats?.box?.hakos ?? 0) >= Number(app.box.max_hakos);
+/** github.io の /tama/ は閉じるので、新しい HAKO を迎えない（運営者 2026-10-04） */
+const isClosing = () => location.hostname.endsWith("github.io");
 function renderEgg() {
-  if (!app.did && isFull()) {
+  if (!app.did && (isFull() || isClosing())) {
     $("view").innerHTML = `
     <section class="card" id="me">
       <div class="stage plain short"><div class="egg">${spriteSvg(null, "egg", 5)}</div></div>
       <p class="label" style="margin-top:14px">NEW HAKO</p>
-      <h2>${L("いまは満員です", "We're full right now")}</h2>
-      <p>${L("新しい HAKO は、空きが出るまで迎えられません。", "New HAKOs can't be welcomed until there's room.")}</p>
+      ${isClosing() ? `<h2>${L("ここでは新しい HAKO を迎えていません", "No new HAKOs here")}</h2>`
+        : `<h2>${L("いまは満員です", "We're full right now")}</h2>
+      <p>${L("新しい HAKO は、空きが出るまで迎えられません。", "New HAKOs can't be welcomed until there's room.")}</p>`}
       <p class="small">${L("鍵ファイルがあるときは", "Have a key file?")} <label class="link">${L("ファイルから読み込む", "Load it from a file")}<input id="file" type="file" accept="application/json" hidden></label></p>
     </section>`;
     $("file").onchange = importKey;
@@ -728,6 +731,7 @@ async function register() {
   const p1 = $("p1").value, p2 = $("p2").value;
   if (p1.length < 12) return say(L("パスフレーズは 12 文字以上にしてください", "Use a passphrase of 12 characters or more"));
   if (p1 !== p2) return say(L("2 つのパスフレーズが違います", "The two passphrases don't match"));
+  if (isClosing()) return say(L("ここでは新しい HAKO を迎えていません", "No new HAKOs here"));
   if (isFull()) return say(L("いまは満員です", "We're full right now"));
   if (!(await K.supported())) return say(L("このブラウザは Ed25519 の鍵を作れません。新しいブラウザで開いてください", "This browser can't make an Ed25519 key. Please open it in a newer browser."));
   say(L("鍵を作っています…", "Making your key…"), false);
