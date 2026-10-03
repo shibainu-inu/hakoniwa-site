@@ -27,7 +27,7 @@ export class Deal {
   note(text) { this.onEvent({ type: "note", text }); }
   busy() { return !!this.st && !this.st.done; }
   get box() { return this.app.box; }
-  price() { return Number({ meal: this.box.meal_price, out: this.box.out_price, play: this.box.play_stake }[this.kind]); }
+  price() { return Number({ meal: this.box.meal_price, out: this.box.out_price, play: this.box.play_stake, sit: this.box.sit_price }[this.kind]); }
   takers() { return new Set(this.kind === "play" ? (this.box.npcs ?? []) : (this.box.miners ?? [])); }
 
   /** 推論の入力（job.context）。おでかけは測った雰囲気（moods.json）が要る。取れなければ「霧」（D-85） */
@@ -41,14 +41,16 @@ export class Deal {
     return { v: 1, mood_version: m.version, hour: m.hour, facts, prompt: outPrompt(this.box.out_instruction, facts) };
   }
 
-  async start({ st }) {
+  /** ctx・deadlines・idMs は、おるすばんの予約（SitDeal）が渡す。ふだんは自分で作る */
+  async start({ st, ctx: given = null, deadlines = null, idMs = null }) {
     if (this.busy()) return { ok: false, why: L("いまは取引の途中です", "A deal is already in progress") };
-    const ctx = await this.context(st);
+    const ctx = given ?? await this.context(st);
     if (!ctx) return { ok: false, why: L("霧で街がよく見えません。少したってから出かけてみてください", "The town is too foggy to see. Try going out a little later.") };
     const t = Date.now(), b = this.box;
+    const dl = deadlines ?? { claimByMs: t + b.claim_by_min * 60_000, refundAfterMs: t + b.refund_after_min * 60_000 };
     const offer = tclk.makeOffer({ from: this.app.did, role: "payer", lock: "hash", amount: String(this.price()), asset: "PAPER", rails: ["paper"],
-      expiresMs: t + b.expires_min * 60_000, claimByMs: t + b.claim_by_min * 60_000, refundAfterMs: t + b.refund_after_min * 60_000,
-      job: { proto: "tama", id: jobId(b, this.kind, this.app.did, t), context: JSON.stringify(ctx) } });
+      expiresMs: t + b.expires_min * 60_000, claimByMs: dl.claimByMs, refundAfterMs: dl.refundAfterMs,
+      job: { proto: "tama", id: jobId(b, this.kind, this.app.did, idMs ?? t), context: JSON.stringify(ctx) } });
     this.st = { stage: "offering", kind: this.kind, offer, amount: this.price(), at: t, done: false };
     this.save();
     try { await this.app.signer.post(b.offers_room, tclk.encodeFrame(offer)); }
@@ -59,7 +61,7 @@ export class Deal {
 
   /** accept のノートを読み、確かめる → 使える accept か null */
   async findAccept() {
-    const raw = await notes.get(this.box.accept_ns, acceptKey(this.app.did, this.kind)).catch(() => null);
+    const raw = await notes.get(this.box.accept_ns, acceptKey(this.app.did, this.kind, this.st.offer.id)).catch(() => null);
     if (!raw) return null;
     const a = tclk.tryDecodeFrame(raw.trim());
     const o = this.st.offer;
@@ -137,7 +139,7 @@ export class Deal {
   finish(lines, ms) {
     const b = this.box, st = this.st;
     let ok = true, say = "";
-    if (this.kind === "meal") ok = checkLines(lines, { n: Number(b.meal_lines), maxChars: b.line_max_chars, instruction: b.meal_instruction, fragmentWords: b.fragment_words }).ok;
+    if (this.kind === "meal" || this.kind === "sit") ok = checkLines(lines, { n: Number(b.meal_lines), maxChars: b.line_max_chars, instruction: b.meal_instruction, fragmentWords: b.fragment_words }).ok;
     if (this.kind === "out") ok = checkLines(lines, { n: Number(b.out_lines), maxChars: b.line_max_chars, instruction: b.out_instruction, fragmentWords: b.fragment_words, needs: [[3, "{V}"], [3, "{B}"]], digitsOk: false }).ok;
     if (!ok) { this.set("ng", { done: true, locked: false, lines }); this.note(L("届いたものが決まりに合わなかったので、成立しませんでした。PAPER は動いていません", "What arrived didn't meet the rules, so the deal didn't settle. No PAPER moved.")); return; }
     let delta = -Number(st.amount);
@@ -146,12 +148,34 @@ export class Deal {
       delta += back;
       say = back > st.amount ? L(`勝った！ ${back} $PAPER 戻ってきた`, `You won! ${back} $PAPER came back`) : back === st.amount ? L(`引き分け。${back} $PAPER 戻ってきた`, `A draw. ${back} $PAPER came back`) : L(`負けちゃった。${back} $PAPER だけ戻ってきた`, `You lost. Only ${back} $PAPER came back`);
     }
-    if (this.kind === "meal") say = lines?.[0] ?? "";
+    if (this.kind === "meal" || this.kind === "sit") say = lines?.[0] ?? "";
     if (this.kind === "out") {
       const nth = (this.app.st?.outsToday ?? 0) + 1;
       say = L(`記事ができました。ほうび ${rewardOf(b, nth)} $PAPER（今日 ${nth} 回目）は、帳簿係が確かめてから届きます`, `The report is done. The reward of ${rewardOf(b, nth)} $PAPER (outing #${nth} today) arrives after the ledger keeper checks it.`);
     }
     this.set("settled", { done: true, locked: false, lines, settledAt: ms, day: localDay(ms, b) });
     this.onEvent({ type: "settled", contract: st.contract, ms, delta, say, lines });
+  }
+}
+
+/** おるすばんの予約のごはん 1 回分（D-123）。流れは Deal と同じで、届ける時刻 at と期限が先にあるだけ。
+ *  状態は localStorage tama_deal_v1:<DID>:sit:<offer の時刻>-<k>（予約ごとに別の箱。前の予約の記録を上書きしない） */
+export class SitDeal extends Deal {
+  constructor({ app, slot, onEvent }) {
+    super({ kind: "sit", app, onEvent });
+    this.slot = slot;
+    this.key = `tama_deal_v1:${app.did}:sit:${slot}`;
+    try { this.st = JSON.parse(localStorage.getItem(this.key) || "null"); } catch { this.st = null; }
+  }
+  at() { try { return Number(JSON.parse(this.st.offer.job.context).at); } catch { return 0; } }
+  /** plan は sitSchedule の 1 件。prompt はいまの様子から（ごはんと同じ書き方） */
+  book({ st, plan, t0 }) {
+    return this.start({ st, ctx: { v: 1, prompt: mealPrompt(this.box.meal_instruction, st), at: plan.at },
+      deadlines: { claimByMs: plan.claimByMs, refundAfterMs: plan.refundAfterMs }, idMs: t0 + plan.k });
+  }
+  async tick() {
+    // 届ける時刻の前は、部屋を読みに行かない（何日も先なので。帳簿係も at より前の reveal を数えない）
+    if (this.st?.stage === "waiting" && Date.now() < this.at()) return;
+    return super.tick();
   }
 }

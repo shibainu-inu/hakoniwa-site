@@ -10,6 +10,8 @@
 //   5. reborn はお墓のときだけ効く。同じ DID で、おなかは reborn_hunger、ごきげんは生まれたときの値、連続日数は 0 から（D-91、D-101）
 //   6. 連続お世話日数は、いまの命の中で、ごはん・おでかけ・あそぶのどれかが成立した日（JST）が、今日か昨日から何日続いているか
 //   8. 育ちの段は、いまの命について: 卵 →（お世話 hatch_cares 回 かつ hatch_hours 時間）生まれた子 →（grow_hours 時間 かつ お世話した日 grow_care_days 日）HAKO。生まれ変わると卵から
+//   9. おるすばん（D-123）: 出来事 sit {ms, until} の間はお墓までの時計を止める。予約のごはん（meal に sit: true）は、ふだんのごはんと同じに
+//      お世話として数える（育ちにも効く。運営者のヒアリング 2026-10-03）。連続日数は、ごはんの届かなかったおるすばん中の日を飛ばして数える
 //   7. あそぶの戻りは契約 id（offer と accept を束ねたハッシュ）の先頭 8 桁の 16 進 mod 100 を、play_table の重みで引く（D-96）
 
 export const HOUR = 3_600_000;
@@ -22,6 +24,26 @@ const dayNum = (d) => Math.round(Date.parse(`${d}T00:00:00Z`) / 86_400_000);
 
 const clamp = (x, lo, hi) => Math.min(hi, Math.max(lo, x));
 
+/** おるすばんの区間 [[from, until], …] を時刻順に重ねてまとめる（D-123） */
+export function mergeCovers(list) {
+  const out = [];
+  for (const [a, b] of list.filter(([a, b]) => b > a).sort((x, y) => (x[0] - y[0]) || (x[1] - y[1]))) {
+    const last = out[out.length - 1];
+    if (last && a <= last[1]) last[1] = Math.max(last[1], b); else out.push([a, b]);
+  }
+  return out;
+}
+/** start から、おるすばんの外の時間が need たまる時刻（お墓になる時刻。区間の中は時計が止まる） */
+export function graveTime(start, need, covers) {
+  let t = start, left = need;
+  for (const [a, b] of covers) {
+    if (b <= t) continue;
+    if (a > t) { if (a - t >= left) return t + left; left -= a - t; }
+    t = Math.max(t, b);
+  }
+  return t + left;
+}
+
 /**
  * 出来事 → いまの状態。events は [{t, ms}]（t: join | reborn | meal | out | play）。順は問わない（ms、同時なら並びの順）。
  * 返す: {born, alive, grave, graveAt, bornAt, hunger, mood, streak, rebirths, outsToday, careDays, lastCare}
@@ -31,6 +53,7 @@ export function lifeState(events, now, box) {
   const hr = Number(box.hunger_per_hour), mr = Number(box.mood_per_hour);
   const hMax = Number(box.hunger_max), mMax = Number(box.mood_max);
   const graveMs = Number(box.grave_after_hours) * HOUR;
+  const covers = mergeCovers(ev.filter((e) => e.t === "sit").map((e) => [Number(e.ms), Number(e.until)]));
   let s = null;   // いまの命: {bornAt, hunger, mood, at, zeroSince, grave, graveAt, days:Set}
   let rebirths = 0;
   const fresh = (ms, reborn = false) => ({ bornAt: ms, hunger: Number(reborn ? (box.reborn_hunger ?? box.hunger_start) : box.hunger_start), mood: Number(box.mood_start), at: ms,
@@ -48,7 +71,7 @@ export function lifeState(events, now, box) {
       } else s.hunger = h;
     }
     s.mood = Math.max(0, s.mood - mr * dtH);
-    if (s.zeroSince !== null && t - s.zeroSince >= graveMs) { s.grave = true; s.graveAt = s.zeroSince + graveMs; }
+    if (s.zeroSince !== null) { const g = graveTime(s.zeroSince, graveMs, covers); if (t >= g) { s.grave = true; s.graveAt = g; } }
     s.at = t;
   };
   for (const e of ev) {
@@ -71,16 +94,23 @@ export function lifeState(events, now, box) {
   const today = localDay(now, box);
   const days = [...s.days].sort();
   let streak = 0;
+  // おるすばん中の日（いまの命の中）は飛ばす。今日はまだお世話していなくても途切れない
+  const frozen = new Set();
+  for (const [a, b] of covers) { for (let d = dayNum(localDay(Math.max(a, s.bornAt), box)), e = dayNum(localDay(Math.min(b, now), box)); d <= e; d++) frozen.add(d); }
   if (!s.grave && days.length) {
-    let want = days.includes(today) ? dayNum(today) : dayNum(today) - 1;
     const set = new Set(days.map(dayNum));
-    while (set.has(want)) { streak += 1; want -= 1; }
+    const lo = Math.min(...set, ...frozen);
+    for (let want = dayNum(today), first = true; want >= lo; want--, first = false) {
+      if (set.has(want)) streak += 1;
+      else if (!first && !frozen.has(want)) break;
+    }
   }
+  const cover = covers.find(([a, b]) => a <= now && now < b);
   const outsToday = ev.filter((e) => e.t === "out" && e.ms >= s.bornAt && localDay(e.ms, box) === today).length;
   return { born: true, alive: !s.grave, grave: s.grave, graveAt: s.graveAt, bornAt: s.bornAt,
     hunger: round2(s.hunger), mood: round2(s.mood), streak, rebirths, outsToday, careDays: days.length, lastCare: s.lastCare ?? null,
     cares: s.cares, stage: growthStage(s.cares, days.length, now - s.bornAt, box),
-    accLevel: accLevel(s.cares, growthStage(s.cares, days.length, now - s.bornAt, box), box) };
+    accLevel: accLevel(s.cares, growthStage(s.cares, days.length, now - s.bornAt, box), box), sitUntil: cover ? cover[1] : null };
 }
 export const round2 = (x) => Math.round(x * 100) / 100;
 /** 飾りの段（D-119）: HAKO になってから、いまの命のお世話の合計が acc_grow_cares（毎日上限まで全部のお世話で 2 日ずつ）に届くたびに 1 段。1〜4。生まれ変わると 1 から */
@@ -185,8 +215,24 @@ export function parseTama(text) {
 /** job.id: tama-<kind>-<DID 末尾 8 を小文字>-<ms> */
 export const jobId = (box, kind, did, ms) => `${box.box}-${kind}-${String(did).slice(-8).toLowerCase()}-${ms}`;
 export function jobKind(box, id) {
-  const m = new RegExp(`^${box.box}-(meal|out|play)-[0-9a-z]{8}-[0-9]+$`).exec(String(id ?? ""));
+  const m = new RegExp(`^${box.box}-(meal|out|play|sit)-[0-9a-z]{8}-[0-9]+$`).exec(String(id ?? ""));
   return m ? m[1] : null;
 }
 /** accept を知らせるノートのキー（miner・NPC が書き、ブラウザが読む） */
-export const acceptKey = (payer, kind) => `${String(payer).slice(-8).toLowerCase()}-${kind}`;
+export const acceptKey = (payer, kind, offerId = "") => `${String(payer).slice(-8).toLowerCase()}-${kind}` + (kind === "sit" ? `-${String(offerId).slice(2, 10)}` : "");
+/** おるすばんの予約（D-123）: k 回目（1..n）は t0 ＋ k × sit_every_hours に届く。claimByMs ＝ at ＋ sit_window_hours、refundAfterMs ＝ claimByMs ＋ 1 時間 */
+export function sitSchedule(box, t0, n) {
+  return Array.from({ length: n }, (_, i) => {
+    const at = t0 + Math.round((i + 1) * Number(box.sit_every_hours) * HOUR), claimByMs = at + Math.round(Number(box.sit_window_hours) * HOUR);
+    return { k: i + 1, at, claimByMs, refundAfterMs: claimByMs + HOUR };
+  });
+}
+/** sit の offer の期限と届ける時刻が決まりどおりか（lockMs は lock の時刻。miner は accept の前に now で見る）→ 理由か null */
+export function sitWhy(box, offer, lockMs) {
+  let at; try { at = JSON.parse(offer.job.context).at; } catch { return "no at"; }
+  if (typeof at !== "number" || !Number.isInteger(at)) return "no at";
+  if (offer.claimByMs !== at + Math.round(Number(box.sit_window_hours) * HOUR) || offer.refundAfterMs !== offer.claimByMs + HOUR) return "deadlines";
+  if (at <= lockMs) return "at not ahead";
+  if (at - lockMs > Number(box.sit_max_days) * Number(box.sit_every_hours) * HOUR + HOUR) return "too far";
+  return null;
+}

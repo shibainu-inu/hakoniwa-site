@@ -1,12 +1,12 @@
 // tama_app.js — たまごっち版の画面（HAKONIWA_tamagotchi_spec_2026-09-28.md）。1 枚のページで、卵（登録）→ 卵からひび、HAKO へ育つ画面 → お墓（幽霊）→ 生まれ変わり。
 // 状態は表示のたびに計算する（D-89）: 帳簿係の latest.json の出来事 ＋ まだ帳簿に載っていない、このブラウザで見た成立（localStorage）。
 // 鍵はこのブラウザだけ（tama_key.js）。署名して出すのは掲示板の join・reborn・deal と、取引の offer・lock・terms・refund だけ。
-import { lifeState, localDay, tamaLine, fillArticle, rewardOf } from "./tama_core.js";
+import { lifeState, localDay, tamaLine, fillArticle, rewardOf, sitSchedule, HOUR } from "./tama_core.js";
 import { spriteSvg, spriteRows } from "./tama_sprite.js";
 import { L, getLang, setLang } from "./tama_i18n.js";
 import { setVenue, makeSigner, readTail } from "./tama_net.js";
 import * as K from "./tama_key.js";
-import { Deal, dealKinds } from "./tama_deal.js";
+import { Deal, SitDeal, dealKinds } from "./tama_deal.js";
 import { lifetime, unlocked, nextUnlock, whenText, roomSvg, artSvg, frameSvg, scrapSvg, svgToPng, spot, HAKO_PX } from "./tama_room.js";
 import { renderGarden } from "./tama_garden.js";
 import { pickPhrase, phraseText } from "./tama_phrases.js";
@@ -16,7 +16,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 const fmt = (n) => Math.round(Number(n)).toLocaleString("ja-JP");
 const rand = () => Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => b.toString(16).padStart(2, "0")).join("");
 
-export const app = { stats: null, box: null, did: null, priv: null, signer: null, motion: null, deals: {} };
+export const app = { stats: null, box: null, did: null, priv: null, signer: null, motion: null, deals: {}, sits: [] };
 
 // ── 手元の出来事（帳簿に載るまでのつなぎ） ──
 const LKEY = (did) => `tama_local_v1:${did}`;
@@ -45,7 +45,7 @@ export function merged(stats, did) {
   for (const x of loc.deltas) if (keys.has(x.key)) balance += x.delta;
   if (!d && keep.some((e) => e.t === "join")) balance += Number(app.box.initial_paper);
   // 出ていった分（lock 中の額）も見込みに入れる
-  for (const x of Object.values(app.deals)) if (x.st?.locked && !x.st?.done) balance -= Number(x.st.amount ?? 0);
+  for (const x of [...Object.values(app.deals), ...(app.sits ?? [])]) if (x.st?.locked && !x.st?.done) balance -= Number(x.st.amount ?? 0);
   return { events: [...foldEv, ...keep], balance, fromFold: !!d, fold: d ?? null };
 }
 
@@ -342,6 +342,7 @@ export function render() {
       ${!st.grave && st.stage !== "hako" && app.box.grow_hours ? `<p class="hint">${L(`${Math.round(app.box.grow_hours / 24)} 日育てると…？`, `Raise it for ${Math.round(app.box.grow_hours / 24)} days and…?`)}</p>` : ""}
       ${graveNote}
       <div class="actions main">${acts}</div>
+      ${sitHtml(st, m)}
       <p id="why" class="why${app.why && app.whyBad ? " bad" : ""}">${esc(app.why ?? "")}</p>
       <div id="said"></div>
       ${roomInfo(m, st)}
@@ -353,7 +354,7 @@ export function render() {
   app.motion = null; setMotion(motionOf(st));
   for (const b of document.querySelectorAll("#reborn")) b.onclick = reborn;
   const cam = $("snapshot"); if (cam) cam.onclick = () => snapshot(app.m, app.st);
-  wireName();
+  wireName(); wireSit();
   const sk = $("savekey"); if (sk) sk.onclick = () => { const rec = K.loadRec(); if (rec) { K.downloadRec(rec); say(L("鍵ファイルを保存しました。パスフレーズと別の場所にしまってください", "Key file saved. Keep it somewhere separate from your passphrase."), false); } };
   for (const b of document.querySelectorAll("button[data-kind]")) b.onclick = () => startDeal(b.dataset.kind);
   renderSaid(m.fold);
@@ -385,6 +386,92 @@ function wireName() {
     render();
   };
   $("nm-cancel").onclick = () => { app.naming = false; app.nameDraft = ""; render(); };
+}
+// ── おるすばん（D-123）: 出かける前に、ごはん N 回分を予約する。届けるのは miner、払うのはこの HAKO ──
+const SIT_INDEX = () => `tama_sit_v1:${app.did}`;
+function loadSits() {
+  let ix = null; try { ix = JSON.parse(localStorage.getItem(SIT_INDEX()) || "null"); } catch { ix = null; }
+  return (ix?.slots ?? []).map((slot) => new SitDeal({ app, slot, onEvent: (ev) => onSit(ev) }));
+}
+const sitLive = () => app.sits.filter((d) => d.st && !d.st.done);
+function onSit(ev) {
+  if (ev.type === "settled") {
+    addLocal(app.did, { t: "meal", ms: ev.ms, contract: ev.contract, sit: true }, ev.delta);
+    logOp(`settled · sit · ${short(ev.contract)} · ${ev.delta} PAPER`);
+  }
+  // 予約の途中の知らせは、頼んだ直後だけ出す（留守中に溜まった知らせで画面を埋めない）
+  else if (ev.type === "note" && app.sitBooking) { app.why = ev.text; app.whyBad = false; app.whyAt = null; }
+}
+async function tickSits() {
+  for (const d of app.sits) {
+    await d.tick().catch(() => {});
+    // lock できた回は、手元でもおるすばん中にする（帳簿係と同じ区間。lock の時刻は、気づいた今で近似する）
+    if (d.st?.locked && d.st.contract && !d.coverNoted) {
+      const until = Number(d.st.offer.claimByMs), from = Math.max(Date.now(), d.at() - Number(app.box.sit_cover_hours) * HOUR);
+      addLocal(app.did, { t: "sit", ms: Math.min(from, until - 1), until, contract: d.st.contract });
+      d.coverNoted = true;
+    }
+  }
+  if (app.sitBooking && !app.sits.some((d) => d.st && !d.st.done && !d.st.locked && !["refunded", "settled"].includes(d.st.stage))) {
+    app.sitBooking = false;
+    const ok = app.sits.filter((d) => d.st?.locked || d.st?.stage === "settled").length;
+    app.why = ok ? L(`おるすばんを頼みました（ごはん ${ok} 回）。出かけて大丈夫です`, `The sitter is booked (${ok} meals). You're free to go.`)
+      : L("おるすばんを頼めませんでした。PAPER は動いていません", "Couldn't book the sitter. No PAPER moved.");
+    app.whyBad = !ok; app.whyAt = Date.now();
+  }
+}
+const whenShort = (ms) => new Date(ms).toLocaleString(getLang() === "ja" ? "ja-JP" : "en-US", { month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" });
+function sitHtml(st, m) {
+  if (!app.box?.sit_price) return "";
+  const live = sitLive();
+  // 頼むボタンは sit_enabled のときだけ（GCP の miner が sit を引き受けるようになってから入れる）。頼んだ分の表示は続ける
+  if (!app.box.sit_enabled && !live.length && !(st.sitUntil > Date.now())) return "";
+  const held = app.sits.some((d) => d.st?.locked || d.st?.stage === "settled");
+  if (live.length && !held) return `<div class="sit"><p class="small">${L("おるすばんを頼んでいます…（1〜2 分。このまま開いておいてください）", "Booking the sitter… (1–2 minutes. Please keep this open.)")}</p></div>`;
+  if (live.length || (st.sitUntil && st.sitUntil > Date.now())) {
+    const ats = app.sits.map((d) => d.at()).filter((t) => t > 0).sort((a, b) => a - b);
+    const next = ats.find((t) => t > Date.now());
+    const came = app.sits.filter((d) => d.st?.stage === "settled").length;
+    const last = ats.length ? ats[ats.length - 1] : null;
+    return `<div class="sit"><p class="small"><b>${L("おるすばん中", "Sitter booked")}</b>${last ? L(`（最後のごはん ${whenShort(last)}）`, ` (last meal ${whenShort(last)})`) : ""}　` +
+      L(`ごはん ${app.sits.length} 回のうち ${came} 回届きました。`, `${came} of ${app.sits.length} meals delivered.`) +
+      (next ? L(`次は ${whenShort(next)}。`, ` Next: ${whenShort(next)}.`) : "") + `</p></div>`;
+  }
+  if (st.grave) return "";
+  if (!app.sitOpen) return `<div class="actions"><button type="button" class="btn sub" id="sit-open">${L("おるすばんを頼む", "Book a sitter")}</button></div>`;
+  const n = Math.min(Math.max(1, Number(app.sitDays ?? 3)), Number(app.box.sit_max_days));
+  const price = Number(app.box.sit_price), total = price * n, lack = m.balance < total;
+  const opts = Array.from({ length: Number(app.box.sit_max_days) }, (_, i) => `<option value="${i + 1}"${i + 1 === n ? " selected" : ""}>${L(`${i + 1} 日`, `${i + 1} day${i ? "s" : ""}`)}</option>`).join("");
+  return `<form class="sitf" id="sitf">
+      <label>${L("留守にする日数", "Days away")}<select id="sit-days">${opts}</select></label>
+      <p class="small">${L(`シッターが 1 日 1 回ごはんをあげます（1 回 ${fmt(price)} $PAPER、全部で ${fmt(total)} $PAPER）。おるすばん中は、おなかが空っぽでもお墓になりません。シッターのごはんも、ふだんのごはんと同じに育ちと連続日数に数えます。早く帰ってきても、予約したごはんはそのまま届きます。届かなかった回の PAPER は、次に開いたときに戻ります。`,
+        `A sitter feeds your HAKO once a day (${fmt(price)} $PAPER each, ${fmt(total)} $PAPER in total). While the sitter is booked, an empty tummy won't put it in a grave. Sitter meals count toward growing up and your streak, just like your own. If you come back early, the booked meals still arrive. PAPER for any meal that doesn't arrive comes back the next time you open the app.`)}</p>
+      ${lack ? `<p class="why bad">${L("PAPER が足りません", "Not enough PAPER")}</p>` : ""}
+      <div class="actions"><button type="submit" class="btn"${lack ? " disabled" : ""}>${L("頼む", "Book")}</button><button type="button" class="btn sub" id="sit-cancel">${L("やめる", "Cancel")}</button></div>
+    </form>`;
+}
+function wireSit() {
+  const o = $("sit-open"); if (o) o.onclick = () => { app.sitOpen = true; render(); };
+  const sel = $("sit-days"); if (sel) sel.onchange = () => { app.sitDays = Number(sel.value); render(); };
+  const c = $("sit-cancel"); if (c) c.onclick = () => { app.sitOpen = false; render(); };
+  const f = $("sitf"); if (f) f.onsubmit = (ev) => { ev.preventDefault(); bookSit(Number($("sit-days").value)); };
+}
+async function bookSit(n) {
+  if (sitLive().length || app.sitBooking) return;
+  const st = app.st, m = app.m;
+  if (!st || st.grave) return;
+  if (m.balance < Number(app.box.sit_price) * n) return say(L("PAPER が足りません", "Not enough PAPER"));
+  const t0 = Date.now(), plan = sitSchedule(app.box, t0, n);
+  const slots = plan.map((p) => `${t0}-${p.k}`);
+  try { localStorage.setItem(SIT_INDEX(), JSON.stringify({ t0, n, slots })); } catch { /* 開き直すと見えなくなるだけ */ }
+  app.sits = slots.map((slot) => new SitDeal({ app, slot, onEvent: (ev) => onSit(ev) }));
+  app.sitOpen = false; app.sitBooking = true;
+  say(L("おるすばんを頼んでいます…（1〜2 分。このまま開いておいてください）", "Booking the sitter… (1–2 minutes. Please keep this open.)"), false);
+  for (let i = 0; i < plan.length; i++) {
+    const r = await app.sits[i].book({ st, plan: plan[i], t0 });
+    if (!r.ok) logOp(`sit · ${plan[i].k} · ${r.why}`);
+  }
+  render();
 }
 function actionsHtml(st, m) {
   if (st.grave) return `<button class="btn" id="reborn" style="--c:var(--accent)"><span class="dot" style="background:var(--accent)"></span>${L("生まれ変わる", "Be reborn")} <span class="price">${fmt(Math.min(Number(app.box.reborn_price ?? 0), Math.max(0, m.balance)))} $PAPER</span></button>`;
@@ -652,9 +739,11 @@ function onDeal(kind, ev) {
 export async function boot() {
   app.why = ""; app.viewHtml = null;
   for (const [k] of dealKinds) app.deals[k] = new Deal({ kind: k, app, onEvent: (ev) => onDeal(k, ev) });
+  app.sits = loadSits();
   render();
   const tick = async () => {
     for (const x of Object.values(app.deals)) await x.tick().catch((e) => x.note?.(`error ${e.message}`));
+    await tickSits();
     if (!document.hidden) render();
   };
   setInterval(tick, 5000);

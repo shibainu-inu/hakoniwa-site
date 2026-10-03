@@ -1,9 +1,9 @@
 {
  "box": {
-  "generated": "2026-10-03T04:03:27Z",
-  "now_ms": 1791000207481,
+  "generated": "2026-10-03T05:03:21Z",
+  "now_ms": 1791003801585,
   "version": "tama/0.4",
-  "config_sha256": "9d1c7daa237ce19dd7107cc7296f1ccf5cff580905918ceea4481b73cb68e2f1",
+  "config_sha256": "14a461bf46f5e9c73189276e2621d593ff0cf892bd6a868f25efe06c63552192",
   "config": {
    "box": "tama",
    "version": "tama/0.4",
@@ -34,6 +34,12 @@
    "meal_price": 240,
    "meal_fill": 40,
    "meal_lines": 1,
+   "sit_enabled": false,
+   "sit_price": 260,
+   "sit_max_days": 7,
+   "sit_every_hours": 24,
+   "sit_window_hours": 6,
+   "sit_cover_hours": 24,
    "out_price": 240,
    "out_rewards": [
     760,
@@ -118,6 +124,7 @@
    "meals": [],
    "outs": [],
    "plays": [],
+   "sits": [],
    "pending": []
   },
   "did:key:z6MkjB4AaN9byo5VGTTzDZM5d5fkgNivC2kxaSeQXsiXTsLt": {
@@ -182,7 +189,7 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790778927814,
-    "hunger": 2.07,
+    "hunger": 0.07,
     "mood": 0.0,
     "streak": 0,
     "rebirths": 0,
@@ -191,7 +198,8 @@
     "lastCare": 1790855501688,
     "cares": 8,
     "stage": "hako",
-    "accLevel": 1
+    "accLevel": 1,
+    "sitUntil": null
    },
    "meals": [
     {
@@ -279,6 +287,7 @@
      "payout": 200
     }
    ],
+   "sits": [],
    "pending": []
   },
   "did:key:z6Mkk22cikHgVNX1oNjX4urjvN2TqZCJg9q5JMFkdhyGjn3j": {
@@ -305,7 +314,7 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790837854462,
-    "hunger": 9.84,
+    "hunger": 7.84,
     "mood": 0.0,
     "streak": 0,
     "rebirths": 0,
@@ -314,7 +323,8 @@
     "lastCare": 1790837916118,
     "cares": 1,
     "stage": "egg",
-    "accLevel": 1
+    "accLevel": 1,
+    "sitUntil": null
    },
    "meals": [
     {
@@ -325,6 +335,7 @@
    ],
    "outs": [],
    "plays": [],
+   "sits": [],
    "pending": []
   },
   "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k": {
@@ -341,6 +352,7 @@
    "meals": [],
    "outs": [],
    "plays": [],
+   "sits": [],
    "pending": []
   },
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
@@ -576,8 +588,8 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 92.49,
-    "mood": 63.49,
+    "hunger": 90.49,
+    "mood": 61.49,
     "streak": 4,
     "rebirths": 0,
     "outsToday": 0,
@@ -585,7 +597,8 @@
     "lastCare": 1790986680527,
     "cares": 40,
     "stage": "hako",
-    "accLevel": 2
+    "accLevel": 2,
+    "sitUntil": null
    },
    "meals": [
     {
@@ -974,6 +987,7 @@
      "payout": 150
     }
    ],
+   "sits": [],
    "pending": []
   },
   "did:key:z6MknCE1Ze1iyrbqQj1CHjSGbKQhdtymDgafQoZzjpDgTfAg": {
@@ -997,9 +1011,9 @@
    ],
    "state": {
     "born": true,
-    "alive": true,
-    "grave": false,
-    "graveAt": null,
+    "alive": false,
+    "grave": true,
+    "graveAt": 1791000269961.0,
     "bornAt": 1790778869961,
     "hunger": 0.0,
     "mood": 0.0,
@@ -1010,7 +1024,8 @@
     "lastCare": 1790778902887,
     "cares": 1,
     "stage": "egg",
-    "accLevel": 1
+    "accLevel": 1,
+    "sitUntil": null
    },
    "meals": [],
    "outs": [],
@@ -1023,6 +1038,7 @@
      "payout": 50
     }
    ],
+   "sits": [],
    "pending": []
   },
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
@@ -1039,6 +1055,7 @@
    "meals": [],
    "outs": [],
    "plays": [],
+   "sits": [],
    "pending": []
   }
  }

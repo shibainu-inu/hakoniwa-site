@@ -28,6 +28,12 @@
  "meal_price": 240,
  "meal_fill": 40,
  "meal_lines": 1,
+ "sit_enabled": false,
+ "sit_price": 260,
+ "sit_max_days": 7,
+ "sit_every_hours": 24,
+ "sit_window_hours": 6,
+ "sit_cover_hours": 24,
  "out_price": 240,
  "out_rewards": [
   760,
