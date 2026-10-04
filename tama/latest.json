@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-04T14:03:19Z",
-  "now_ms": 1791122599170,
+  "generated": "2026-10-04T15:03:20Z",
+  "now_ms": 1791126200174,
   "version": "tama/0.5",
   "config_sha256": "1c67d8d8817f2305f5f0463dec62217f9d80d0706a574357d0d14a587ef742e1",
   "config": {
@@ -131,12 +131,12 @@
   "hakos": 4,
   "released": 0,
   "contracts": {
-   "meal:settled": 27,
+   "meal:settled": 28,
    "out:refunded": 1,
    "out:settled": 15,
    "play:refunded": 1,
    "play:rule": 1,
-   "play:settled": 23
+   "play:settled": 24
   },
   "stats": {},
   "invalid": [
@@ -155,9 +155,9 @@
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
    "joined": null,
    "operator": true,
-   "balance": -150.0,
-   "earned": 1600.0,
-   "spent": 1750.0,
+   "balance": -350.0,
+   "earned": 1700.0,
+   "spent": 2050.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -415,9 +415,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8280.0,
-   "earned": 2000.0,
-   "spent": 10540.0,
+   "balance": 8240.0,
+   "earned": 2300.0,
+   "spent": 10880.0,
    "issued": 16820.0,
    "events": [
     {
@@ -786,6 +786,19 @@
      "contract": "0x1c960ba1f0659845b2a6ff90db976034d32e179785eabe595e88183c1ef4eef6",
      "price": 100,
      "payout": 300
+    },
+    {
+     "t": "meal",
+     "ms": 1791124931659,
+     "contract": "0x4db206a4781c102fb4891ad243162820267bc7ae4196214da8421be7acfb86bb",
+     "price": 240
+    },
+    {
+     "t": "play",
+     "ms": 1791125009470,
+     "contract": "0x30e84d03193b50ff55959afaae1a6f0514a5d0d142f42ff74b033e20dbb32ead",
+     "price": 100,
+     "payout": 300
     }
    ],
    "state": {
@@ -794,24 +807,19 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 61.75,
-    "mood": 67.4,
+    "hunger": 94.3,
+    "mood": 85.4,
     "streak": 5,
     "rebirths": 0,
-    "outsToday": 2,
+    "outsToday": 0,
     "careDays": 5,
-    "lastCare": 1791063916874,
-    "cares": 42,
+    "lastCare": 1791125009470,
+    "cares": 44,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": null
    },
    "meals": [
-    {
-     "contract": "0x6a5019d7e68890a2557111c98c36272c9102b2fb803a18c86b1c89f0c134d712",
-     "ms": 1790774247207,
-     "line": "Eating feels so good! 🥒✨"
-    },
     {
      "contract": "0x9b62b0eac63fd93bc7677a1c0b3e6ea182cb30e957a6c68af1b9d607d3fac73a",
      "ms": 1790777716312,
@@ -908,6 +916,12 @@
      "contract": "0x1ec41d75e32c051a7bdccb6cdff574b92c3e7d0067b78e8adc36abe350399f61",
      "ms": 1791062751735,
      "line": "Splat Stew, Peck Chomp, Muffin Snack",
+     "menu": true
+    },
+    {
+     "contract": "0x4db206a4781c102fb4891ad243162820267bc7ae4196214da8421be7acfb86bb",
+     "ms": 1791124931659,
+     "line": "Feast for Two: Mini Pastrami Pies",
      "menu": true
     }
    ],
@@ -1345,6 +1359,13 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 300
+    },
+    {
+     "contract": "0x30e84d03193b50ff55959afaae1a6f0514a5d0d142f42ff74b033e20dbb32ead",
+     "ms": 1791125009470,
+     "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
+     "stake": 100,
+     "payout": 300
     }
    ],
    "sits": [],
@@ -1406,8 +1427,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 10080.0,
-   "earned": 10080.0,
+   "balance": 10320.0,
+   "earned": 10320.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
