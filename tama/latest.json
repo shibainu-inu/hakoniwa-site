@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-04T20:03:31Z",
-  "now_ms": 1791144211700,
+  "generated": "2026-10-04T21:03:28Z",
+  "now_ms": 1791147808752,
   "version": "tama/0.5",
   "config_sha256": "1c67d8d8817f2305f5f0463dec62217f9d80d0706a574357d0d14a587ef742e1",
   "config": {
@@ -131,13 +131,13 @@
   "hakos": 4,
   "released": 0,
   "contracts": {
-   "meal:settled": 30,
+   "meal:settled": 31,
    "out:refunded": 1,
-   "out:settled": 17,
+   "out:settled": 18,
    "play:refunded": 1,
    "play:rule": 1,
-   "play:settled": 25,
-   "sit:open": 1,
+   "play:settled": 26,
+   "sit:settled": 1,
    "sitplay:open": 2
   },
   "stats": {},
@@ -151,7 +151,7 @@
     "why": "already rewarded"
    }
   ],
-  "paper_total": 49260.0
+  "paper_total": 49500.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -400,9 +400,9 @@
   "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k": {
    "joined": null,
    "operator": true,
-   "balance": -50.0,
-   "earned": 700.0,
-   "spent": 750.0,
+   "balance": 0.0,
+   "earned": 800.0,
+   "spent": 800.0,
    "issued": 0.0,
    "events": [],
    "state": {
@@ -417,10 +417,10 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8700.0,
-   "earned": 2600.0,
-   "spent": 11940.0,
-   "issued": 18040.0,
+   "balance": 8150.0,
+   "earned": 2650.0,
+   "spent": 12780.0,
+   "issued": 18280.0,
    "events": [
     {
      "t": "join",
@@ -852,6 +852,33 @@
      "ms": 1791140948448,
      "contract": "0xb8be051cd680f62ac6bc4f6a19eaaafdc2202c7667e9d84cc1332ac7bf0b98b9",
      "price": 240
+    },
+    {
+     "t": "play",
+     "ms": 1791144040853,
+     "contract": "0x15645407286ca0567e15a0eadb6fd2d6d74d1cea9c1c0a6ed20bded3376dc9f5",
+     "price": 100,
+     "payout": 50
+    },
+    {
+     "t": "out",
+     "ms": 1791144479397,
+     "contract": "0xd7d7722dc2ab2665bb99eb0d3acc73d8001d79e1e82ad4a29553b9f72238e506",
+     "price": 240,
+     "reward": 240.0
+    },
+    {
+     "t": "meal",
+     "ms": 1791144556504,
+     "contract": "0x0a6e84fe61fb349a55cde0f7928f820971901a211ef2e5d3410b7b9d3290d03a",
+     "price": 240
+    },
+    {
+     "t": "meal",
+     "ms": 1791147795409,
+     "contract": "0xc898aa5ddebebd71b39404661e5a1ff27237203c452079dff62317d029fff973",
+     "sit": true,
+     "price": 260
     }
    ],
    "state": {
@@ -860,29 +887,19 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 98.19,
-    "mood": 95.39,
+    "hunger": 99.99,
+    "mood": 97.91,
     "streak": 6,
     "rebirths": 0,
-    "outsToday": 2,
+    "outsToday": 3,
     "careDays": 6,
-    "lastCare": 1791140948448,
-    "cares": 47,
+    "lastCare": 1791147795409,
+    "cares": 50,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": 1791198177984
    },
    "meals": [
-    {
-     "contract": "0x2eaff381be42fc17b933c77dd2ecbca73cb79886fc6383952fa8fddefb80183e",
-     "ms": 1790806053603,
-     "line": "A bit peckish after my snack, I feel quite cheerful!"
-    },
-    {
-     "contract": "0x00b05a76c8196855a9c547102e608613e28f2fb134475ad7f179620385e11f6e",
-     "ms": 1790806282449,
-     "line": "Yum yum, a bit peckish, but now I'm so cheerful, ready for a nap and then more munchies!"
-    },
     {
      "contract": "0xc7e6126676d1bd12e6ef4599f1606c05eeb445e0cf63606e957b390b137c4649",
      "ms": 1790815810021,
@@ -977,6 +994,18 @@
      "contract": "0xb8be051cd680f62ac6bc4f6a19eaaafdc2202c7667e9d84cc1332ac7bf0b98b9",
      "ms": 1791140948448,
      "line": "Pet Sweets: Mini Pup Tarts",
+     "menu": true
+    },
+    {
+     "contract": "0x0a6e84fe61fb349a55cde0f7928f820971901a211ef2e5d3410b7b9d3290d03a",
+     "ms": 1791144556504,
+     "line": "Peculiar Picnic Platter",
+     "menu": true
+    },
+    {
+     "contract": "0xc898aa5ddebebd71b39404661e5a1ff27237203c452079dff62317d029fff973",
+     "ms": 1791147795409,
+     "line": "Peculiarly Parsely Pasta",
      "menu": true
     }
    ],
@@ -1325,16 +1354,32 @@
       "It was 10% today, against 3% on a usual day.",
       "As usual, I was pleased to see such high engagement with technology, but the economy of transactions showed signs of a change."
      ]
+    },
+    {
+     "contract": "0xd7d7722dc2ab2665bb99eb0d3acc73d8001d79e1e82ad4a29553b9f72238e506",
+     "ms": 1791144479397,
+     "lock_ms": 1791144440020,
+     "facts": {
+      "metric": "refund",
+      "label": "the share of deals that ended in a refund",
+      "dir": "higher",
+      "value": "12%",
+      "base": "3%"
+     },
+     "rewarded": true,
+     "day": "2026-10-05",
+     "nth": 3,
+     "funded": true,
+     "lines": [
+      "Busy market finds AI agents on a sale spree.",
+      "Chirped and buzzed with AI agents in every corner.",
+      "Today, the share of refunds exceeded expectations.",
+      "It was 12% today, against 3% on a usual day.",
+      "This market is not just a place for buying and selling, but also for transactions that are subject to change."
+     ]
     }
    ],
    "plays": [
-    {
-     "contract": "0x5d720cddd1ac6b0d5bd8655201468fa3f6082a133ed54e8cc1f51896e62999ce",
-     "ms": 1790774277752,
-     "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
-     "stake": 100,
-     "payout": 150
-    },
     {
      "contract": "0x7081bcc5d585e8d8878a082596dcdec4684cb46f9a3230920a51e0cdb786dc63",
      "ms": 1790774993864,
@@ -1467,6 +1512,13 @@
      "npc": "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3",
      "stake": 100,
      "payout": 300
+    },
+    {
+     "contract": "0x15645407286ca0567e15a0eadb6fd2d6d74d1cea9c1c0a6ed20bded3376dc9f5",
+     "ms": 1791144040853,
+     "npc": "did:key:z6Mkk3G4LAqPsooa68NMcnCyQoLaWZKwbUH3bcvFDQcjcA6k",
+     "stake": 100,
+     "payout": 50
     }
    ],
    "sits": [
@@ -1474,10 +1526,10 @@
      "contract": "0xc898aa5ddebebd71b39404661e5a1ff27237203c452079dff62317d029fff973",
      "kind": "sit",
      "at": 1791147777984,
-     "status": "open",
+     "status": "settled",
      "funded": true,
-     "ms": null,
-     "line": null
+     "ms": 1791147795409,
+     "line": "Peculiarly Parsely Pasta"
     },
     {
      "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a",
@@ -1499,11 +1551,6 @@
     }
    ],
    "pending": [
-    {
-     "contract": "0xc898aa5ddebebd71b39404661e5a1ff27237203c452079dff62317d029fff973",
-     "kind": "sit",
-     "status": "open"
-    },
     {
      "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a",
      "kind": "sitplay",
@@ -1572,8 +1619,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 11280.0,
-   "earned": 11280.0,
+   "balance": 12020.0,
+   "earned": 12020.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
