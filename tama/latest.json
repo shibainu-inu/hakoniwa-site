@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-04T19:03:20Z",
-  "now_ms": 1791140600249,
+  "generated": "2026-10-04T20:03:31Z",
+  "now_ms": 1791144211700,
   "version": "tama/0.5",
   "config_sha256": "1c67d8d8817f2305f5f0463dec62217f9d80d0706a574357d0d14a587ef742e1",
   "config": {
@@ -131,13 +131,14 @@
   "hakos": 4,
   "released": 0,
   "contracts": {
-   "meal:settled": 29,
+   "meal:settled": 30,
    "out:refunded": 1,
-   "out:settled": 16,
+   "out:settled": 17,
    "play:refunded": 1,
    "play:rule": 1,
    "play:settled": 25,
-   "sit:open": 1
+   "sit:open": 1,
+   "sitplay:open": 2
   },
   "stats": {},
   "invalid": [
@@ -150,7 +151,7 @@
     "why": "already rewarded"
    }
   ],
-  "paper_total": 48800.0
+  "paper_total": 49260.0
  },
  "did": {
   "did:key:z6MkhvCWgveWvVqXwaayqPYfsXRAc7LqNPmtWbHMw6Cqqjq3": {
@@ -416,10 +417,10 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8720.0,
+   "balance": 8700.0,
    "earned": 2600.0,
-   "spent": 11460.0,
-   "issued": 17580.0,
+   "spent": 11940.0,
+   "issued": 18040.0,
    "events": [
     {
      "t": "join",
@@ -826,6 +827,31 @@
      "ms": 1791140580521,
      "until": 1791169377984,
      "contract": "0xc898aa5ddebebd71b39404661e5a1ff27237203c452079dff62317d029fff973"
+    },
+    {
+     "t": "sit",
+     "ms": 1791140584203,
+     "until": 1791183777984,
+     "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a"
+    },
+    {
+     "t": "sit",
+     "ms": 1791140587071,
+     "until": 1791198177984,
+     "contract": "0xf570e654e859e6272140db8a2410d56247b38379408477a0d60453e6d45e57a5"
+    },
+    {
+     "t": "out",
+     "ms": 1791140687578,
+     "contract": "0xd5a0f635c635301286ba62acd4f7e185a06083ca454f4096a9240e7524f64a24",
+     "price": 240,
+     "reward": 460.0
+    },
+    {
+     "t": "meal",
+     "ms": 1791140948448,
+     "contract": "0xb8be051cd680f62ac6bc4f6a19eaaafdc2202c7667e9d84cc1332ac7bf0b98b9",
+     "price": 240
     }
    ],
    "state": {
@@ -834,24 +860,19 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 91.3,
-    "mood": 97.4,
+    "hunger": 98.19,
+    "mood": 95.39,
     "streak": 6,
     "rebirths": 0,
-    "outsToday": 1,
+    "outsToday": 2,
     "careDays": 6,
-    "lastCare": 1791140419364,
-    "cares": 46,
+    "lastCare": 1791140948448,
+    "cares": 47,
     "stage": "hako",
     "accLevel": 2,
-    "sitUntil": 1791169377984
+    "sitUntil": 1791198177984
    },
    "meals": [
-    {
-     "contract": "0x9706b0745dc63dbcc030da63d3731d3783614330f2aa98d78ae5f942fba10bf0",
-     "ms": 1790779025547,
-     "line": "I'm a bit peckish and feeling very cheerful now after my snack."
-    },
     {
      "contract": "0x2eaff381be42fc17b933c77dd2ecbca73cb79886fc6383952fa8fddefb80183e",
      "ms": 1790806053603,
@@ -950,6 +971,12 @@
      "contract": "0xea264d24c310a215311e974e33901376164df8b52c2de1784114703e424dfb6b",
      "ms": 1791139458916,
      "line": "Marmalade Pancakes: Pancakes, sweet as a silly cat's purr",
+     "menu": true
+    },
+    {
+     "contract": "0xb8be051cd680f62ac6bc4f6a19eaaafdc2202c7667e9d84cc1332ac7bf0b98b9",
+     "ms": 1791140948448,
+     "line": "Pet Sweets: Mini Pup Tarts",
      "menu": true
     }
    ],
@@ -1275,6 +1302,29 @@
       "It was 10% today, against 3% on a usual day.",
       "As I walked, I felt both the excitement of new tech and the cautiousness of returning to the past."
      ]
+    },
+    {
+     "contract": "0xd5a0f635c635301286ba62acd4f7e185a06083ca454f4096a9240e7524f64a24",
+     "ms": 1791140687578,
+     "lock_ms": 1791140640216,
+     "facts": {
+      "metric": "refund",
+      "label": "the share of deals that ended in a refund",
+      "dir": "higher",
+      "value": "10%",
+      "base": "3%"
+     },
+     "rewarded": true,
+     "day": "2026-10-05",
+     "nth": 2,
+     "funded": true,
+     "lines": [
+      "AI Market Walk: Transactions on the Rise",
+      "The market felt lively, with customers eagerly seeking new AI innovations.",
+      "A rare sale ended in a full refund, unlike any seen before.",
+      "It was 10% today, against 3% on a usual day.",
+      "As usual, I was pleased to see such high engagement with technology, but the economy of transactions showed signs of a change."
+     ]
     }
    ],
    "plays": [
@@ -1428,12 +1478,40 @@
      "funded": true,
      "ms": null,
      "line": null
+    },
+    {
+     "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a",
+     "kind": "sitplay",
+     "at": 1791162177984,
+     "status": "open",
+     "funded": true,
+     "ms": null,
+     "line": null
+    },
+    {
+     "contract": "0xf570e654e859e6272140db8a2410d56247b38379408477a0d60453e6d45e57a5",
+     "kind": "sitplay",
+     "at": 1791176577984,
+     "status": "open",
+     "funded": true,
+     "ms": null,
+     "line": null
     }
    ],
    "pending": [
     {
      "contract": "0xc898aa5ddebebd71b39404661e5a1ff27237203c452079dff62317d029fff973",
      "kind": "sit",
+     "status": "open"
+    },
+    {
+     "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a",
+     "kind": "sitplay",
+     "status": "open"
+    },
+    {
+     "contract": "0xf570e654e859e6272140db8a2410d56247b38379408477a0d60453e6d45e57a5",
+     "kind": "sitplay",
      "status": "open"
     }
    ]
@@ -1494,8 +1572,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 10800.0,
-   "earned": 10800.0,
+   "balance": 11280.0,
+   "earned": 11280.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
