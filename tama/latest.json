@@ -1,7 +1,7 @@
 {
  "box": {
-  "generated": "2026-10-05T01:03:28Z",
-  "now_ms": 1791162208982,
+  "generated": "2026-10-05T02:03:28Z",
+  "now_ms": 1791165808903,
   "version": "tama/0.5",
   "config_sha256": "1c67d8d8817f2305f5f0463dec62217f9d80d0706a574357d0d14a587ef742e1",
   "config": {
@@ -138,7 +138,8 @@
    "play:rule": 1,
    "play:settled": 26,
    "sit:settled": 1,
-   "sitplay:open": 2
+   "sitplay:open": 1,
+   "sitplay:settled": 1
   },
   "stats": {},
   "invalid": [
@@ -417,9 +418,9 @@
   "did:key:z6Mkk7jtcryXKCvUoUHCgC3eCMwNpZnVVL6EZfcgygvK9Czx": {
    "joined": "2026-09-30T05:17:56.435302Z",
    "operator": false,
-   "balance": 8150.0,
+   "balance": 8050.0,
    "earned": 2650.0,
-   "spent": 12780.0,
+   "spent": 12880.0,
    "issued": 18280.0,
    "events": [
     {
@@ -879,6 +880,13 @@
      "contract": "0xc898aa5ddebebd71b39404661e5a1ff27237203c452079dff62317d029fff973",
      "sit": true,
      "price": 260
+    },
+    {
+     "t": "play",
+     "ms": 1791162210634,
+     "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a",
+     "sit": true,
+     "price": 100
     }
    ],
    "state": {
@@ -887,14 +895,14 @@
     "grave": false,
     "graveAt": null,
     "bornAt": 1790745476435,
-    "hunger": 91.99,
-    "mood": 89.91,
+    "hunger": 84.99,
+    "mood": 98.0,
     "streak": 6,
     "rebirths": 0,
     "outsToday": 3,
     "careDays": 6,
-    "lastCare": 1791147795409,
-    "cares": 50,
+    "lastCare": 1791162210634,
+    "cares": 51,
     "stage": "hako",
     "accLevel": 2,
     "sitUntil": 1791198177984
@@ -1535,10 +1543,10 @@
      "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a",
      "kind": "sitplay",
      "at": 1791162177984,
-     "status": "open",
+     "status": "settled",
      "funded": true,
-     "ms": null,
-     "line": null
+     "ms": 1791162210634,
+     "line": "I'm feeling a bit peckish after playing with you all, but I'm so happy and cheerful now!"
     },
     {
      "contract": "0xf570e654e859e6272140db8a2410d56247b38379408477a0d60453e6d45e57a5",
@@ -1551,11 +1559,6 @@
     }
    ],
    "pending": [
-    {
-     "contract": "0xde1c52464cad9344c515edfc0d7b933e6d7aedb31741baff0215ac704f8fae0a",
-     "kind": "sitplay",
-     "status": "open"
-    },
     {
      "contract": "0xf570e654e859e6272140db8a2410d56247b38379408477a0d60453e6d45e57a5",
      "kind": "sitplay",
@@ -1619,8 +1622,8 @@
   "did:key:z6Mkq52a8jJna9yBCGyTL6hbMuqQiMbxihFcuQeSUuyGhE3T": {
    "joined": null,
    "operator": true,
-   "balance": 12020.0,
-   "earned": 12020.0,
+   "balance": 12120.0,
+   "earned": 12120.0,
    "spent": 0.0,
    "issued": 0.0,
    "events": [],
